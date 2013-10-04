@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+</h:head>
+    <h:body>
+    <ui:composition template="../resources/template.xhtml">
+        <ui:define name="content">	
+             <p:commandLink rendered="#{etudiantController.compte.actif}"
+                            value="Log Out" action="#{loginController.doLogout}"/><br/>
+        <div>Felicitation</div>
+        <p:messages for="update"/>
+        
+            <p:outputLabel rendered="#{etudiantController.compte.actif}" value="#{etudiantController.compte.email}"/>
+            <br/>
+            <p:commandLink rendered="#{etudiantController.compte.actif}"
+                value="Modifier mon dossier" action="#{etudiantController.showLoggedDetails}"/><br/>
+            <p:outputLabel value="#{etudiantController.compte.actif}"/>
+       
+        </ui:define>
+    </ui:composition>
+    </h:body>
+</html>

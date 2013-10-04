@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+</h:head>
+    <h:body>
+    <ui:composition template="/resources/template.xhtml">
+        <ui:define name="content">	
+        <div></div>
+        <p:messages for="update"/>
+        Hello from Facelets
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" /><br /><br />
+        <p:commandLink value="New Etudiant" action="#{etudiantController.showCreate}" /><br /><br />
+        
+        <p:commandLink value="Deja enregistrer, Ouvrir une session" action="#{etudiantController.showLogin}"/>
+        
+        
+   </ui:define>
+    </ui:composition>
+    </h:body>
+</html>

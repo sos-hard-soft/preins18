@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+</h:head>
+    <h:body>
+    <ui:composition template="../resources/template.xhtml">
+        <ui:define name="content">	
+        <div></div>
+        <p:messages for="update"/>
+
+        <p:dataTable value="#{etudiantController.listChoix}" var="sujet">
+            <p:column  headerText="Branche">  
+                <h:outputText value="#{sujet.branche.intitule}" />  
+        </p:column> 
+            <p:column headerText="Intitule du sujet">  
+                <h:outputText value="#{sujet.intitule}" />  
+        </p:column> 
+            <p:column headerText="Encadrant">  
+                <h:outputText value="#{sujet.encadrant}" />  
+        </p:column> 
+            <p:column headerText="Laboratoire">  
+                <h:outputText value="#{sujet.labo}" />  
+        </p:column> 
+            <p:column headerText="Nombre de place">  
+                <h:outputText value="#{sujet.nbPlace}" />  
+        </p:column> 
+            <p:column headerText="Etablissement">  
+                <h:outputText value="#{sujet.etablissement}" />  
+        </p:column> 
+            <p:column style="width:4%">  
+                            
+                                <p:growl id="messages"/>  
+
+                                <p:menuButton value="Options">  
+                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(sujet)}" icon="ui-icon-arrowrefresh-1-w"/>    
+                                                                        
+                                </p:menuButton>  
+                            
+
+                        </p:column> 
+        </p:dataTable>
+        
+        </ui:define>
+    </ui:composition>
+    </h:body>
+</html>
