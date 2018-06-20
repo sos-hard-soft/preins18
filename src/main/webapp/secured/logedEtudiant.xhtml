@@ -14,18 +14,24 @@ and open the template in the editor.
 </h:head>
     <h:body>
     <ui:composition template="../resources/template.xhtml">
-        <ui:define name="content">	
-             <p:commandLink rendered="#{etudiantController.compte.actif}"
+        <ui:define name="meta">
+            <head><meta http-equiv="refresh" content="5; URL=/cedocinsc/etudiant/view.xhtml" /></head>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+            <p:commandButton rendered="#{etudiantController.compte.actif}"
                             value="Log Out" action="#{loginController.doLogout}"/><br/>
-        <div>Felicitation</div>
-        <p:messages for="update"/>
         
-            <p:outputLabel rendered="#{etudiantController.compte.actif}" value="#{etudiantController.compte.email}"/>
+        <p:messages for="update"/>
+        <div class="col-9">
+        Bienvenu <p:outputLabel  rendered="#{etudiantController.compte.actif}" value="#{etudiantController.current.prenom}"/>
             <br/>
-            <p:commandLink rendered="#{etudiantController.compte.actif}"
-                value="Modifier mon dossier" action="#{etudiantController.showLoggedDetails}"/><br/>
-            <p:outputLabel value="#{etudiantController.compte.actif}"/>
-       
+            <h4>Vous allez etre rédiriger vers votre espace personel <p:commandLink rendered="#{etudiantController.compte.actif}"
+                value="cliquez ici" action="#{etudiantController.showLoggedDetails}"/></h4>
+          
+            <p>Sur votre espace personel vous pouvez passer votre candidature, modifier vos informations personelle, et editer votre formulaire de demande d'inscription</p>
+       </div>
+        </h:form>
         </ui:define>
     </ui:composition>
     </h:body>

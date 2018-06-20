@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+        <h:outputStylesheet name="css/bootstrap.min.css" />
+        <style type="text/css">
+            
+            .sidebar-nav {
+                padding: 9px 0;
+            }
+            h3{font-size: 12px}
+
+            .ui-widget, .ui-widget .ui-widget {
+                font-size: 90% !important;
+            }
+            .body-content tr, .body-content td {
+                border: none;
+            }
+            #logoump{
+                float: left;
+            }
+            #logofso{
+                float: right;
+            }
+            #paroles{
+                float: left;
+                margin-left: 100px;
+            }
+            #print{
+                text-align: center;
+                background-color: darkorange;
+                height: 35px;
+            }
+        </style>
+</h:head>
+    <h:body>
+        <h:form>
+            
+        <div class="container">
+            <div id="print" class="row">
+                <h4> Pour imprimer votre formulaire de candidature cliquez sur  
+                
+                    <a href="#" onclick="window.print();return false;">IMPRIMER</a>
+                </h4>
+                
+                 
+            </div>
+            <div class="row">
+                <div id="logoump" class="col-2"><h:graphicImage name="images/umpLogo.png" class="img-responsive"/></div>
+                
+                <div id="paroles">
+                    <p style="text-align: center;">جامعة محمد الأول وجدة<br/>
+                        Université Mohamed Premier - Oujda <br/>مركز دراسـات الدكتـوراة علـوم و تقنيـات<br/>
+                        Centre d'études doctorales sciences et téchniques</p>
+                </div>
+                <div id="logofso" class="col-lg-2" style="text-align: right;">
+                    <h:graphicImage name="images/logo.png" class="img-responsive"/>
+                </div>
+            </div>
+            <hr/>
+            <div class="row" style="text-align: center;">FORMULAIRE DE CANDIDATURE POUR INSCRIPTION AUX ETUDES DOCTORALES 2013 - 2014</div>
+            <hr/>
+            <div class="row">
+                <h3>1 . DONNEES PERSONELLES</h3>                    
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <strong>Nom :</strong> #{etudiantController.current.nom}
+                </div>
+                <div class="col-lg-4 col-offset-1">
+                    <strong>Prénom :</strong> #{etudiantController.current.prenom}
+                </div>
+                <div class="col-4 ">
+                    <strong>CIN :</strong> #{etudiantController.current.cin}
+                </div>
+                <div class="col-4 col-offset-1">
+                    <strong>CNE :</strong> #{etudiantController.current.cne}
+                </div>
+                <div class="col-4 ">
+                    <strong>Date de naissance : </strong> 
+                    <h:outputText value="#{etudiantController.current.dateNaissance}" >
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>
+                </div>
+                <div class="col-4 col-offset-1">
+                    <strong>Nationalité :</strong> #{etudiantController.current.nationalite}
+                </div>
+                
+                <div class="col-4 ">
+                    <strong>Etat Civil :</strong>
+                    <p:outputLabel value="Celibataire" rendered="#{etudiantController.current.etatMatrimonial}"/>
+                    <p:outputLabel value="Mariee" rendered="#{!etudiantController.current.etatMatrimonial}"/>
+                </div>
+                <div class="col-4 col-offset-1">
+                    <strong>Fonction :</strong> 
+                    <p:outputLabel value="Salarié" rendered="#{etudiantController.current.activite}"/>
+                    <p:outputLabel value="Non salarié " rendered="#{!etudiantController.current.activite}"/>
+                </div>
+                <div class="col-4 ">
+                    <strong>Téléphonne :</strong> #{etudiantController.current.numeroTelephonne}
+                </div>
+                <div class="col-4 col-offset-1">
+                    <strong>Email :</strong> #{etudiantController.current.email}
+                </div>
+                <div class="col-6">
+                    <strong>Adresse personelle :</strong> #{etudiantController.current.adresse}
+                </div>
+            </div>
+            <div class="row">
+                <h3>2 . CANDIDATURES</h3>
+            </div>
+            
+            <div class="row">
+                <h5>Formation Doctorale choisie : </h5>    
+                <h4><h:outputText value="#{etudiantController.current.branche.intitule}" />  </h4>
+                                
+            </div>
+            <div class="row">
+                <h3>3 . DIPLÔMES OBTENUS</h3>
+            </div>
+            <div class="row">
+                <p:dataTable value="#{etudiantController.current.qualificationList}" var="diplome">
+                                <p:column  headerText="Diplôme">  
+                                    <h:outputText value="#{diplome.diplome}" />  
+                                </p:column> 
+                    <p:column  headerText="Etablissement">  
+                                    <h:outputText value="#{diplome.partieDelivrante}" />  
+                                </p:column>
+                                <p:column  headerText="Date d'obtention">  
+                                    <h:outputText value="#{diplome.dateObtention}" >
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>  
+                                </p:column> 
+                    <p:column  headerText="Date de premiere Inscription">  
+                        <h:outputText value="#{diplome.datePremiereInscription}" >
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>  
+                                </p:column> 
+
+                     <p:column  headerText="Classement">  
+                         <h:outputText value="#{diplome.classement}" />  
+                                </p:column>
+                                <p:column  headerText="Mention">  
+                                    <h:outputText value="#{diplome.mention}" />  
+                                </p:column> 
+                                
+                                
+                            </p:dataTable>
+            </div>
+            
+
+        </div>
+                
+            </h:form>
+    </h:body>
+</html>

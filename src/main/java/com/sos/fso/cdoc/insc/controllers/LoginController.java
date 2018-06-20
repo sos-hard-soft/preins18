@@ -7,10 +7,12 @@ package com.sos.fso.cdoc.insc.controllers;
 
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
-import javax.inject.Named;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -32,7 +34,7 @@ public class LoginController {
     public LoginController() {
     }
     
-    /*
+    
     @PostConstruct
     public void init(){
         FacesContext fc = FacesContext.getCurrentInstance();
@@ -44,7 +46,7 @@ public class LoginController {
         compte = compteService.findByCne(cne);
            }    
     }
-    */
+    
     public String doLogout() {
         FacesContext context = FacesContext.getCurrentInstance();
 
@@ -56,6 +58,8 @@ public class LoginController {
         // destroy session:
         HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
         session.invalidate();
+        
+        
 
         // using faces-redirect to initiate a new request:
         return "/index.xhtml?faces-redirect=true";

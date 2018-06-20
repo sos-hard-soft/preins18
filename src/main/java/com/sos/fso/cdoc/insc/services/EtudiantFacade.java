@@ -8,6 +8,7 @@ package com.sos.fso.cdoc.insc.services;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -28,8 +29,26 @@ public class EtudiantFacade extends AbstractFacade<Etudiant> {
         super(Etudiant.class);
     }
 
-    public Etudiant findByCne(double cne) {
-        return em.createNamedQuery("Etudiant.findByCne", Etudiant.class).setParameter("cne", cne).getSingleResult();
+    public Etudiant findByCne(long cne) {
+        Etudiant etudiant;
+        try {
+            etudiant = em.createNamedQuery("Etudiant.findByCne", Etudiant.class).setParameter("cne", cne).getSingleResult();
+            return etudiant;
+        } catch (NoResultException ex) {
+            return null;
+        }
+        
+    }
+    
+    public Etudiant findByCin(String cin) {
+        Etudiant etudiant;
+        try {
+            etudiant = em.createNamedQuery("Etudiant.findByCin", Etudiant.class).setParameter("cin", cin).getSingleResult();
+            return etudiant;
+        } catch (NoResultException ex) {
+            return null;
+        }
+        
     }
     
 }

@@ -6,14 +6,21 @@
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
+        <ui:insert name="meta">
+            
+        </ui:insert>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="css/default.css" rel="stylesheet" type="text/css" />
         <link href="css/cssLayout.css" rel="stylesheet" type="text/css" />
+        
         <title>Facelets Template</title>
          <!-- Le styles -->
         <h:outputStylesheet name="css/bootstrap.min.css" />
-        <h:outputStylesheet name="css/DT_bootstrap.css" />
+       
+        <h:outputStylesheet name="css/my.css" />
+        
+        
 <!-- JQuery DataTable plugin -->
 
 
@@ -29,7 +36,7 @@ padding: 9px 0;
 h3{font-size: 12px}
 
 .ui-widget, .ui-widget .ui-widget {
-    font-size: 90% !important;
+    font-size: 95% !important;
  }
 </style>
 
@@ -49,68 +56,165 @@ h3{font-size: 12px}
     </h:head>
 
     <h:body>
-        <h:form>
+       
         <div class="container">
-            
+              
         <div id="top">
             <ui:insert name="top">
-                <div class="">
+                <div class="row">
                     <h:graphicImage name="images/logo.png" class="img-responsive"/>
+                   
+                </div>
+                    
+                     <!-- ####  -->
+                     <div class="row" >  
+                    <div id="menuLeft"></div>
 
-      </div>
+                    <div id="primaryMenu">
 
+                    <ul class="sf-menu menu">
+
+                    <li class="first leaf">
+                    <a href="http://www.fso.ump.ma/">Accueil</a>
+                    </li>
+
+                    <li class="expanded">
+                    <a href="http://www.fso.ump.ma/faculte">Faculté</a>
+
+                    <ul class="sf-menu menu">
+
+                    <li class="first leaf">
+                    <a href="http://www.fso.ump.ma/faculte/departements">Departements</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/faculte/structure">Structure</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/faculte/services">Services</a>
+                    </li>
+
+                    <li class="last leaf">
+                    <a title="" href="http://www.fso.ump.ma/COSTE">COSTE</a>
+                    </li>
+                    </ul>
+                    </li>
+
+                    <li class="expanded">
+                    <a title="" href="http://www.fso.ump.ma/formation">Formations</a>
+
+                    <ul class="sf-menu menu">
+
+                    <li class="first leaf">
+                    <a href="http://www.fso.ump.ma/formation/information-administrative">Informations Administratives</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/formation/information-pedagogique">Informations Pédagogiques</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/formation/licence-fondamentale">Licence Fondamentale</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/formation/licence-professionnelle">Licence Professionnelle</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/formation/master">Master</a>
+                    </li>
+
+                    <li class="last leaf">
+                    <a href="http://www.fso.ump.ma/formation/master-specialise">Master Spécialisé</a>
+                    </li>
+                    </ul>
+                    </li>
+
+                    <li class="expanded active-trail">
+                    <a class="active-trail" href="http://www.fso.ump.ma/recherche">Recherche</a>
+
+                    <ul class="sf-menu menu">
+
+                    <li class="first leaf">
+                    <a href="http://www.fso.ump.ma/recherche/laboratoire">Laboratoires</a>
+                    </li>
+
+                    <li class="leaf active-trail">
+                    <a class="active-trail active" href="http://www.fso.ump.ma/recherche/etude-doctorale">Études Doctorales</a>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/recherche/partenariat">Cooperation et Partenariat</a>
+                    </li>
+
+                    <li class="last leaf">
+                    <a href="http://www.fso.ump.ma/recherche/politique-recherche">Politique de recherche</a>
+                    </li>
+                    </ul>
+                    </li>
+
+                    <li class="leaf">
+                    <a href="http://www.fso.ump.ma/espace-etudiants">Espace Étudiants</a>
+                    </li>
+
+                    <li class="last expanded">
+                    <a title="" href="http://www.fso.ump.ma/ressource">Ressources</a>
+
+                    <ul class="sf-menu menu">
+
+                    <li class="first leaf">
+                    <a href="http://www.fso.ump.ma/ressource/bibliotheque">Bibliothéque</a>
+                    </li>
+
+                    <li class="last leaf">
+                    <a href="http://www.fso.ump.ma/ressource/publication">Publication</a>
+                    </li>
+                    </ul>
+                    </li>
+                    </ul>
+                    </div>
+                    <div id="menuRight"></div>
+                    <!-- ####  -->
+       </div>
             </ui:insert>
         </div>
-        <div class="body-content">
-            
+            <div id="iner">
+            <div id="blanc" class="row"  >
+                <div class="row" style="text-align: center;"><h4>Candidature aux études doctorales 2013-2014</h4></div>
                 <div id="left" class="col-lg-2">
+                    
                 <ui:insert name="left">
                     
-                    <h:form>  
-              
-                                    <p:growl id="messages" autoUpdate="true"/>  
-
-                                    <p:panelMenu style="width:180px;">  
-                                        <p:submenu label="Doctorant">  
-                                            <p:menuitem value="Afficher" action="#{etudiantController.showList}"  icon="ui-icon-extlink" />  
-                                            
-                                        </p:submenu>  
-                                        <p:submenu label="Etudiant">  
-                                            <p:menuitem value="Afficher" action="#{brancheController.showList()}"  icon="ui-icon-disk" />  
-                                            <p:menuitem value="Ajouter" action="#{etudiantController.showCreate}"  icon="ui-icon-arrowrefresh-1-w" />  
-                                            <p:menuitem value="Ajouter choix" action="#{etudiantController.showAddChoice}"  icon="ui-icon-arrowrefresh-1-w" />  
-                                        </p:submenu>  
-                                        <p:submenu label="Sujet">  
-                                            <p:menuitem value="Afficher" action="#{sujetController.showList}"  icon="ui-icon-disk" />  
-                                            <p:menuitem value="Ajouter" action="#{sujetController.showCreate}"  icon="ui-icon-arrowrefresh-1-w" />  
-                                            
-                                        </p:submenu>  
-                                        <p:separator />  
-                                        <p:submenu label="Navigations" >  
-                                            
-                                                    <p:menuitem value="FSO" url="http://www.fso.ump.ma" icon="ui-icon-home" />  
-                                                    <p:menuitem value="Etude Doctoral" url="http://www.fso.ump.ma/recherche/etude-doctorale" icon="ui-icon-document" />  
-                                              
-                                        </p:submenu>  
-                                    </p:panelMenu>  
-
-                                </h:form>  
-
                    </ui:insert>
+                    <div class="clear-block block block-menu even block block-menu " id="block-menu-menu-recherche">
+  	    <h2>Recherche</h2>
+  	  <div class="content with-subject">
+    <ul class="menu"><li class="first leaf"><a title="" href="/recherche/laboratoire">Laboratoires</a></li>
+<li class="leaf active-trail"><a class="active-trail active" title="" href="/recherche/etude-doctorale">Études Doctorales</a></li>
+<li class="leaf"><a title="" href="/recherche/partenariat">Cooperation &amp; Partenariat</a></li>
+<li class="last leaf"><a title="" href="/recherche/politique-recherche">Politique de recherche</a></li>
+</ul>  </div>
+</div>
             </div>
-            <div id="content" class="col-lg-10">
+            <div id="content"  class="center_content col-lg-10">
                 <ui:insert name="content">Content</ui:insert>
             </div>
         
             </div>
+            </div> 
             <div id="bottom" class="footer">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom"> © Faculte des sciences - UMP - Oujda</ui:insert>
         </div>
-
-        </div>
+         </div>   
+   
+        
+           
+   
 
 <!-- JQuery DataTable plugin -->
-</h:form>
+
     </h:body>
 
 </html>

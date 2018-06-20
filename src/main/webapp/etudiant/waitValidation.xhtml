@@ -11,18 +11,36 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <h1>Liste des cadres</h1>
+        
+        
 </h:head>
     <h:body>
     <ui:composition template="/resources/template.xhtml">
+        <ui:define name="meta">
+            <head><meta http-equiv="refresh" content="5; URL=http://www.fso.ump.ma/cedocinsc" /></head>
+        </ui:define>
         <ui:define name="content">	
         <div></div>
+        <h:form>
         <p:messages for="update"/>
         Vous allez recevoir un email de validation dans votre compte, cliquez sur le lien apparaisant dans l email pour activer votre compte et poursuivre vottre inscription.
         <br />
         
-        
-        
+        <div class="user_register border_y">
+    <div> <span style="color:green;"> Vous allez etre rederigé vers la page d'acceuil de la FSO </span><br/><br/>
+        <a href="http://www.fso.ump.ma">Si vous ne voulez pas attendre cliquez ici。</a></div>
+</div> 
+        <script type="text/JavaScript">
+function redirect(){
+   window.location = $('a').attr('href');
+}
+
+setTimeout(redirect, 2000);
+
+</script>
+        </h:form>
    </ui:define>
     </ui:composition>
     </h:body>
+    
 </html>

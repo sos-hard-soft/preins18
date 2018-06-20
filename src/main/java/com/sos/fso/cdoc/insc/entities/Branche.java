@@ -54,6 +54,8 @@ public class Branche implements Serializable {
     private String description;
     @OneToMany(mappedBy = "branche")
     private List<Sujet> sujetList;
+    @OneToMany(mappedBy = "branche")
+    private List<Etudiant> etudiantList;
 
     public Branche() {
     }
@@ -108,6 +110,17 @@ public class Branche implements Serializable {
         this.sujetList = sujetList;
     }
 
+    @XmlTransient
+    public List<Etudiant> getEtudiantList() {
+        return etudiantList;
+    }
+
+    public void setEtudiantList(List<Etudiant> etudiantList) {
+        this.etudiantList = etudiantList;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -130,7 +143,7 @@ public class Branche implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sos.fso.cdoc.insc.entities.Branche[ idBranche=" + idBranche + " ]";
+        return intitule;
     }
     
 }

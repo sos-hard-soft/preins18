@@ -10,31 +10,39 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <h1>Liste des cadres</h1>
+        <h1>Création d'un compte</h1>
 </h:head>
     <h:body>
     <ui:composition template="../resources/template.xhtml">
-        <ui:define name="content">	
-        <div></div>
+       <ui:define name="content">	
+            <div class="row">
+                <h:form>
         <p:messages for="update"/>
-
+        <div class="col-lg-7">
+            <p:panel header="Création d'un compte">
             <p:panelGrid columns="3">
                 <p:outputLabel value="CNE :"/>
                 <p:inputText id="cne" value="#{etudiantController.newEtudiant.cne}"
-                             required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant"/>
-                <p:message for="cne"/>
+                             required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant">
+                    <f:validator binding="#{uniqueCneValidator}" />
+                    <f:ajax event="blur" render="verifyCNE"/>
+                </p:inputText>
+                <p:message id="verifyCNE" for="cne"/>
                 
                 <p:outputLabel value="CIN :"/>
                 <p:inputText id="cin" value="#{etudiantController.newEtudiant.cin}"
-                             required="true" requiredMessage="Veuillez saisir votre code didentite nationale !"/>
-                <p:message for="cin"/>
+                             required="true" requiredMessage="Veuillez saisir votre code didentite nationale !">
+                    <f:validator binding="#{uniqueCinValidator}" />
+                    <f:ajax event="blur" render="verifyCIN"/>
+                </p:inputText>
+                <p:message id="verifyCIN" for="cin"/>
                 
                 <p:outputLabel value="Nom :"/>
                 <p:inputText id="nom" value="#{etudiantController.newEtudiant.nom}"
                              required="true" requiredMessage="Veuillez saisir votre nom"/>
                 <p:message for="nom"/>
                 
-                <p:outputLabel value="Prenom :"/>
+                <p:outputLabel value="Prénom :"/>
                 <p:inputText id="prenom" value="#{etudiantController.newEtudiant.prenom}"
                              required="true" requiredMessage="Veuillez saisir votre prenom"/>
                 <p:message for="prenom"/>
@@ -55,14 +63,38 @@ pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[
                 </p:inputText>
                 <p:message for="email"/>
                 
-                <p:outputLabel value="Password :"/>
-                <h:inputSecret id="password" value="#{etudiantController.newCompte.password}"
-                             required="true" requiredMessage="Veuillez saisir un mot de passe d'au moins 8 caractere"/>
-                <p:message for="password"/>
-                
-                <p:commandButton value="Enregistrer les donnee et continuer" action="#{etudiantController.doCreate}"/>
             </p:panelGrid>
-
+                </p:panel>
+<p:panel header="Mot de passe pour le compte">  
+         <p:messages id="pass" showDetail="true" autoUpdate="true"/>
+  
+        <h:panelGrid columns="2" id="matchGrid">                     
+            <h:outputLabel for="pwd1" value="Mot de passe : *" />  
+            <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" label="Password 1" required="true">
+                <f:validateLength minimum="6" for="pwd1" />                    
+            </p:password>  
+  
+            <h:outputLabel for="pwd2" value="Resaisissez le mot de passe : *" />  
+            <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
+        </h:panelGrid>  
+  
+          
+    </p:panel> 
+        <p:commandButton update="pass" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" />
+        </div>
+        
+        <div class="col-lg-5">
+            <p:panel header="Première phase de préinscription">
+            <ul>
+                <li style="color: #46b8da; font-family: georgia;">Repmplir le formulaire munitieusement</li>
+                <li style="color: #D20005; font-family: georgia;">L'adresse email sera utilisée pour vérifier vos données</li>
+                <li style="color: darkorange; font-family: georgia;">Vous receverez un email de validation qui vous permettra d'activer votre compte, si vous ne recevez pas l'email dans la minutes qui suit, veuillez verifier dans le courier indésirable</li>
+                <li style="color: #449d44; font-family: georgia;">Choisissez un mot de passe d'au moins 6 caractères</li>
+            </ul>
+            </p:panel>
+        </div>
+        </h:form>
+        </div>
         </ui:define>
     </ui:composition>
     </h:body>

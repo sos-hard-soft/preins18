@@ -14,8 +14,12 @@ import javax.faces.context.Flash;
  * @author mab.salhi
  */
 public class Sosutil {
+
+    public Sosutil() {
+    }
     
-    private void addMessage(String key, FacesMessage.Severity severity, String message, String detail) {
+    
+    public void addMessage(String key, FacesMessage.Severity severity, String message, String detail) {
         FacesContext context = FacesContext.getCurrentInstance();
         Flash flash = context.getExternalContext().getFlash();
         flash.setKeepMessages(true);

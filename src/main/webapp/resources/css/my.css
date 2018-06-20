@@ -1,0 +1,285 @@
+/* 
+    Document   : my
+    Created on : 9 oct. 2013, 11:12:07
+    Author     : mohammedoufi
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body{
+    background: url("/cedocinsc/javax.faces.resource/images/bg.png.xhtml") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+}
+
+#primaryMenu {
+    clear: none;
+    float: left;
+    margin: 0 0 10px;
+    padding: 0;
+    width:100%;
+}
+#primaryMenu h2 {
+    display: none;
+}
+#menuLeft {
+    background: url("/cedocinsc/javax.faces.resource/images/block-bg.png.xhtml") no-repeat scroll left bottom rgba(0, 0, 0, 0);
+    float: left;
+    height: 59px;
+    margin: 0 0 0 -24px;
+    padding: 0;
+    width: 24px;
+}
+#menuRight {
+    background: url("/cedocinsc/javax.faces.resource/images/right-block-bg.png.xhtml") no-repeat scroll right bottom rgba(0, 0, 0, 0);
+    clear: right;
+    float: right;
+    height: 59px;
+    margin: 0 -24px 0 0;
+    padding: 0;
+    width: 24px;
+}
+#primaryMenu ul.sf-menu {
+    background: none repeat scroll 0 0 #1A96D4;
+    clear: none;
+    float: none;
+    font-size: 14px;
+    height: 44px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+#primaryMenu ul.sf-menu li {
+    border-right: 1px solid #CCCCCC;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-weight: bold;
+    list-style: none outside none;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    width: auto;
+    z-index: 100;
+}
+#primaryMenu ul.menu li.expanded, #primaryMenu ul.menu li.expanded a {
+    background-image: none;
+    list-style: none outside none !important;
+}
+#primaryMenu ul.sf-menu li a {
+    color: #FFFFFF;
+    display: block;
+    margin: 0;
+    outline: medium none;
+    padding: 14px;
+    text-decoration: none;
+}
+#primaryMenu ul li a.active {
+    background-color: #FE6B25;
+}
+#primaryMenu ul.sf-menu li a:hover, #primaryMenu ul.sf-menu li:hover, #primaryMenu ul.sf-menu li a.active, #primaryMenu ul.sf-menu li.active-trail {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+#primaryMenu ul.sf-menu li a:hover {
+    background-color: #FE6B25;
+}
+#primaryMenu ul.sf-menu li ul {
+    border: medium none;
+    left: -9999em;
+    margin: 0 0 0 -1px;
+    padding: 0;
+    position: absolute;
+    width: auto;
+}
+#primaryMenu ul.sf-menu li:hover ul, #primaryMenu ul.sf-menu li.hover ul {
+    display: block;
+    left: auto;
+}
+#primaryMenu ul.sf-menu li ul li {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #333333;
+    border-color: #FFFFFF #FFFFFF -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    clear: both;
+    float: left;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    width: 225px;
+}
+#primaryMenu ul.sf-menu li ul li a, #primaryMenu ul.sf-menu li ul li a:link, #primaryMenu ul.sf-menu li ul li a:visited {
+    padding: 12px;
+    width: auto;
+}
+#primaryMenu ul.sf-menu li ul li.last {
+    border-bottom: 1px solid #FFFFFF;
+}
+#primaryMenu ul.sf-menu li ul li a:hover, #primaryMenu ul.sf-menu li ul li a.active {
+    background: none repeat scroll 0 0 #1A96D4;
+}
+#primaryMenu ul.sf-menu li ul li a {
+    background: none repeat scroll 0 0 #1A96D4;
+}
+#primaryMenu ul.sf-menu li ul li a:hover {
+    background-color: #FE6B25;
+}
+#primaryMenu ul.sf-menu li ul li ul.menu {
+    left: -9999em;
+    margin: -1px 0 0;
+    padding: 0;
+    position: absolute;
+    width: auto;
+}
+#primaryMenu ul.sf-menu li ul li:hover ul.menu, #primaryMenu ul.sf-menu li ul li.hover ul.menu {
+    display: block;
+    left: 200px;
+    top: 0;
+}
+#primaryMenu ul.sf-menu ul.menu ul.menu ul.menu {
+    display: none;
+}
+#primaryMenu ul.sf-menu ul.menu ul.menu li:hover ul.menu, #primaryMenu ul.sf-menu ul.menu ul.menu li.hover ul.menu {
+    display: block;
+    left: 200px;
+    top: 0;
+}
+#primaryMenu ul.sf-menu ul.menu ul.menu li ul.menu li.last a {
+    display: block;
+}
+#primaryMenu ul.sf-js-enabled li.expanded {
+    list-style: none outside none;
+}
+#topMenu {
+    margin: 5px 0;
+    padding: 0;
+    text-align: right;
+}
+#topMenu li {
+    border-right: 1px solid #333333;
+    margin: 0 5px 0 0;
+    padding: 0 5px 0 0;
+}
+#topMenu li.last {
+    border-right: medium none;
+}
+#topMenu li a {
+    text-decoration: none;
+}
+#topMenu li a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    background-color: #99CC00;
+    clear: both;
+    margin-top: 15px;
+   margin-left: -23px;
+    margin-right: -23px;
+    width: inherit;
+    color: #FFFFFF;
+    min-height: 20px;
+    text-align: center;
+}
+.container{
+    min-height: 800px;
+    width: inherit;
+}
+
+#blanc{
+    background-color: #ffffff;
+    margin-top: -15px;
+    width: auto;
+    height: inherit;
+    padding-top: 20px;
+    
+}
+#iner{
+    background-color: #ffffff;
+    margin-left: -8px;
+    margin-right: -9px;
+    width: inherit;
+}
+
+.img-responsive {
+ 
+    margin-bottom: 20px;
+    
+}
+
+/* Start of menu sidebar Styles */
+
+.sidebar ul.menu {
+	margin-left: -30px;
+	background-image: none;
+    list-style-image: none !important;
+    list-style: none !important;
+}
+
+#sidebar_first h2 {
+  background: url("images/block-bg-green.png") bottom left no-repeat;
+  margin-left: -24px; 
+  padding: 9px 0 24px 26px; 
+}
+#sidebar_last h2 {
+  background: url("images/right-block-bg-green.png") bottom right no-repeat;
+  clear: both;
+  margin-right: -24px;
+  padding:9px 27px 24px 20px;
+  text-align:right;
+  *width: 197px;
+}
+.sidebar .block .content {
+  background-color: #F0F0F0;
+  margin: 0;
+  padding: 10px;
+}
+.sidebar .block .with-subject {
+  border: none;
+  margin-top: -27px;
+  *margin-top: -34px;
+}
+
+#sidebar_first .with-subject ul.menu li {
+	border-bottom: 1px dotted #000000;
+    list-style-image: url("images/dropdown-normal-arrow.png");
+    padding: 8px 0 8px 8px;
+	}
+	
+#sidebar_first .with-subject ul.menu li.expanded {
+	list-style-image: url("images/menu-expanded.png");
+    padding: 8px 0 8px 8px;
+	}
+
+#sidebar_first .with-subject ul.menu li.last.leaf {
+	border-bottom:none;
+	}
+	
+	
+	
+#sidebar_first .with-subject .menu li  a{
+	text-decoration:none;
+}
+
+#sidebar_first .with-subject .menu li  a:hover{
+	text-decoration:underline;
+}
+
+.sidebar .block {
+  margin: 0 0 10px;
+}
+#sidebar_first .even h2 {
+  background: url("images/block-bg-orange.png") bottom left no-repeat;
+}
+#sidebar_last .odd h2 {
+  background: url("images/right-block-bg-orange.png") bottom right no-repeat;
+}
+
+/* End of menu sidebar Styles */
+
+.ui-menu.ui-widget{
+    min-width: 180px;
+}

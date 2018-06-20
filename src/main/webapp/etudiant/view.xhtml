@@ -10,44 +10,164 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <h1>Liste des cadres</h1>
-</h:head>
+        <h1>Détail du candidat</h1>
+    </h:head>
     <h:body>
-    <ui:composition template="../resources/template.xhtml">
-        <ui:define name="content">	
-        <div></div>
-        <p:messages for="update"/>
+        <ui:composition template="../resources/template.xhtml">
+            <ui:define name="left">
+            <ui:insert name="header" >
+                <ui:include src="menuEtudiant.xhtml" />
+            </ui:insert>
+            </ui:define>
+            <ui:define name="content">	
+                <h:form>
+                <div></div>
+                <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
+                    Votre session a expirer ou vous n'avez pas activer votre compte.
+                </p:panel>
+                <div class="row">
+                    <div class="col-lg-8">
+                <p:panel id="etudiantdetail" rendered="#{!etudiantController.sessionOuverte}">
 
-        <p:panelGrid columns="2">
-            <p:outputLabel value="Nom : "/>
-            <p:outputLabel value="#{etudiantController.current.nom}"/>
-            
-            <p:outputLabel value="Prenom : "/>
-            <p:outputLabel value="#{etudiantController.current.prenom}"/>
-            
-            <p:outputLabel value="CIN : "/>
-            <p:outputLabel value="#{etudiantController.current.cin}"/>
-            
-            <p:outputLabel value="CNE : "/>
-            <p:outputLabel value="#{etudiantController.current.cne}"/>
-            
-            <p:outputLabel value="Date naissance : "/>
-            <p:outputLabel value="#{etudiantController.current.dateNaissance}"/>
-        </p:panelGrid>
+                    <p:messages for="update"/>
+<p:panel header="Informations personèlle">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="CIN : "/>
+                        <p:outputLabel value="#{etudiantController.current.cin}"/>
 
-        <p:dataTable value="#{etudiantController.current.choixList}" var="sujet">
-            <p:column  headerText="Branche">  
-                <h:outputText value="#{sujet.idSujet.branche.intitule}" />  
-        </p:column> 
-        <p:column  headerText="Sujet">  
-            <h:outputText value="#{sujet.idSujet.intitule}" />  
-        </p:column> 
-        
-            <p:column  headerText="Branche">  
-                <h:outputText value="#{sujet.idSujet.encadrant}" />  
-        </p:column> 
-        </p:dataTable>
-        </ui:define>
-    </ui:composition>
+                        <p:outputLabel value="CNE : "/>
+                        <p:outputLabel value="#{etudiantController.current.cne}"/>
+                        
+                        <p:outputLabel value="Nom : "/>
+                        <p:outputLabel value="#{etudiantController.current.nom}"/>
+
+                        <p:outputLabel value="Prénom : "/>
+                        <p:outputLabel value="#{etudiantController.current.prenom}"/>
+
+                        <p:outputLabel value="Date de naissance : "/>
+                        <p:outputLabel value="#{etudiantController.current.dateNaissance}"/>
+                        
+                        <p:outputLabel value="Lieu de naissance : "/>
+                        <p:outputLabel value="#{etudiantController.current.lieuNaissance}"/>
+                        
+                        <p:outputLabel value="Nationalité : "/>
+                        <p:outputLabel value="#{etudiantController.current.nationalite}"/>
+                        
+                        <p:outputLabel value="Sexe : "/>
+                        <p:outputLabel value="Masculin" rendered="#{etudiantController.current.sexe}"/>
+                        <p:outputLabel value="Féminin" rendered="#{!etudiantController.current.sexe}"/>
+                        
+                        <p:outputLabel value="Activité : "/>
+                        <p:outputLabel value="Fonctionaire" rendered="#{etudiantController.current.activite}"/>
+                        <p:outputLabel value="Sans Fonction" rendered="#{!etudiantController.current.activite}"/>
+                        
+                        <p:outputLabel value="Etat matrimonial : "/>
+                        <p:outputLabel value="Célibataire" rendered="#{etudiantController.current.etatMatrimonial}"/>
+                        <p:outputLabel value="Mariée" rendered="#{!etudiantController.current.etatMatrimonial}"/>
+                    </p:panelGrid>
+</p:panel>
+                    <p:panel header="Cordonnées de contact">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="email : "/>
+                        <p:outputLabel value="#{etudiantController.current.email}"/>
+                        <p:outputLabel value="Adresse : "/>
+                        <p:outputLabel value="#{etudiantController.current.adresse}"/>
+                        <p:outputLabel value="Numéro de téléphonne : "/>
+                        <p:outputLabel value="#{etudiantController.current.numeroTelephonne}"/>
+                    </p:panelGrid>
+                        </p:panel>
+
+
+                </p:panel>
+                        </div>
+                    <div class="col-lg-3">
+                        <p:panel header="Aide">
+                        <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
+                        <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
+                        <p style="color: #99CC00; font-family: georgia;">Pour imprimer votre formulaire de candidature appuyez sur le bouton "imprimer le formulaire" dans le menu qui apparait à guache de l'écran.</p>
+                        </p:panel>
+                    </div>
+</div>
+                <p:tabView id="tabView">  
+
+                    <p:tab id="tab1" title="Diplomes Obtenus">
+                        
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:dataTable value="#{etudiantController.current.qualificationList}" var="diplome">
+                                <p:column  headerText="Diplome">  
+                                    <h:outputText value="#{diplome.diplome}" />  
+                                </p:column> 
+                                <p:column  headerText="Date d'obtention">  
+                                    <h:outputText value="#{diplome.dateObtention}" >
+                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                    </h:outputText>  
+                                </p:column> 
+
+                                <p:column  headerText="Mention">  
+                                    <h:outputText value="#{diplome.mention}" />  
+                                </p:column> 
+                                <p:column  headerText="Etablissement">  
+                                    <h:outputText value="#{diplome.partieDelivrante}" />  
+                                </p:column>
+                                <p:column style="width:4%" headerText="Actions">  
+                            
+                                <p:growl id="messages"/>  
+
+                                <p:menuButton value="Actions">  
+                                    <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
+                                    <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveQualification(diplome)}" ajax="false"/>  
+                                    
+                                </p:menuButton>  
+                            
+
+                        </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>  
+                    </p:tab>  
+                    <p:tab id="tab2" title="Formation Doctorale Choisie">
+                        <p:outputLabel value="Vous avez choisis la branche : "/>
+                        <h4><p:outputLabel value="#{etudiantController.current.branche.intitule}" /></h4>
+                    </p:tab>
+                    <p:tab id="tab3" title="Sujets Choisis" disabled="true">  
+                          
+                            <p:dataTable value="#{etudiantController.current.choixList}" var="sujet">
+                                <p:column  headerText="Branche">  
+                                    <h:outputText value="#{sujet.idSujet.branche.intitule}" />  
+                                </p:column> 
+                                <p:column  headerText="Titre Sujet">  
+                                    <h:outputText value="#{sujet.idSujet.intitule}" />  
+                                </p:column> 
+
+                                <p:column  headerText="Encadrant">  
+                                    <h:outputText value="#{sujet.idSujet.encadrant}" />  
+                                </p:column>
+                                
+                                <p:column  headerText="Etablissement">  
+                                    <h:outputText value="#{sujet.idSujet.etablissement}" />  
+                                </p:column>
+                                
+                                <p:column  headerText="Laboratoire / Equipe">  
+                                    <h:outputText value="#{sujet.idSujet.labo}" />  
+                                </p:column>
+                                <p:column style="width:4%" headerText="Actions">  
+                            
+                                <p:growl id="messages"/>  
+
+                                <p:menuButton value="Actions">  
+                                    <p:menuitem value="Details" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
+                                    <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveChoix(sujet)}" ajax="false"/>  
+                                    
+                                </p:menuButton> 
+                                </p:column>
+                            </p:dataTable>
+                       
+                    </p:tab>  
+
+
+
+                </p:tabView>
+</h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

@@ -26,7 +26,7 @@ public class SendMail {
     }
     
     
-    
+    /*
     public void SendEmail(String email, String key){
         String response = "response?faces-redirect=true";
         
@@ -38,7 +38,7 @@ public class SendMail {
         }
         
         //return response;
-    }
+    }*/
 
     public String getEmail() {
         return email;

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+    </h:head>
+    <h:body>
+        <ui:composition template="../resources/template.xhtml">
+            <ui:define name="left">
+            <ui:insert name="header" >
+                <ui:include src="menuEtudiant.xhtml" />
+            </ui:insert>
+            </ui:define>
+            <ui:define name="content">	
+                <h:form>
+                    <p:messages for="update"/>
+                    <p:panel header="Ajouter un nouveau diplome">
+                    
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Date d'obtention du diplome"/>
+                    <p:calendar id="dateObtention" value="#{etudiantController.currentQualification.dateObtention}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                    <p:message for="dateObtention"/> 
+
+                    <p:outputLabel value="Date de premiere inscription"/>
+                    <p:calendar id="datePremiereInscription" value="#{etudiantController.currentQualification.datePremiereInscription}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                    <p:message for="datePremiereInscription"/> 
+
+                    <p:outputLabel value="Diplome :"/>
+                    <p:selectOneMenu id="diplome" value="#{etudiantController.currentQualification.diplome}"
+                                     required="true" requiredMessage="Veuillez saisir la mention du diplome">  
+                        <f:selectItem itemLabel="Diplome" itemValue="" />  
+                        <f:selectItem itemLabel="Baccalaureat" itemValue="Baccalaureat" />  
+                        <f:selectItem itemLabel="Licence fondamentale" itemValue="Licence fondamentale" />  
+                        <f:selectItem itemLabel="Licence professionelle" itemValue="Licence professionelle" />
+                        <f:selectItem itemLabel="Master recherche" itemValue="Master recherche" />
+                        <f:selectItem itemLabel="Master specialise" itemValue="Master specialise" />
+                        <f:selectItem itemLabel="Diplome d'ingenieur" itemValue="Diplome d'ingenieur" />
+                        <f:selectItem itemLabel="Autre diplome equivalent" itemValue="Autre diplome equivalent" />
+                        <p:ajax listener="#{etudiantController.getRightSemestre}" 
+                                event="select"/>
+                    </p:selectOneMenu>  
+                    <p:message for="diplome"/>
+
+                    <p:outputLabel value="Mention :"/>
+                    <p:selectOneMenu id="mention" value="#{etudiantController.currentQualification.mention}"
+                                     required="true" requiredMessage="Veuillez saisir la mention du diplome">
+                        <f:selectItem itemLabel="Mention" itemValue="" />  
+                        <f:selectItem itemLabel="Passable" itemValue="Passable" />  
+                        <f:selectItem itemLabel="Assez bien" itemValue="Assez bien" />  
+                        <f:selectItem itemLabel="Bien" itemValue="Bien" />
+                        <f:selectItem itemLabel="Tres bien" itemValue="Tres bien" />
+                        <f:selectItem itemLabel="Excellent" itemValue="Excellent" />
+                    </p:selectOneMenu>
+                    <p:message for="mention"/>
+
+                    <p:outputLabel value="Classement :"/>
+                    <p:inputText id="classement" value="#{etudiantController.currentQualification.classement}"
+                                 converterMessage="Veuillez saisir un nombre entier."
+                                 validatorMessage="Veuillez saisir un nombre entier."
+                                 >
+                        <f:validateLength minimum="0" maximum="6" />
+                    </p:inputText>
+                    <p:message for="classement"/>
+
+                    <p:outputLabel value="Etablissement delivrant le diplome :"/>
+                    <p:inputText id="partieDelivrante" value="#{etudiantController.currentQualification.partieDelivrante}"
+                                 required="true" requiredMessage="Veuillez saisir l'etablissement d'etude"/>
+                    <p:message for="partieDelivrante"/>
+
+                </p:panelGrid>
+                        <p:panel header="Les notes de semestre pour les liscencier">
+                        <p:panelGrid columns="4">
+                        <p:outputLabel value="Note S1 :"/>
+                        <p:inputText id="note1" value="#{etudiantController.currentQualification.note1}" />
+
+                        <p:outputLabel value="Note S2 :"/>
+                        <p:inputText id="note2" value="#{etudiantController.currentQualification.note2}" />
+
+                        <p:outputLabel value="Note S3 :"/>
+                        <p:inputText id="note3" value="#{etudiantController.currentQualification.note3}" />
+
+                        <p:outputLabel value="Note S4 :"/>
+                        <p:inputText id="note4" value="#{etudiantController.currentQualification.note4}" />
+
+                        <p:outputLabel value="Note S5 :"/>
+                        <p:inputText id="note5" value="#{etudiantController.currentQualification.note5}" />
+
+                        <p:outputLabel value="Note S6 :"/>
+                        <p:inputText id="note6" value="#{etudiantController.currentQualification.note6}" />
+
+
+                    </p:panelGrid>
+                    </p:panel>
+                <h:commandButton value="Enregistrer ce parcours" action="#{etudiantController.doEditQualification}"/>
+
+</p:panel>
+                    </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

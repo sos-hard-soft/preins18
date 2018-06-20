@@ -10,22 +10,55 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <h1>Liste des cadres</h1>
+        
 </h:head>
     <h:body>
     <ui:composition template="/resources/template.xhtml">
         <ui:define name="content">	
-        <div></div>
+            <div class="row">
+                <p>La candidature pour les postes de doctorant auprés du Centre d'Etudes Doctorales Sciences et Téchniques est ouverte.<br />
+                la procédure de séléction se fera comme suit :
+                <ol>
+                    <li>Enregistrement des candidats sur la platforme de pré-inscription en ligne du 15 au 31 octobre 2013</li>
+                    <li>Préselection des candidats retenus pour choix de sujets et entretiens.</li>
+                    <li>Affichage des résultats de la premiere phase de présélection et des sujets proposés</li>
+                    <li>Complétion de la candidature en ligne sur la platforme de pré-inscription par le choix des sujets.</li>
+                    <li>Entretiens</li>
+                    <li>Résultats définitifs</li>
+                </ol>
+                </p>
+            </div>
         <p:messages for="update"/>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" /><br /><br />
-        <p:commandLink value="New Etudiant" action="#{etudiantController.showCreate}" /><br /><br />
+        <div class="row">
+            <h:form>
+            
+            <div class="col-lg-4 col-offset-2">
+                <p:commandLink action="#{etudiantController.showLogin}">
+                <h:graphicImage name="images/already.jpg" class="img-responsive"/>
+                <hr />
+                <h4>Déja enregistrer, Ouvrir une session</h4>
+                </p:commandLink>
+             
+            
+            </div>
+                <div class="col-lg-4 col-offset-2">
+                    <p:commandLink action="#{etudiantController.showCreate}">
+                <h:graphicImage name="images/createNew.jpg" class="img-responsive"/>
+                <hr />
+                <h4>Crée votre compte</h4>
+                </p:commandLink>
+             
+            
+            </div>
+            </h:form>
+        </div>
         
-        <p:commandLink value="Deja enregistrer, Ouvrir une session" action="#{etudiantController.showLogin}"/>
+        
+        
         
         
    </ui:define>
     </ui:composition>
     </h:body>
 </html>
+

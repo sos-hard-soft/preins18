@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -62,7 +64,7 @@ public class Etudiant implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cne")
-    private double cne;
+    private long cne;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
@@ -104,11 +106,14 @@ public class Etudiant implements Serializable {
     private String adresse;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "numero_telephonne")
-    private Double numeroTelephonne;
-    @OneToMany(mappedBy = "etudiant")
+    private long numeroTelephonne;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "etudiant")
     private List<Qualification> qualificationList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEtudiant")
     private List<Choix> choixList;
+    @JoinColumn(name = "branche", referencedColumnName = "id_branche")
+    @ManyToOne
+    private Branche branche;
 
     public Etudiant() {
     }
@@ -117,7 +122,7 @@ public class Etudiant implements Serializable {
         this.idEtudiant = idEtudiant;
     }
 
-    public Etudiant(Integer idEtudiant, double cne, String cin, String nom, String prenom, Date dateNaissance) {
+    public Etudiant(Integer idEtudiant, long cne, String cin, String nom, String prenom, Date dateNaissance) {
         this.idEtudiant = idEtudiant;
         this.cne = cne;
         this.cin = cin;
@@ -142,11 +147,11 @@ public class Etudiant implements Serializable {
         this.optimisticLock = optimisticLock;
     }
 
-    public double getCne() {
+    public long getCne() {
         return cne;
     }
 
-    public void setCne(double cne) {
+    public void setCne(long cne) {
         this.cne = cne;
     }
 
@@ -238,11 +243,11 @@ public class Etudiant implements Serializable {
         this.adresse = adresse;
     }
 
-    public Double getNumeroTelephonne() {
+    public long getNumeroTelephonne() {
         return numeroTelephonne;
     }
 
-    public void setNumeroTelephonne(Double numeroTelephonne) {
+    public void setNumeroTelephonne(long numeroTelephonne) {
         this.numeroTelephonne = numeroTelephonne;
     }
 
@@ -262,6 +267,14 @@ public class Etudiant implements Serializable {
 
     public void setChoixList(List<Choix> choixList) {
         this.choixList = choixList;
+    }
+
+    public Branche getBranche() {
+        return branche;
+    }
+
+    public void setBranche(Branche branche) {
+        this.branche = branche;
     }
 
     @Override

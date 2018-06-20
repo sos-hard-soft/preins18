@@ -14,20 +14,29 @@ and open the template in the editor.
 </h:head>
     <h:body>
     <ui:composition template="../resources/template.xhtml">
+        <ui:define name="left">
+            <ui:insert name="header" >
+                <ui:include src="menuEtudiant.xhtml" />
+            </ui:insert>
+            </ui:define>
         <ui:define name="content">	
         <div></div>
+        <h:form>
         <p:messages for="update"/>
-
-        <p:panelGrid columns="2">
-            <p:outputLabel value="Choisir votre branche"/>
+        
+        <p:panel header="Selectionnez Une Formation doctorales">
+            
+            <p:panelGrid columns="2">
+            <p:outputLabel value="Choisir votre formation doctorale"/>
             <p:selectOneMenu id="diplome" value="#{etudiantController.branche}">  
                 <f:selectItems value="#{etudiantController.allBranches}"/>  
                 </p:selectOneMenu>
-            <p:commandButton value="Valider votre choix" action="#{etudiantController.showSujets}"/>
+            
+            <h:commandButton value="Valider le choix" action="#{etudiantController.doAddBranche}"/>
         </p:panelGrid>
-
+</p:panel>
         
-        
+        </h:form>
         </ui:define>
     </ui:composition>
     </h:body>

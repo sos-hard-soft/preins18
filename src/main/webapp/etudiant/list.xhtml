@@ -16,6 +16,7 @@ and open the template in the editor.
     <ui:composition template="../resources/template.xhtml">
         <ui:define name="content">	
         <div></div>
+        <h:form>
         <p:messages for="update"/>
 
         <p:dataTable value="#{etudiantController.all}" var="etudiant">
@@ -48,7 +49,7 @@ and open the template in the editor.
 
                         </p:column> 
         </p:dataTable>
-
+</h:form>
         </ui:define>
     </ui:composition>
     </h:body>

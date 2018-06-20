@@ -14,12 +14,23 @@ and open the template in the editor.
 </h:head>
     <h:body>
     <ui:composition template="../resources/template.xhtml">
-        <ui:define name="content">	
-            <div>la cle de validation est : <strong>
-                    #{accountController.activation.compte.cne}
-                </strong></div>
-        <p:messages for="update"/>
-       
+        <ui:define name="meta">            
+            <h:head rendered="#{accountController.compte.actif}">
+                <meta http-equiv="refresh" content="5; URL=http://www.fso.ump.ma/cedocinsc/" />
+            </h:head>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+            <p:messages for="fatal"/>
+            <h1>#{accountController.text}</h1>
+            <p:panel rendered="#{accountController.compte.actif}">
+            <div class="row">
+                Merci pour votre validation,<strong>#{accountController.etudiant.nom}</strong>, <strong>#{accountController.etudiant.prenom}</strong> vous pouvez maintenant vous dirigez vers votre espace personelle, pour finaliser votre candidature, pour cela, cliquez sur ce lien<br />
+                ou retourner sur la page d'acceuil de l'application pour vous connecter <a href="http://www.fso.ump.ma/cedocinsc/">Page d'acceuil</a>.<br />
+            </div>
+            </p:panel>
+        
+       </h:form>
         </ui:define>
     </ui:composition>
     </h:body>

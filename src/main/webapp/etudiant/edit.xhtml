@@ -1,16 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
+To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+    </h:head>
+    <h:body>
+        <ui:composition template="../resources/template.xhtml">
+            <ui:define name="left">
+            <ui:insert name="header" >
+                <ui:include src="menuEtudiant.xhtml" />
+            </ui:insert>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                <div></div>
+                <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
+                    Votre session a éxpirer ou vous n'avez pas activer votre compte.
+                </p:panel>
+
+                <p:panel id="etudiantdetail" header="Modification des Informations personelle" rendered="#{!etudiantController.sessionOuverte}">
+
+                    <p:messages for="update"/>
+
+                    <p:panelGrid columns="3">
+                        <p:outputLabel value="CNE : "/>
+                        <p:outputLabel id="cne" value="#{etudiantController.current.cne}"
+                             />
+                    <p:message for="cne"/>
+                
+                        <p:outputLabel value="CIN : "/>
+                        <p:outputLabel id="cin" value="#{etudiantController.current.cin}" />
+                   
+                <p:message for="cin"/>
+
+                        
+                        
+                        <p:outputLabel  value="Nom : *"/>
+                <p:inputText id="nom" value="#{etudiantController.current.nom}"
+                             required="true" requiredMessage="Veuillez saisir votre nom"/>
+                <p:message for="nom"/>
+                
+                <p:outputLabel value="Prénom : *"/>
+                <p:inputText id="prenom" value="#{etudiantController.current.prenom}"
+                             required="true" requiredMessage="Veuillez saisir votre prenom"/>
+                <p:message for="prenom"/>
+                
+                <p:outputLabel value="Date de naissance : *"/>
+                <p:calendar id="dateNaissance" value="#{etudiantController.current.dateNaissance}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date de naissance" />
+                <p:message for="dateNaissance"/>
+                
+                <p:outputLabel value="email : *"/>
+                <p:inputText id="email" value="#{etudiantController.current.email}"
+                             required="true" requiredMessage="Veuillez saisir une adresse email valide">
+                    <f:validateRegex
+pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                </p:inputText>
+                <p:message for="email"/>
+                
+                <p:outputLabel value="Lieu de naissance :"/>
+                <p:inputText id="lieuNaissance" value="#{etudiantController.current.lieuNaissance}"
+                             />
+                <p:message for="lieuNaissance"/>
+                
+                <p:outputLabel value="Nationalité :"/>
+                <p:inputText id="nationalite" value="#{etudiantController.current.nationalite}"
+                             />
+                <p:message for="nationalite"/>
+                
+                <p:outputLabel value="sexe :"/>
+                <p:selectOneRadio id="sexe" value="#{etudiantController.current.sexe}">
+                    <f:selectItem itemLabel="Masculin" itemValue="true"/>
+                    <f:selectItem itemLabel="Féminin" itemValue="false"/>
+                </p:selectOneRadio>
+                <p:message for="lieuNaissance"/>
+                
+                
+                <p:outputLabel value="Etat matrimonial :"/>
+                <p:selectOneRadio id="etatMatrimonial" value="#{etudiantController.current.etatMatrimonial}">
+                    <f:selectItem itemLabel="Célibataire" itemValue="true"/>
+                    <f:selectItem itemLabel="Marié(e)" itemValue="false"/>
+                </p:selectOneRadio>
+                <p:message for="lieuNaissance"/>
+                
+                <p:outputLabel value="Fonctionaire :"/>
+                <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}">
+                    <f:selectItem itemLabel="Oui" itemValue="true"/>
+                    <f:selectItem itemLabel="Non" itemValue="false"/>
+                </p:selectOneRadio>
+                <p:message for="lieuNaissance"/>
+                
+                <p:outputLabel value="Adresse de corespondance :"/>
+                <p:inputTextarea rows="6" cols="50" id="adresse" value="#{etudiantController.current.adresse}"
+                             />
+                <p:message for="lieuNaissance"/>
+                <p:outputLabel value="Numéro de téléphonne :"/>
+                <p:inputText id="telephonne" value="#{etudiantController.current.numeroTelephonne}"
+                             />
+                <p:message for="lieuNaissance"/>
+                    </p:panelGrid>
+<h:commandButton value="Enregistrer les Modification" action="#{etudiantController.doEdit}"/>
+
+
+                </p:panel>
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Ajouter un Diplome</h1>
+    </h:head>
+    <h:body>
+        <ui:composition template="../resources/template.xhtml">
+            <ui:define name="left">
+            <ui:insert name="header" >
+                <ui:include src="menuEtudiant.xhtml" />
+            </ui:insert>
+                
+            </ui:define>
+            <ui:define name="content">	
+                <h:form>
+                <div></div>
+                    <p:messages for="update"/>
+                    <div class="col-lg-7">
+                    <p:panel header="Ajouter un nouveau diplôme">
+                    
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Date d'obtention du diplôme : *"/>
+                    <p:calendar id="dateObtention" value="#{etudiantController.newQualification.dateObtention}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                    <p:message for="dateObtention"/> 
+
+                    <p:outputLabel value="Date de première inscription : *"/>
+                    <p:calendar id="datePremiereInscription" value="#{etudiantController.newQualification.datePremiereInscription}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date d obtention" />
+                    <p:message for="datePremiereInscription"/> 
+
+                    <p:outputLabel value="Diplôme : *"/>
+                    <p:selectOneMenu id="diplome" value="#{etudiantController.newQualification.diplome}"
+                                     required="true" requiredMessage="Veuillez selectionnez votre diplôme" >  
+                        <f:selectItem itemLabel="Diplome" itemValue="null" />  
+                        <f:selectItem itemLabel="Baccalaureat" itemValue="Baccalaureat" />  
+                        <f:selectItem itemLabel="Licence fondamentale" itemValue="Licence fondamentale" />  
+                        <f:selectItem itemLabel="Licence professionelle" itemValue="Licence professionelle" />
+                        <f:selectItem itemLabel="Master recherche" itemValue="Master recherche" />
+                        <f:selectItem itemLabel="Master specialise" itemValue="Master specialise" />
+                        <f:selectItem itemLabel="Diplome d'ingenieur" itemValue="Diplome d ingenieur" />
+                        <f:selectItem itemLabel="Autre diplome equivalent" itemValue="Autre diplome equivalent" />
+                        <p:ajax listener="#{etudiantController.getRightSemestre}" 
+                                event="select"/>
+                    </p:selectOneMenu>  
+                    <p:message for="diplome"/>
+
+                    <p:outputLabel value="Mention : *"/>
+                    <p:selectOneMenu id="mention" value="#{etudiantController.newQualification.mention}"
+                                     required="true" requiredMessage="Veuillez saisir la mention du diplome">
+                        <f:selectItem itemLabel="Mention" itemValue="null" />  
+                        <f:selectItem itemLabel="Passable" itemValue="Passable" />  
+                        <f:selectItem itemLabel="Assez bien" itemValue="Assez bien" />  
+                        <f:selectItem itemLabel="Bien" itemValue="Bien" />
+                        <f:selectItem itemLabel="Tres bien" itemValue="Tres bien" />
+                        <f:selectItem itemLabel="Excellent" itemValue="Excellent" />
+                    </p:selectOneMenu>
+                    <p:message for="mention"/>
+
+                    <p:outputLabel value="Classement :"/>
+                    <p:inputText id="classement" value="#{etudiantController.newQualification.classement}"
+                                 converterMessage="Veuillez saisir un nombre entier."
+                                 validatorMessage="Veuillez saisir un nombre entier."
+                                 >
+                        <f:validateLength minimum="0" maximum="6" />
+                    </p:inputText>
+                    <p:message for="classement"/>
+
+                    <p:outputLabel value="Etablissement delivrant le diplôme : *"/>
+                    <p:inputText id="partieDelivrante" value="#{etudiantController.newQualification.partieDelivrante}"
+                                 required="true" requiredMessage="Veuillez saisir l'etablissement d'etude"/>
+                    <p:message for="partieDelivrante"/>
+
+                </p:panelGrid>
+                        <p:panel header="Les notes de semestres(1->6) pour les licence ou master(1->4) / les années pour les Ingénieurs(1->5) ou les étudiants de l'ancien systeme(1->4)">
+                        <p:panelGrid columns="4">
+                        <p:outputLabel value="Note 1 :"/>
+                        <p:inputText id="note1" value="#{etudiantController.newQualification.note1}" />
+
+                        <p:outputLabel value="Note 2 :"/>
+                        <p:inputText id="note2" value="#{etudiantController.newQualification.note2}" />
+
+                        <p:outputLabel value="Note 3 :"/>
+                        <p:inputText id="note3" value="#{etudiantController.newQualification.note3}" />
+
+                        <p:outputLabel value="Note 4 :"/>
+                        <p:inputText id="note4" value="#{etudiantController.newQualification.note4}" />
+
+                        <p:outputLabel value="Note 5 :"/>
+                        <p:inputText id="note5" value="#{etudiantController.newQualification.note5}" />
+
+                        <p:outputLabel value="Note 6 :"/>
+                        <p:inputText id="note6" value="#{etudiantController.newQualification.note6}" />
+
+
+                    </p:panelGrid>
+                    </p:panel>
+                <h:commandButton value="Enregistrer ce parcours" action="#{etudiantController.doAddQualification}"/>
+
+</p:panel>
+                        </div>
+                    <div class="col-lg-4">
+                        <p:panel header="Aide a propos de l'ajout des diplômes !!">
+                        
+                        <p>
+                            Quand vous ajoutez un diplôme, 
+                            <ul>
+                                <li style="color: #1A96D4; font-family: georgia;">Les champs marqués avec un asterisk (*) sont obligatoires</li>
+                                <li style="color: #46b8da; font-family: georgia;">Vous n'êtes pas obligés de saisir des notes pour le bacalaureat</li>
+                                <li style="color: #99CC00; font-family: georgia;">Dans le cas des liscences veuillez saisir vos notes de semestres</li>
+                                <li style="color: blueviolet; font-family: georgia;">Dans le cas des étudiants issus de l'ancien système, ils peuvent saisir leur moyennes générales pour les 4 années, dans les champs Note S</li>
+                                <li style="color: #FE6B25; font-family: georgia;">Dans le cas des master juste 4 semestres</li>
+                                <li style="color: #c09853; font-family: georgia;">Dans le cas des diplômes d'ingenieurs de S1 a S5 reprèsentent les 5 années de formation</li>
+                                <li style="color: #449d44; font-family: georgia;">Pour les notes, utiliser un point '.' pour séparer la décimale, exemple : "13.43"</li>
+                            </ul>
+                        </p>
+                        </p:panel>
+                    </div>
+                    </h:form>
+            </ui:define>
+           
+        </ui:composition>
+    </h:body>
+</html> 

@@ -6,6 +6,8 @@
 package com.sos.fso.cdoc.insc.services;
 
 import com.sos.fso.cdoc.insc.entities.Choix;
+import com.sos.fso.cdoc.insc.entities.Etudiant;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +29,11 @@ public class ChoixFacade extends AbstractFacade<Choix> {
     public ChoixFacade() {
         super(Choix.class);
     }
+    
+    public List<Choix> findByIdEtudiant(Etudiant current){
+        return em.createNamedQuery("Choix.findByIdEtudiant").setParameter("idEtudiant", current).getResultList();
+        
+    }
+    
     
 }
