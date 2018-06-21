@@ -46,4 +46,8 @@
             <form-error-page>/security/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
+    <security-role>
+        <description/>
+        <role-name>candidat</role-name>
+    </security-role>
 </web-app>

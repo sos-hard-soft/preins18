@@ -35,7 +35,7 @@ public class LoginController {
     }
     
     
-    @PostConstruct
+    /*@PostConstruct*/
     public void init(){
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String,String> params;
