@@ -28,7 +28,9 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col-lg-8">
                 <p:panel id="etudiantdetail" rendered="#{!etudiantController.sessionOuverte}">
-
+                    <p:panelGrid>
+                        <p:graphicImage height="120" width="120" value="#{etudiantController.byteToImage(etudiantController.current.photo)}" />
+                    </p:panelGrid>
                     <p:messages for="update"/>
 <p:panel header="Informations personèlle">
                     <p:panelGrid columns="2">

@@ -21,6 +21,8 @@ import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.MailerBean;
 import com.sos.fso.cdoc.insc.services.QualificationFacade;
 import com.sos.fso.cdoc.insc.services.SujetFacade;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -33,16 +35,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
+import org.apache.commons.io.IOUtils;
+
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultStreamedContent;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
  * @author mab.salhi
  */
 @Named(value = "etudiantController")
+@ManagedBean
 @SessionScoped
 public class EtudiantController implements Serializable {
 
@@ -183,7 +193,7 @@ public class EtudiantController implements Serializable {
 
         //return response;
     }
-
+    
     public void sendConfirmationCandidatureMail(String email, String choix){
         try {
             mailStatus = mailerBean.sendConfirmationCandidatureMail(email, choix);
@@ -192,6 +202,24 @@ public class EtudiantController implements Serializable {
             logger.severe(ex.getMessage());
         }
     }
+    
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
+        System.out.println("Start file upload procedure");
+        UploadedFile file = event.getFile();
+        System.out.println(file.getFileName());
+
+        byte[] foto = IOUtils.toByteArray(file.getInputstream());
+        System.out.println(foto);
+
+        current.setPhoto(foto);
+ //application code
+    }
+
+    public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
+        ByteArrayInputStream img = new ByteArrayInputStream(imgBytes);
+        return new DefaultStreamedContent(img, "image/jpg");
+    }
+    
     
     public List<Branche> getAllBranches() {
         return brancheService.findAll();

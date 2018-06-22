@@ -40,7 +40,7 @@
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>jdbcRealm</realm-name>
+        <realm-name>umpRealm</realm-name>
         <form-login-config>
             <form-login-page>/security/login.xhtml</form-login-page>
             <form-error-page>/security/error.xhtml</form-error-page>

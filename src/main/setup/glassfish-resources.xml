@@ -11,4 +11,18 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="jdbc/cdocDB" object-type="user" pool-name="mysql_cdocInsc_rootPool"/>
+    <mail-resource debug="false" enabled="true" 
+                   from="mabsalhi.sos@gmail.com" 
+                   host="smtp.gmail.com" 
+                   jndi-name="mail" 
+                   object-type="user" 
+                   store-protocol="imap" 
+                   store-protocol-class="com.sun.mail.imap.IMAPStore" 
+                   transport-protocol="smtps" 
+                   transport-protocol-class="com.sun.mail.smtp.SMTPSSLTransport" 
+                   user="mabsalhi.sos@gmail.com">
+    <description/>
+    <property name="mail-smtps-auth" value="true"/>
+    <property name="mail-smtps-password" value="salhi1983"/>
+  </mail-resource>
 </resources>

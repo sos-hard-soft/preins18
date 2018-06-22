@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -75,11 +76,17 @@ public class Etudiant implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "nom")
     private String nom;
+    @Size(max = 255)
+    @Column(name = "nom_ar")
+    private String nomAr;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "prenom")
     private String prenom;
+    @Size(max = 255)
+    @Column(name = "prenom_ar")
+    private String prenomAr;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date_naissance")
@@ -107,6 +114,9 @@ public class Etudiant implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "numero_telephonne")
     private long numeroTelephonne;
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "etudiant")
     private List<Qualification> qualificationList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEtudiant")
@@ -165,6 +175,30 @@ public class Etudiant implements Serializable {
 
     public String getNom() {
         return nom;
+    }
+
+    public String getNomAr() {
+        return nomAr;
+    }
+
+    public void setNomAr(String nomAr) {
+        this.nomAr = nomAr;
+    }
+
+    public String getPrenomAr() {
+        return prenomAr;
+    }
+
+    public void setPrenomAr(String prenomAr) {
+        this.prenomAr = prenomAr;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     public void setNom(String nom) {
