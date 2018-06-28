@@ -86,16 +86,44 @@ public class Qualification implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "note1")
     private Double note1;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "scan-releve1")
+    private String releveScan1;
     @Column(name = "note2")
     private Double note2;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "scan-releve2")
+    private String releveScan2;
     @Column(name = "note3")
     private Double note3;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "scan-releve3")
+    private String releveScan3;
     @Column(name = "note4")
     private Double note4;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "scan-releve4")
+    private String releveScan4;
     @Column(name = "note5")
     private Double note5;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "scan-releve5")
+    private String releveScan5;
     @Column(name = "note6")
     private Double note6;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "scan-releve6")
+    private String releveScan6;
+    @Basic(optional = false)
+    @Size(min = 1, max = 255)
+    @Column(name = "path-scan")
+    private String PathScan;
     @JoinColumn(name = "etudiant", referencedColumnName = "id_etudiant")
     @ManyToOne
     private Etudiant etudiant;
@@ -236,6 +264,62 @@ public class Qualification implements Serializable {
         this.etudiant = etudiant;
     }
 
+    public String getPathScan() {
+        return PathScan;
+    }
+
+    public void setPathScan(String PathScan) {
+        this.PathScan = PathScan;
+    }
+
+    public String getReleveScan1() {
+        return releveScan1;
+    }
+
+    public void setReleveScan1(String releveScan1) {
+        this.releveScan1 = releveScan1;
+    }
+
+    public String getReleveScan2() {
+        return releveScan2;
+    }
+
+    public void setReleveScan2(String releveScan2) {
+        this.releveScan2 = releveScan2;
+    }
+
+    public String getReleveScan3() {
+        return releveScan3;
+    }
+
+    public void setReleveScan3(String releveScan3) {
+        this.releveScan3 = releveScan3;
+    }
+
+    public String getReleveScan4() {
+        return releveScan4;
+    }
+
+    public void setReleveScan4(String releveScan4) {
+        this.releveScan4 = releveScan4;
+    }
+
+    public String getReleveScan5() {
+        return releveScan5;
+    }
+
+    public void setReleveScan5(String releveScan5) {
+        this.releveScan5 = releveScan5;
+    }
+
+    public String getReleveScan6() {
+        return releveScan6;
+    }
+
+    public void setReleveScan6(String releveScan6) {
+        this.releveScan6 = releveScan6;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -32,7 +32,7 @@ import javax.mail.internet.MimeMultipart;
 @Named
 @Stateless
 public class MailerBean {
-    @Resource(name="mail/umpMailer")
+    @Resource(name="mail/fsjesMailer")
     private Session session;
 
     private static final Logger logger = Logger.getLogger(MailerBean.class.getName());

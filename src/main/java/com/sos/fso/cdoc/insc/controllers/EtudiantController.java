@@ -22,10 +22,14 @@ import com.sos.fso.cdoc.insc.services.MailerBean;
 import com.sos.fso.cdoc.insc.services.QualificationFacade;
 import com.sos.fso.cdoc.insc.services.SujetFacade;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
@@ -65,6 +69,8 @@ public class EtudiantController implements Serializable {
     protected String status;
     private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
     private Future<String> mailStatus;
+    private Path path;
+    private File uploaded;
 
     @Inject
     private EtudiantFacade etudiantService;
@@ -109,10 +115,10 @@ public class EtudiantController implements Serializable {
         return "/index?faces-redirect=true";
     }
 
-    public String showPrint(){
+    public String showPrint() {
         return "/etudiant/formCandidature?faces-redirect=true";
-        }
-    
+    }
+
     public String showEdit() {
         //this.current = item;
         return "/etudiant/edit?faces-redirect=true";
@@ -193,8 +199,8 @@ public class EtudiantController implements Serializable {
 
         //return response;
     }
-    
-    public void sendConfirmationCandidatureMail(String email, String choix){
+
+    public void sendConfirmationCandidatureMail(String email, String choix) {
         try {
             mailStatus = mailerBean.sendConfirmationCandidatureMail(email, choix);
             this.setStatus("Envoie en cours ...");
@@ -202,7 +208,7 @@ public class EtudiantController implements Serializable {
             logger.severe(ex.getMessage());
         }
     }
-    
+
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         System.out.println("Start file upload procedure");
         UploadedFile file = event.getFile();
@@ -212,15 +218,27 @@ public class EtudiantController implements Serializable {
         System.out.println(foto);
 
         current.setPhoto(foto);
- //application code
+        //application code
+    }
+    
+    public String handleUploadToDisk(FileUploadEvent event) throws IOException {
+        System.out.println("Start scan upload procedure");
+        UploadedFile file = event.getFile();
+        System.out.println(file.getFileName());
+        
+        byte[] scan = IOUtils.toByteArray(file.getInputstream());
+        System.out.println(scan);
+
+        //current.setPhoto(foto);
+        //application code
+        return "";
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
         ByteArrayInputStream img = new ByteArrayInputStream(imgBytes);
         return new DefaultStreamedContent(img, "image/jpg");
     }
-    
-    
+
     public List<Branche> getAllBranches() {
         return brancheService.findAll();
     }
@@ -234,9 +252,11 @@ public class EtudiantController implements Serializable {
         logger.log(Level.INFO, "Debut de la procedure d'ajout de diplome !!");
         if (current != null) {
             newQualification.setEtudiant(current);
-
+            
+            
             try {
                 qualificationService.create(newQualification);
+                
                 current.getQualificationList().add(newQualification);
                 etudiantService.clearCache();
             } catch (Exception e) {
@@ -248,7 +268,7 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
-    public String doAddBranche(){
+    public String doAddBranche() {
         current.setBranche(branche);
         String choix = branche.getIntitule();
         String email = current.getEmail();
@@ -256,7 +276,7 @@ public class EtudiantController implements Serializable {
         etudiantService.edit(current);
         return "/etudiant/view?faces-redirect=true";
     }
-    
+
     public String doAddChoix(Sujet sujet) {
         int nbChoix = current.getChoixList().size();
         System.out.println("le nombre de choix est " + nbChoix);
@@ -299,7 +319,7 @@ public class EtudiantController implements Serializable {
         newCompte.setEmail(newEtudiant.getEmail());
         newCompte.setActif(Boolean.FALSE);
         newCompte.setGroupe("candidat");
-        
+
         //Creation Du compte
         String password = newCompte.getPassword();
         String hashedPassword = Hash.hash(password);
@@ -311,12 +331,19 @@ public class EtudiantController implements Serializable {
         //Generation de la cle d'identification et envoie de mail d'activation
         final String key = UUID.randomUUID().toString();
         System.out.println("La cle generer est " + key);
-        SendEmail(newEtudiant.getEmail(), key, newEtudiant.getCne(), password);        
-//Definition de l'activation
+        SendEmail(newEtudiant.getEmail(), key, newEtudiant.getCne(), password);
+        //Definition de l'activation
         activation.setActivationKey(key);
         activation.setCompte(newCompte);
         activationService.create(activation);
-
+        //Creation du répertoire spécifique a l'étudiant
+        String candidatFolder = newEtudiant.getCin();
+        path = Paths.get("C:\\inscmast\\candidats\\" + candidatFolder + "");
+        try {
+            Files.createDirectories(path);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         //Creation de l'etudiant
         etudiantService.create(newEtudiant);
         return "waitValidation?faces-redirect=true";
@@ -347,22 +374,21 @@ public class EtudiantController implements Serializable {
         }
 
     }
-    
-    public void doRemoveChoix(Choix choix){
+
+    public void doRemoveChoix(Choix choix) {
         try {
             this.current.getChoixList().remove(choix);
             choixService.remove(choix);
             etudiantService.edit(current);
             addMessage("update", FacesMessage.SEVERITY_INFO, "le Sujet a ete supprimer avec success !!", "Error !!");
-            
+
         } catch (Exception e) {
         }
     }
-    
+
     // ======================================
     // = Constructors et Helpers=
     // ======================================
-
     public EtudiantController() {
     }
 
@@ -556,4 +582,20 @@ public class EtudiantController implements Serializable {
         this.currentQualification = currentQualification;
     }
 
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
+    }
+
+    public File getUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(File uploaded) {
+        this.uploaded = uploaded;
+    }
+    
 }

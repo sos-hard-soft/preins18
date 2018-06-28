@@ -29,7 +29,7 @@ and open the template in the editor.
                     </p:panel>
 
                     <p:panel id="etudiantdetail" header="Modification des Informations personelle" rendered="#{!etudiantController.sessionOuverte}">
-                         <p:outputLabel value="Photo :" />
+                         <p:outputLabel value="Veuillez charger votre Photo d'identité :" />
                     <p:fileUpload fileUploadListener="#{etudiantController.handleFileUpload}" />
                     <p:growl id="messages" showDetail="true"/>
         
@@ -54,12 +54,20 @@ and open the template in the editor.
                             <p:inputText id="nom" value="#{etudiantController.current.nom}"
                                          required="true" requiredMessage="Veuillez saisir votre nom"/>
                             <p:message for="nom"/>
+                            <p:outputLabel  value="الاسم العائلي : *"/>
+                            <p:inputText id="nomAr" value="#{etudiantController.current.nomAr}"
+                                         required="false" requiredMessage="Veuillez saisir votre nom en arabe"/>
+                            <p:message for="nomAr"/>
 
                             <p:outputLabel value="Prénom : *"/>
                             <p:inputText id="prenom" value="#{etudiantController.current.prenom}"
                                          required="true" requiredMessage="Veuillez saisir votre prenom"/>
                             <p:message for="prenom"/>
-
+                            <p:outputLabel  value="الاسم الشخصي : *"/>
+                            <p:inputText id="prenomAr" value="#{etudiantController.current.prenomAr}"
+                                         required="false" requiredMessage="Veuillez saisir votre nom en arabe"/>
+                            <p:message for="prenomAr"/>
+                            
                             <p:outputLabel value="Date de naissance : *"/>
                             <p:calendar id="dateNaissance" value="#{etudiantController.current.dateNaissance}"
                                         mode="popup" pattern="dd/MM/yyyy"
@@ -80,6 +88,10 @@ and open the template in the editor.
                             <p:inputText id="lieuNaissance" value="#{etudiantController.current.lieuNaissance}"
                                          />
                             <p:message for="lieuNaissance"/>
+                            <p:outputLabel value="Lieu de naissance :"/>
+                            <p:inputText id="lieuNaissanceAr" value="#{etudiantController.current.lieuNaissanceAr}"
+                                         />
+                            <p:message for="lieuNaissanceAr"/>
 
                             <p:outputLabel value="Nationalité :"/>
                             <p:inputText id="nationalite" value="#{etudiantController.current.nationalite}"

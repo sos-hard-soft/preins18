@@ -59,6 +59,9 @@ and open the template in the editor.
                                 event="select"/>-->
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
+                    <p:outputLabel value="Veuillez charger l'image de votre diplome :" />
+                    <p:fileUpload fileUploadListener="#{etudiantController.handleFileUpload}" />
+                    <p:message for="diplome"/>
 
                     <p:outputLabel value="Mention : *"/>
                     <p:selectOneMenu id="mention" value="#{etudiantController.newQualification.mention}"

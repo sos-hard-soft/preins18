@@ -96,6 +96,9 @@ public class Etudiant implements Serializable {
     @Column(name = "lieu_naissance")
     private String lieuNaissance;
     @Size(max = 255)
+    @Column(name = "lieu_naissance_ar")
+    private String lieuNaissanceAr;
+    @Size(max = 255)
     @Column(name = "nationalite")
     private String nationalite;
     @Column(name = "sexe")
@@ -229,6 +232,14 @@ public class Etudiant implements Serializable {
         this.lieuNaissance = lieuNaissance;
     }
 
+    public String getLieuNaissanceAr() {
+        return lieuNaissanceAr;
+    }
+
+    public void setLieuNaissanceAr(String lieuNaissanceAr) {
+        this.lieuNaissanceAr = lieuNaissanceAr;
+    }
+    
     public String getNationalite() {
         return nationalite;
     }

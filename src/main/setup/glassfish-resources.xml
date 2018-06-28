@@ -14,15 +14,20 @@
     <mail-resource debug="false" enabled="true" 
                    from="mabsalhi.sos@gmail.com" 
                    host="smtp.gmail.com" 
-                   jndi-name="mail" 
+                   jndi-name="mail/fsjesMailer" 
                    object-type="user" 
                    store-protocol="imap" 
                    store-protocol-class="com.sun.mail.imap.IMAPStore" 
-                   transport-protocol="smtps" 
-                   transport-protocol-class="com.sun.mail.smtp.SMTPSSLTransport" 
-                   user="mabsalhi.sos@gmail.com">
-    <description/>
-    <property name="mail-smtps-auth" value="true"/>
-    <property name="mail-smtps-password" value="salhi1983"/>
-  </mail-resource>
+                   transport-protocol="smtp" 
+                   transport-protocol-class="com.sun.mail.smtp.SMTPTransport" 
+                   user="mabsalhi.sos"
+    >
+        <description/>
+        <property name="mail.smtp.socketFactory.class" value="javax.net.ssl.SSLSocketFactory"/>
+        <property name="mail.smtp.socketFactory.port " value="465"/>
+        <property name="mail.smtp.port " value="465"/>
+        <property name="mail.smtp.auth " value="true"/>
+        <property name="mail.smtp.password " value="mabsalhi.sos@gmail.com"/>
+        <property name="mail.smtp.user " value="salhi1983"/>
+    </mail-resource>
 </resources>
