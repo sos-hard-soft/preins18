@@ -29,7 +29,7 @@ and open the template in the editor.
                     <div class="col-lg-8">
                 <p:panel id="etudiantdetail" rendered="#{!etudiantController.sessionOuverte}">
                     <p:panelGrid>
-                        <p:graphicImage height="120" width="120" value="#{etudiantController.byteToImage(etudiantController.current.photo)}" />
+                        <p:graphicImage rendered="#{etudiantController.fileExist}" height="120" width="120" value="#{etudiantController.byteToImage(etudiantController.current.photo)}" />
                     </p:panelGrid>
                     <p:messages for="update"/>
 <p:panel header="Informations personèlle">
@@ -42,10 +42,12 @@ and open the template in the editor.
                         
                         <p:outputLabel value="Nom : "/>
                         <p:outputLabel value="#{etudiantController.current.nom}"/>
-
+                        <p:outputLabel  value="الاسم العائلي : *"/>
+                        <p:outputLabel value="#{etudiantController.current.nomAr}"/>
                         <p:outputLabel value="Prénom : "/>
                         <p:outputLabel value="#{etudiantController.current.prenom}"/>
-
+                        <p:outputLabel  value="الاسم الشخصي : *"/>
+                        <p:outputLabel value="#{etudiantController.current.prenomAr}"/>
                         <p:outputLabel value="Date de naissance : "/>
                         <p:outputLabel value="#{etudiantController.current.dateNaissance}"/>
                         

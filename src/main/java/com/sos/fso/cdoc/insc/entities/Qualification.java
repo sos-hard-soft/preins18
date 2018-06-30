@@ -88,41 +88,41 @@ public class Qualification implements Serializable {
     private Double note1;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "scan-releve1")
+    @Column(name = "scan_releve1")
     private String releveScan1;
     @Column(name = "note2")
     private Double note2;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "scan-releve2")
+    @Column(name = "scan_releve2")
     private String releveScan2;
     @Column(name = "note3")
     private Double note3;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "scan-releve3")
+    @Column(name = "scan_releve3")
     private String releveScan3;
     @Column(name = "note4")
     private Double note4;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "scan-releve4")
+    @Column(name = "scan_releve4")
     private String releveScan4;
     @Column(name = "note5")
     private Double note5;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "scan-releve5")
+    @Column(name = "scan_releve5")
     private String releveScan5;
     @Column(name = "note6")
     private Double note6;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "scan-releve6")
+    @Column(name = "scan_releve6")
     private String releveScan6;
     @Basic(optional = false)
     @Size(min = 1, max = 255)
-    @Column(name = "path-scan")
+    @Column(name = "path_scan")
     private String PathScan;
     @JoinColumn(name = "etudiant", referencedColumnName = "id_etudiant")
     @ManyToOne

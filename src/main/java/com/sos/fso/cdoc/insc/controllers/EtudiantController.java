@@ -24,12 +24,14 @@ import com.sos.fso.cdoc.insc.services.SujetFacade;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +45,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
 import org.primefaces.event.SelectEvent;
@@ -69,7 +72,7 @@ public class EtudiantController implements Serializable {
     protected String status;
     private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
     private Future<String> mailStatus;
-    private Path path;
+    private Path folder;
     private File uploaded;
 
     @Inject
@@ -107,6 +110,8 @@ public class EtudiantController implements Serializable {
 
     private boolean visibled = false;
     private boolean visible = false;
+    private boolean fileExist = false;
+    private String fileName;
 
     // ======================================
     // = Navigation Methods =
@@ -220,18 +225,25 @@ public class EtudiantController implements Serializable {
         current.setPhoto(foto);
         //application code
     }
-    
-    public String handleUploadToDisk(FileUploadEvent event) throws IOException {
-        System.out.println("Start scan upload procedure");
-        UploadedFile file = event.getFile();
-        System.out.println(file.getFileName());
-        
-        byte[] scan = IOUtils.toByteArray(file.getInputstream());
-        System.out.println(scan);
 
+    public void handleUploadToDisk(FileUploadEvent event) throws IOException {
+        System.out.println("Start scan upload procedure");
+        UploadedFile uploadedFile = event.getFile();
+        InputStream input = uploadedFile.getInputstream();
+        System.out.println(uploadedFile.getFileName());
+
+        folder = Paths.get("C:\\inscmast\\candidats\\" + current.getCin() + "");
+        String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
+        String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
+        Path file = Files.createTempFile(folder, filename + "-", "." + extension);
+        Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
+        //byte[] scan = IOUtils.toByteArray(file.getInputstream());
+        //System.out.println(scan);
         //current.setPhoto(foto);
         //application code
-        return "";
+        System.out.println("Uploaded file successfully saved in " + file);
+        
+        this.fileName = file.toString();
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
@@ -252,11 +264,12 @@ public class EtudiantController implements Serializable {
         logger.log(Level.INFO, "Debut de la procedure d'ajout de diplome !!");
         if (current != null) {
             newQualification.setEtudiant(current);
-            
-            
+            System.out.println("Fill qualification file : " + fileName);
+            newQualification.setDiplome(fileName);
+
             try {
                 qualificationService.create(newQualification);
-                
+
                 current.getQualificationList().add(newQualification);
                 etudiantService.clearCache();
             } catch (Exception e) {
@@ -265,6 +278,7 @@ public class EtudiantController implements Serializable {
         } else {
             logger.log(Level.SEVERE, "Erreur de donnee the current entity is null !!");
         }
+        this.fileName = null;
         return "/etudiant/view?faces-redirect=true";
     }
 
@@ -338,9 +352,9 @@ public class EtudiantController implements Serializable {
         activationService.create(activation);
         //Creation du répertoire spécifique a l'étudiant
         String candidatFolder = newEtudiant.getCin();
-        path = Paths.get("C:\\inscmast\\candidats\\" + candidatFolder + "");
+        folder = Paths.get("C:\\inscmast\\candidats\\" + candidatFolder + "");
         try {
-            Files.createDirectories(path);
+            Files.createDirectories(folder);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -464,6 +478,9 @@ public class EtudiantController implements Serializable {
         if (current == null) {
             current = etudiantService.findByCne(compte.getCne());
         }
+        if (current.getPhoto() != null) {
+            fileExist = true;
+        }         
         return current;
     }
 
@@ -582,12 +599,12 @@ public class EtudiantController implements Serializable {
         this.currentQualification = currentQualification;
     }
 
-    public Path getPath() {
-        return path;
+    public Path getFolder() {
+        return folder;
     }
 
-    public void setPath(Path path) {
-        this.path = path;
+    public void setFolder(Path folder) {
+        this.folder = folder;
     }
 
     public File getUploaded() {
@@ -596,6 +613,22 @@ public class EtudiantController implements Serializable {
 
     public void setUploaded(File uploaded) {
         this.uploaded = uploaded;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public boolean isFileExist() {
+        return fileExist;
+    }
+
+    public void setFileExist(boolean fileExist) {
+        this.fileExist = fileExist;
     }
     
 }
