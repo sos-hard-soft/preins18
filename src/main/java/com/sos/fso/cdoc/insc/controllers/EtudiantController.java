@@ -265,7 +265,7 @@ public class EtudiantController implements Serializable {
         if (current != null) {
             newQualification.setEtudiant(current);
             System.out.println("Fill qualification file : " + fileName);
-            newQualification.setDiplome(fileName);
+            newQualification.setPathScan(fileName);
 
             try {
                 qualificationService.create(newQualification);

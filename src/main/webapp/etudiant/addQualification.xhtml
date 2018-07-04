@@ -30,18 +30,14 @@ and open the template in the editor.
                 <p:panelGrid columns="3">
                     <p:outputLabel value="Date d'obtention du diplôme : *"/>
                     <p:calendar id="dateObtention" value="#{etudiantController.newQualification.dateObtention}"
-                                mode="popup" pattern="dd/MM/yyyy"
-                                yearRange="c-100" locale="fr"
-                                showButtonPanel="true" navigator="true"
+                                mode="popup" pattern="dd/MM/yyyy" locale="fr"
                                 required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
                     <p:message for="dateObtention"/> 
 
                     <p:outputLabel value="Date de première inscription : *"/>
                     <p:calendar id="datePremiereInscription" value="#{etudiantController.newQualification.datePremiereInscription}"
                                 mode="popup" pattern="dd/MM/yyyy"
-                                yearRange="c-100" locale="fr"
-                                showButtonPanel="true" navigator="true"
-                                required="true" requiredMessage="Veuillez selectionnez une Date d obtention" />
+                                locale="fr" required="true" requiredMessage="Veuillez selectionnez une Date d obtention" />
                     <p:message for="datePremiereInscription"/> 
 
                     <p:outputLabel value="Diplôme : *"/>
@@ -60,8 +56,8 @@ and open the template in the editor.
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
                     <p:outputLabel value="Veuillez charger l'image de votre diplome :" />
-                    <p:fileUpload fileUploadListener="#{etudiantController.handleUploadToDisk}" />
-                    <p:message for="diplome"/>
+                    <p:fileUpload id="scan" fileUploadListener="#{etudiantController.handleUploadToDisk}" />
+                    <p:message for="scan"/>
 
                     <p:outputLabel value="Mention : *"/>
                     <p:selectOneMenu id="mention" value="#{etudiantController.newQualification.mention}"

@@ -6,6 +6,7 @@
 package com.sos.fso.cdoc.insc.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,7 +17,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -127,7 +130,16 @@ public class Etudiant implements Serializable {
     @JoinColumn(name = "branche", referencedColumnName = "id_branche")
     @ManyToOne
     private Branche branche;
-
+    @ManyToMany(cascade = { 
+        CascadeType.PERSIST, 
+        CascadeType.MERGE
+    })
+    @JoinTable(name = "choix_etudiant",
+        joinColumns = @JoinColumn(name = "id_filiere"),
+        inverseJoinColumns = @JoinColumn(name = "id_etudiant")
+    )
+    private List<Filiere> etudiantChoices = new ArrayList<>();
+    
     public Etudiant() {
     }
 
@@ -322,6 +334,15 @@ public class Etudiant implements Serializable {
         this.branche = branche;
     }
 
+    public List<Filiere> getEtudiantChoices() {
+        return etudiantChoices;
+    }
+
+    public void setEtudiantChoices(List<Filiere> etudiantChoices) {
+        this.etudiantChoices = etudiantChoices;
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

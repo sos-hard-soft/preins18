@@ -25,7 +25,8 @@ and open the template in the editor.
                 <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
                     Votre session a expirer ou vous n'avez pas activer votre compte.
                 </p:panel>
-                <div class="row">
+                               <div class="row">
+
                     <div class="col-lg-8">
                 <p:panel id="etudiantdetail" rendered="#{!etudiantController.sessionOuverte}">
                     <p:panelGrid>
@@ -92,11 +93,12 @@ and open the template in the editor.
                         </p:panel>
                     </div>
 </div>
+                
                 <p:tabView id="tabView">  
 
                     <p:tab id="tab1" title="Diplomes Obtenus">
                         
-                        <h:panelGrid columns="2" cellpadding="10">  
+                       
                             <p:dataTable value="#{etudiantController.current.qualificationList}" var="diplome">
                                 <p:column  headerText="Diplome">  
                                     <h:outputText value="#{diplome.diplome}" />  
@@ -105,10 +107,6 @@ and open the template in the editor.
                                     <h:outputText value="#{diplome.dateObtention}" >
                                         <f:convertDateTime pattern="dd.MM.yyyy" />
                                     </h:outputText>  
-                                </p:column> 
-
-                                <p:column  headerText="Mention">  
-                                    <h:outputText value="#{diplome.mention}" />  
                                 </p:column> 
                                 <p:column  headerText="Etablissement">  
                                     <h:outputText value="#{diplome.partieDelivrante}" />  
@@ -126,9 +124,9 @@ and open the template in the editor.
 
                         </p:column>
                             </p:dataTable>
-                        </h:panelGrid>  
+          
                     </p:tab>  
-                    <p:tab id="tab2" title="Formation Doctorale Choisie">
+                    <p:tab id="tab2"  title="Formation Doctorale Choisie">
                         <p:outputLabel value="Vous avez choisis la branche : "/>
                         <h4><p:outputLabel value="#{etudiantController.current.branche.intitule}" /></h4>
                     </p:tab>
