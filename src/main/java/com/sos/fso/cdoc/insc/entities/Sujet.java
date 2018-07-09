@@ -8,7 +8,6 @@ package com.sos.fso.cdoc.insc.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,64 +19,58 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author mab.salhi
+ * @author mabsalhi.sos
  */
 @Entity
 @Table(name = "t_sujet")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Sujet.findAll", query = "SELECT s FROM Sujet s"),
-    @NamedQuery(name = "Sujet.findByIdSujet", query = "SELECT s FROM Sujet s WHERE s.idSujet = :idSujet"),
-    @NamedQuery(name = "Sujet.findByOptimisticLock", query = "SELECT s FROM Sujet s WHERE s.optimisticLock = :optimisticLock"),
-    @NamedQuery(name = "Sujet.findByIntitule", query = "SELECT s FROM Sujet s WHERE s.intitule = :intitule"),
-    @NamedQuery(name = "Sujet.findByEncadrant", query = "SELECT s FROM Sujet s WHERE s.encadrant = :encadrant"),
-    @NamedQuery(name = "Sujet.findByLabo", query = "SELECT s FROM Sujet s WHERE s.labo = :labo"),
-    @NamedQuery(name = "Sujet.findByEtablissement", query = "SELECT s FROM Sujet s WHERE s.etablissement = :etablissement"),
-    @NamedQuery(name = "Sujet.findByNbPlace", query = "SELECT s FROM Sujet s WHERE s.nbPlace = :nbPlace"),
-    @NamedQuery(name = "Sujet.findByDescription", query = "SELECT s FROM Sujet s WHERE s.description = :description"),
-    @NamedQuery(name = "Sujet.findByBranche", query = "SELECT s FROM Sujet s WHERE s.branche = :branche")
-})
+    @NamedQuery(name = "Sujet.findAll", query = "SELECT s FROM Sujet s")
+    , @NamedQuery(name = "Sujet.findByIdSujet", query = "SELECT s FROM Sujet s WHERE s.idSujet = :idSujet")
+    , @NamedQuery(name = "Sujet.findByDescription", query = "SELECT s FROM Sujet s WHERE s.description = :description")
+    , @NamedQuery(name = "Sujet.findByEncadrant", query = "SELECT s FROM Sujet s WHERE s.encadrant = :encadrant")
+    , @NamedQuery(name = "Sujet.findByEtablissement", query = "SELECT s FROM Sujet s WHERE s.etablissement = :etablissement")
+    , @NamedQuery(name = "Sujet.findByIntitule", query = "SELECT s FROM Sujet s WHERE s.intitule = :intitule")
+    , @NamedQuery(name = "Sujet.findByLabo", query = "SELECT s FROM Sujet s WHERE s.labo = :labo")
+    , @NamedQuery(name = "Sujet.findByNbPlace", query = "SELECT s FROM Sujet s WHERE s.nbPlace = :nbPlace")
+    , @NamedQuery(name = "Sujet.findByOptimisticLock", query = "SELECT s FROM Sujet s WHERE s.optimisticLock = :optimisticLock")})
 public class Sujet implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_sujet")
     private Integer idSujet;
-    @Column(name = "optimistic_lock")
-    private Integer optimisticLock;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "intitule")
-    private String intitule;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 150)
-    @Column(name = "encadrant")
-    private String encadrant;
-    @Size(max = 255)
-    @Column(name = "labo")
-    private String labo;
-    @Size(max = 255)
-    @Column(name = "etablissement")
-    private String etablissement;
-    @Column(name = "nb_place")
-    private Integer nbPlace;
     @Size(max = 255)
     @Column(name = "description")
     private String description;
+    @Size(max = 255)
+    @Column(name = "encadrant")
+    private String encadrant;
+    @Size(max = 255)
+    @Column(name = "etablissement")
+    private String etablissement;
+    @Size(max = 255)
+    @Column(name = "intitule")
+    private String intitule;
+    @Size(max = 255)
+    @Column(name = "labo")
+    private String labo;
+    @Column(name = "nb_place")
+    private Integer nbPlace;
+    @Column(name = "optimistic_lock")
+    private Integer optimisticLock;
     @JoinColumn(name = "branche", referencedColumnName = "id_branche")
     @ManyToOne
     private Branche branche;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idSujet")
+    @OneToMany(mappedBy = "idSujet")
     private List<Choix> choixList;
 
     public Sujet() {
@@ -85,12 +78,6 @@ public class Sujet implements Serializable {
 
     public Sujet(Integer idSujet) {
         this.idSujet = idSujet;
-    }
-
-    public Sujet(Integer idSujet, String intitule, String encadrant) {
-        this.idSujet = idSujet;
-        this.intitule = intitule;
-        this.encadrant = encadrant;
     }
 
     public Integer getIdSujet() {
@@ -101,20 +88,12 @@ public class Sujet implements Serializable {
         this.idSujet = idSujet;
     }
 
-    public Integer getOptimisticLock() {
-        return optimisticLock;
+    public String getDescription() {
+        return description;
     }
 
-    public void setOptimisticLock(Integer optimisticLock) {
-        this.optimisticLock = optimisticLock;
-    }
-
-    public String getIntitule() {
-        return intitule;
-    }
-
-    public void setIntitule(String intitule) {
-        this.intitule = intitule;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEncadrant() {
@@ -125,20 +104,28 @@ public class Sujet implements Serializable {
         this.encadrant = encadrant;
     }
 
-    public String getLabo() {
-        return labo;
-    }
-
-    public void setLabo(String labo) {
-        this.labo = labo;
-    }
-
     public String getEtablissement() {
         return etablissement;
     }
 
     public void setEtablissement(String etablissement) {
         this.etablissement = etablissement;
+    }
+
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
+    }
+
+    public String getLabo() {
+        return labo;
+    }
+
+    public void setLabo(String labo) {
+        this.labo = labo;
     }
 
     public Integer getNbPlace() {
@@ -149,12 +136,12 @@ public class Sujet implements Serializable {
         this.nbPlace = nbPlace;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getOptimisticLock() {
+        return optimisticLock;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setOptimisticLock(Integer optimisticLock) {
+        this.optimisticLock = optimisticLock;
     }
 
     public Branche getBranche() {

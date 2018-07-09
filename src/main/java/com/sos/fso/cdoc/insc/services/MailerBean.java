@@ -44,7 +44,7 @@ public class MailerBean {
      * @return
      */
     @Asynchronous
-    public Future<String> sendVerificationMail(String email, String key,long cne, String password) {
+    public Future<String> sendVerificationMail(String email, String key,String cin, String password) {
         String status;
         try {
             Message message = new MimeMessage(session);
@@ -65,7 +65,7 @@ public class MailerBean {
                     + "<p>Vous avez entamez la procédure de candidature au postes de doctorants au <strong>Centre d'Etudes Doctorales Sciences et Téchniques</strong><br />"
                     + "Pour confirmer les données saisi et créer votre compte veuillez cliquez sur le lien suivant ou le copiez collez dans votre navigateur : </p>"
                     + "http://www.fso.ump.ma/cedocinsc/compte/validation.xhtml?key="+key+"<br />"
-                    + "<p>Le login est votre cne : "+ cne + "<br />"
+                    + "<p>Le login est votre CIN : "+ cin + "<br />"
                     + "Votre mot de passe est : " + password + "</p></body></html>";
             htmlPart.setContent(htmlContent, "text/html");
             

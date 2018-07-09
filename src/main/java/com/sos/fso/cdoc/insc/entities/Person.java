@@ -15,10 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -34,46 +31,41 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author mabsalhi.sos
  */
 @Entity
-@Table(name = "t_etudiant")
+@Table(name = "t_person")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Etudiant.findAll", query = "SELECT e FROM Etudiant e")
-    , @NamedQuery(name = "Etudiant.findByIdEtudiant", query = "SELECT e FROM Etudiant e WHERE e.idEtudiant = :idEtudiant")
-    , @NamedQuery(name = "Etudiant.findByActivite", query = "SELECT e FROM Etudiant e WHERE e.activite = :activite")
-    , @NamedQuery(name = "Etudiant.findByAdresse", query = "SELECT e FROM Etudiant e WHERE e.adresse = :adresse")
-    , @NamedQuery(name = "Etudiant.findByCin", query = "SELECT e FROM Etudiant e WHERE e.cin = :cin")
-    , @NamedQuery(name = "Etudiant.findByCne", query = "SELECT e FROM Etudiant e WHERE e.cne = :cne")
-    , @NamedQuery(name = "Etudiant.findByDateNaissance", query = "SELECT e FROM Etudiant e WHERE e.dateNaissance = :dateNaissance")
-    , @NamedQuery(name = "Etudiant.findByEmail", query = "SELECT e FROM Etudiant e WHERE e.email = :email")
-    , @NamedQuery(name = "Etudiant.findByEtatMatrimonial", query = "SELECT e FROM Etudiant e WHERE e.etatMatrimonial = :etatMatrimonial")
-    , @NamedQuery(name = "Etudiant.findByLieuNaissance", query = "SELECT e FROM Etudiant e WHERE e.lieuNaissance = :lieuNaissance")
-    , @NamedQuery(name = "Etudiant.findByLieuNaissanceAr", query = "SELECT e FROM Etudiant e WHERE e.lieuNaissanceAr = :lieuNaissanceAr")
-    , @NamedQuery(name = "Etudiant.findByNationalite", query = "SELECT e FROM Etudiant e WHERE e.nationalite = :nationalite")
-    , @NamedQuery(name = "Etudiant.findByNom", query = "SELECT e FROM Etudiant e WHERE e.nom = :nom")
-    , @NamedQuery(name = "Etudiant.findByNomAr", query = "SELECT e FROM Etudiant e WHERE e.nomAr = :nomAr")
-    , @NamedQuery(name = "Etudiant.findByNumeroTelephonne", query = "SELECT e FROM Etudiant e WHERE e.numeroTelephonne = :numeroTelephonne")
-    , @NamedQuery(name = "Etudiant.findByOptimisticLock", query = "SELECT e FROM Etudiant e WHERE e.optimisticLock = :optimisticLock")
-    , @NamedQuery(name = "Etudiant.findByPrenom", query = "SELECT e FROM Etudiant e WHERE e.prenom = :prenom")
-    , @NamedQuery(name = "Etudiant.findByPrenomAr", query = "SELECT e FROM Etudiant e WHERE e.prenomAr = :prenomAr")
-    , @NamedQuery(name = "Etudiant.findBySexe", query = "SELECT e FROM Etudiant e WHERE e.sexe = :sexe")})
-public class Etudiant implements Serializable {
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+    , @NamedQuery(name = "Person.findByIdPerson", query = "SELECT p FROM Person p WHERE p.idPerson = :idPerson")
+    , @NamedQuery(name = "Person.findByAdresse", query = "SELECT p FROM Person p WHERE p.adresse = :adresse")
+    , @NamedQuery(name = "Person.findByCin", query = "SELECT p FROM Person p WHERE p.cin = :cin")
+    , @NamedQuery(name = "Person.findByDateNaissance", query = "SELECT p FROM Person p WHERE p.dateNaissance = :dateNaissance")
+    , @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email")
+    , @NamedQuery(name = "Person.findByEtatMatrimonial", query = "SELECT p FROM Person p WHERE p.etatMatrimonial = :etatMatrimonial")
+    , @NamedQuery(name = "Person.findByFonction", query = "SELECT p FROM Person p WHERE p.fonction = :fonction")
+    , @NamedQuery(name = "Person.findByLieuNaissance", query = "SELECT p FROM Person p WHERE p.lieuNaissance = :lieuNaissance")
+    , @NamedQuery(name = "Person.findByLieuNaissanceAr", query = "SELECT p FROM Person p WHERE p.lieuNaissanceAr = :lieuNaissanceAr")
+    , @NamedQuery(name = "Person.findByNationalite", query = "SELECT p FROM Person p WHERE p.nationalite = :nationalite")
+    , @NamedQuery(name = "Person.findByNom", query = "SELECT p FROM Person p WHERE p.nom = :nom")
+    , @NamedQuery(name = "Person.findByNomAr", query = "SELECT p FROM Person p WHERE p.nomAr = :nomAr")
+    , @NamedQuery(name = "Person.findByNumeroTelephonne", query = "SELECT p FROM Person p WHERE p.numeroTelephonne = :numeroTelephonne")
+    , @NamedQuery(name = "Person.findByOptimisticLock", query = "SELECT p FROM Person p WHERE p.optimisticLock = :optimisticLock")
+    , @NamedQuery(name = "Person.findByPrenom", query = "SELECT p FROM Person p WHERE p.prenom = :prenom")
+    , @NamedQuery(name = "Person.findByPrenomAr", query = "SELECT p FROM Person p WHERE p.prenomAr = :prenomAr")
+    , @NamedQuery(name = "Person.findBySexe", query = "SELECT p FROM Person p WHERE p.sexe = :sexe")})
+public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_etudiant")
-    private Integer idEtudiant;
-    @Column(name = "activite")
-    private Boolean activite;
+    @Column(name = "id_person")
+    private Integer idPerson;
     @Size(max = 255)
     @Column(name = "adresse")
     private String adresse;
     @Size(max = 255)
     @Column(name = "cin")
     private String cin;
-    @Column(name = "cne")
-    private long cne;
     @Column(name = "date_naissance")
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
@@ -83,6 +75,9 @@ public class Etudiant implements Serializable {
     private String email;
     @Column(name = "etat_matrimonial")
     private Boolean etatMatrimonial;
+    @Size(max = 255)
+    @Column(name = "fonction")
+    private String fonction;
     @Size(max = 255)
     @Column(name = "lieu_naissance")
     private String lieuNaissance;
@@ -113,37 +108,43 @@ public class Etudiant implements Serializable {
     private String prenomAr;
     @Column(name = "sexe")
     private Boolean sexe;
-    @ManyToMany(mappedBy = "etudiantList")
+    @OneToMany(mappedBy = "person")
     private List<Filiere> filiereList;
-    @JoinColumn(name = "branche", referencedColumnName = "id_branche")
-    @ManyToOne
-    private Branche branche;
-    @OneToMany(mappedBy = "etudiant")
-    private List<Qualification> qualificationList;
-    @OneToMany(mappedBy = "idEtudiant")
-    private List<Choix> choixList;
 
-    public Etudiant() {
+    public Person() {
     }
 
-    public Etudiant(Integer idEtudiant) {
-        this.idEtudiant = idEtudiant;
+    public Person(Integer idPerson, String adresse, String cin, Date dateNaissance, String email, Boolean etatMatrimonial, String fonction, String lieuNaissance, String lieuNaissanceAr, String nationalite, String nom, String nomAr, BigInteger numeroTelephonne, Integer optimisticLock, byte[] photo, String prenom, String prenomAr, Boolean sexe) {
+        this.idPerson = idPerson;
+        this.adresse = adresse;
+        this.cin = cin;
+        this.dateNaissance = dateNaissance;
+        this.email = email;
+        this.etatMatrimonial = etatMatrimonial;
+        this.fonction = fonction;
+        this.lieuNaissance = lieuNaissance;
+        this.lieuNaissanceAr = lieuNaissanceAr;
+        this.nationalite = nationalite;
+        this.nom = nom;
+        this.nomAr = nomAr;
+        this.numeroTelephonne = numeroTelephonne;
+        this.optimisticLock = optimisticLock;
+        this.photo = photo;
+        this.prenom = prenom;
+        this.prenomAr = prenomAr;
+        this.sexe = sexe;
+    }
+    
+    public Person(Integer idPerson) {
+        this.idPerson = idPerson;
     }
 
-    public Integer getIdEtudiant() {
-        return idEtudiant;
+    public Integer getIdPerson() {
+        return idPerson;
     }
 
-    public void setIdEtudiant(Integer idEtudiant) {
-        this.idEtudiant = idEtudiant;
-    }
-
-    public Boolean getActivite() {
-        return activite;
-    }
-
-    public void setActivite(Boolean activite) {
-        this.activite = activite;
+    public void setIdPerson(Integer idPerson) {
+        this.idPerson = idPerson;
     }
 
     public String getAdresse() {
@@ -160,14 +161,6 @@ public class Etudiant implements Serializable {
 
     public void setCin(String cin) {
         this.cin = cin;
-    }
-
-    public long getCne() {
-        return cne;
-    }
-
-    public void setCne(long cne) {
-        this.cne = cne;
     }
 
     public Date getDateNaissance() {
@@ -192,6 +185,14 @@ public class Etudiant implements Serializable {
 
     public void setEtatMatrimonial(Boolean etatMatrimonial) {
         this.etatMatrimonial = etatMatrimonial;
+    }
+
+    public String getFonction() {
+        return fonction;
+    }
+
+    public void setFonction(String fonction) {
+        this.fonction = fonction;
     }
 
     public String getLieuNaissance() {
@@ -291,47 +292,21 @@ public class Etudiant implements Serializable {
         this.filiereList = filiereList;
     }
 
-    public Branche getBranche() {
-        return branche;
-    }
-
-    public void setBranche(Branche branche) {
-        this.branche = branche;
-    }
-
-    @XmlTransient
-    public List<Qualification> getQualificationList() {
-        return qualificationList;
-    }
-
-    public void setQualificationList(List<Qualification> qualificationList) {
-        this.qualificationList = qualificationList;
-    }
-
-    @XmlTransient
-    public List<Choix> getChoixList() {
-        return choixList;
-    }
-
-    public void setChoixList(List<Choix> choixList) {
-        this.choixList = choixList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idEtudiant != null ? idEtudiant.hashCode() : 0);
+        hash += (idPerson != null ? idPerson.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Etudiant)) {
+        if (!(object instanceof Person)) {
             return false;
         }
-        Etudiant other = (Etudiant) object;
-        if ((this.idEtudiant == null && other.idEtudiant != null) || (this.idEtudiant != null && !this.idEtudiant.equals(other.idEtudiant))) {
+        Person other = (Person) object;
+        if ((this.idPerson == null && other.idPerson != null) || (this.idPerson != null && !this.idPerson.equals(other.idPerson))) {
             return false;
         }
         return true;
@@ -339,7 +314,7 @@ public class Etudiant implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sos.fso.cdoc.insc.entities.Etudiant[ idEtudiant=" + idEtudiant + " ]";
+        return prenom + " " + nom;
     }
     
 }

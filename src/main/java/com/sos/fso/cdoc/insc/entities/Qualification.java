@@ -20,110 +20,100 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author mab.salhi
+ * @author mabsalhi.sos
  */
 @Entity
 @Table(name = "t_qualification")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Qualification.findAll", query = "SELECT q FROM Qualification q"),
-    @NamedQuery(name = "Qualification.findByIdQualification", query = "SELECT q FROM Qualification q WHERE q.idQualification = :idQualification"),
-    @NamedQuery(name = "Qualification.findByOptimisticLock", query = "SELECT q FROM Qualification q WHERE q.optimisticLock = :optimisticLock"),
-    @NamedQuery(name = "Qualification.findByDateObtention", query = "SELECT q FROM Qualification q WHERE q.dateObtention = :dateObtention"),
-    @NamedQuery(name = "Qualification.findByDatePremiereInscription", query = "SELECT q FROM Qualification q WHERE q.datePremiereInscription = :datePremiereInscription"),
-    @NamedQuery(name = "Qualification.findByDiplome", query = "SELECT q FROM Qualification q WHERE q.diplome = :diplome"),
-    @NamedQuery(name = "Qualification.findByMention", query = "SELECT q FROM Qualification q WHERE q.mention = :mention"),
-    @NamedQuery(name = "Qualification.findByPartieDelivrante", query = "SELECT q FROM Qualification q WHERE q.partieDelivrante = :partieDelivrante"),
-    @NamedQuery(name = "Qualification.findByClassement", query = "SELECT q FROM Qualification q WHERE q.classement = :classement"),
-    @NamedQuery(name = "Qualification.findByNote1", query = "SELECT q FROM Qualification q WHERE q.note1 = :note1"),
-    @NamedQuery(name = "Qualification.findByNote2", query = "SELECT q FROM Qualification q WHERE q.note2 = :note2"),
-    @NamedQuery(name = "Qualification.findByNote3", query = "SELECT q FROM Qualification q WHERE q.note3 = :note3"),
-    @NamedQuery(name = "Qualification.findByNote4", query = "SELECT q FROM Qualification q WHERE q.note4 = :note4"),
-    @NamedQuery(name = "Qualification.findByNote5", query = "SELECT q FROM Qualification q WHERE q.note5 = :note5"),
-    @NamedQuery(name = "Qualification.findByNote6", query = "SELECT q FROM Qualification q WHERE q.note6 = :note6")})
+    @NamedQuery(name = "Qualification.findAll", query = "SELECT q FROM Qualification q")
+    , @NamedQuery(name = "Qualification.findByIdQualification", query = "SELECT q FROM Qualification q WHERE q.idQualification = :idQualification")
+    , @NamedQuery(name = "Qualification.findByPathScan", query = "SELECT q FROM Qualification q WHERE q.pathScan = :pathScan")
+    , @NamedQuery(name = "Qualification.findByClassement", query = "SELECT q FROM Qualification q WHERE q.classement = :classement")
+    , @NamedQuery(name = "Qualification.findByDateObtention", query = "SELECT q FROM Qualification q WHERE q.dateObtention = :dateObtention")
+    , @NamedQuery(name = "Qualification.findByDatePremiereInscription", query = "SELECT q FROM Qualification q WHERE q.datePremiereInscription = :datePremiereInscription")
+    , @NamedQuery(name = "Qualification.findByDiplome", query = "SELECT q FROM Qualification q WHERE q.diplome = :diplome")
+    , @NamedQuery(name = "Qualification.findByMention", query = "SELECT q FROM Qualification q WHERE q.mention = :mention")
+    , @NamedQuery(name = "Qualification.findByNote1", query = "SELECT q FROM Qualification q WHERE q.note1 = :note1")
+    , @NamedQuery(name = "Qualification.findByNote2", query = "SELECT q FROM Qualification q WHERE q.note2 = :note2")
+    , @NamedQuery(name = "Qualification.findByNote3", query = "SELECT q FROM Qualification q WHERE q.note3 = :note3")
+    , @NamedQuery(name = "Qualification.findByNote4", query = "SELECT q FROM Qualification q WHERE q.note4 = :note4")
+    , @NamedQuery(name = "Qualification.findByNote5", query = "SELECT q FROM Qualification q WHERE q.note5 = :note5")
+    , @NamedQuery(name = "Qualification.findByNote6", query = "SELECT q FROM Qualification q WHERE q.note6 = :note6")
+    , @NamedQuery(name = "Qualification.findByOptimisticLock", query = "SELECT q FROM Qualification q WHERE q.optimisticLock = :optimisticLock")
+    , @NamedQuery(name = "Qualification.findByPartieDelivrante", query = "SELECT q FROM Qualification q WHERE q.partieDelivrante = :partieDelivrante")
+    , @NamedQuery(name = "Qualification.findByScanReleve1", query = "SELECT q FROM Qualification q WHERE q.scanReleve1 = :scanReleve1")
+    , @NamedQuery(name = "Qualification.findByScanReleve2", query = "SELECT q FROM Qualification q WHERE q.scanReleve2 = :scanReleve2")
+    , @NamedQuery(name = "Qualification.findByScanReleve3", query = "SELECT q FROM Qualification q WHERE q.scanReleve3 = :scanReleve3")
+    , @NamedQuery(name = "Qualification.findByScanReleve4", query = "SELECT q FROM Qualification q WHERE q.scanReleve4 = :scanReleve4")
+    , @NamedQuery(name = "Qualification.findByScanReleve5", query = "SELECT q FROM Qualification q WHERE q.scanReleve5 = :scanReleve5")
+    , @NamedQuery(name = "Qualification.findByScanReleve6", query = "SELECT q FROM Qualification q WHERE q.scanReleve6 = :scanReleve6")})
 public class Qualification implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_qualification")
     private Integer idQualification;
-    @Column(name = "optimistic_lock")
-    private Integer optimisticLock;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 255)
+    @Column(name = "path_scan")
+    private String pathScan;
+    @Column(name = "classement")
+    private Integer classement;
     @Column(name = "date_obtention")
     @Temporal(TemporalType.DATE)
     private Date dateObtention;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "date_premiere_inscription")
     @Temporal(TemporalType.DATE)
     private Date datePremiereInscription;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "diplome")
     private String diplome;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "mention")
     private String mention;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "partie_delivrante")
-    private String partieDelivrante;
-    @Column(name = "classement")
-    private Integer classement;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "note1")
     private Double note1;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
-    @Column(name = "scan_releve1")
-    private String releveScan1;
     @Column(name = "note2")
     private Double note2;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
-    @Column(name = "scan_releve2")
-    private String releveScan2;
     @Column(name = "note3")
     private Double note3;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
-    @Column(name = "scan_releve3")
-    private String releveScan3;
     @Column(name = "note4")
     private Double note4;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
-    @Column(name = "scan_releve4")
-    private String releveScan4;
     @Column(name = "note5")
     private Double note5;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
-    @Column(name = "scan_releve5")
-    private String releveScan5;
     @Column(name = "note6")
     private Double note6;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
+    @Column(name = "optimistic_lock")
+    private Integer optimisticLock;
+    @Size(max = 255)
+    @Column(name = "partie_delivrante")
+    private String partieDelivrante;
+    @Size(max = 255)
+    @Column(name = "scan_releve1")
+    private String scanReleve1;
+    @Size(max = 255)
+    @Column(name = "scan_releve2")
+    private String scanReleve2;
+    @Size(max = 255)
+    @Column(name = "scan_releve3")
+    private String scanReleve3;
+    @Size(max = 255)
+    @Column(name = "scan_releve4")
+    private String scanReleve4;
+    @Size(max = 255)
+    @Column(name = "scan_releve5")
+    private String scanReleve5;
+    @Size(max = 255)
     @Column(name = "scan_releve6")
-    private String releveScan6;
-    @Basic(optional = false)
-    @Size(min = 1, max = 255)
-    @Column(name = "path_scan")
-    private String PathScan;
+    private String scanReleve6;
     @JoinColumn(name = "etudiant", referencedColumnName = "id_etudiant")
     @ManyToOne
     private Etudiant etudiant;
@@ -135,15 +125,6 @@ public class Qualification implements Serializable {
         this.idQualification = idQualification;
     }
 
-    public Qualification(Integer idQualification, Date dateObtention, Date datePremiereInscription, String diplome, String mention, String partieDelivrante) {
-        this.idQualification = idQualification;
-        this.dateObtention = dateObtention;
-        this.datePremiereInscription = datePremiereInscription;
-        this.diplome = diplome;
-        this.mention = mention;
-        this.partieDelivrante = partieDelivrante;
-    }
-
     public Integer getIdQualification() {
         return idQualification;
     }
@@ -152,12 +133,20 @@ public class Qualification implements Serializable {
         this.idQualification = idQualification;
     }
 
-    public Integer getOptimisticLock() {
-        return optimisticLock;
+    public String getPathScan() {
+        return pathScan;
     }
 
-    public void setOptimisticLock(Integer optimisticLock) {
-        this.optimisticLock = optimisticLock;
+    public void setPathScan(String pathScan) {
+        this.pathScan = pathScan;
+    }
+
+    public Integer getClassement() {
+        return classement;
+    }
+
+    public void setClassement(Integer classement) {
+        this.classement = classement;
     }
 
     public Date getDateObtention() {
@@ -190,22 +179,6 @@ public class Qualification implements Serializable {
 
     public void setMention(String mention) {
         this.mention = mention;
-    }
-
-    public String getPartieDelivrante() {
-        return partieDelivrante;
-    }
-
-    public void setPartieDelivrante(String partieDelivrante) {
-        this.partieDelivrante = partieDelivrante;
-    }
-
-    public Integer getClassement() {
-        return classement;
-    }
-
-    public void setClassement(Integer classement) {
-        this.classement = classement;
     }
 
     public Double getNote1() {
@@ -256,6 +229,70 @@ public class Qualification implements Serializable {
         this.note6 = note6;
     }
 
+    public Integer getOptimisticLock() {
+        return optimisticLock;
+    }
+
+    public void setOptimisticLock(Integer optimisticLock) {
+        this.optimisticLock = optimisticLock;
+    }
+
+    public String getPartieDelivrante() {
+        return partieDelivrante;
+    }
+
+    public void setPartieDelivrante(String partieDelivrante) {
+        this.partieDelivrante = partieDelivrante;
+    }
+
+    public String getScanReleve1() {
+        return scanReleve1;
+    }
+
+    public void setScanReleve1(String scanReleve1) {
+        this.scanReleve1 = scanReleve1;
+    }
+
+    public String getScanReleve2() {
+        return scanReleve2;
+    }
+
+    public void setScanReleve2(String scanReleve2) {
+        this.scanReleve2 = scanReleve2;
+    }
+
+    public String getScanReleve3() {
+        return scanReleve3;
+    }
+
+    public void setScanReleve3(String scanReleve3) {
+        this.scanReleve3 = scanReleve3;
+    }
+
+    public String getScanReleve4() {
+        return scanReleve4;
+    }
+
+    public void setScanReleve4(String scanReleve4) {
+        this.scanReleve4 = scanReleve4;
+    }
+
+    public String getScanReleve5() {
+        return scanReleve5;
+    }
+
+    public void setScanReleve5(String scanReleve5) {
+        this.scanReleve5 = scanReleve5;
+    }
+
+    public String getScanReleve6() {
+        return scanReleve6;
+    }
+
+    public void setScanReleve6(String scanReleve6) {
+        this.scanReleve6 = scanReleve6;
+    }
+
     public Etudiant getEtudiant() {
         return etudiant;
     }
@@ -264,62 +301,6 @@ public class Qualification implements Serializable {
         this.etudiant = etudiant;
     }
 
-    public String getPathScan() {
-        return PathScan;
-    }
-
-    public void setPathScan(String PathScan) {
-        this.PathScan = PathScan;
-    }
-
-    public String getReleveScan1() {
-        return releveScan1;
-    }
-
-    public void setReleveScan1(String releveScan1) {
-        this.releveScan1 = releveScan1;
-    }
-
-    public String getReleveScan2() {
-        return releveScan2;
-    }
-
-    public void setReleveScan2(String releveScan2) {
-        this.releveScan2 = releveScan2;
-    }
-
-    public String getReleveScan3() {
-        return releveScan3;
-    }
-
-    public void setReleveScan3(String releveScan3) {
-        this.releveScan3 = releveScan3;
-    }
-
-    public String getReleveScan4() {
-        return releveScan4;
-    }
-
-    public void setReleveScan4(String releveScan4) {
-        this.releveScan4 = releveScan4;
-    }
-
-    public String getReleveScan5() {
-        return releveScan5;
-    }
-
-    public void setReleveScan5(String releveScan5) {
-        this.releveScan5 = releveScan5;
-    }
-
-    public String getReleveScan6() {
-        return releveScan6;
-    }
-
-    public void setReleveScan6(String releveScan6) {
-        this.releveScan6 = releveScan6;
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;

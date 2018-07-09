@@ -21,18 +21,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author mab.salhi
+ * @author mabsalhi.sos
  */
 @Entity
 @Table(name = "t_choix")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Choix.findAll", query = "SELECT c FROM Choix c"),
-    @NamedQuery(name = "Choix.findByIdChoix", query = "SELECT c FROM Choix c WHERE c.idChoix = :idChoix"),
-    @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock"),
-    @NamedQuery(name = "Choix.findByIdEtudiant", query = "SELECT c FROM Choix c WHERE c.idEtudiant = :idEtudiant")
-})
+    @NamedQuery(name = "Choix.findAll", query = "SELECT c FROM Choix c")
+    , @NamedQuery(name = "Choix.findByIdChoix", query = "SELECT c FROM Choix c WHERE c.idChoix = :idChoix")
+    , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")})
 public class Choix implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,12 +40,12 @@ public class Choix implements Serializable {
     private Integer idChoix;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @JoinColumn(name = "id_sujet", referencedColumnName = "id_sujet")
-    @ManyToOne(optional = false)
-    private Sujet idSujet;
     @JoinColumn(name = "id_etudiant", referencedColumnName = "id_etudiant")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Etudiant idEtudiant;
+    @JoinColumn(name = "id_sujet", referencedColumnName = "id_sujet")
+    @ManyToOne
+    private Sujet idSujet;
 
     public Choix() {
     }
@@ -71,20 +70,20 @@ public class Choix implements Serializable {
         this.optimisticLock = optimisticLock;
     }
 
-    public Sujet getIdSujet() {
-        return idSujet;
-    }
-
-    public void setIdSujet(Sujet idSujet) {
-        this.idSujet = idSujet;
-    }
-
     public Etudiant getIdEtudiant() {
         return idEtudiant;
     }
 
     public void setIdEtudiant(Etudiant idEtudiant) {
         this.idEtudiant = idEtudiant;
+    }
+
+    public Sujet getIdSujet() {
+        return idSujet;
+    }
+
+    public void setIdSujet(Sujet idSujet) {
+        this.idSujet = idSujet;
     }
 
     @Override

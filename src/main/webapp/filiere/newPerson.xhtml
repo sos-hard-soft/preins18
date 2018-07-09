@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Ajouter une Filiere</h1>
+    </h:head>
+    <h:body>
+        <ui:composition template="../resources/template.xhtml">
+            <ui:define name="left">
+            <ui:insert name="header" >
+                
+            </ui:insert>
+                
+            </ui:define>
+            <ui:define name="content">	
+              
+                    <h:form>
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Adresse:" for="adresse" />
+                            <p:inputText id="adresse" value="#{masterController.newPerson.adresse}" title="Adresse" />
+                            <p:outputLabel value="Cin:" for="cin" />
+                            <p:inputText id="cin" value="#{masterController.newPerson.cin}" title="Cin" />
+                            <p:outputLabel value="DateNaissance:" for="dateNaissance" />
+                            <p:inputText id="dateNaissance" value="#{masterController.newPerson.dateNaissance}" title="DateNaissance" >
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </p:inputText>
+                            <p:outputLabel value="Email:" for="email" />
+                            <p:inputText id="email" value="#{masterController.newPerson.email}" title="Email" />
+                            <p:outputLabel value="EtatMatrimonial:" for="etatMatrimonial" />
+                            <p:inputText id="etatMatrimonial" value="#{masterController.newPerson.etatMatrimonial}" title="EtatMatrimonial" />
+                            <p:outputLabel value="Fonction:" for="fonction" />
+                            <p:inputText id="fonction" value="#{masterController.newPerson.fonction}" title="Fonction" />
+                            <p:outputLabel value="LieuNaissance:" for="lieuNaissance" />
+                            <p:inputText id="lieuNaissance" value="#{masterController.newPerson.lieuNaissance}" title="LieuNaissance" />
+                            <p:outputLabel value="LieuNaissanceAr:" for="lieuNaissanceAr" />
+                            <p:inputText id="lieuNaissanceAr" value="#{masterController.newPerson.lieuNaissanceAr}" title="LieuNaissanceAr" />
+                            <p:outputLabel value="Nationalite:" for="nationalite" />
+                            <p:inputText id="nationalite" value="#{masterController.newPerson.nationalite}" title="Nationalite" />
+                            <p:outputLabel value="Nom:" for="nom" />
+                            <p:inputText id="nom" value="#{masterController.newPerson.nom}" title="Nom" />
+                            <p:outputLabel value="NomAr:" for="nomAr" />
+                            <p:inputText id="nomAr" value="#{masterController.newPerson.nomAr}" title="NomAr" />
+                            <p:outputLabel value="NumeroTelephonne:" for="numeroTelephonne" />
+                            <p:inputText id="numeroTelephonne" value="#{masterController.newPerson.numeroTelephonne}" title="NumeroTelephonne" />
+                            <p:outputLabel value="OptimisticLock:" for="optimisticLock" />
+                            <p:inputText id="optimisticLock" value="#{masterController.newPerson.optimisticLock}" title="OptimisticLock" />
+                            <p:outputLabel value="Photo:" for="photo" />
+                            <p:inputTextarea rows="4" cols="30" id="photo" value="#{masterController.newPerson.photo}" title="Photo" />
+                            <p:outputLabel value="Prenom:" for="prenom" />
+                            <p:inputText id="prenom" value="#{masterController.newPerson.prenom}" title="Prenom" />
+                            <p:outputLabel value="PrenomAr:" for="prenomAr" />
+                            <p:inputText id="prenomAr" value="#{masterController.newPerson.prenomAr}" title="PrenomAr" />
+                            <p:outputLabel value="Sexe:" for="sexe" />
+                            <p:inputText id="sexe" value="#{masterController.newPerson.sexe}" title="Sexe" />
+                            
+                    
+                        </p:panelGrid>
+                        <p:commandButton id="saveButton" value="Enregistrez les donnee" 
+                                         action="#{masterController.doCreatePerson}" />
+                        </h:form>
+
+            </ui:define>
+           
+        </ui:composition>
+    </h:body>
+</html> 

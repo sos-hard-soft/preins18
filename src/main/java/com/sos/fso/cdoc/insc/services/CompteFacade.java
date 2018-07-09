@@ -28,8 +28,8 @@ public class CompteFacade extends AbstractFacade<Compte> {
         super(Compte.class);
     }
     
-     public Compte findByCne(long cne){
-        return em.createNamedQuery("Compte.findByCne", Compte.class).setParameter("cne", cne).getSingleResult();
+     public Compte findByCin(String cin){
+        return em.createNamedQuery("Compte.findByCin", Compte.class).setParameter("cin", cin).getSingleResult();
     }
     
     

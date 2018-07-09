@@ -13,9 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,22 +29,22 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author mabsalhi.sos
  */
 @Entity
-@Table(name = "t_branche")
+@Table(name = "t_filiere")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Branche.findAll", query = "SELECT b FROM Branche b")
-    , @NamedQuery(name = "Branche.findByIdBranche", query = "SELECT b FROM Branche b WHERE b.idBranche = :idBranche")
-    , @NamedQuery(name = "Branche.findByDescription", query = "SELECT b FROM Branche b WHERE b.description = :description")
-    , @NamedQuery(name = "Branche.findByIntitule", query = "SELECT b FROM Branche b WHERE b.intitule = :intitule")
-    , @NamedQuery(name = "Branche.findByOptimisticLock", query = "SELECT b FROM Branche b WHERE b.optimisticLock = :optimisticLock")})
-public class Branche implements Serializable {
+    @NamedQuery(name = "Filiere.findAll", query = "SELECT f FROM Filiere f")
+    , @NamedQuery(name = "Filiere.findByIdFiliere", query = "SELECT f FROM Filiere f WHERE f.idFiliere = :idFiliere")
+    , @NamedQuery(name = "Filiere.findByDescription", query = "SELECT f FROM Filiere f WHERE f.description = :description")
+    , @NamedQuery(name = "Filiere.findByIntitule", query = "SELECT f FROM Filiere f WHERE f.intitule = :intitule")
+    , @NamedQuery(name = "Filiere.findByOptimisticLock", query = "SELECT f FROM Filiere f WHERE f.optimisticLock = :optimisticLock")})
+public class Filiere implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_branche")
-    private Integer idBranche;
+    @Column(name = "id_filiere")
+    private Integer idFiliere;
     @Size(max = 255)
     @Column(name = "description")
     private String description;
@@ -50,24 +53,36 @@ public class Branche implements Serializable {
     private String intitule;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @OneToMany(mappedBy = "branche")
-    private List<Sujet> sujetList;
-    @OneToMany(mappedBy = "branche")
+    @JoinTable(name = "choix_etudiant", joinColumns = {
+        @JoinColumn(name = "id_etudiant", referencedColumnName = "id_filiere")}, inverseJoinColumns = {
+        @JoinColumn(name = "id_filiere", referencedColumnName = "id_etudiant")})
+    @ManyToMany
     private List<Etudiant> etudiantList;
+    @JoinColumn(name = "person", referencedColumnName = "id_person")
+    @ManyToOne
+    private Person person;
 
-    public Branche() {
+    public Filiere() {
     }
 
-    public Branche(Integer idBranche) {
-        this.idBranche = idBranche;
+    public Filiere(Integer idFiliere, String description, String intitule, Integer optimisticLock, Person person) {
+        this.idFiliere = idFiliere;
+        this.description = description;
+        this.intitule = intitule;
+        this.optimisticLock = optimisticLock;
+        this.person = person;
+    }
+    
+    public Filiere(Integer idFiliere) {
+        this.idFiliere = idFiliere;
     }
 
-    public Integer getIdBranche() {
-        return idBranche;
+    public Integer getIdFiliere() {
+        return idFiliere;
     }
 
-    public void setIdBranche(Integer idBranche) {
-        this.idBranche = idBranche;
+    public void setIdFiliere(Integer idFiliere) {
+        this.idFiliere = idFiliere;
     }
 
     public String getDescription() {
@@ -95,15 +110,6 @@ public class Branche implements Serializable {
     }
 
     @XmlTransient
-    public List<Sujet> getSujetList() {
-        return sujetList;
-    }
-
-    public void setSujetList(List<Sujet> sujetList) {
-        this.sujetList = sujetList;
-    }
-
-    @XmlTransient
     public List<Etudiant> getEtudiantList() {
         return etudiantList;
     }
@@ -112,21 +118,29 @@ public class Branche implements Serializable {
         this.etudiantList = etudiantList;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idBranche != null ? idBranche.hashCode() : 0);
+        hash += (idFiliere != null ? idFiliere.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Branche)) {
+        if (!(object instanceof Filiere)) {
             return false;
         }
-        Branche other = (Branche) object;
-        if ((this.idBranche == null && other.idBranche != null) || (this.idBranche != null && !this.idBranche.equals(other.idBranche))) {
+        Filiere other = (Filiere) object;
+        if ((this.idFiliere == null && other.idFiliere != null) || (this.idFiliere != null && !this.idFiliere.equals(other.idFiliere))) {
             return false;
         }
         return true;
@@ -134,7 +148,7 @@ public class Branche implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sos.fso.cdoc.insc.entities.Branche[ idBranche=" + idBranche + " ]";
+        return "com.sos.fso.cdoc.insc.entities.Filiere[ idFiliere=" + idFiliere + " ]";
     }
     
 }

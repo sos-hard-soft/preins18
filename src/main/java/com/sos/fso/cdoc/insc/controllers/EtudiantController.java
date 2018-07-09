@@ -162,9 +162,9 @@ public class EtudiantController implements Serializable {
     }
 
     public String showLoggedDetails() {
-        long cne = compte.getCne();
-        System.out.println("le cne est : " + cne);
-        current = etudiantService.findByCne(cne);
+        String cin = compte.getCin();
+        System.out.println("le cne est : " + cin);
+        current = etudiantService.findByCin(cin);
         System.out.println("La personne est : " + current.getNom() + "--> " + current.getCin());
         etudiantService.clearCache();
         return "/etudiant/view?faces-redirect=true";
@@ -192,11 +192,11 @@ public class EtudiantController implements Serializable {
         }
     }
 
-    public void SendEmail(String email, String key, long cne, String password) {
+    public void SendEmail(String email, String key, String cin, String password) {
         String response = "response?faces-redirect=true";
 
         try {
-            mailStatus = mailerBean.sendVerificationMail(email, key, cne, password);
+            mailStatus = mailerBean.sendVerificationMail(email, key, cin, password);
             this.setStatus("Envoie en cours ...(veuillez rafraishir !!!)");
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
@@ -329,7 +329,7 @@ public class EtudiantController implements Serializable {
 
     public String doCreate() {
         //creation du compte a partir des infos de l'etudiant
-        newCompte.setCne(newEtudiant.getCne());
+        newCompte.setCin(newEtudiant.getCin());
         newCompte.setEmail(newEtudiant.getEmail());
         newCompte.setActif(Boolean.FALSE);
         newCompte.setGroupe("candidat");
@@ -345,7 +345,7 @@ public class EtudiantController implements Serializable {
         //Generation de la cle d'identification et envoie de mail d'activation
         final String key = UUID.randomUUID().toString();
         System.out.println("La cle generer est " + key);
-        SendEmail(newEtudiant.getEmail(), key, newEtudiant.getCne(), password);
+        SendEmail(newEtudiant.getEmail(), key, newEtudiant.getCin(), password);
         //Definition de l'activation
         activation.setActivationKey(key);
         activation.setCompte(newCompte);
@@ -476,7 +476,7 @@ public class EtudiantController implements Serializable {
 
     public Etudiant getCurrent() {
         if (current == null) {
-            current = etudiantService.findByCne(compte.getCne());
+            current = etudiantService.findByCin(compte.getCin());
         }
         if (current.getPhoto() != null) {
             fileExist = true;
@@ -500,8 +500,8 @@ public class EtudiantController implements Serializable {
         if (compte == null) {
             Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
             if (principal != null) {
-                long cne = Long.parseLong(principal.getName());
-                compte = compteService.findByCne(cne);
+                String cin = principal.getName();
+                compte = compteService.findByCin(cin);
             }
         }
         return compte;

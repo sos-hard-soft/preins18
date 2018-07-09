@@ -6,6 +6,7 @@
 package com.sos.fso.cdoc.insc.entities;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,54 +18,50 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author mab.salhi
+ * @author mabsalhi.sos
  */
 @Entity
 @Table(name = "t_compte")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c"),
-    @NamedQuery(name = "Compte.findByIdCompte", query = "SELECT c FROM Compte c WHERE c.idCompte = :idCompte"),
-    @NamedQuery(name = "Compte.findByOptimisticLock", query = "SELECT c FROM Compte c WHERE c.optimisticLock = :optimisticLock"),
-    @NamedQuery(name = "Compte.findByCne", query = "SELECT c FROM Compte c WHERE c.cne = :cne"),
-    @NamedQuery(name = "Compte.findByEmail", query = "SELECT c FROM Compte c WHERE c.email = :email"),
-    @NamedQuery(name = "Compte.findByPassword", query = "SELECT c FROM Compte c WHERE c.password = :password"),
-    @NamedQuery(name = "Compte.findByGroupe", query = "SELECT c FROM Compte c WHERE c.groupe = :groupe"),
-    @NamedQuery(name = "Compte.findByActif", query = "SELECT c FROM Compte c WHERE c.actif = :actif")})
+    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")
+    , @NamedQuery(name = "Compte.findByIdCompte", query = "SELECT c FROM Compte c WHERE c.idCompte = :idCompte")
+    , @NamedQuery(name = "Compte.findByActif", query = "SELECT c FROM Compte c WHERE c.actif = :actif")
+    , @NamedQuery(name = "Compte.findByCin", query = "SELECT c FROM Compte c WHERE c.cin = :cin")
+    , @NamedQuery(name = "Compte.findByEmail", query = "SELECT c FROM Compte c WHERE c.email = :email")
+    , @NamedQuery(name = "Compte.findByGroupe", query = "SELECT c FROM Compte c WHERE c.groupe = :groupe")
+    , @NamedQuery(name = "Compte.findByOptimisticLock", query = "SELECT c FROM Compte c WHERE c.optimisticLock = :optimisticLock")
+    , @NamedQuery(name = "Compte.findByPassword", query = "SELECT c FROM Compte c WHERE c.password = :password")})
 public class Compte implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_compte")
     private Integer idCompte;
-    @Column(name = "optimistic_lock")
-    private Integer optimisticLock;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cne")
-    private long cne;
+    @Column(name = "actif")
+    private Boolean actif;
+    @Column(name = "cin")
+    private String cin;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "email")
     private String email;
     @Size(max = 255)
-    @Column(name = "password")
-    private String password;
-    @Size(max = 255)
     @Column(name = "groupe")
     private String groupe;
-    @Column(name = "actif")
-    private Boolean actif;
+    @Column(name = "optimistic_lock")
+    private Integer optimisticLock;
+    @Size(max = 255)
+    @Column(name = "password")
+    private String password;
     @OneToMany(mappedBy = "compte")
     private List<Activation> activationList;
 
@@ -75,12 +72,6 @@ public class Compte implements Serializable {
         this.idCompte = idCompte;
     }
 
-    public Compte(Integer idCompte, long cne, String email) {
-        this.idCompte = idCompte;
-        this.cne = cne;
-        this.email = email;
-    }
-
     public Integer getIdCompte() {
         return idCompte;
     }
@@ -89,36 +80,29 @@ public class Compte implements Serializable {
         this.idCompte = idCompte;
     }
 
-    public Integer getOptimisticLock() {
-        return optimisticLock;
+    public Boolean getActif() {
+        return actif;
     }
 
-    public void setOptimisticLock(Integer optimisticLock) {
-        this.optimisticLock = optimisticLock;
+    public void setActif(Boolean actif) {
+        this.actif = actif;
     }
 
-    public long getCne() {
-        return cne;
+    public String getCin() {
+        return cin;
     }
 
-    public void setCne(long cne) {
-        this.cne = cne;
+    public void setCin(String cin) {
+        this.cin = cin;
     }
 
+    
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getGroupe() {
@@ -129,12 +113,20 @@ public class Compte implements Serializable {
         this.groupe = groupe;
     }
 
-    public Boolean getActif() {
-        return actif;
+    public Integer getOptimisticLock() {
+        return optimisticLock;
     }
 
-    public void setActif(Boolean actif) {
-        this.actif = actif;
+    public void setOptimisticLock(Integer optimisticLock) {
+        this.optimisticLock = optimisticLock;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @XmlTransient

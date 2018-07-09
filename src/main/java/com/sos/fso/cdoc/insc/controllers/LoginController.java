@@ -40,10 +40,10 @@ public class LoginController {
         FacesContext fc = FacesContext.getCurrentInstance();
         Map<String,String> params;
         params = fc.getExternalContext().getRequestParameterMap();
-        long cne = Long.parseLong(params.get("j_username"));
-        System.out.println("la personne logue est : " + cne);
-        if (cne != 0) {
-        compte = compteService.findByCne(cne);
+        String cin = params.get("j_username");
+        System.out.println("la personne logue est : " + cin);
+        if (cin != null) {
+        compte = compteService.findByCin(cin);
            }    
     }
     

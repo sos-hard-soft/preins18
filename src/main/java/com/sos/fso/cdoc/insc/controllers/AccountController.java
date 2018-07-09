@@ -93,8 +93,8 @@ public class AccountController implements Serializable {
                 compte = activation.getCompte();
                 this.doActivate();
                 
-        long cne = compte.getCne();
-        etudiant = etudiantService.findByCne(cne);
+        String cin = compte.getCin();
+        etudiant = etudiantService.findByCin(cin);
               }
         } catch (Exception e) {
             
