@@ -60,17 +60,17 @@ public class Filiere implements Serializable {
     private List<Etudiant> etudiantList;
     @JoinColumn(name = "person", referencedColumnName = "id_person")
     @ManyToOne
-    private Person person;
+    private Person responsable;
 
     public Filiere() {
     }
 
-    public Filiere(Integer idFiliere, String description, String intitule, Integer optimisticLock, Person person) {
+    public Filiere(Integer idFiliere, String description, String intitule, Integer optimisticLock, Person responsable) {
         this.idFiliere = idFiliere;
         this.description = description;
         this.intitule = intitule;
         this.optimisticLock = optimisticLock;
-        this.person = person;
+        this.responsable = responsable;
     }
     
     public Filiere(Integer idFiliere) {
@@ -118,12 +118,12 @@ public class Filiere implements Serializable {
         this.etudiantList = etudiantList;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getResponsable() {
+        return responsable;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setResponsable(Person responsable) {
+        this.responsable = responsable;
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.sos.fso.cdoc.insc.entities.Branche;
 import com.sos.fso.cdoc.insc.entities.Choix;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
+import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Qualification;
 import com.sos.fso.cdoc.insc.entities.Sujet;
 import com.sos.fso.cdoc.insc.helpers.Hash;
@@ -72,8 +73,7 @@ public class EtudiantController implements Serializable {
     protected String status;
     private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
     private Future<String> mailStatus;
-    private Path folder;
-    private File uploaded;
+   
 
     @Inject
     private EtudiantFacade etudiantService;
@@ -112,6 +112,8 @@ public class EtudiantController implements Serializable {
     private boolean visible = false;
     private boolean fileExist = false;
     private String fileName;
+    private Path folder;
+    private File uploaded;
 
     // ======================================
     // = Navigation Methods =
@@ -291,6 +293,36 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
+    public String doSelectFiliere(Filiere choix){
+        int nbChoix = current.getFiliereList().size();
+        System.out.println("Le nombre de vos choix est : " + nbChoix);
+        
+        if (nbChoix >-1 && nbChoix < 3) {
+            List<Filiere> stdChoix = current.getFiliereList();
+            Iterator<Filiere> ite = stdChoix.iterator();
+            
+            while (ite.hasNext()) {
+                Filiere next = ite.next();
+                System.out.println("la filiere " + next.getIdFiliere());
+                if (next.getIdFiliere() == null && next.getIdFiliere() == choix.getIdFiliere()) {
+                    addMessage("update", FacesMessage.SEVERITY_FATAL, "Cette filière fait déja partie de vos choix !!", "Erreur !!");
+                    return null;
+                } else{
+                    System.out.println("Le choix est légitime.");
+                }
+                               
+            }
+            current.getFiliereList().add(choix);
+            etudiantService.edit(current);
+            etudiantService.clearCache();
+            return "/etudiant/view?faces-redirect=true";
+            
+        }else {
+            addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (2) permis est atteint !!", "Error !!");
+            return "/etudiant/view?faces-redirect=true";
+        }
+    }
+    
     public String doAddChoix(Sujet sujet) {
         int nbChoix = current.getChoixList().size();
         System.out.println("le nombre de choix est " + nbChoix);

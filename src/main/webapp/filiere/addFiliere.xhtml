@@ -26,19 +26,20 @@ and open the template in the editor.
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <p:panelGrid columns="2">
                             <p:outputLabel value="intitule :" for="intitule" />
-                            <p:inputText id="intitule" value="#{masterController.newFiliere.intitule}" title="intitule" />
+                            <p:inputText id="intitule" value="#{filiereController.newFiliere.intitule}" title="intitule" />
                             <p:outputLabel value="description :" for="description" />
-                            <p:inputText id="description" value="#{masterController.newFiliere.description}" title="description" />
-                           
-                            <p:selectOneMenu id="person" value="#{masterController.newFiliere.person}" title="Person">
-                                <f:selectItems value="#{masterController.allPersons}" />
+                            <p:inputText id="description" value="#{filiereController.newFiliere.description}" title="description" />
+                            <p:outputLabel value="person :" for="person" />
+                            <p:selectOneMenu id="person" value="#{filiereController.newFiliere.person}" title="Person">
+                                <f:selectItems value="#{personController.allPersons}" var="person"
+                                               itemValue="#{person}" itemLabel="#{person.nom}"/>
                             </p:selectOneMenu>
                             
                             
                     
                         </p:panelGrid>
-                        <p:commandButton id="saveButton" value="Enregistrez les donnee" 
-                                         action="#{masterController.doCreateFiliere}" />
+                        <h:commandButton id="saveButton" value="Enregistrez les donnee" 
+                                         action="#{filiereController.doCreateFiliere}" />
                         </h:form>
 
             </ui:define>

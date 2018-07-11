@@ -6,43 +6,35 @@
 package com.sos.fso.cdoc.insc.controllers;
 
 import com.sos.fso.cdoc.insc.entities.Filiere;
-import com.sos.fso.cdoc.insc.entities.Person;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
-import com.sos.fso.cdoc.insc.services.PersonFacade;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
- * @author mabsalhi.sos
+ * @author master05
  */
-@Named(value = "masterController")
+@Named(value = "filiereController")
 @SessionScoped
-public class MasterController implements Serializable {
-    // ======================================
+public class FiliereController implements Serializable{
+   // ======================================
     // = Attributes =
     // ======================================
     private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
     
     @Inject
-    private PersonFacade personService;
-    private Person newPerson;
-    private Person current;
-    private List<Person> personnes;
-    
-    @Inject
     private FiliereFacade filiereService;
     private Filiere newFiliere;
-    private Filiere lafiliere;
+    private Filiere current;
     private List<Filiere> filieres;
     
     /**
@@ -62,51 +54,23 @@ public class MasterController implements Serializable {
         newFiliere = new Filiere();
         return "/filiere/addFiliere?faces-redirect=true";
     }
-    public String showCreatePerson() {
-        newPerson = new Person();
-        return "/filiere/newPerson?faces-redirect=true";
-    }
+    
     public List<Filiere> getAllFilieres() {
         return filiereService.findAll();
     }
-
-    public List<Person> getAllPersons() {
-        return personService.findAll();
-    }
+    
     
     public String doCreateFiliere(){
-        System.out.println("Click sur bouton");
-        System.out.println("Creation de la filiere : " + newFiliere.getIntitule());
+        System.out.println("Procedure de creation " + newFiliere.getIntitule());
         filiereService.create(newFiliere);
-        return "/index?faces-redirect=true";
-    }
-    public String doCreatePerson(){
-        System.out.println("Procedure de creation " + newPerson.getCin());
-        personService.create(newPerson);
         FacesMessage message = new FacesMessage( "Succès de l'inscription !" );
         FacesContext.getCurrentInstance().addMessage( null, message );
         return "/index?faces-redirect=true";
     }
     
-    public MasterController() {
+    public FiliereController() {
         
        
-    }
-
-    public Person getNewPerson() {
-        return newPerson;
-    }
-
-    public void setNewPerson(Person newPerson) {
-        this.newPerson = newPerson;
-    }
-
-    public Person getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Person current) {
-        this.current = current;
     }
 
     public Filiere getNewFiliere() {
@@ -117,29 +81,29 @@ public class MasterController implements Serializable {
         this.newFiliere = newFiliere;
     }
 
-    public Filiere getLafiliere() {
-        return lafiliere;
+    public Filiere getCurrent() {
+        return current;
     }
 
-    public void setLafiliere(Filiere lafiliere) {
-        this.lafiliere = lafiliere;
+    public void setCurrent(Filiere current) {
+        this.current = current;
+    }
+
+    public Filiere getFiliere(java.lang.Integer id) {
+        return filiereService.find(id);
     }
     
-    public Person getPerson(java.lang.Integer id) {
-        return personService.find(id);
-    }
-    
-    @FacesConverter(forClass = Person.class)
-    public static class PersonControllerConverter implements Converter {
+    @FacesConverter(forClass = Filiere.class)
+    public static class FiliereControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            MasterController controller = (MasterController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "masterController");
-            return controller.getPerson(getKey(value));
+            FiliereController controller = (FiliereController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "filiereController");
+            return controller.getFiliere(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -159,14 +123,13 @@ public class MasterController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Person) {
-                Person o = (Person) object;
-                return getStringKey(o.getIdPerson());
+            if (object instanceof Filiere) {
+                Filiere o = (Filiere) object;
+                return getStringKey(o.getIdFiliere());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Person.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Filiere.class.getName());
             }
         }
     
-}
-    
+} 
 }
