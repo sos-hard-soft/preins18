@@ -1,101 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h1>Création d'un compte</h1>
-</h:head>
-    <h:body>
-    <ui:composition template="../resources/template.xhtml">
-       <ui:define name="content">	
-            <div class="row">
-                <h:form>
-        <p:messages for="update"/>
-        <div class="col-lg-7">
-            <p:panel header="Création d'un compte">
-            <p:panelGrid columns="3">
-                <p:outputLabel value="CNE :"/>
-                <p:inputText id="cne" value="#{etudiantController.newEtudiant.cne}"
-                             required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant">
-                    <f:validator binding="#{uniqueCneValidator}" />
-                    <f:ajax event="blur" render="verifyCNE"/>
-                </p:inputText>
-                <p:message id="verifyCNE" for="cne"/>
-                
-                <p:outputLabel value="CIN :"/>
-                <p:inputText id="cin" value="#{etudiantController.newEtudiant.cin}"
-                             required="true" requiredMessage="Veuillez saisir votre code didentite nationale !">
-                    <f:validator binding="#{uniqueCinValidator}" />
-                    <f:ajax event="blur" render="verifyCIN"/>
-                </p:inputText>
-                <p:message id="verifyCIN" for="cin"/>
-                
-                <p:outputLabel value="Nom :"/>
-                <p:inputText id="nom" value="#{etudiantController.newEtudiant.nom}"
-                             required="true" requiredMessage="Veuillez saisir votre nom"/>
-                <p:message for="nom"/>
-                
-                <p:outputLabel value="Prénom :"/>
-                <p:inputText id="prenom" value="#{etudiantController.newEtudiant.prenom}"
-                             required="true" requiredMessage="Veuillez saisir votre prenom"/>
-                <p:message for="prenom"/>
-                
-                <p:outputLabel value="Date de naissance"/>
-                <p:calendar id="dateNaissance" value="#{etudiantController.newEtudiant.dateNaissance}"
-                                mode="popup" pattern="dd/MM/yyyy"
-                                yearRange="c-100" locale="fr"
-                                showButtonPanel="true" navigator="true"
-                                required="true" requiredMessage="Veuillez selectionnez une Date de naissance" />
-                <p:message for="dateNaissance"/>
-                
-                <p:outputLabel value="email :"/>
-                <p:inputText id="email" value="#{etudiantController.newEtudiant.email}"
-                             required="true" requiredMessage="Veuillez saisir une adresse email valide">
-                    <f:validateRegex
-pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                </p:inputText>
-                <p:message for="email"/>
-                
-            </p:panelGrid>
-                </p:panel>
-<p:panel header="Mot de passe pour le compte">  
-         <p:messages id="pass" showDetail="true" autoUpdate="true"/>
-  
-        <h:panelGrid columns="2" id="matchGrid">                     
-            <h:outputLabel for="pwd1" value="Mot de passe : *" />  
-            <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" label="Password 1" required="true">
-                <f:validateLength minimum="6" for="pwd1" />                    
-            </p:password>  
-  
-            <h:outputLabel for="pwd2" value="Resaisissez le mot de passe : *" />  
-            <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
-        </h:panelGrid>  
-  
-          
-    </p:panel> 
-        <p:commandButton update="pass" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" />
-        </div>
-        
-        <div class="col-lg-5">
-            <p:panel header="Première phase de préinscription">
-            <ul>
-                <li style="color: #46b8da; font-family: georgia;">Repmplir le formulaire munitieusement</li>
-                <li style="color: #D20005; font-family: georgia;">L'adresse email sera utilisée pour vérifier vos données</li>
-                <li style="color: darkorange; font-family: georgia;">Vous receverez un email de validation qui vous permettra d'activer votre compte, si vous ne recevez pas l'email dans la minutes qui suit, veuillez verifier dans le courier indésirable</li>
-                <li style="color: #449d44; font-family: georgia;">Choisissez un mot de passe d'au moins 6 caractères</li>
-            </ul>
-            </p:panel>
-        </div>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">	
+        <h:form>
+
+            <header class="page-header">
+                <h1 class="page-title">Enregistrement</h1>
+                <p:messages for="update"/>
+            </header>
+
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
+                        <p class="text-center text-muted">Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de <a href="security/login.html">Login</a>. </p>
+                        <hr />
+
+                            
+                                <div class="top-margin">
+                                    <label><p:outputLabel value="CNE :"/></label>
+                                    <p:inputText id="cne" class="form-control" value="#{etudiantController.newEtudiant.cne}"
+                                                 required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant">
+                                        <f:validator binding="#{uniqueCneValidator}" />
+                                        <f:ajax event="blur" render="verifyCNE"/>
+                                    </p:inputText>
+                                    <p:message id="verifyCNE" for="cne"/>
+                                </div>
+                                <div class="top-margin">
+                                    <label><p:outputLabel value="CIN :"/></label>
+                                    <p:inputText id="cin" class="form-control" value="#{etudiantController.newEtudiant.cin}"
+                                                 required="true" requiredMessage="Veuillez saisir votre code didentite nationale !">
+                                        <f:validator binding="#{uniqueCinValidator}" />
+                                        <f:ajax event="blur" render="verifyCIN"/>
+                                    </p:inputText>
+                                    <p:message id="verifyCIN" for="cin"/>
+                                </div>
+                                <div class="top-margin">
+                                    <label><p:outputLabel value="Nom :"/></label>
+                                    <p:inputText id="nom" class="form-control" value="#{etudiantController.newEtudiant.nom}"
+                                                 required="true" requiredMessage="Veuillez saisir votre nom"/>
+                                    <p:message for="nom"/>
+                                </div>
+                                <div class="top-margin"><label><p:outputLabel value="Prénom :"/></label>
+                                    <p:inputText id="prenom" class="form-control" value="#{etudiantController.newEtudiant.prenom}"
+                                                 required="true" requiredMessage="Veuillez saisir votre prenom"/>
+                                    <p:message for="prenom"/></div>
+                                <div class="top-margin"><label><p:outputLabel value="Date de naissance"/></label>
+                                    <p:calendar id="dateNaissance" value="#{etudiantController.newEtudiant.dateNaissance}"
+                                                mode="popup" pattern="dd/MM/yyyy"
+                                                locale="fr" navigator="true" required="true" requiredMessage="Veuillez selectionnez une Date de naissance" />
+                                    <p:message for="dateNaissance"/></div>
+                                <div class="top-margin"><label><p:outputLabel value="email :"/></label>
+                                    <p:inputText id="email" value="#{etudiantController.newEtudiant.email}"
+                                                 required="true" requiredMessage="Veuillez saisir une adresse email valide">
+                                        <f:validateRegex
+                                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                    </p:inputText>
+                                    <p:message for="email"/></div>
+                                <div class="top-margin">
+                                    <p:panel header="Mot de passe pour le compte">  
+                                        <p:messages id="pass" showDetail="true" autoUpdate="true"/>
+
+                                        <h:panelGrid columns="2" id="matchGrid">                     
+                                            <h:outputLabel for="pwd1" value="Mot de passe : *" />  
+                                            <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" label="Password 1" required="true">
+                                                <f:validateLength minimum="6" for="pwd1" />                    
+                                            </p:password> 
+                                            <h:outputLabel for="pwd2" value="Resaisissez le mot de passe : *" />  
+                                            <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
+                                        </h:panelGrid>  
+                                    </p:panel> 
+                                </div>
+                                <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" /></div>
+                                        
+                                            
+                                    </div>
+                       </div>
+                </div>
+
+ 
         </h:form>
-        </div>
-        </ui:define>
-    </ui:composition>
-    </h:body>
-</html>
+
+    </ui:define>
+</ui:composition>
