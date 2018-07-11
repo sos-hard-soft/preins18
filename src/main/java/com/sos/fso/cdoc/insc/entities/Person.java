@@ -108,7 +108,7 @@ public class Person implements Serializable {
     private String prenomAr;
     @Column(name = "sexe")
     private Boolean sexe;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "responsable")
     private List<Filiere> filiereList;
 
     public Person() {

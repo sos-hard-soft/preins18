@@ -30,7 +30,7 @@ and open the template in the editor.
                             <p:outputLabel value="description :" for="description" />
                             <p:inputText id="description" value="#{filiereController.newFiliere.description}" title="description" />
                             <p:outputLabel value="person :" for="person" />
-                            <p:selectOneMenu id="person" value="#{filiereController.newFiliere.person}" title="Person">
+                            <p:selectOneMenu id="person" value="#{filiereController.newFiliere.responsable}" title="Person">
                                 <f:selectItems value="#{personController.allPersons}" var="person"
                                                itemValue="#{person}" itemLabel="#{person.nom}"/>
                             </p:selectOneMenu>

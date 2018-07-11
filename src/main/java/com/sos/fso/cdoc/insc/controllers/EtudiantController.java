@@ -107,14 +107,15 @@ public class EtudiantController implements Serializable {
     @Inject
     private ChoixFacade choixService;
     private Choix choix = new Choix();
-
+    private Filiere choixFiliere;
+    
     private boolean visibled = false;
     private boolean visible = false;
     private boolean fileExist = false;
     private String fileName;
     private Path folder;
     private File uploaded;
-
+    
     // ======================================
     // = Navigation Methods =
     // ======================================
@@ -145,6 +146,11 @@ public class EtudiantController implements Serializable {
     public String showAddQualification() {
         newQualification = new Qualification();
         return "/etudiant/addQualification?faces-redirect=true";
+    }
+    
+    public String showChoixFiliere() {
+        choixFiliere = new Filiere();
+        return "/etudiant/selectFiliere?faces-redirect=true";
     }
 
     public String showAddChoice() {
@@ -294,6 +300,7 @@ public class EtudiantController implements Serializable {
     }
 
     public String doSelectFiliere(Filiere choix){
+        System.out.println("Fiting my method");
         int nbChoix = current.getFiliereList().size();
         System.out.println("Le nombre de vos choix est : " + nbChoix);
         
@@ -431,7 +438,16 @@ public class EtudiantController implements Serializable {
         } catch (Exception e) {
         }
     }
+    public void doRemoveFiliereSelection(Filiere filiere) {
+        try {
+            this.current.getFiliereList().remove(filiere);
+            etudiantService.edit(current);
+            addMessage("update", FacesMessage.SEVERITY_INFO, "le choix a ete supprimer avec success !!", "Error !!");
 
+        } catch (Exception e) {
+        }
+    }
+    
     // ======================================
     // = Constructors et Helpers=
     // ======================================
@@ -539,6 +555,14 @@ public class EtudiantController implements Serializable {
         return compte;
     }
 
+    public Filiere getChoixFiliere() {
+        return choixFiliere;
+    }
+
+    public void setChoixFiliere(Filiere choixFiliere) {
+        this.choixFiliere = choixFiliere;
+    }
+    
     public void setCompte(Compte compte) {
         this.compte = compte;
     }
