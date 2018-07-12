@@ -108,6 +108,7 @@ public class EtudiantController implements Serializable {
     private ChoixFacade choixService;
     private Choix choix = new Choix();
     private Filiere choixFiliere;
+    private List<Filiere> choixFLTmp;
     
     private boolean visibled = false;
     private boolean visible = false;
@@ -299,27 +300,40 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
-    public String doSelectFiliere(Filiere choix){
+    public void addToFiliereSelection(Filiere currentSelection){
+        System.out.println("List tempon contient : " + choixFLTmp.size());
+        int nbChoix = current.getFiliereList().size();
+        
+        if (nbChoix>-1 && nbChoix < 3) {
+            this.choixFLTmp.add(currentSelection);
+            System.out.println("le choix :" + currentSelection.getIntitule());
+        } else {
+            addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (2) permis est atteint, veuillez supprimer un choix dans la liste en bas et reessayer !!", "Error !!");
+        }
+    }
+    
+    public String makeChoice(){
+        
         System.out.println("Fiting my method");
         int nbChoix = current.getFiliereList().size();
+        List<Filiere> choixActuel = current.getFiliereList();
         System.out.println("Le nombre de vos choix est : " + nbChoix);
         
         if (nbChoix >-1 && nbChoix < 3) {
-            List<Filiere> stdChoix = current.getFiliereList();
+            List<Filiere> stdChoix = choixFLTmp;
             Iterator<Filiere> ite = stdChoix.iterator();
             
             while (ite.hasNext()) {
                 Filiere next = ite.next();
                 System.out.println("la filiere " + next.getIdFiliere());
-                if (next.getIdFiliere() == null && next.getIdFiliere() == choix.getIdFiliere()) {
-                    addMessage("update", FacesMessage.SEVERITY_FATAL, "Cette filière fait déja partie de vos choix !!", "Erreur !!");
-                    return null;
+                if (next.getIdFiliere() == null && !choixActuel.contains(next)) {
+                    current.getFiliereList().add(next);
+                    
                 } else{
-                    System.out.println("Le choix est légitime.");
+                    System.out.println("Le choix n'est pas légitime.");
                 }
                                
             }
-            current.getFiliereList().add(choix);
             etudiantService.edit(current);
             etudiantService.clearCache();
             return "/etudiant/view?faces-redirect=true";
@@ -685,6 +699,14 @@ public class EtudiantController implements Serializable {
 
     public void setFileExist(boolean fileExist) {
         this.fileExist = fileExist;
+    }
+
+    public List<Filiere> getChoixFLTmp() {
+        return choixFLTmp;
+    }
+
+    public void setChoixFLTmp(List<Filiere> choixFLTmp) {
+        this.choixFLTmp = choixFLTmp;
     }
     
 }

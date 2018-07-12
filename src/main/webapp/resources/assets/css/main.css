@@ -1,5 +1,5 @@
 /* Header */
-#head { background:#181015 url( /cedocinsc/resources/assets/images/bg_header.jpg) no-repeat; background-size: cover; min-height:520px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; font-weight:300; }
+#head { background:#540cad url( /cedocinsc/resources/assets/images/bg_header.jpg) no-repeat; background-size: cover; min-height:520px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; font-weight:300; }
 #head.secondary { height:100px; min-height: 100px; padding-top:0px; }
 	#head .lead { font-family:"Open sans", Helvetica, Arial; font-size:44px; margin-bottom:6px; color:white; line-height:1.15em; } 
 	#head .tagline { color:rgba(255,255,255,0.75); margin-bottom:25px; }
@@ -25,8 +25,8 @@
 /* Highlights (in jumbotron in most cases) */
 .highlight { margin-top:40px; }
 	.h-caption { text-align: center; } 
-	.h-caption i { display:block; font-size: 54px; color:#382526; margin-bottom:36px; }
-	.h-caption h4 { color:#382526; font-size: 16px; font-weight: bold; margin-bottom:20px; }
+	.h-caption i { display:block; font-size: 54px; color:#540cad; margin-bottom:36px; }
+	.h-caption h4 { color:#540cad; font-size: 16px; font-weight: bold; margin-bottom:20px; }
 	.h-body { }
 
 
@@ -37,7 +37,7 @@ blockquote { font-style: italic; font-family: Georgia; color:#999; margin:30px 0
 label { color: #777; }
 .thin { font-weight:300; }
 .page-title { margin-top:20px; font-weight:300; }
-.text-muted { color:#888; }
+    .text-muted { color:#888; }
 .breadcrumb { background:none; padding:0; margin:30px 0 0px 0; }
 ul.list-spaces li{ margin-bottom:10px; }
 
@@ -62,21 +62,25 @@ img.pull-left { margin-right: 10px; }
 	.sidebar h1, .sidebar .h1, .sidebar h2, .sidebar .h2, .sidebar h3, .sidebar .h3 { margin-top:20px; } 
 
 /* Footer */
-.footer1 { background: #232323; padding: 30px 0 0 0; font-size: 12px; color: #999; }
-	.footer1 a { color: #ccc; }
+.footer1 { background: #0064ff; padding: 30px 0 0 0; font-size: 12px; color: #999; }
+	.footer1 a { color: #fff; }
 		.footer1 a:hover {color: #fff; }
 	.footer1 .widget { margin-bottom:30px; }		
-	.footer1 .widget-title { font-size: 17px; font-weight: bold; color: #ccc; margin: 0 0 20px; }
-	.footer1 .entry-meta { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; margin: 0 0 35px 0; padding: 2px 0; color: #888888; font-size: 12px; font-size: 0.75rem; }
+	.footer1 .widget-title { font-size: 17px; font-weight: bold; color: #fff; margin: 0 0 20px; }
+	.footer1 .entry-meta { border-top: 1px solid #fff; border-bottom: 1px solid #fff; margin: 0 0 35px 0; padding: 2px 0; color: #888888; font-size: 12px; font-size: 0.75rem; }
 		.footer1 .entry-meta a { color: #333333; }
-		.footer1 .entry-meta .meta-in { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 10px 0; }
+		.footer1 .entry-meta .meta-in { border-top: 1px solid #fff; border-bottom: 1px solid #fff; padding: 10px 0; }
 	.follow-me-icons { font-size:30px; }		
 		.follow-me-icons i { float:left; margin:0 10px 0 0; }		
 
-.footer2 { background: #191919; padding: 15px 0; color: #777; font-size: 12px; }
+.footer2 { background: #0067b8; padding: 15px 0; color: #777; font-size: 12px; }
 	.footer2 a { color: #aaa; }
 		.footer2 a:hover { color: #fff; }
 		.footer2 p { margin: 0; }
 
 	.widget-simplenav { margin-left:-5px; }		
 	.widget-simplenav a{ margin:0 5px; }		
+
+        .navbar-inverse {
+            background: #0064ff;
+        }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Login Form</title>
+        <h:outputStylesheet name="css/bootstrap.min.css" />
+        <style type="text/css">
+
+            .sidebar-nav {
+                padding: 9px 0;
+            }
+            h3{font-size: 12px}
+
+            .ui-widget, .ui-widget .ui-widget {
+                font-size: 90% !important;
+            }
+            .body-content tr, .body-content td {
+                border: none;
+            }
+            #logoump{
+                float: left;
+            }
+            #logofso{
+                float: right;
+            }
+            #paroles{
+                float: left;
+                margin-left: 100px;
+            }
+            #print{
+                text-align: center;
+                background-color: darkorange;
+                height: 35px;
+            }
+            
+            #form{
+                text-align: center;
+                background-color: #fff;
+         
+        -webkit-border-radius: 10px 10px 10px 10px;
+           -moz-border-radius: 10px 10px 10px 10px;
+                border-radius: 10px 10px 10px 10px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            }
+            .footer {
+    background-color: #99CC00;
+    clear: both;
+    margin-top: 15px;
+   margin-left: -23px;
+    margin-right: -23px;
+    color: #FFFFFF;
+    min-height: 20px;
+    text-align: center;
+}
+        </style>
+    </h:head>
+    <h:body>
+
+        <div class="container">
+            <div class="row">
+                <div id="logoump" class="col-2"><h:graphicImage name="images/umpLogo.png" class="img-responsive"/></div>
+
+                <div id="paroles">
+                    <p style="text-align: center; background-color: ">جامعة محمد الأول وجدة<br/>
+                        Universite Mohamed Premier - Oujda <br/>مركز دراسـات الدكتـوراة علـوم و تقنيـات<br/>Centre d'etudes doctorales sciences et techniques</p>
+                </div>
+                <div id="logofso" class="col-lg-2" style="text-align: right;">
+                    <h:graphicImage name="images/logo.png" class="img-responsive"/>
+                </div>
+            </div>
+            <hr/>
+            <div class="row" style="text-align: center; background-color: #1A96D4; height: 40px;">
+                <h4 style="color: #ffffff; font-family: cursive;">Formulaire de connexion</h4>
+            </div>
+            <hr/>
+
+
+            <div class="row">
+                <div class="col-lg-6 col-offset-3" id="form">
+                <form action="j_security_check" method="post">
+                    <h:outputLabel for="j_username" value="Username" />
+                    <h:inputText id="j_username" />
+                    <br />
+                    <h:outputLabel for="j_password" value="Password" />
+                    <h:inputSecret id="j_password" />
+                    <br />
+                    <h:commandButton value="Login" />
+                </form>
+                    </div>
+            </div>
+
+
+       <div id="bottom" class="row footer">
+            © Faculte des sciences - UMP - Oujda
+        </div>
+        </div>
+
+    </h:body>
+</html>

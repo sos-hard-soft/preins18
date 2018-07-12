@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h1>Liste des cadres</h1>
-</h:head>
-    <h:body>
-    <ui:composition template="../resources/template.xhtml">
-        <ui:define name="left">
-            <ui:insert name="header" >
-                <ui:include src="menuEtudiant.xhtml" />
-            </ui:insert>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             <ui:define name="sidebar-left">
+                
+                    <ui:include src="menuEtudiant.xhtml" />
+             
             </ui:define>
-        <ui:define name="content">	
+<ui:define name="content">	
         <div></div>
         <h:form>
         <p:messages for="update"/>
@@ -32,12 +24,37 @@ and open the template in the editor.
                 <f:selectItems value="#{filiereController.allFilieres}"/>  
             </p:selectOneMenu>
             
-            <p:commandButton value="Valider le choix" action="#{etudiantController.doSelectFiliere}"/>
+            <p:commandButton value="Valider le choix" action="#{etudiantController.addToFiliereSelection(choix)}"/>
+        </p:panelGrid>
+            <p:panelGrid columns="2">
+            <p:outputLabel value="Votre Choix contient : "/>
+        
+                    <h1><h:outputText value="List"/></h1>
+                    <h:dataTable value="#{etudiantController.current.filiereList}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Intitule"/>
+                            </f:facet>
+                            <h:outputText value="#{item.intitule}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Description"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Responsable"/>
+                            </f:facet>
+                            <h:outputText value="#{item.responsable.nom}"/>
+                        </h:column>                        
+                    </h:dataTable>
+                            
+                    <p:commandButton value="Valider le choix" action="#{etudiantController.makeChoice}"/>
         </p:panelGrid>
 </p:panel>
         
         </h:form>
-        </ui:define>
-    </ui:composition>
-    </h:body>
-</html>
+   </ui:define>
+</ui:composition>
