@@ -84,3 +84,7 @@ img.pull-left { margin-right: 10px; }
         .navbar-inverse {
             background: #0064ff;
         }
+        
+        .navbar-inverse .navbar-brand img {
+                width: 120px;            
+        }

@@ -20,13 +20,13 @@
             
             <p:panelGrid columns="2">
             <p:outputLabel value="Choisir votre formation doctorale"/>
-            <p:selectOneMenu id="diplome" value="#{etudiantController.choixFiliere}">  
+            <p:selectOneMenu id="filiere" value="#{etudiantController.choixFiliere}">  
                 <f:selectItems value="#{filiereController.allFilieres}"/>  
             </p:selectOneMenu>
             
-            <p:commandButton value="Valider le choix" action="#{etudiantController.addToFiliereSelection(choix)}"/>
+           <p:outputLabel value=""/> <p:commandButton value="Valider le choix" action="#{etudiantController.addToFiliereSelection(choixFiliere)}"/>
         </p:panelGrid>
-            <p:panelGrid columns="2">
+           
             <p:outputLabel value="Votre Choix contient : "/>
         
                     <h1><h:outputText value="List"/></h1>
@@ -52,7 +52,7 @@
                     </h:dataTable>
                             
                     <p:commandButton value="Valider le choix" action="#{etudiantController.makeChoice}"/>
-        </p:panelGrid>
+        
 </p:panel>
         
         </h:form>

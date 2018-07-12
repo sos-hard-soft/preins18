@@ -34,7 +34,7 @@ and open the template in the editor.
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<div class="login100-pic js-tilt">
-					<img src="images/img-01.png" alt="IMG" />
+                                    <p:graphicImage value="../resources/secured/images/img-01.png" />					
 				</div>
                            
 				<form class="login100-form validate-form" action="j_security_check" method="post">
@@ -66,17 +66,19 @@ and open the template in the editor.
 					<div class="text-center p-t-12">
 						<span class="txt1">
 							Vous avez oublié vos identifiants
-						</span>
+						</span><br />
 						<a class="txt2" href="#">
 							Login / Mot de passe
 						</a>
 					</div>
 
 					<div class="text-center p-t-136">
-                                            <h:commandLink class="txt2" action="#{etudiantController.showCreate}">
+                                   
+                                            <a href="/cedocinsc/index.xhtml">
 							Créer votre espace
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</h:commandLink>
+						</a>
+                                    
 					</div>
 				</form>
 			</div>

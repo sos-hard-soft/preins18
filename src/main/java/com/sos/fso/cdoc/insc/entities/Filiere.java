@@ -148,7 +148,7 @@ public class Filiere implements Serializable {
 
     @Override
     public String toString() {
-        return "com.sos.fso.cdoc.insc.entities.Filiere[ idFiliere=" + idFiliere + " ]";
+        return intitule;
     }
     
 }

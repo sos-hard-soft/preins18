@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        
-</h:head>
-    <h:body>
-    <ui:composition template="/resources/template.xhtml">
-        <ui:define name="content">	
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             <ui:define name="sidebar-left">
+                
+
+             
+            </ui:define>
+<ui:define name="content">	
             <div class="row">
                 <p>La candidature pour les postes de doctorant auprés du Centre d'Etudes Doctorales Sciences et Téchniques est ouverte.<br />
                 la procédure de séléction se fera comme suit :
@@ -31,8 +28,7 @@ and open the template in the editor.
                 </p>
             </div>
         <p:messages for="update"/>
-        <div class="row">
-            <h:form>
+             <h:form>
             
             <div class="col-lg-4 col-offset-2">
                 <p:commandLink action="#{etudiantController.showLogin}">
@@ -53,14 +49,5 @@ and open the template in the editor.
             
             </div>
             </h:form>
-        </div>
-        
-        
-        
-        
-        
-   </ui:define>
-    </ui:composition>
-    </h:body>
-</html>
-
+       </ui:define>
+</ui:composition>
