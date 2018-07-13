@@ -34,12 +34,15 @@
                         
                         <p:outputLabel value="Nom : "/>
                         <p:outputLabel value="#{etudiantController.current.nom}"/>
-                        <p:outputLabel  value="الاسم العائلي : *"/>
-                        <p:outputLabel value="#{etudiantController.current.nomAr}"/>
-                        <p:outputLabel value="Prénom : "/>
+                        
+                        <p:outputLabel value="#{etudiantController.current.nomAr}" dir="rtl"/>
+                        <p:outputLabel  value="الاسم العائلي : *" dir="rtl"/>
+                        <p:outputLabel value="Prénom : " />
                         <p:outputLabel value="#{etudiantController.current.prenom}"/>
-                        <p:outputLabel  value="الاسم الشخصي : *"/>
-                        <p:outputLabel value="#{etudiantController.current.prenomAr}"/>
+                        
+                        <p:outputLabel value="#{etudiantController.current.prenomAr}" dir="rtl"/>
+                        <p:outputLabel  value="الاسم الشخصي : *" dir="rtl"/>
+                        
                         <p:outputLabel value="Date de naissance : "/>
                         <p:outputLabel value="#{etudiantController.current.dateNaissance}"/>
                         

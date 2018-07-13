@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/mstemp.xhtml"
+                template="../resources/msLand.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
@@ -14,7 +14,7 @@
                 <p:messages for="update"/>
             </header>
 
-            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
@@ -52,11 +52,10 @@
                                     <p:message for="prenom"/></div>
                                 <div class="top-margin"><label><p:outputLabel value="Date de naissance"/></label>
                                     <p:calendar id="dateNaissance" value="#{etudiantController.newEtudiant.dateNaissance}"
-                                                mode="popup" pattern="dd/MM/yyyy"
-                                                locale="fr" navigator="true" required="true" requiredMessage="Veuillez selectionnez une Date de naissance" />
+                                                mode="popup"  requiredMessage="Veuillez selectionnez une Date de naissance" />
                                     <p:message for="dateNaissance"/></div>
                                 <div class="top-margin"><label><p:outputLabel value="email :"/></label>
-                                    <p:inputText id="email" value="#{etudiantController.newEtudiant.email}"
+                                    <p:inputText id="email" class="form-control" value="#{etudiantController.newEtudiant.email}"
                                                  required="true" requiredMessage="Veuillez saisir une adresse email valide">
                                         <f:validateRegex
                                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />

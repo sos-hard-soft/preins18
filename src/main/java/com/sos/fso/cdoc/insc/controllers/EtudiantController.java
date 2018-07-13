@@ -19,6 +19,7 @@ import com.sos.fso.cdoc.insc.services.BrancheFacade;
 import com.sos.fso.cdoc.insc.services.ChoixFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
+import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.MailerBean;
 import com.sos.fso.cdoc.insc.services.QualificationFacade;
 import com.sos.fso.cdoc.insc.services.SujetFacade;
@@ -53,6 +54,9 @@ import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.TransferEvent;
+import org.primefaces.event.UnselectEvent;
+import org.primefaces.model.DualListModel;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -109,6 +113,12 @@ public class EtudiantController implements Serializable {
     private Choix choix = new Choix();
     private Filiere choixFiliere;
     private List<Filiere> choixFLTmp;
+    
+    @Inject
+    private FiliereFacade filiereService;
+    private List<Filiere> listFiliere;
+    
+    private DualListModel<Filiere> pickFiliere;
     
     private boolean visibled = false;
     private boolean visible = false;
@@ -524,7 +534,17 @@ public class EtudiantController implements Serializable {
         }
 
     }
-
+    
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Filiere Selectionné", ((Filiere) event.getObject()).getIntitule());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("Filiere déselectionné", ((Filiere) event.getObject()).getIntitule());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
     // ======================================
     // = Getters & setters =
     // ======================================
@@ -708,5 +728,55 @@ public class EtudiantController implements Serializable {
     public void setChoixFLTmp(List<Filiere> choixFLTmp) {
         this.choixFLTmp = choixFLTmp;
     }
+
+    public List<Filiere> getListFiliere() {
+        listFiliere = filiereService.findAll();
+        return listFiliere;
+    }
+
+    public void setListFiliere(List<Filiere> listFiliere) {
+        this.listFiliere = listFiliere;
+    }
     
+
+    public DualListModel<Filiere> getPickFiliere() {
+        if (pickFiliere == null) {
+            pickFiliere = new DualListModel<Filiere>();
+            pickFiliere.setSource(getListFiliere());
+        }
+        return pickFiliere;
+    }
+
+    public void setPickFiliere(DualListModel<Filiere> pickFiliere) {
+        this.pickFiliere = pickFiliere;
+    }
+    
+    public void onTransfer(TransferEvent event) {
+        StringBuilder builder = new StringBuilder();
+        for(Object item : event.getItems()) {
+            builder.append(((Filiere) item).getIntitule()).append("<br />");
+        }
+         
+        FacesMessage msg = new FacesMessage();
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+        msg.setSummary("Items Transferred");
+        msg.setDetail(builder.toString());
+         
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    } 
+ 
+    public void onSelect(SelectEvent event) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
+    }
+     
+    public void onUnselect(UnselectEvent event) {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
+    }
+     
+    public void onReorder() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
+    } 
 }

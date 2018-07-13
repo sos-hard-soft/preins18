@@ -33,7 +33,7 @@
 /* Typography */
 h1, h2, h3, h4, h5, h6 { font-family:"Open sans", Helvetica, Arial; }
 h1, .h1, h2, .h2, h3, .h3 { margin-top:30px; } 
-blockquote { font-style: italic; font-family: Georgia; color:#999; margin:30px 0 30px; }
+blockquote { font-style: italic; font-family: Georgia; color:#fff; margin:30px 0 30px; }
 label { color: #777; }
 .thin { font-weight:300; }
 .page-title { margin-top:20px; font-weight:300; }
@@ -62,7 +62,7 @@ img.pull-left { margin-right: 10px; }
 	.sidebar h1, .sidebar .h1, .sidebar h2, .sidebar .h2, .sidebar h3, .sidebar .h3 { margin-top:20px; } 
 
 /* Footer */
-.footer1 { background: #0064ff; padding: 30px 0 0 0; font-size: 12px; color: #999; }
+.footer1 { background: #0064ff; padding: 30px 0 0 0; font-size: 12px; color: #fff; }
 	.footer1 a { color: #fff; }
 		.footer1 a:hover {color: #fff; }
 	.footer1 .widget { margin-bottom:30px; }		

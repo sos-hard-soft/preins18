@@ -1,60 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/mstemp.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-             <ui:define name="sidebar-left">
-                
-                    <ui:include src="menuEtudiant.xhtml" />
-             
-            </ui:define>
-<ui:define name="content">	
-        <div></div>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
         <h:form>
         <p:messages for="update"/>
+        <p:pickList id="pickList" value="#{etudiantController.pickFiliere}" var="filiere" itemLabel="#{filiere.intitule}" itemValue="#{filiere}" />
         
-        <p:panel header="Selectionnez Une Filiere">
-            
-            <p:panelGrid columns="2">
-            <p:outputLabel value="Choisir votre formation doctorale"/>
-            <p:selectOneMenu id="filiere" value="#{etudiantController.choixFiliere}">  
-                <f:selectItems value="#{filiereController.allFilieres}"/>  
-            </p:selectOneMenu>
-            
-           <p:outputLabel value=""/> <p:commandButton value="Valider le choix" action="#{etudiantController.addToFiliereSelection(choixFiliere)}"/>
-        </p:panelGrid>
-           
-            <p:outputLabel value="Votre Choix contient : "/>
-        
-                    <h1><h:outputText value="List"/></h1>
-                    <h:dataTable value="#{etudiantController.current.filiereList}" var="item">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Intitule"/>
-                            </f:facet>
-                            <h:outputText value="#{item.intitule}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Description"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Responsable"/>
-                            </f:facet>
-                            <h:outputText value="#{item.responsable.nom}"/>
-                        </h:column>                        
-                    </h:dataTable>
-                            
-                    <p:commandButton value="Valider le choix" action="#{etudiantController.makeChoice}"/>
-        
-</p:panel>
-        
+                
+               
+          
         </h:form>
-   </ui:define>
-</ui:composition>
+    </body>
+</html>
