@@ -19,6 +19,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -53,11 +54,8 @@ public class Filiere implements Serializable {
     private String intitule;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @JoinTable(name = "choix_etudiant", joinColumns = {
-        @JoinColumn(name = "id_etudiant", referencedColumnName = "id_filiere")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_filiere", referencedColumnName = "id_etudiant")})
-    @ManyToMany
-    private List<Etudiant> etudiantList;
+    @OneToMany(mappedBy = "idFiliere")
+    private List<Choix> choixList;
     @JoinColumn(name = "person", referencedColumnName = "id_person")
     @ManyToOne
     private Person responsable;
@@ -109,13 +107,12 @@ public class Filiere implements Serializable {
         this.optimisticLock = optimisticLock;
     }
 
-    @XmlTransient
-    public List<Etudiant> getEtudiantList() {
-        return etudiantList;
+    public List<Choix> getChoixList() {
+        return choixList;
     }
 
-    public void setEtudiantList(List<Etudiant> etudiantList) {
-        this.etudiantList = etudiantList;
+    public void setChoixList(List<Choix> choixList) {
+        this.choixList = choixList;
     }
 
     public Person getResponsable() {

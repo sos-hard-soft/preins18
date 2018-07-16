@@ -70,8 +70,8 @@ public class Sujet implements Serializable {
     @JoinColumn(name = "branche", referencedColumnName = "id_branche")
     @ManyToOne
     private Branche branche;
-    @OneToMany(mappedBy = "idSujet")
-    private List<Choix> choixList;
+    //@OneToMany(mappedBy = "idSujet")
+    //private List<Choix> choixList;
 
     public Sujet() {
     }
@@ -152,14 +152,14 @@ public class Sujet implements Serializable {
         this.branche = branche;
     }
 
-    @XmlTransient
-    public List<Choix> getChoixList() {
-        return choixList;
-    }
-
-    public void setChoixList(List<Choix> choixList) {
-        this.choixList = choixList;
-    }
+//    @XmlTransient
+//    public List<Choix> getChoixList() {
+//        return choixList;
+//    }
+//
+//    public void setChoixList(List<Choix> choixList) {
+//        this.choixList = choixList;
+//    }
 
     @Override
     public int hashCode() {

@@ -35,6 +35,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -106,13 +107,13 @@ public class EtudiantController implements Serializable {
 
     @Inject
     private SujetFacade sujetService;
-    private List<Sujet> listChoix;
+    private List<Filiere> listChoix;
 
     @Inject
     private ChoixFacade choixService;
     private Choix choix = new Choix();
     private Filiere choixFiliere;
-    private List<Filiere> choixFLTmp;
+    private List<Filiere> choixFLTmp = new ArrayList<>();
     
     @Inject
     private FiliereFacade filiereService;
@@ -170,13 +171,13 @@ public class EtudiantController implements Serializable {
             branche = new Branche();
             return "/etudiant/addChoice?faces-redirect=true";
         }
-        listChoix = sujetService.findByBranche(branche);
+        listChoix = filiereService.findAll();
         return "/etudiant/selectSujet?faces-redirect=true";
     }
 
     public String showSujets() {
         etudiantService.clearCache();
-        listChoix = sujetService.findByBranche(branche);
+        listChoix = filiereService.findAll();
         return "/etudiant/selectSujet?faces-redirect=true";
     }
 
@@ -310,51 +311,7 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
-    public void addToFiliereSelection(Filiere currentSelection){
-        System.out.println("List tempon contient : " + choixFLTmp.size());
-        int nbChoix = current.getFiliereList().size();
-        
-        if (nbChoix>-1 && nbChoix < 3) {
-            this.choixFLTmp.add(currentSelection);
-            System.out.println("le choix :" + currentSelection.getIntitule());
-        } else {
-            addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (2) permis est atteint, veuillez supprimer un choix dans la liste en bas et reessayer !!", "Error !!");
-        }
-    }
-    
-    public String makeChoice(){
-        
-        System.out.println("Fiting my method");
-        int nbChoix = current.getFiliereList().size();
-        List<Filiere> choixActuel = current.getFiliereList();
-        System.out.println("Le nombre de vos choix est : " + nbChoix);
-        
-        if (nbChoix >-1 && nbChoix < 3) {
-            List<Filiere> stdChoix = choixFLTmp;
-            Iterator<Filiere> ite = stdChoix.iterator();
-            
-            while (ite.hasNext()) {
-                Filiere next = ite.next();
-                System.out.println("la filiere " + next.getIdFiliere());
-                if (next.getIdFiliere() == null && !choixActuel.contains(next)) {
-                    current.getFiliereList().add(next);
-                    
-                } else{
-                    System.out.println("Le choix n'est pas légitime.");
-                }
-                               
-            }
-            etudiantService.edit(current);
-            etudiantService.clearCache();
-            return "/etudiant/view?faces-redirect=true";
-            
-        }else {
-            addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (2) permis est atteint !!", "Error !!");
-            return "/etudiant/view?faces-redirect=true";
-        }
-    }
-    
-    public String doAddChoix(Sujet sujet) {
+    public String doAddChoix(Filiere filiere) {
         int nbChoix = current.getChoixList().size();
         System.out.println("le nombre de choix est " + nbChoix);
 
@@ -364,9 +321,9 @@ public class EtudiantController implements Serializable {
 
             while (iterator.hasNext()) {
                 Choix choixExistant = iterator.next();
-                Sujet sujetExistant = choixExistant.getIdSujet();
-                System.out.println("le sujet de l'iteraor" + sujetExistant.getIntitule());
-                if (sujetExistant.getIntitule() == null ? sujet.getIntitule() == null : sujetExistant.getIntitule().equals(sujet.getIntitule())) {
+                Filiere filiereExistante = choixExistant.getIdFiliere();
+                System.out.println("le sujet de l'iteraor" + filiereExistante.getIntitule());
+                if (filiereExistante.getIntitule() == null ? filiere.getIntitule() == null : filiereExistante.getIntitule().equals(filiere.getIntitule())) {
                     addMessage("update", FacesMessage.SEVERITY_ERROR, "Vous avez deja choisi ce sujet !!", "Error !!");
                     return null;
                 } else {
@@ -375,10 +332,10 @@ public class EtudiantController implements Serializable {
             }
 
             choix.setIdEtudiant(current);
-            choix.setIdSujet(sujet);
+            choix.setIdFiliere(filiere);
             choixService.create(choix);
             current.getChoixList().add(choix);
-            System.out.println("Edition en cours ajout de " + choix.getIdSujet().getIntitule());
+            System.out.println("Edition en cours ajout de " + choix.getIdFiliere().getIntitule());
             //etudiantService.edit(current);
             etudiantService.clearCache();
             return "/etudiant/view?faces-redirect=true";
@@ -462,15 +419,7 @@ public class EtudiantController implements Serializable {
         } catch (Exception e) {
         }
     }
-    public void doRemoveFiliereSelection(Filiere filiere) {
-        try {
-            this.current.getFiliereList().remove(filiere);
-            etudiantService.edit(current);
-            addMessage("update", FacesMessage.SEVERITY_INFO, "le choix a ete supprimer avec success !!", "Error !!");
-
-        } catch (Exception e) {
-        }
-    }
+    
     
     // ======================================
     // = Constructors et Helpers=
@@ -483,7 +432,7 @@ public class EtudiantController implements Serializable {
 
             List<Choix> choixAnciens = choixService.findByIdEtudiant(current);
             choix = choixAnciens.get(1);
-            branche = choix.getIdSujet().getBranche();
+            //branche = choix.getIdFiliere().getBranche();
             System.out.println("la nombre est : " + branche.getIntitule());
         } else {
             branche = null;
@@ -625,11 +574,12 @@ public class EtudiantController implements Serializable {
         this.branche = branche;
     }
 
-    public List<Sujet> getListChoix() {
+    public List<Filiere> getListChoix() {
+        listChoix = filiereService.findAll();
         return listChoix;
     }
 
-    public void setListChoix(List<Sujet> listChoix) {
+    public void setListChoix(List<Filiere> listChoix) {
         this.listChoix = listChoix;
     }
 

@@ -43,9 +43,9 @@ public class Choix implements Serializable {
     @JoinColumn(name = "id_etudiant", referencedColumnName = "id_etudiant")
     @ManyToOne
     private Etudiant idEtudiant;
-    @JoinColumn(name = "id_sujet", referencedColumnName = "id_sujet")
+    @JoinColumn(name = "id_filiere", referencedColumnName = "id_filiere")
     @ManyToOne
-    private Sujet idSujet;
+    private Filiere idFiliere;
 
     public Choix() {
     }
@@ -78,12 +78,12 @@ public class Choix implements Serializable {
         this.idEtudiant = idEtudiant;
     }
 
-    public Sujet getIdSujet() {
-        return idSujet;
+    public Filiere getIdFiliere() {
+        return idFiliere;
     }
 
-    public void setIdSujet(Sujet idSujet) {
-        this.idSujet = idSujet;
+    public void setIdFiliere(Filiere idFiliere) {
+        this.idFiliere = idFiliere;
     }
 
     @Override

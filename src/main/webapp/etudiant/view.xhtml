@@ -123,11 +123,15 @@
                             </p:dataTable>
                         </h:panelGrid>  
                     </p:tab>  
-                    <p:tab id="tab2" title="Formation Doctorale Choisie">
-                        <p:outputLabel value="Vous avez choisis la branche : "/>
-                        <h4><p:outputLabel value="#{etudiantController.current.branche.intitule}" /></h4>
+                    <p:tab id="tab2" title="Filieres Choisis">
+                        <p:outputLabel value="Vous avez choisis les filieres ci après : "/>
+                         <ul>
+                             <ui:repeat value="#{etudiantController.current.choixList}" var="choix">
+                                 <li><p:outputLabel value="#{choix.idFiliere.intitule}" /> -- <p:outputLabel value="#{choix.idFiliere.description}" /></li>                            
+                        </ui:repeat>
+                </ul>
                     </p:tab>
-                    <p:tab id="tab3" title="Sujets Choisis" disabled="true">  
+                    <!--<p:tab id="tab3" title="Sujets Choisis" disabled="true">  
                           
                             <p:dataTable value="#{etudiantController.current.choixList}" var="sujet">
                                 <p:column  headerText="Branche">  
@@ -160,7 +164,7 @@
                                 </p:column>
                             </p:dataTable>
                        
-                    </p:tab>  
+                    </p:tab>  -->
 
 
 

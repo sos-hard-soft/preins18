@@ -113,8 +113,6 @@ public class Etudiant implements Serializable {
     private String prenomAr;
     @Column(name = "sexe")
     private Boolean sexe;
-    @ManyToMany(mappedBy = "etudiantList")
-    private List<Filiere> filiereList;
     @JoinColumn(name = "branche", referencedColumnName = "id_branche")
     @ManyToOne
     private Branche branche;
@@ -280,15 +278,6 @@ public class Etudiant implements Serializable {
 
     public void setSexe(Boolean sexe) {
         this.sexe = sexe;
-    }
-
-    @XmlTransient
-    public List<Filiere> getFiliereList() {
-        return filiereList;
-    }
-
-    public void setFiliereList(List<Filiere> filiereList) {
-        this.filiereList = filiereList;
     }
 
     public Branche getBranche() {
