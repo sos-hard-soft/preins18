@@ -5,7 +5,9 @@
  */
 package com.sos.fso.cdoc.insc.controllers;
 
+import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
+import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -50,6 +52,10 @@ public class PersonController implements Serializable{
     private Person current;
     private List<Person> personnes;
     
+    @Inject
+    private FiliereFacade filiereFacade;
+    private Filiere filiereProf;
+    
     private boolean visibled = false;
     private boolean visible = false;
     private boolean fileExist = false;
@@ -66,8 +72,9 @@ public class PersonController implements Serializable{
         return "/index?faces-redirect=true";
     }
 
-    public String showDetails() {
-        return "/filiere/view?faces-redirect=true";
+    public String showDetails(Person selected) {
+        this.current = selected;
+        return "/filiere/list?faces-redirect=true";
     }
 
     public String showCreatePerson() {
@@ -141,6 +148,8 @@ public class PersonController implements Serializable{
        
     }
 
+    
+    
     public boolean isVisibled() {
         return visibled;
     }
@@ -155,6 +164,23 @@ public class PersonController implements Serializable{
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public List<Person> getPersonnes() {
+        return personnes;
+    }
+
+    public void setPersonnes(List<Person> personnes) {
+        this.personnes = personnes;
+    }
+
+    public Filiere getFiliereProf() {
+        filiereProf = filiereFacade.findByResponsable(current);
+        return filiereProf;
+    }
+
+    public void setFiliereProf(Filiere filiereProf) {
+        this.filiereProf = filiereProf;
     }
 
     public boolean isFileExist() {

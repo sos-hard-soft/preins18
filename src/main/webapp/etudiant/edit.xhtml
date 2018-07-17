@@ -17,7 +17,7 @@
 
                     <p:panel id="etudiantdetail" header="Modification des Informations personelle" rendered="#{!etudiantController.sessionOuverte}">
                          <p:outputLabel value="Veuillez charger votre Photo d'identité :" />
-                    <p:fileUpload fileUploadListener="#{etudiantController.handleFileUpload}" />
+                    <p:fileUpload mode="advanced" auto="true" sizeLimit="51380224" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleFileUpload}" />
                     <p:growl id="messages" showDetail="true"/>
         
                         <p:messages for="update"/>

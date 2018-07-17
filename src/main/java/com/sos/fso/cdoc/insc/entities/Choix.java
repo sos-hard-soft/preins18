@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Choix.findAll", query = "SELECT c FROM Choix c")
     , @NamedQuery(name = "Choix.findByIdChoix", query = "SELECT c FROM Choix c WHERE c.idChoix = :idChoix")
-    , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")})
+    , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")
+    , @NamedQuery(name = "Choix.findByIdFiliere", query = "SELECT c FROM Choix c WHERE c.idFiliere = :idFiliere")})
 public class Choix implements Serializable {
 
     private static final long serialVersionUID = 1L;

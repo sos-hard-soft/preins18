@@ -315,7 +315,7 @@ public class EtudiantController implements Serializable {
         int nbChoix = current.getChoixList().size();
         System.out.println("le nombre de choix est " + nbChoix);
 
-        if (nbChoix > -1 && nbChoix < 3) {
+        if (nbChoix > -1 && nbChoix < 2) {
             List<Choix> aTrouver = current.getChoixList();
             Iterator<Choix> iterator = aTrouver.iterator();
 
@@ -341,7 +341,7 @@ public class EtudiantController implements Serializable {
             return "/etudiant/view?faces-redirect=true";
 
         } else {
-            addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (3) permis est atteint !!", "Error !!");
+            addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (2) permis est atteint !!", "Error !!");
             return "/etudiant/view?faces-redirect=true";
         }
 

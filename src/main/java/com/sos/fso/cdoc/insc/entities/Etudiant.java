@@ -118,6 +118,8 @@ public class Etudiant implements Serializable {
     private Branche branche;
     @OneToMany(mappedBy = "etudiant")
     private List<Qualification> qualificationList;
+    @OneToMany(mappedBy = "etudiant")
+    private List<Pieces> piecesList;
     @OneToMany(mappedBy = "idEtudiant")
     private List<Choix> choixList;
 
@@ -287,7 +289,17 @@ public class Etudiant implements Serializable {
     public void setBranche(Branche branche) {
         this.branche = branche;
     }
+    
+    @XmlTransient
+    public List<Pieces> getPiecesList() {
+        return piecesList;
+    }
 
+    public void setPiecesList(List<Pieces> piecesList) {
+        this.piecesList = piecesList;
+    }
+    
+    
     @XmlTransient
     public List<Qualification> getQualificationList() {
         return qualificationList;

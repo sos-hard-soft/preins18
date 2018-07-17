@@ -220,12 +220,12 @@ body{
 }
 
 #sidebar_first h2 {
-  background: url("images/block-bg-green.png") bottom left no-repeat;
+  background: url("/cedocinsc/javax.faces.resource/images/block-bg-green.png") bottom left no-repeat;
   margin-left: -24px; 
   padding: 9px 0 24px 26px; 
 }
 #sidebar_last h2 {
-  background: url("images/right-block-bg-green.png") bottom right no-repeat;
+  background: url("/cedocinsc/javax.faces.resource/images/right-block-bg-green.png") bottom right no-repeat;
   clear: both;
   margin-right: -24px;
   padding:9px 27px 24px 20px;
@@ -245,12 +245,12 @@ body{
 
 #sidebar_first .with-subject ul.menu li {
 	border-bottom: 1px dotted #000000;
-    list-style-image: url("images/dropdown-normal-arrow.png");
+    list-style-image: url("/cedocinsc/javax.faces.resource/images/dropdown-normal-arrow.png");
     padding: 8px 0 8px 8px;
 	}
 	
 #sidebar_first .with-subject ul.menu li.expanded {
-	list-style-image: url("images/menu-expanded.png");
+	list-style-image: url("/cedocinsc/javax.faces.resource/images/menu-expanded.png");
     padding: 8px 0 8px 8px;
 	}
 
@@ -283,3 +283,60 @@ body{
 .ui-menu.ui-widget{
     min-width: 180px;
 }
+
+.ui-datatable td,.ui-datatable th {
+    white-space: normal;
+}
+
+
+.mystyle.ui-datatable .ui-datatable-header{
+background: #003946 !important;
+
+}
+
+.mystyle.ui-datatable .ui-datatable-header{
+background: #003946 !important;
+
+}
+
+.mystyle.ui-datatable .ui-datatable-even{
+background: white ;
+
+
+}
+
+.mystyle.ui-datatable .ui-datatable-odd.ui-state-hover{
+background: #F4E7C1 ;
+
+}
+
+.mystyle.ui-datatable .ui-datatable-even.ui-state-hover{
+background: #F4E7C1 ;
+
+}
+
+.mystyle.ui-datatable .ui-datatable-even.ui-state-highlight{
+background: #fff9e5 ;
+
+}
+
+.mystyle.ui-datatable .ui-datatable-odd.ui-state-highlight{
+background: #fff9e5 ;
+
+}
+
+.mystyle.ui-datatable .ui-datatable-data-empty td {
+color:red;
+font-weight:bold;
+}
+.ui-datatable.mystyle th {
+background: EAAB00;
+font-family: verdana;
+font-size: 1em;
+}
+
+
+.mystyle.ui-datatable .ui-expanded-row-content{
+background:white;
+}
+

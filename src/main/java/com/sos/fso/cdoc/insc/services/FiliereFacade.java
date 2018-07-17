@@ -6,8 +6,10 @@
 package com.sos.fso.cdoc.insc.services;
 
 import com.sos.fso.cdoc.insc.entities.Filiere;
+import com.sos.fso.cdoc.insc.entities.Person;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -28,5 +30,14 @@ public class FiliereFacade extends AbstractFacade<Filiere> {
     public FiliereFacade() {
         super(Filiere.class);
     }
-    
+    public Filiere findByResponsable(Person responsable) {
+        Filiere filiere;
+        try {
+            filiere = em.createNamedQuery("Choix.findByIdFiliere", Filiere.class).setParameter("idFiliere", responsable.getFiliereList().get(0).getIdFiliere()).getSingleResult();
+            return filiere;
+        } catch (NoResultException ex) {
+            return null;
+        }
+        
+    }
 }

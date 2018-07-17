@@ -15,22 +15,22 @@
                 
         <h:form>
         <p:messages for="update"/>
-        <p:panel header="Liste des sujet disponible">
-            <p:dataTable value="#{etudiantController.listChoix}" var="filiere">
+        
+        <p:dataTable value="#{etudiantController.listChoix}" var="filiere" >
             <p:column  headerText="Branche">  
                 <h:outputText value="#{filiere.intitule}" />  
         </p:column> 
-            <p:column headerText="Intitule du sujet">  
+        <p:column headerText="Intitule du sujet">  
                 <h:outputText value="#{filiere.description}" />  
         </p:column> 
             <p:column headerText="Encadrant">  
                 <h:outputText value="#{filiere.responsable}" />  
         </p:column> 
-            <p:column style="width:4%">  
+            <p:column headerText="Actions">  
                             
                                 <p:growl id="messages"/>  
 
-                                <p:menuButton value="Options">  
+                                <p:menuButton value="Ajouter">  
                                     <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
                                                                         
                                 </p:menuButton>  
@@ -38,7 +38,7 @@
 
                         </p:column> 
         </p:dataTable>
-        </p:panel>
+ 
         </h:form>
        
             

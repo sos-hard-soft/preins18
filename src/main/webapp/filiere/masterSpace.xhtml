@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h1>Ajouter une Filiere</h1>
-    </h:head>
-    <h:body>
-        <ui:composition template="../resources/template.xhtml">
-            <ui:define name="left">
-            <ui:insert name="header" >
-                <ui:include src="menuEtudiant.xhtml" />
-            </ui:insert>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             <ui:define name="sidebar-left">
                 
+                    <ui:include src="menuProf.xhtml" />
+             
             </ui:define>
-            <ui:define name="content">	
-                <h:form>
-                    
-                    </h:form>
-            </ui:define>
-           
-        </ui:composition>
-    </h:body>
-</html> 
+<ui:define name="content">
+                
+        <h:form>
+        <p:messages for="update"/>
+        
+        <p:dataTable value="#{etudiantController.listChoix}" var="filiere" >
+            <p:column  headerText="Branche">  
+                <h:outputText value="#{filiere.intitule}" />  
+        </p:column> 
+        <p:column headerText="Intitule du sujet">  
+                <h:outputText value="#{filiere.description}" />  
+        </p:column> 
+            <p:column headerText="Encadrant">  
+                <h:outputText value="#{filiere.responsable}" />  
+        </p:column> 
+            <p:column headerText="Actions">  
+                            
+                                <p:growl id="messages"/>  
+
+                                <p:menuButton value="Ajouter">  
+                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
+                                                                        
+                                </p:menuButton>  
+                            
+
+                        </p:column> 
+        </p:dataTable>
+ 
+        </h:form>
+       
+            
+           </ui:define>
+</ui:composition>

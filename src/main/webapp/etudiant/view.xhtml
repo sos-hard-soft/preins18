@@ -90,9 +90,20 @@
                 <p:tabView id="tabView">  
 
                     <p:tab id="tab1" title="Diplomes Obtenus">
-                        
-                        <h:panelGrid columns="2" cellpadding="10">  
+
                             <p:dataTable value="#{etudiantController.current.qualificationList}" var="diplome">
+                                <p:column headerText="Actions">  
+                            
+                                <p:growl id="messages"/>  
+
+                                <p:menuButton value="Actions">  
+                                    <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
+                                    <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveQualification(diplome)}" ajax="false"/>  
+                                    
+                                </p:menuButton>  
+                                
+
+                        </p:column>
                                 <p:column  headerText="Diplome">  
                                     <h:outputText value="#{diplome.diplome}" />  
                                 </p:column> 
@@ -108,20 +119,11 @@
                                 <p:column  headerText="Etablissement">  
                                     <h:outputText value="#{diplome.partieDelivrante}" />  
                                 </p:column>
-                                <p:column style="width:4%" headerText="Actions">  
-                            
-                                <p:growl id="messages"/>  
-
-                                <p:menuButton value="Actions">  
-                                    <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
-                                    <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveQualification(diplome)}" ajax="false"/>  
-                                    
-                                </p:menuButton>  
-                            
-
-                        </p:column>
+                                
+                                
                             </p:dataTable>
-                        </h:panelGrid>  
+
+                        
                     </p:tab>  
                     <p:tab id="tab2" title="Filieres Choisis">
                         <p:outputLabel value="Vous avez choisis les filieres ci après : "/>

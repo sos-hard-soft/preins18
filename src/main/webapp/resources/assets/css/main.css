@@ -88,3 +88,7 @@ img.pull-left { margin-right: 10px; }
         .navbar-inverse .navbar-brand img {
                 width: 120px;            
         }
+        
+        .ui-widget-content {
+    border: 1px solid #fff;
+}
