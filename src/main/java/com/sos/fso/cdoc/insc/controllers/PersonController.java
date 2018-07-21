@@ -5,8 +5,10 @@
  */
 package com.sos.fso.cdoc.insc.controllers;
 
+import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
+import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
 import java.io.ByteArrayInputStream;
@@ -55,6 +57,11 @@ public class PersonController implements Serializable{
     @Inject
     private FiliereFacade filiereFacade;
     private Filiere filiereProf;
+    
+    @Inject
+    private EtudiantFacade etudiantService;
+    private Etudiant student;
+    private List<Object[]> maliste;
     
     private boolean visibled = false;
     private boolean visible = false;
@@ -144,10 +151,25 @@ public class PersonController implements Serializable{
     
     
     public PersonController() {
-        
-       
+               
     }
 
+    public List<Object[]> getMaliste() {
+        String intitule = filiereFacade.findByResponsable(current).getIntitule();
+        System.out.println("L'intitulé reporté est : " + intitule);
+        System.out.println("recuperation de la liste des etudiants par la requete natif sql*************");
+        System.out.println("**************************************************************************");
+        maliste = etudiantService.getPreinscrit(intitule);
+        System.out.println("List recuperer avec suces !!!!!");
+        System.out.println("first element " + maliste.get(0));
+        return maliste;
+    }
+
+    public void setMaliste(List<Object[]> maliste) {
+        this.maliste = maliste;
+    }
+    
+    
     
     
     public boolean isVisibled() {

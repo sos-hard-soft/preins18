@@ -6,6 +6,8 @@
 package com.sos.fso.cdoc.insc.services;
 
 import com.sos.fso.cdoc.insc.entities.Etudiant;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -50,5 +52,21 @@ public class EtudiantFacade extends AbstractFacade<Etudiant> {
         }
         
     }
+    
+    public List<Object[]> getPreinscrit(String intitule){
+        System.out.println("Procedure recuperation list  estudiant filiere responsable");
+        List<Object[]> preinscrit;
+        try {
+            preinscrit = em.createNativeQuery("SELECT e.cin, e.nom, f.intitule as IntituleFiliere "
+                    + "FROM  t_etudiant AS e INNER JOIN t_choix AS c ON e.id_etudiant = c.id_etudiant "
+                    + "INNER JOIN t_filiere AS f ON c.id_filiere = f.id_filiere Where f.intitule = '" + intitule + "';").getResultList();
+            System.out.println("Works fine!!!!!");
+            System.out.println("Resultat : " + preinscrit.get(0));
+        } catch (NoResultException ex) {
+            return null;
+        }
+        return preinscrit;
+    }
+    
     
 }

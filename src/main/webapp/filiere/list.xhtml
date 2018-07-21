@@ -17,130 +17,13 @@
 
         <h:form>
             <h1><h:outputText value="List"/></h1>
-            <h:dataTable value="#{personController.filiereProf.choixList.}" var="item">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="IdEtudiant"/>
-                    </f:facet>
-                    <h:outputText value="#{item.idEtudiant}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Activite"/>
-                    </f:facet>
-                    <h:outputText value="#{item.activite}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Adresse"/>
-                    </f:facet>
-                    <h:outputText value="#{item.adresse}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Cin"/>
-                    </f:facet>
-                    <h:outputText value="#{item.cin}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Cne"/>
-                    </f:facet>
-                    <h:outputText value="#{item.cne}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="DateNaissance"/>
-                    </f:facet>
-                    <h:outputText value="#{item.dateNaissance}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:outputText>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Email"/>
-                    </f:facet>
-                    <h:outputText value="#{item.email}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="EtatMatrimonial"/>
-                    </f:facet>
-                    <h:outputText value="#{item.etatMatrimonial}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="LieuNaissance"/>
-                    </f:facet>
-                    <h:outputText value="#{item.lieuNaissance}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="LieuNaissanceAr"/>
-                    </f:facet>
-                    <h:outputText value="#{item.lieuNaissanceAr}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nationalite"/>
-                    </f:facet>
-                    <h:outputText value="#{item.nationalite}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nom"/>
-                    </f:facet>
-                    <h:outputText value="#{item.nom}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="NomAr"/>
-                    </f:facet>
-                    <h:outputText value="#{item.nomAr}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="NumeroTelephonne"/>
-                    </f:facet>
-                    <h:outputText value="#{item.numeroTelephonne}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="OptimisticLock"/>
-                    </f:facet>
-                    <h:outputText value="#{item.optimisticLock}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Photo"/>
-                    </f:facet>
-                    <h:outputText value="#{item.photo}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Prenom"/>
-                    </f:facet>
-                    <h:outputText value="#{item.prenom}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="PrenomAr"/>
-                    </f:facet>
-                    <h:outputText value="#{item.prenomAr}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Sexe"/>
-                    </f:facet>
-                    <h:outputText value="#{item.sexe}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Branche"/>
-                    </f:facet>
-                    <h:outputText value="#{item.branche}"/>
-                </h:column>
-            </h:dataTable>
+            <p:dataTable value="#{personController.maliste}" var="liste">
+                <p:columns value="#{personController.maliste[0]}" columnIndexVar="i" var="column" field="#{column.property}" >
+                     
+        <h:outputText value="#{liste[i]}" />
+    </p:columns>
+</p:dataTable>
+           
         </h:form>
     </f:view>
 
