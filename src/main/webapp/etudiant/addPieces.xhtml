@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+             <ui:define name="sidebar-left">
+                
+                    <ui:include src="menuEtudiant.xhtml" />
+             
+            </ui:define>
+<ui:define name="content">
+                <h:form>
+                <div></div>
+                <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
+                    Votre session a expirer ou vous n'avez pas activer votre compte.
+                </p:panel>
+                <div class="row">
+                    <div class="col-lg-8">
+                    <p:panel header="Ajouter un nouveau diplôme">
+                    
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Date de délivrance de la pièce : "/>
+                    <p:calendar id="dateObtention" value="#{etudiantController.newPieces.dateObtention}"
+                                locale="fr" navigator="true" yearRange="1980:2020" pattern="dd/MM/yyyy" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                    <p:message for="dateObtention"/> 
+
+                    <p:outputLabel value="Intitulé de la Pièce : *"/>
+                    <p:inputText id="piece" value="#{etudiantController.newPieces.intitule}"
+                                     required="true" requiredMessage="Veuillez saisir l'intitule de votre piece justificative" />  
+                        
+                    <p:message for="piece"/>
+                    <p:outputLabel value="Veuillez charger l'image de votre piece :" />
+                    <p:fileUpload id="file" mode="advanced" auto="true" sizeLimit="51380224" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" />
+                    <p:message for="file"/>
+
+                    <p:outputLabel value="Partie delivrante : *"/>
+                    <p:inputText id="partieDelivrante" value="#{etudiantController.newPieces.partieDelivrante}"
+                                 required="true" requiredMessage="Veuillez saisir l'etablissement ayant delivré la piece"/>
+                    <p:message for="partieDelivrante"/>
+
+                </p:panelGrid>
+                        
+                <h:commandButton value="Enregistrer la pièce" action="#{etudiantController.doAddPieces}"/>
+
+</p:panel>
+                        </div>
+                    <div class="col-lg-3">
+                        <p:panel header="Aide a propos de l'ajout des diplômes !!">
+                        
+                        <p>
+                            Quand vous ajoutez un diplôme, 
+                            <ul>
+                                <li style="color: #1A96D4; font-family: georgia;">Les champs marqués avec un asterisk (*) sont obligatoires</li>
+                                <li style="color: #46b8da; font-family: georgia;">Vous n'êtes pas obligés de saisir des notes pour le bacalaureat</li>
+                                <li style="color: #99CC00; font-family: georgia;">Dans le cas des liscences veuillez saisir vos notes de semestres</li>
+                                <li style="color: blueviolet; font-family: georgia;">Dans le cas des étudiants issus de l'ancien système, ils peuvent saisir leur moyennes générales pour les 4 années, dans les champs Note S</li>
+                                <li style="color: #FE6B25; font-family: georgia;">Dans le cas des master juste 4 semestres</li>
+                                <li style="color: #c09853; font-family: georgia;">Dans le cas des diplômes d'ingenieurs de S1 a S5 reprèsentent les 5 années de formation</li>
+                                <li style="color: #449d44; font-family: georgia;">Pour les notes, utiliser un point '.' pour séparer la décimale, exemple : "13.43"</li>
+                            </ul>
+                        </p>
+                        </p:panel>
+                    </div></div>                    </h:form>
+            </ui:define>
+</ui:composition>

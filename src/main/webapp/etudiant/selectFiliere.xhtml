@@ -14,17 +14,17 @@
 <ui:define name="content">
                 
         <h:form>
-        <p:messages for="update"/>
+        <p:messages id="select" showDetail="true" autoUpdate="true"/>
         
         <p:dataTable value="#{etudiantController.listChoix}" var="filiere" >
-            <p:column  headerText="Branche">  
+            <p:column  headerText="Filière">  
                 <h:outputText value="#{filiere.intitule}" />  
         </p:column> 
-        <p:column headerText="Intitule du sujet">  
+        <p:column headerText="Intitule de la filière">  
                 <h:outputText value="#{filiere.description}" />  
         </p:column> 
-            <p:column headerText="Encadrant">  
-                <h:outputText value="#{filiere.responsable}" />  
+            <p:column headerText="Responsable">  
+                <h:outputText value="#{filiere.responsable.nom} #{filiere.responsable.prenom}" />  
         </p:column> 
             <p:column headerText="Actions">  
                             

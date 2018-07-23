@@ -2,13 +2,16 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/msLand.xhtml"
+                template="../resources/mstemp.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-             <ui:define name="content">
-               
-                   
+             <ui:define name="sidebar-left">
+                
+                    <ui:include src="menuEtudiant.xhtml" />
+             
+            </ui:define>
+<ui:define name="content">
                 <h:form>
                     <div></div>
                     <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
@@ -56,11 +59,8 @@
                             <p:message for="prenomAr"/>
                             
                             <p:outputLabel value="Date de naissance : *"/>
-                            <p:calendar id="dateNaissance" value="#{etudiantController.current.dateNaissance}"
-                                        mode="popup" pattern="dd/MM/yyyy"
-                                        yearRange="c-100" locale="fr"
-                                        showButtonPanel="true" navigator="true"
-                                        required="true" requiredMessage="Veuillez selectionnez une Date de naissance" />
+                            <p:calendar id="dateNaissance" value="#{etudiantController.current.dateNaissance}" title="DateNaissance" 
+                                        locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />
                             <p:message for="dateNaissance"/>
 
                             <p:outputLabel value="email : *"/>
@@ -116,7 +116,7 @@
                                          />
                             <p:message for="lieuNaissance"/>
                         </p:panelGrid>
-                        <h:commandButton value="Enregistrer les Modification" action="#{etudiantController.doEdit}"/>
+                        <p:commandButton value="Enregistrer les Modification" action="#{etudiantController.doEdit}"/>
 
 
                     </p:panel>

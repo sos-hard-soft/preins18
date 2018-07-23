@@ -14,25 +14,22 @@
 <ui:define name="content">
                 <h:form>
                 <div></div>
-                    <p:messages for="update"/>
-                    <div class="col-lg-7">
+                <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
+                    Votre session a expirer ou vous n'avez pas activer votre compte.
+                </p:panel>
+                <div class="row">
+                    <div class="col-lg-8">
                     <p:panel header="Ajouter un nouveau diplôme">
                     
                 <p:panelGrid columns="3">
                     <p:outputLabel value="Date d'obtention du diplôme : *"/>
                     <p:calendar id="dateObtention" value="#{etudiantController.newQualification.dateObtention}"
-                                mode="popup" pattern="dd/MM/yyyy"
-                                yearRange="c-100" locale="fr"
-                                showButtonPanel="true" navigator="true"
-                                required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                                locale="fr" navigator="true" yearRange="1980:2020" pattern="dd/MM/yyyy" requiredMessage="Veuillez selectionnez une Date d'obtention" />
                     <p:message for="dateObtention"/> 
 
                     <p:outputLabel value="Date de première inscription : *"/>
                     <p:calendar id="datePremiereInscription" value="#{etudiantController.newQualification.datePremiereInscription}"
-                                mode="popup" pattern="dd/MM/yyyy"
-                                yearRange="c-100" locale="fr"
-                                showButtonPanel="true" navigator="true"
-                                required="true" requiredMessage="Veuillez selectionnez une Date d obtention" />
+                                locale="fr" navigator="true" yearRange="1980:2020" pattern="dd/MM/yyyy" requiredMessage="Veuillez selectionnez une Date d obtention" />
                     <p:message for="datePremiereInscription"/> 
 
                     <p:outputLabel value="Diplôme : *"/>
@@ -51,7 +48,7 @@
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
                     <p:outputLabel value="Veuillez charger l'image de votre diplome :" />
-                    <p:fileUpload fileUploadListener="#{etudiantController.handleUploadToDisk}" />
+                    <p:fileUpload mode="advanced" auto="true" sizeLimit="51380224" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" />
                     <p:message for="diplome"/>
 
                     <p:outputLabel value="Mention : *"/>
@@ -108,7 +105,7 @@
 
 </p:panel>
                         </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <p:panel header="Aide a propos de l'ajout des diplômes !!">
                         
                         <p>
@@ -124,7 +121,6 @@
                             </ul>
                         </p>
                         </p:panel>
-                    </div>
-                    </h:form>
+                    </div></div>                    </h:form>
             </ui:define>
 </ui:composition>

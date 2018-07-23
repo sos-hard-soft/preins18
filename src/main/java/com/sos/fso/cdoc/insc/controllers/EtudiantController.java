@@ -11,8 +11,8 @@ import com.sos.fso.cdoc.insc.entities.Choix;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
+import com.sos.fso.cdoc.insc.entities.Pieces;
 import com.sos.fso.cdoc.insc.entities.Qualification;
-import com.sos.fso.cdoc.insc.entities.Sujet;
 import com.sos.fso.cdoc.insc.helpers.Hash;
 import com.sos.fso.cdoc.insc.services.ActivationFacade;
 import com.sos.fso.cdoc.insc.services.BrancheFacade;
@@ -21,10 +21,13 @@ import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.MailerBean;
+import com.sos.fso.cdoc.insc.services.PiecesFacade;
 import com.sos.fso.cdoc.insc.services.QualificationFacade;
 import com.sos.fso.cdoc.insc.services.SujetFacade;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.inject.Named;
@@ -78,7 +81,6 @@ public class EtudiantController implements Serializable {
     protected String status;
     private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
     private Future<String> mailStatus;
-   
 
     @Inject
     private EtudiantFacade etudiantService;
@@ -98,6 +100,11 @@ public class EtudiantController implements Serializable {
     private Qualification currentQualification = new Qualification();
 
     @Inject
+    private PiecesFacade piecesService;
+    private Pieces newPieces;
+    private Pieces currentPieces = new Pieces();
+
+    @Inject
     private ActivationFacade activationService;
     private Activation activation;
 
@@ -114,13 +121,13 @@ public class EtudiantController implements Serializable {
     private Choix choix = new Choix();
     private Filiere choixFiliere;
     private List<Filiere> choixFLTmp = new ArrayList<>();
-    
+
     @Inject
     private FiliereFacade filiereService;
     private List<Filiere> listFiliere;
-    
+
     private DualListModel<Filiere> pickFiliere;
-    
+
     private boolean visibled = false;
     private boolean visible = false;
     private boolean fileExist = false;
@@ -128,6 +135,8 @@ public class EtudiantController implements Serializable {
     private Path folder;
     private File uploaded;
     
+   
+
     // ======================================
     // = Navigation Methods =
     // ======================================
@@ -159,7 +168,12 @@ public class EtudiantController implements Serializable {
         newQualification = new Qualification();
         return "/etudiant/addQualification?faces-redirect=true";
     }
-    
+
+    public String showAddPieces() {
+        newPieces = new Pieces();
+        return "/etudiant/addPieces?faces-redirect=true";
+    }
+
     public String showChoixFiliere() {
         choixFiliere = new Filiere();
         return "/etudiant/selectFiliere?faces-redirect=true";
@@ -224,7 +238,20 @@ public class EtudiantController implements Serializable {
 
         //return response;
     }
-
+    
+    public String doDeletePieces(Pieces pieces){
+        try {
+            this.performDelete(pieces.getPathScan());
+            System.out.println("Suppression du fichier depuis disque !!");
+            current.getPiecesList().remove(pieces);
+            piecesService.remove(pieces);
+            
+        } catch (Exception e) {
+            System.out.println("errur : " + e.getStackTrace());
+        }
+        return this.showDetails();
+    }
+    
     public void sendConfirmationCandidatureMail(String email, String choix) {
         try {
             mailStatus = mailerBean.sendConfirmationCandidatureMail(email, choix);
@@ -232,6 +259,13 @@ public class EtudiantController implements Serializable {
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
         }
+    }
+    
+    public void performDelete(String path){
+        File laPiece = new File(path);
+        laPiece.delete();
+        System.out.println("Le fichier a été supprimé");
+        addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
     }
 
     public void handleFileUpload(FileUploadEvent event) throws IOException {
@@ -262,8 +296,19 @@ public class EtudiantController implements Serializable {
         //current.setPhoto(foto);
         //application code
         System.out.println("Uploaded file successfully saved in " + file);
-        
+
         this.fileName = file.toString();
+    }
+
+    public InputStream getImage(String filename) throws FileNotFoundException {
+        try {
+            FileInputStream laPiece;
+            laPiece = new FileInputStream(new File(filename));
+            return laPiece;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return new FileInputStream(new File("C:\\inscmast\\no_document.jpeg"));
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
@@ -278,6 +323,26 @@ public class EtudiantController implements Serializable {
     public List<Etudiant> getAll() {
         etudiantService.clearCache();
         return etudiantService.findAll();
+    }
+
+    public String doAddPieces() {
+        logger.log(Level.INFO, "Debut de la procedure d'ajout d'une piece justificative!!");
+        if (current != null) {
+            newPieces.setEtudiant(current);
+            System.out.println("le fichier de la justif : ");
+            newPieces.setPathScan(fileName);
+            try {
+                piecesService.create(newPieces);
+                current.getPiecesList().add(newPieces);
+                etudiantService.clearCache();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            logger.log(Level.SEVERE, "Erreur de donnee the current entity is null !!");
+        }
+        this.fileName = null;
+        return "/etudiant/view?faces-redirect=true";
     }
 
     public String doAddQualification() {
@@ -324,7 +389,7 @@ public class EtudiantController implements Serializable {
                 Filiere filiereExistante = choixExistant.getIdFiliere();
                 System.out.println("le sujet de l'iteraor" + filiereExistante.getIntitule());
                 if (filiereExistante.getIntitule() == null ? filiere.getIntitule() == null : filiereExistante.getIntitule().equals(filiere.getIntitule())) {
-                    addMessage("update", FacesMessage.SEVERITY_ERROR, "Vous avez deja choisi ce sujet !!", "Error !!");
+                    addMessage("update", FacesMessage.SEVERITY_ERROR, "Vous avez déja choisi cette Filière, ", "Veuillez effectuer un nouveau choix.");
                     return null;
                 } else {
                     System.out.println("le sujet n'est pas  dans la liste des sujet de l'etudiant");
@@ -419,8 +484,7 @@ public class EtudiantController implements Serializable {
         } catch (Exception e) {
         }
     }
-    
-    
+
     // ======================================
     // = Constructors et Helpers=
     // ======================================
@@ -483,17 +547,17 @@ public class EtudiantController implements Serializable {
         }
 
     }
-    
+
     public void onRowSelect(SelectEvent event) {
         FacesMessage msg = new FacesMessage("Filiere Selectionné", ((Filiere) event.getObject()).getIntitule());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
- 
+
     public void onRowUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage("Filiere déselectionné", ((Filiere) event.getObject()).getIntitule());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-    
+
     // ======================================
     // = Getters & setters =
     // ======================================
@@ -508,10 +572,11 @@ public class EtudiantController implements Serializable {
     public Etudiant getCurrent() {
         if (current == null) {
             current = etudiantService.findByCin(compte.getCin());
+            
         }
         if (current.getPhoto() != null) {
             fileExist = true;
-        }         
+        }
         return current;
     }
 
@@ -538,6 +603,7 @@ public class EtudiantController implements Serializable {
         return compte;
     }
 
+   
     public Filiere getChoixFiliere() {
         return choixFiliere;
     }
@@ -545,7 +611,7 @@ public class EtudiantController implements Serializable {
     public void setChoixFiliere(Filiere choixFiliere) {
         this.choixFiliere = choixFiliere;
     }
-    
+
     public void setCompte(Compte compte) {
         this.compte = compte;
     }
@@ -687,7 +753,22 @@ public class EtudiantController implements Serializable {
     public void setListFiliere(List<Filiere> listFiliere) {
         this.listFiliere = listFiliere;
     }
-    
+
+    public Pieces getNewPieces() {
+        return newPieces;
+    }
+
+    public void setNewPieces(Pieces newPieces) {
+        this.newPieces = newPieces;
+    }
+
+    public Pieces getCurrentPieces() {
+        return currentPieces;
+    }
+
+    public void setCurrentPieces(Pieces currentPieces) {
+        this.currentPieces = currentPieces;
+    }
 
     public DualListModel<Filiere> getPickFiliere() {
         if (pickFiliere == null) {
@@ -700,33 +781,33 @@ public class EtudiantController implements Serializable {
     public void setPickFiliere(DualListModel<Filiere> pickFiliere) {
         this.pickFiliere = pickFiliere;
     }
-    
+
     public void onTransfer(TransferEvent event) {
         StringBuilder builder = new StringBuilder();
-        for(Object item : event.getItems()) {
+        for (Object item : event.getItems()) {
             builder.append(((Filiere) item).getIntitule()).append("<br />");
         }
-         
+
         FacesMessage msg = new FacesMessage();
         msg.setSeverity(FacesMessage.SEVERITY_INFO);
         msg.setSummary("Items Transferred");
         msg.setDetail(builder.toString());
-         
+
         FacesContext.getCurrentInstance().addMessage(null, msg);
-    } 
- 
+    }
+
     public void onSelect(SelectEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Selected", event.getObject().toString()));
     }
-     
+
     public void onUnselect(UnselectEvent event) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Item Unselected", event.getObject().toString()));
     }
-     
+
     public void onReorder() {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "List Reordered", null));
-    } 
+    }
 }

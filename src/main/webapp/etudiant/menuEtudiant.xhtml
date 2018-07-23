@@ -21,19 +21,16 @@ and open the template in the editor.
         <p:submenu label="Detail Etudiant">  
             <p:menuitem value="Afficher détail" action="#{etudiantController.showLoggedDetails}" icon="ui-icon-search" />  
             <p:menuitem value="Editer Infos" action="#{etudiantController.showEdit}" icon="ui-icon-arrowrefresh-1-w"/>
-                
-            
+                            
         </p:submenu>  
         <p:submenu label="Ajouter des qualification">  
             <p:menuitem value="Ajouter un diplome" action="#{etudiantController.showAddQualification}" icon="ui-icon-plus"/>  
         </p:submenu>
         <p:submenu label="Gerer la candidature">  
             <p:menuitem value="Choisir la filiere" action="#{etudiantController.showChoixFiliere}" icon="ui-icon-plus"/>
-            <p:menuitem value="Choisir la formation Doctorale" action="#{etudiantController.showAddChoice}" icon="ui-icon-plus"/>  
-            <p:menuitem value="Ajouter Choix de sujet" disabled="true" action="#{etudiantController.showAddChoice}" icon="ui-icon-plus"/>  
-        </p:submenu>
-        <p:submenu label="formulaire de candidature">  
-            <p:menuitem value="Imprimer le formulaire" disabled="false" action="#{etudiantController.showPrint}" target="_blank" icon="ui-icon-print"/>  
+            </p:submenu>
+        <p:submenu label="Pieces Justificatives">  
+            <p:menuitem value="Ajouter une pièce" disabled="false" action="#{etudiantController.showAddPieces}" target="_blank" icon="ui-icon-print"/>  
         </p:submenu>
     </p:menu>
 </h:form>

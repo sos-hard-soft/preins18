@@ -83,6 +83,14 @@ public class Pieces implements Serializable {
         return pathScan;
     }
 
+    public String getIntitule() {
+        return intitule;
+    }
+
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
+    }
+    
     public void setPathScan(String pathScan) {
         this.pathScan = pathScan;
     }

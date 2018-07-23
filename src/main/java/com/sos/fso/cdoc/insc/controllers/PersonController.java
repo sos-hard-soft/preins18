@@ -161,7 +161,7 @@ public class PersonController implements Serializable{
         System.out.println("**************************************************************************");
         maliste = etudiantService.getPreinscrit(intitule);
         System.out.println("List recuperer avec suces !!!!!");
-        System.out.println("first element " + maliste.get(0));
+        //System.out.println("first element " + maliste.get(0));
         return maliste;
     }
 
