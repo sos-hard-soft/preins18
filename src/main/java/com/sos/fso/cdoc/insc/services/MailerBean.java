@@ -64,7 +64,7 @@ public class MailerBean {
                     + "<p>Bonjour</p>"
                     + "<p>Vous avez entamez la procédure de candidature au postes de doctorants au <strong>Centre d'Etudes Doctorales Sciences et Téchniques</strong><br />"
                     + "Pour confirmer les données saisi et créer votre compte veuillez cliquez sur le lien suivant ou le copiez collez dans votre navigateur : </p>"
-                    + "http://www.fso.ump.ma/cedocinsc/compte/validation.xhtml?key="+key+"<br />"
+                    + "http://www.fso.ump.ma/preinsmast/compte/validation.xhtml?key="+key+"<br />"
                     + "<p>Le login est votre CIN : "+ cin + "<br />"
                     + "Votre mot de passe est : " + password + "</p></body></html>";
             htmlPart.setContent(htmlContent, "text/html");

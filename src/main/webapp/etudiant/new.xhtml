@@ -7,21 +7,22 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">	
-        <h:form>
+        
 
             <header class="page-header">
                 <h1 class="page-title">Création d'un compte pour la gestion de la préinscription</h1>
-                <p:messages for="update"/>
+                
             </header>
 
             <div class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
-                        <p class="text-center text-muted">Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de
-                            <p:commandLink action="#{etudiantController.showLogin}">Login</p:commandLink>. </p>
+                        <h:form><p class="text-center text-muted">Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de
+                            <h:commandLink value="Login" action="#{etudiantController.showLogin}" /></p></h:form>. 
                         <hr />
-
+                        <h:form>
+                            <p:messages for="update"/>
                         <p:panel header="Veuillez Saisir Vos informations personnels">
                             <p:panelGrid columns="3">
                                 <h:outputText value="CNE :" />
@@ -72,15 +73,17 @@
                                             <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
                                         </h:panelGrid>  
                                     </p:panel> 
+                            <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" /></div>
+                            </h:form>
                                 </div>
-                                <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" /></div>
+                                
                                         
                                             
                                     </div>
                        </div>
       
  
-        </h:form>
+        
 
     </ui:define>
 </ui:composition>

@@ -8,95 +8,65 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Login Form</title>
-        <h:outputStylesheet name="css/bootstrap.min.css" />
-        <style type="text/css">
+<h:head>
+	<title>Login V1</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="secured/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+        <h:outputStylesheet name="secured/vendor/bootstrap/css/bootstrap.min.css" />
+	<h:outputStylesheet name="secured/fonts/font-awesome-4.7.0/css/font-awesome.min.css" />
+	
+        <h:outputStylesheet name="secured/vendor/animate/animate.css" />
+	
+        <h:outputStylesheet name="secured/vendor/css-hamburgers/hamburgers.min.css" />
+	
+        <h:outputStylesheet name="secured/vendor/select2/select2.min.css" />
+	
+        <h:outputStylesheet name="secured/css/util.css" />
+	<h:outputStylesheet name="secured/css/main.css" />
 
-            .sidebar-nav {
-                padding: 9px 0;
-            }
-            h3{font-size: 12px}
-
-            .ui-widget, .ui-widget .ui-widget {
-                font-size: 90% !important;
-            }
-            .body-content tr, .body-content td {
-                border: none;
-            }
-            #logoump{
-                float: left;
-            }
-            #logofso{
-                float: right;
-            }
-            #paroles{
-                float: left;
-                margin-left: 100px;
-            }
-            #print{
-                text-align: center;
-                background-color: darkorange;
-                height: 35px;
-            }
-            
-            #form{
-                text-align: center;
-                background-color: #fff;
-         
-        -webkit-border-radius: 10px 10px 10px 10px;
-           -moz-border-radius: 10px 10px 10px 10px;
-                border-radius: 10px 10px 10px 10px;
-        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-                box-shadow: 0 1px 2px rgba(0,0,0,.15);
-            }
-            .footer {
-    background-color: #99CC00;
-    clear: both;
-    margin-top: 15px;
-   margin-left: -23px;
-    margin-right: -23px;
-    color: #FFFFFF;
-    min-height: 20px;
-    text-align: center;
-}
-        </style>
-    </h:head>
-    <h:body>
-
-        <div class="container">
-            <div class="row">
-                <div id="logoump" class="col-2"><h:graphicImage name="images/umpLogo.png" class="img-responsive"/></div>
-
-                <div id="paroles">
-                    <p style="text-align: center; background-color: ">جامعة محمد الأول وجدة<br/>
-                        Universite Mohamed Premier - Oujda <br/>مركز دراسـات الدكتـوراة علـوم و تقنيـات<br/>Centre d'etudes doctorales sciences et techniques</p>
-                </div>
-                <div id="logofso" class="col-lg-2" style="text-align: right;">
-                    <h:graphicImage name="images/logo.png" class="img-responsive"/>
-                </div>
-            </div>
-            <hr/>
-            <div class="row" style="text-align: center; background-color: #1A96D4; height: 40px;">
-                <h4 style="color: #ffffff; font-family: cursive;">Formulaire de connexion</h4>
-            </div>
-            <hr/>
-
-
-            <div class="row">
-                <div class="col-lg-6 col-offset-3" id="form">
-        <p:panel header="Login Error">
-            Desole mes les donnees saisient ne concorde pas, veuillez ressayer !! <a href="/cedocinsc/security/login.xhtml" >Login</a>
+</h:head>
+    <h:body><div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt">
+                                    <p:graphicImage value="../resources/secured/images/img-01.png" />					
+				</div>
+                            <div class="col-6">
+			
+				<p:panel header="Login Error">
+            Desolé mais les données saisient ne concorde pas, veuillez ressayer !!<br />
+            <h2><a href="/preinsmast/security/login.xhtml" >Se Connecter</a></h2>
         </p:panel>
- </div>
-            </div>
+		
+		
+	</div>
+                        </div>
+                    
+		</div>
+	
+                           
+			
+	</div>
+	
 
+	
+<!--===============================================================================================-->	
+    <h:outputScript name="secured/vendor/jquery/jquery-3.2.1.min.js" target="head"/>
+	<h:outputScript name="secured/vendor/bootstrap/js/popper.js" target="head"/>
+        <h:outputScript name="secured/vendor/bootstrap/js/bootstrap.min.js" target="head"/>
+        <h:outputScript name="secured/vendor/select2/select2.min.js" target="head"/>
+        <h:outputScript name="secured/vendor/tilt/tilt.jquery.min.js" target="head"/>
+        <h:outputScript name="secured/js/main.js" target="head"/>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
 
-       <div id="bottom" class="row footer">
-            © Faculte des sciences - UMP - Oujda
-        </div>
-        </div>
 
     </h:body>
 </html>

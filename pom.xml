@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sos.fso.cdoc.insc</groupId>
-    <artifactId>cedocinsc</artifactId>
+    <artifactId>preinsmast</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>cedocinsc</name>
+    <name>preinsmast</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

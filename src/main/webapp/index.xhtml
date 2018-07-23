@@ -8,14 +8,14 @@
 
 <ui:define name="content">	
             <div class="row">
-                <p>La candidature pour les postes de doctorant auprés du Centre d'Etudes Doctorales Sciences et Téchniques est ouverte.<br />
-                la procédure de séléction se fera comme suit :
+                <h3>Procédure de préinscription en master de la Faculté des Sciences Juridiques Economiques et Sociales</h3>
+                <p>La candidature pour les masters est ouverte.<br />
+                    la procédure de préséléction se fera comme suit :
                 <ol>
-                    <li>Enregistrement des candidats sur la platforme de pré-inscription en ligne du 15 au 31 octobre 2013</li>
-                    <li>Préselection des candidats retenus pour choix de sujets et entretiens.</li>
-                    <li>Affichage des résultats de la premiere phase de présélection et des sujets proposés</li>
-                    <li>Complétion de la candidature en ligne sur la platforme de pré-inscription par le choix des sujets.</li>
-                    <li>Entretiens</li>
+                    <li>Enregistrement des candidats sur la platforme de pré-inscription en ligne du 15 aout 2018 au 31 Septembre 2018</li>
+                    <li>Préselection des candidats retenus pour examens d'entrées.</li>
+                    <li>Affichage des résultats de la premiere phase de présélection.</li>
+                    <li>Entretiens oraux.</li>
                     <li>Résultats définitifs</li>
                     <li><p:commandLink value="New Filiere" action="#{filiereController.showCreateFiliere}" /></li>
                     <li><p:commandLink value="New Person" action="#{personController.showCreatePerson}" /></li>
@@ -25,7 +25,7 @@
         <p:messages for="update"/>
              <h:form>
             
-            <div class="col-lg-4 col-offset-2">
+            <div class="col-md-3 col-sm-6 highlight">
                 <p:commandLink action="#{etudiantController.showLogin}">
                 <h:graphicImage name="images/already.jpg" class="img-responsive"/>
                 <hr />
@@ -34,7 +34,7 @@
              
             
             </div>
-                <div class="col-lg-4 col-offset-2">
+                <div class="col-md-3 col-sm-6 highlight">
                     <p:commandLink action="#{etudiantController.showCreate}">
                 <h:graphicImage name="images/createNew.jpg" class="img-responsive"/>
                 <hr />

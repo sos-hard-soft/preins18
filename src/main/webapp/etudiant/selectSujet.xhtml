@@ -15,31 +15,22 @@
         <h:form>
         <p:messages for="update"/>
         <p:panel header="Liste des sujet disponible">
-        <p:dataTable value="#{etudiantController.listChoix}" var="sujet">
+            <p:dataTable value="#{filiereController.allFilieres}" var="filiere">
             <p:column  headerText="Branche">  
-                <h:outputText value="#{sujet.branche.intitule}" />  
+                <h:outputText value="#{filiere.intitule}" />  
         </p:column> 
             <p:column headerText="Intitule du sujet">  
-                <h:outputText value="#{sujet.intitule}" />  
+                <h:outputText value="#{filiere.description}" />  
         </p:column> 
             <p:column headerText="Encadrant">  
-                <h:outputText value="#{sujet.encadrant}" />  
-        </p:column> 
-            <p:column headerText="Laboratoire">  
-                <h:outputText value="#{sujet.labo}" />  
-        </p:column> 
-            <p:column headerText="Nombre de place">  
-                <h:outputText value="#{sujet.nbPlace}" />  
-        </p:column> 
-            <p:column headerText="Etablissement">  
-                <h:outputText value="#{sujet.etablissement}" />  
+                <h:outputText value="#{filiere.responsable.nom}" />  
         </p:column> 
             <p:column style="width:4%">  
                             
                                 <p:growl id="messages"/>  
 
                                 <p:menuButton value="Options">  
-                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(sujet)}" icon="ui-icon-arrowrefresh-1-w"/>    
+                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
                                                                         
                                 </p:menuButton>  
                             
