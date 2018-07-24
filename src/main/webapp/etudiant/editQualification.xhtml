@@ -4,18 +4,25 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="../resources/mstemp.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:of="http://omnifaces.org/functions">
 
-             <ui:define name="sidebar-left">
-                
-                    <ui:include src="menuEtudiant.xhtml" />
-             
-            </ui:define>
-<ui:define name="content">
-                <h:form>
-                    <p:messages for="update"/>
-                    <p:panel header="Ajouter un nouveau diplome">
-                    
+    <ui:define name="sidebar-left">
+
+        <ui:include src="menuEtudiant.xhtml" />
+
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <p:messages for="update"/>
+            <p:panel header="Modifier les détails du diplôme">
+                <p:panelGrid>
+                    <p:commandButton id="delete" value="Supprimer la scan du diplome" action="#{etudiantController.performDelete(etudiantController.currentQualification.pathScan)}" icon="ui-icon-delete" />
+                    <f:facet name="header">
+                        <o:graphicImage value="#{etudiantController.getImage(etudiantController.currentQualification.pathScan)}" dataURI="true"/>
+                    </f:facet>
+                </p:panelGrid>    
                 <p:panelGrid columns="3">
                     <p:outputLabel value="Date d'obtention du diplome"/>
                     <p:calendar id="dateObtention" value="#{etudiantController.currentQualification.dateObtention}"
@@ -76,8 +83,8 @@
                     <p:message for="partieDelivrante"/>
 
                 </p:panelGrid>
-                        <p:panel header="Les notes de semestre pour les liscencier">
-                        <p:panelGrid columns="4">
+                <p:panel header="Les notes de semestre pour les liscencier">
+                    <p:panelGrid columns="4">
                         <p:outputLabel value="Note S1 :"/>
                         <p:inputText id="note1" value="#{etudiantController.currentQualification.note1}" />
 
@@ -98,10 +105,10 @@
 
 
                     </p:panelGrid>
-                    </p:panel>
+                </p:panel>
                 <h:commandButton value="Enregistrer ce parcours" action="#{etudiantController.doEditQualification}"/>
 
-</p:panel>
-                    </h:form>
- </ui:define>
+            </p:panel>
+        </h:form>
+    </ui:define>
 </ui:composition>

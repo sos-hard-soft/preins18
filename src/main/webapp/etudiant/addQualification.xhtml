@@ -48,8 +48,9 @@
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
                     <p:outputLabel value="Veuillez charger l'image de votre diplome :" />
-                    <p:fileUpload mode="advanced" auto="true" sizeLimit="51380224" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" />
-                    <p:message for="diplome"/>
+                    <p:fileUpload id="fichier" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                                  sizeLimit="500000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
+                    <p:message for="fichier"/>
 
                     <p:outputLabel value="Mention : *"/>
                     <p:selectOneMenu id="mention" value="#{etudiantController.newQualification.mention}"
@@ -81,22 +82,22 @@
                         <p:panel header="Les notes de semestres(1->6) pour les licence ou master(1->4) / les années pour les Ingénieurs(1->5) ou les étudiants de l'ancien systeme(1->4)">
                         <p:panelGrid columns="4">
                         <p:outputLabel value="Note 1 :"/>
-                        <p:inputText id="note1" value="#{etudiantController.newQualification.note1}" />
+                        <p:inputNumber id="note1" value="#{etudiantController.newQualification.note1}" minValue="0.00" maxValue="20.00" />
 
                         <p:outputLabel value="Note 2 :"/>
-                        <p:inputText id="note2" value="#{etudiantController.newQualification.note2}" />
+                        <p:inputNumber id="note2" value="#{etudiantController.newQualification.note2}" minValue="0.00" maxValue="20.00" />
 
                         <p:outputLabel value="Note 3 :"/>
-                        <p:inputText id="note3" value="#{etudiantController.newQualification.note3}" />
+                        <p:inputNumber id="note3" value="#{etudiantController.newQualification.note3}" minValue="0.00" maxValue="20.00" />
 
                         <p:outputLabel value="Note 4 :"/>
-                        <p:inputText id="note4" value="#{etudiantController.newQualification.note4}" />
+                        <p:inputNumber id="note4" value="#{etudiantController.newQualification.note4}" minValue="0.00" maxValue="20.00" />
 
                         <p:outputLabel value="Note 5 :"/>
-                        <p:inputText id="note5" value="#{etudiantController.newQualification.note5}" />
+                        <p:inputNumber id="note5" value="#{etudiantController.newQualification.note5}" minValue="0.00" maxValue="20.00" />
 
                         <p:outputLabel value="Note 6 :"/>
-                        <p:inputText id="note6" value="#{etudiantController.newQualification.note6}" />
+                        <p:inputNumber id="note6" value="#{etudiantController.newQualification.note6}" minValue="0.00" maxValue="20.00" />
 
 
                     </p:panelGrid>

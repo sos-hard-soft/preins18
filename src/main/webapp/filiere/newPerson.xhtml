@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h1>Ajouter une Filiere</h1>
-    </h:head>
-    <h:body>
-        <ui:composition template="../resources/template.xhtml">
-            <ui:define name="left">
-            <ui:insert name="header" >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             <ui:define name="sidebar-left">
                 
-            </ui:insert>
-                
+                    <ui:include src="menuProf.xhtml" />
+             
             </ui:define>
-            <ui:define name="content">	
+<ui:define name="content">
               
                     <h:form>
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <p:panelGrid columns="2">
                             <p:outputLabel value="Veuillez charger votre Photo d'identité :" />
-                    <p:fileUpload mode="advanced" auto="true" sizeLimit="51380224" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{personController.handleFileUpload}" />
+                    <p:fileUpload mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{personController.handleFileUpload}" 
+                                  sizeLimit="500000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:growl id="messages" showDetail="true"/>
                             <p:outputLabel value="Adresse:" for="adresse" />
                             <p:inputText id="adresse" value="#{personController.newPerson.adresse}" title="Adresse" />
@@ -63,7 +55,4 @@ and open the template in the editor.
                         </h:form>
 
             </ui:define>
-           
-        </ui:composition>
-    </h:body>
-</html> 
+</ui:composition>

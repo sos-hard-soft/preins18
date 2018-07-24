@@ -277,6 +277,8 @@ public class EtudiantController implements Serializable {
         System.out.println(foto);
 
         current.setPhoto(foto);
+        String msg = "Chargement de" + event.getFile().getFileName() + " effectué avec succes. N'oubliez pas de validez par le bouton en bas du formulaire !";
+        addMessage("update", FacesMessage.SEVERITY_INFO, msg, "succes");
         //application code
     }
 

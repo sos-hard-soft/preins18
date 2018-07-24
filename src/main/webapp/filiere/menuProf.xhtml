@@ -15,9 +15,7 @@ and open the template in the editor.
     <h:body>
         <ui:composition>
             <h:form>
-            <p:commandButton rendered="#{etudiantController.compte.actif}"
-                             icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
-               <p:menu>  
+            <p:menu>  
         <p:submenu label="Gerer Filiere">  
             <p:menuitem value="Ajouter une Filiere" action="#{filiereController.showCreateFiliere}" icon="ui-icon-plus"/>  
         </p:submenu>

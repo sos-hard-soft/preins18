@@ -20,7 +20,8 @@
 
                     <p:panel id="etudiantdetail" header="Modification des Informations personelle" rendered="#{!etudiantController.sessionOuverte}">
                          <p:outputLabel value="Veuillez charger votre Photo d'identité :" />
-                    <p:fileUpload mode="advanced" auto="true" sizeLimit="51380224" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleFileUpload}" />
+                    <p:fileUpload mode="advanced" label="Cliquez pour Chargé votre foto d'identité" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleFileUpload}" 
+                                  sizeLimit="500000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:growl id="messages" showDetail="true"/>
         
                         <p:messages for="update"/>
@@ -44,18 +45,20 @@
                             <p:inputText id="nom" value="#{etudiantController.current.nom}"
                                          required="true" requiredMessage="Veuillez saisir votre nom"/>
                             <p:message for="nom"/>
-                            <p:outputLabel  value="الاسم العائلي : *"/>
+                            
                             <p:inputText id="nomAr" value="#{etudiantController.current.nomAr}"
                                          required="false" requiredMessage="Veuillez saisir votre nom en arabe"/>
+                            <p:outputLabel  value="الاسم العائلي : *" dir="rtl" style="float: right;"/>
                             <p:message for="nomAr"/>
 
                             <p:outputLabel value="Prénom : *"/>
                             <p:inputText id="prenom" value="#{etudiantController.current.prenom}"
                                          required="true" requiredMessage="Veuillez saisir votre prenom"/>
                             <p:message for="prenom"/>
-                            <p:outputLabel  value="الاسم الشخصي : *"/>
+                            
                             <p:inputText id="prenomAr" value="#{etudiantController.current.prenomAr}"
                                          required="false" requiredMessage="Veuillez saisir votre nom en arabe"/>
+                            <p:outputLabel  value="الاسم الشخصي : *" dir="rtl" style="float: right;"/>
                             <p:message for="prenomAr"/>
                             
                             <p:outputLabel value="Date de naissance : *"/>
@@ -75,9 +78,10 @@
                             <p:inputText id="lieuNaissance" value="#{etudiantController.current.lieuNaissance}"
                                          />
                             <p:message for="lieuNaissance"/>
-                            <p:outputLabel value="Lieu de naissance :"/>
+                            
                             <p:inputText id="lieuNaissanceAr" value="#{etudiantController.current.lieuNaissanceAr}"
                                          />
+                            <p:outputLabel value=" مكان الازدياد : *" dir="rtl" style="float: right;"/>
                             <p:message for="lieuNaissanceAr"/>
 
                             <p:outputLabel value="Nationalité :"/>
