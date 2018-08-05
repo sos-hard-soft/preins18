@@ -14,7 +14,7 @@
                 
             </header>
 
-            <div class="col-md-8 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="col-md-10 col-md-offset-2 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
@@ -24,13 +24,14 @@
                         <h:form>
                             <p:messages for="update"/>
                         <p:panel header="Veuillez Saisir Vos informations personnels">
-                            <p:panelGrid columns="3">
+                            <p:panelGrid columns="4">
                                 <h:outputText value="CNE :" />
                                     <p:inputText id="cne" class="form-control" value="#{etudiantController.newEtudiant.cne}"
                                                  required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant">
                                         <f:validator binding="#{uniqueCneValidator}" />
                                         <f:ajax event="blur" render="verifyCNE"/>
                                     </p:inputText>
+                                <h:outputText dir="rtl" value="الرقم الوطني للطالب : " />
                                     <p:message id="verifyCNE" for="cne"/>
                                <h:outputText value="CNI :" />
                                     <p:inputText id="cin" class="form-control" value="#{etudiantController.newEtudiant.cin}"
@@ -38,25 +39,30 @@
                                         <f:validator binding="#{uniqueCinValidator}" />
                                         <f:ajax event="blur" render="verifyCIN"/>
                                     </p:inputText>
+                               <h:outputText dir="rtl" value="رقم البطاقة الوطنية للتعريف : " />
                                     <p:message id="verifyCIN" for="cin"/>
                                     <h:outputText value="Nom :" />
                                <p:inputText id="nom" class="form-control" value="#{etudiantController.newEtudiant.nom}"
                                                  required="true" requiredMessage="Veuillez saisir votre nom"/>
-                                    <p:message for="nom"/>
+                               <h:outputText dir="rtl" value="الاسم العائلي : " />     
+                               <p:message for="nom"/>
                                     <h:outputText value="Prénom :" />
                                 <p:inputText id="prenom" class="form-control" value="#{etudiantController.newEtudiant.prenom}"
                                                  required="true" requiredMessage="Veuillez saisir votre prenom"/>
+                                <h:outputText dir="rtl" value="الاسم الشخصي : " />
                                     <p:message for="prenom"/>
                                     <h:outputText value="Date de naissance :" />
                                     <p:calendar id="dateNaissance" value="#{etudiantController.newEtudiant.dateNaissance}" title="DateNaissance" 
                                         locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />
-                                     <p:message for="dateNaissance"/>
+                                    <h:outputText dir="rtl" value="تاريخ الازدياد : " /> 
+                                    <p:message for="dateNaissance"/>
                                      <h:outputText value="email :" />
                                      <p:inputText id="email" class="form-control" value="#{etudiantController.newEtudiant.email}"
                                                  required="true" requiredMessage="Veuillez saisir une adresse email valide">
                                         <f:validateRegex
                                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                     </p:inputText>
+                                     <h:outputText dir="rtl" value="البريد الالكتروني : " />
                                     <p:message for="email"/>
                                     </p:panelGrid>
                                     </p:panel>
@@ -64,13 +70,15 @@
                                     <p:panel header="Mot de passe pour le compte">  
                                         <p:messages id="pass" showDetail="true" autoUpdate="true"/>
 
-                                        <h:panelGrid columns="2" id="matchGrid">                     
+                                        <h:panelGrid columns="3" id="matchGrid">                     
                                             <h:outputLabel for="pwd1" value="Mot de passe : *" />  
                                             <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" label="Password 1" required="true">
                                                 <f:validateLength minimum="6" for="pwd1" />                    
-                                            </p:password> 
+                                            </p:password>
+                                            <h:outputText dir="rtl" value="كلمة السر : " />
                                             <h:outputLabel for="pwd2" value="Resaisissez le mot de passe : *" />  
                                             <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
+                                            <h:outputText dir="rtl" value="تأكيد الكلمة: " />
                                         </h:panelGrid>  
                                     </p:panel> 
                             <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" /></div>

@@ -8,6 +8,7 @@ package com.sos.fso.cdoc.insc.controllers;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
+import com.sos.fso.cdoc.insc.entities.Students;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
@@ -61,7 +62,7 @@ public class PersonController implements Serializable{
     @Inject
     private EtudiantFacade etudiantService;
     private Etudiant student;
-    private List<Object[]> maliste;
+    private List<Students> maliste;
     
     private boolean visibled = false;
     private boolean visible = false;
@@ -154,7 +155,7 @@ public class PersonController implements Serializable{
                
     }
 
-    public List<Object[]> getMaliste() {
+    public List<Students> getMaliste() {
         String intitule = filiereFacade.findByResponsable(current).getIntitule();
         System.out.println("L'intitulé reporté est : " + intitule);
         System.out.println("recuperation de la liste des etudiants par la requete natif sql*************");
@@ -165,7 +166,7 @@ public class PersonController implements Serializable{
         return maliste;
     }
 
-    public void setMaliste(List<Object[]> maliste) {
+    public void setMaliste(List<Students> maliste) {
         this.maliste = maliste;
     }
     

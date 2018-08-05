@@ -310,7 +310,7 @@ public class EtudiantController implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new FileInputStream(new File("C:\\inscmast\\no_document.jpeg"));
+        return new FileInputStream(new File("C:\\inscmast\\no_document.jpg"));
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
@@ -352,7 +352,7 @@ public class EtudiantController implements Serializable {
         if (current != null) {
             newQualification.setEtudiant(current);
             System.out.println("Fill qualification file : " + fileName);
-            newQualification.setDiplome(fileName);
+            newQualification.setPathScan(fileName);
 
             try {
                 qualificationService.create(newQualification);

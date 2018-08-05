@@ -6,6 +6,7 @@
 package com.sos.fso.cdoc.insc.services;
 
 import com.sos.fso.cdoc.insc.entities.Etudiant;
+import com.sos.fso.cdoc.insc.entities.Students;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -53,18 +54,29 @@ public class EtudiantFacade extends AbstractFacade<Etudiant> {
         
     }
     
-    public List<Object[]> getPreinscrit(String intitule){
+    public List<Students> getPreinscrit(String intitule){
         System.out.println("Procedure recuperation list  estudiant filiere responsable");
-        List<Object[]> preinscrit;
+        //List<Object[]> preinscrit;
+        List<Students> myList;
         try {
-            preinscrit = em.createNativeQuery("SELECT e.cin, e.nom, f.intitule as IntituleFiliere "
-                    + "FROM  t_etudiant AS e INNER JOIN t_choix AS c ON e.id_etudiant = c.id_etudiant "
-                    + "INNER JOIN t_filiere AS f ON c.id_filiere = f.id_filiere Where f.intitule = '" + intitule + "';").getResultList();
-            System.out.println("Works fine!!!!!");            
+    //            preinscrit = em.createNativeQuery("SELECT e.cin, e.nom, f.intitule as IntituleFiliere "
+    //                    + "FROM  t_etudiant AS e INNER JOIN t_choix AS c ON e.id_etudiant = c.id_etudiant "
+    //                    + "INNER JOIN t_filiere AS f ON c.id_filiere = f.id_filiere Where f.intitule = '" + intitule + "';").getResultList();
+    //            System.out.println("Works fine!!!!!");  
+            
+            
+            myList = em.createNativeQuery("SELECT e.cin, e.nom, e.prenom, q.note1, q.note2, q.diplome, f.intitule AS IntituleFiliere "
+                    + "FROM  t_etudiant AS e INNER JOIN t_choix AS c "
+                    + "ON e.id_etudiant = c.id_etudiant "
+                    + "INNER JOIN t_qualification AS q ON e.id_etudiant = q.etudiant "
+                    + "INNER JOIN t_filiere AS f ON c.id_filiere = f.id_filiere "
+                    + "Where f.intitule = '" + intitule + "' and (q.diplome = 'Licence fondamentale' or q.diplome = 'Licence professionnelle');", Students.class).getResultList();
+            System.out.println("Works fine!!!!!");
+            System.out.println(myList.get(0).getCin());
         } catch (NoResultException ex) {
             throw new NoResultException(ex.getMessage());            
         }
-        return preinscrit;
+        return myList;
     }
     
     

@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/mstemp.xhtml"
+                template="../resources/msLand.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
@@ -17,10 +17,10 @@
             <p:messages for="fatal"/>
             <h1>#{accountController.text}</h1>
             <p:panel rendered="#{accountController.compte.actif}">
-            <div class="row">
-                Merci pour votre validation,<strong>#{accountController.etudiant.nom}</strong>, <strong>#{accountController.etudiant.prenom}</strong> vous pouvez maintenant vous dirigez vers votre espace personelle, pour finaliser votre candidature, pour cela, cliquez sur ce lien<br />
-                ou retourner sur la page d'acceuil de l'application pour vous connecter <a href="http://www.fsjes.ump.ma/preinsmast/">Page d'acceuil</a>.<br />
-            </div>
+                <div class="jumbotron top-space">
+			<h4>Merci pour votre validation,<strong>#{accountController.etudiant.nom}</strong>, <strong>#{accountController.etudiant.prenom}</strong> vous pouvez maintenant vous dirigez vers votre espace personelle, pour finaliser votre candidature, pour cela, cliquez sur ce lien.</h4>
+     		<p class="text-right"><a href="http://www.fsjes.ump.ma/preinsmast/" class="btn btn-primary btn-large">Page d'acceuil FSJES »</a></p>
+  		</div>
             </p:panel>
         
        </h:form>

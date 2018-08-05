@@ -6,43 +6,50 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<ui:define name="content">	
+<ui:define name="content">
+    <h3 class="text-center thin">Préinscription en masters de la faculté des sciences juridiques économiques et sociales - Oujda</h3>
+			<h:form>
+                            <p:messages for="update"/>
+			<div class="row">
+                            <div class="col-md-3 col-sm-6 highlight">
+					<div class="h-caption"><p:commandLink action="#{etudiantController.showLogin}"><h4><i class="fa fa-smile-o fa-5"></i>Ouvrir votre session</h4></p:commandLink></div>
+					<div class="h-body text-center">
+						<p>Vous avez déja crée votre compte, et déja validez par émail, cliquez ici pour ouvrir une session et accéder a votre espace personnel.</p>
+					</div>
+				</div>  
+				<div class="col-md-3 col-sm-6 highlight">
+					<div class="h-caption"><p:commandLink action="#{etudiantController.showCreate}"><h4><i class="fa fa-cogs fa-5"></i>Création du compte</h4></p:commandLink></div>
+					<div class="h-body text-center">
+						<p>Vous voulez effectuez votre préinscription en master, cliquez sur le bouton en haut pour entamer la procédure.</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 highlight">
+					<div class="h-caption"><h4><i class="fa fa-youtube-play fa-5"></i>Vidéo de presentation</h4></div>
+					<div class="h-body text-center">
+						<p>Si vous trouvez des dificulté dans l'utilisation de notre plateforme, cette vidéo vous guidera pas a ps pour réaliser votre candidature! </p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 highlight">
+					<div class="h-caption"><h4><i class="fa fa-heart fa-5"></i>Creative Commons</h4></div>
+					<div class="h-body text-center">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
+					</div>
+				</div>
+				
+			</div>
+                            </h:form>
             <div class="row">
-                <h3>Procédure de préinscription en master de la Faculté des Sciences Juridiques Economiques et Sociales</h3>
-                <p>La candidature pour les masters est ouverte.<br />
-                    la procédure de préséléction se fera comme suit :
+               
                 <ol>
-                    <li>Enregistrement des candidats sur la platforme de pré-inscription en ligne du 15 aout 2018 au 31 Septembre 2018</li>
-                    <li>Préselection des candidats retenus pour examens d'entrées.</li>
-                    <li>Affichage des résultats de la premiere phase de présélection.</li>
-                    <li>Entretiens oraux.</li>
-                    <li>Résultats définitifs</li>
+                  
                     <li><p:commandLink value="New Filiere" action="#{filiereController.showCreateFiliere}" /></li>
                     <li><p:commandLink value="New Person" action="#{personController.showCreatePerson}" /></li>
                 </ol>
-                </p>
-            </div>
-        <p:messages for="update"/>
-             <h:form>
-            
-            <div class="col-md-3 col-sm-6 highlight">
-                <p:commandLink action="#{etudiantController.showLogin}">
-                <h:graphicImage name="images/already.jpg" class="img-responsive"/>
-                <hr />
-                <h4>Déja enregistrer, Ouvrir une session</h4>
-                </p:commandLink>
+              
+            </div>        
              
             
-            </div>
-                <div class="col-md-3 col-sm-6 highlight">
-                    <p:commandLink action="#{etudiantController.showCreate}">
-                <h:graphicImage name="images/createNew.jpg" class="img-responsive"/>
-                <hr />
-                <h4>Crée votre compte</h4>
-                </p:commandLink>
-             
             
-            </div>
-            </h:form>
+            
        </ui:define>
 </ui:composition>

@@ -17,12 +17,22 @@
 
         <h:form>
             <h1><h:outputText value="List"/></h1>
-            <p:dataTable value="#{personController.maliste}" var="liste">
+           <!-- <p:dataTable value="#{personController.maliste}" var="liste">
                 <p:columns value="#{personController.maliste[0]}" columnIndexVar="i" var="column" field="#{column.property}" >
                      
         <h:outputText value="#{liste[i]}" />
     </p:columns>
-</p:dataTable>
+</p:dataTable>-->
+            
+            <p:dataTable value="#{personController.maliste}" var="item">
+                
+                <p:column headerText="Nom">
+                    <h:outputText value="#{item.nom}" />
+    </p:column>
+                <p:column headerText="Nom">
+                    <h:outputText value="#{item.note1}" />
+    </p:column>
+            </p:dataTable>
            
         </h:form>
     </f:view>

@@ -1,5 +1,5 @@
 /* Header */
-#head { background:#540cad url( /preinsmast/resources/assets/images/bg_header.jpg) no-repeat; background-size: cover; min-height:520px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; font-weight:300; }
+#head { background:#ff9800 url( /preinsmast/resources/assets/images/bg_header.jpg) no-repeat; background-size: cover; min-height:520px; text-align: center; padding-top:240px; color:white; font-family:"Open sans", Helvetica, Arial; font-weight:300; }
 #head.secondary { height:100px; min-height: 100px; padding-top:0px; }
 	#head .lead { font-family:"Open sans", Helvetica, Arial; font-size:44px; margin-bottom:6px; color:white; line-height:1.15em; } 
 	#head .tagline { color:rgba(255,255,255,0.75); margin-bottom:25px; }
@@ -25,8 +25,8 @@
 /* Highlights (in jumbotron in most cases) */
 .highlight { margin-top:40px; }
 	.h-caption { text-align: center; } 
-	.h-caption i { display:block; font-size: 54px; color:#540cad; margin-bottom:36px; }
-	.h-caption h4 { color:#540cad; font-size: 16px; font-weight: bold; margin-bottom:20px; }
+	.h-caption i { display:block; font-size: 54px; color:#ff9800; margin-bottom:36px; }
+	.h-caption h4 { color:#ff9800; font-size: 16px; font-weight: bold; margin-bottom:20px; }
 	.h-body { }
 
 

@@ -467,3 +467,13 @@ h2{
     max-height: 56px;
     font-weight: 600;
 }
+
+h4{
+    font-size: 30px;
+    line-height: 28px;
+    font-weight: 600;
+    max-height: 56px;
+    font-weight: 600;
+    font-family: fantasy;
+    color: #c80000;
+}
