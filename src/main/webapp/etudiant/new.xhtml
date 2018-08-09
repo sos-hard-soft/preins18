@@ -19,7 +19,7 @@
                     <div class="panel-body">
                         <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
                         <h:form><p class="text-center text-muted">Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de
-                            <h:commandLink value="Login" action="#{etudiantController.showLogin}" /></p></h:form>. 
+                            <h:commandLink value="connexion" action="#{etudiantController.showLogin}" /></p></h:form>. 
                         <hr />
                         <h:form>
                             <p:messages for="update"/>
@@ -81,7 +81,7 @@
                                             <h:outputText dir="rtl" value="تأكيد الكلمة: " />
                                         </h:panelGrid>  
                                     </p:panel> 
-                            <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les donnee" action="#{etudiantController.doCreate}" /></div>
+                            <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les données" action="#{etudiantController.doCreate}" /></div>
                             </h:form>
                                 </div>
                                 

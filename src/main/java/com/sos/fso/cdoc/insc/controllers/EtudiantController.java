@@ -268,6 +268,13 @@ public class EtudiantController implements Serializable {
         addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
     }
 
+    public void deleteQualificationScan(String path){
+        File laPiece = new File(path);
+        laPiece.delete();
+        System.out.println("Le fichier a été supprimé");
+        addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
+        this.currentQualification.setPathScan(null);
+    }
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         System.out.println("Start file upload procedure");
         UploadedFile file = event.getFile();
@@ -310,7 +317,7 @@ public class EtudiantController implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new FileInputStream(new File("C:\\inscmast\\no_document.jpg"));
+        return new FileInputStream(new File("C:\\inscmast\\no_document.jpeg"));
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
@@ -403,7 +410,7 @@ public class EtudiantController implements Serializable {
             choixService.create(choix);
             current.getChoixList().add(choix);
             System.out.println("Edition en cours ajout de " + choix.getIdFiliere().getIntitule());
-            //etudiantService.edit(current);
+            etudiantService.edit(current);
             etudiantService.clearCache();
             return "/etudiant/view?faces-redirect=true";
 
@@ -460,20 +467,27 @@ public class EtudiantController implements Serializable {
     }
 
     public String doEditQualification() {
+        System.out.println("Fill qualification file : " + fileName);
+        currentQualification.setPathScan(fileName);
         qualificationService.edit(currentQualification);
         return "/etudiant/view?faces-redirect=true";
     }
 
+    
     public void doRemoveQualification(Qualification diplome) {
-        try {
+        String asupprimer = diplome.getPathScan();
+        System.out.println("Debut procedure delete");
+        try {            
             this.current.getQualificationList().remove(diplome);
-
+            System.out.println("Debut procedure delete du diplome");
+            
             qualificationService.remove(diplome);
+            System.out.println("diplome supprimé");
             etudiantService.edit(current);
             addMessage("update", FacesMessage.SEVERITY_INFO, "le Diplome a ete supprimer avec success !!", "Error !!");
         } catch (Exception e) {
         }
-
+        this.performDelete(asupprimer);
     }
 
     public void doRemoveChoix(Choix choix) {

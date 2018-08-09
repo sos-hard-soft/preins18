@@ -37,21 +37,23 @@
                                 <p:outputLabel value="Nom : "/>
                                 <p:outputLabel value="#{etudiantController.current.nom}"/>
 
-                                <p:outputLabel value="#{etudiantController.current.nomAr}" dir="rtl"/>
+                                <p:outputLabel value="#{etudiantController.current.nomAr}" style="float: right;" dir="rtl"/>
                                 <p:outputLabel  value="الاسم العائلي : *" dir="rtl" style="float: right;"/>
                                 <p:outputLabel value="Prénom : " />
                                 <p:outputLabel value="#{etudiantController.current.prenom}"/>
 
-                                <p:outputLabel value="#{etudiantController.current.prenomAr}" dir="rtl"/>
+                                <p:outputLabel value="#{etudiantController.current.prenomAr}" style="float: right;" dir="rtl"/>
                                 <p:outputLabel  value="الاسم الشخصي : *" dir="rtl" style="float: right;"/>
 
                                 <p:outputLabel value="Date de naissance : "/>
-                                <p:outputLabel value="#{etudiantController.current.dateNaissance}"/>
+                                <p:outputLabel value="#{etudiantController.current.dateNaissance}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
 
                                 <p:outputLabel value="Lieu de naissance : "/>
                                 <p:outputLabel value="#{etudiantController.current.lieuNaissance}"/>
                                 
-                                <p:outputLabel value="#{etudiantController.current.lieuNaissanceAr}"/>
+                                <p:outputLabel value="#{etudiantController.current.lieuNaissanceAr}" style="float: right;"/>
                                 <p:outputLabel value=" مكان الازدياد : *" dir="rtl" style="float: right;"/>
                                  
                                 <p:outputLabel value="Nationalité : "/>
@@ -76,7 +78,7 @@
                                 <p:outputLabel value="#{etudiantController.current.email}"/>
                                 <p:outputLabel value="Adresse : "/>
                                 <p:outputLabel value="#{etudiantController.current.adresse}"/>
-                                <p:outputLabel value="Numéro de téléphonne : "/>
+                                <p:outputLabel value="Numéro de téléphonne: "/>
                                 <p:outputLabel value="#{etudiantController.current.numeroTelephonne}"/>
                             </p:panelGrid>
                         </p:panel>
@@ -88,7 +90,7 @@
                     <p:panel header="Aide">
                         <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
                         <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
-                        <p style="color: #99CC00; font-family: georgia;">Pour imprimer votre formulaire de candidature appuyez sur le bouton "imprimer le formulaire" dans le menu qui apparait à guache de l'écran.</p>
+                        
                     </p:panel>
                 </div>
             </div>
@@ -132,12 +134,29 @@
                 </p:tab>  
                 <p:tab id="tab2" title="Filieres Choisis">
                     <p:outputLabel value="Vous avez choisis les filieres ci après : "/>
-                    <ul>
-                        <ui:repeat value="#{etudiantController.current.choixList}" var="choix">
-                            <li><span><p:outputLabel value="#{choix.idFiliere.intitule}" /></span> -||- <span><p:outputLabel value="#{choix.idFiliere.description}" /></span></li>                            
-                        </ui:repeat>
-                    </ul>
+                    <p:commandButton action="#{etudiantController.showChoixFiliere}" rendered="#{etudiantController.current.choixList.size() != 2}" value="Ajouter un autre choix" />
+                    <p:dataTable value="#{etudiantController.current.choixList}" var="choix">
+                        <p:column headerText="Actions">  
+
+                            <p:growl id="messages"/>  
+
+                            <p:menuButton value="Actions">  
+                                <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveChoix(choix)}" ajax="false"/>  
+                            </p:menuButton>  
+
+
+                        </p:column>
+                        <p:column  headerText="Filiere Choisis">  
+                            <h:outputText value="#{choix.idFiliere.intitule}" />  
+                        </p:column> 
+                        <p:column  headerText="Intitulé de la filière">  
+                            <h:outputText value="#{choix.idFiliere.description}" />  
+                        </p:column> 
+
+                    </p:dataTable>
                 </p:tab>
+                
+                
                 <p:tab id="tab3" title="Pieces Justificatives">  
 
                     <p:accordionPanel value="#{etudiantController.current.piecesList}" var="piece">

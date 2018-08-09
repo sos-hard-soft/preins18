@@ -48,8 +48,8 @@
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
                     <p:outputLabel value="Veuillez charger l'image de votre diplome :" />
-                    <p:fileUpload id="fichier" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
-                                  sizeLimit="500000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
+                    <p:fileUpload id="fichier" label="Cliquez pour Chargé votre copie de diplome" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                                  sizeLimit="5000000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:message for="fichier"/>
 
                     <p:outputLabel value="Mention : *"/>
@@ -102,7 +102,7 @@
 
                     </p:panelGrid>
                     </p:panel>
-                <h:commandButton value="Enregistrer ce parcours" action="#{etudiantController.doAddQualification}"/>
+                <h:commandButton class="btn btn-action" value="Enregistrer ce parcours" action="#{etudiantController.doAddQualification}"/>
 
 </p:panel>
                         </div>

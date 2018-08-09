@@ -15,38 +15,38 @@
               
                     <h:form>
                         <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:growl id="messages" showDetail="true"/>
                         <p:panelGrid columns="2">
                             <p:outputLabel value="Veuillez charger votre Photo d'identité :" />
-                    <p:fileUpload mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{personController.handleFileUpload}" 
+                    <p:fileUpload mode="advanced" auto="true" label="Cliquez pour Chargé votre foto d'identité" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{personController.handleFileUpload}" 
                                   sizeLimit="500000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
-                    <p:growl id="messages" showDetail="true"/>
-                            <p:outputLabel value="Adresse:" for="adresse" />
-                            <p:inputText id="adresse" value="#{personController.newPerson.adresse}" title="Adresse" />
                             <p:outputLabel value="Cin:" for="cin" />
-                            <p:inputText id="cin" value="#{personController.newPerson.cin}" title="Cin" />
-                            <p:outputLabel value="DateNaissance:" for="dateNaissance" />
-                            <p:calendar id="dateNaissance" value="#{personController.newPerson.dateNaissance}" title="DateNaissance" 
-                                        locale="fr" navigator="true" pattern="dd/MM/yyyy" />
-                            <p:outputLabel value="Email:" for="email" />
-                            <p:inputText id="email" value="#{personController.newPerson.email}" title="Email" />
-                            <p:outputLabel value="Fonction:" for="fonction" />
-                            <p:inputText id="fonction" value="#{personController.newPerson.fonction}" title="Fonction" />
-                            <p:outputLabel value="LieuNaissance:" for="lieuNaissance" />
-                            <p:inputText id="lieuNaissance" value="#{personController.newPerson.lieuNaissance}" title="LieuNaissance" />
-                            <p:outputLabel value="LieuNaissanceAr:" for="lieuNaissanceAr" />
-                            <p:inputText id="lieuNaissanceAr" value="#{personController.newPerson.lieuNaissanceAr}" title="LieuNaissanceAr" />
-                            <p:outputLabel value="Nationalite:" for="nationalite" />
-                            <p:inputText id="nationalite" value="#{personController.newPerson.nationalite}" title="Nationalite" />
+                            <p:inputText id="cin" value="#{personController.newPerson.cin}" title="Cin" />        
                             <p:outputLabel value="Nom:" for="nom" />
                             <p:inputText id="nom" value="#{personController.newPerson.nom}" title="Nom" />
                             <p:outputLabel value="NomAr:" for="nomAr" />
                             <p:inputText id="nomAr" value="#{personController.newPerson.nomAr}" title="NomAr" />
-                            <p:outputLabel value="NumeroTelephonne:" for="numeroTelephonne" />
-                            <p:inputText id="numeroTelephonne" value="#{personController.newPerson.numeroTelephonne}" title="NumeroTelephonne" />
                             <p:outputLabel value="Prenom:" for="prenom" />
                             <p:inputText id="prenom" value="#{personController.newPerson.prenom}" title="Prenom" />
                             <p:outputLabel value="PrenomAr:" for="prenomAr" />
                             <p:inputText id="prenomAr" value="#{personController.newPerson.prenomAr}" title="PrenomAr" />
+                            
+                            <p:outputLabel value="DateNaissance:" for="dateNaissance" />
+                            <p:calendar id="dateNaissance" value="#{personController.newPerson.dateNaissance}" title="DateNaissance" 
+                                        locale="fr" navigator="true" pattern="dd/MM/yyyy" />
+                            
+                            <p:outputLabel value="Adresse:" for="adresse" />
+                            <p:inputText id="adresse" value="#{personController.newPerson.adresse}" title="Adresse" />
+                            <p:outputLabel value="NumeroTelephonne:" for="numeroTelephonne" />
+                            <p:inputText id="numeroTelephonne" value="#{personController.newPerson.numeroTelephonne}" title="NumeroTelephonne" />
+                            
+                            <p:outputLabel value="Email:" for="email" />
+                            <p:inputText id="email" value="#{personController.newPerson.email}" title="Email" />
+                            <p:outputLabel value="Fonction:" for="fonction" />
+                            <p:inputText id="fonction" value="#{personController.newPerson.fonction}" title="Fonction" />
+                            
+                            
+                            
                             
                     
                         </p:panelGrid>
