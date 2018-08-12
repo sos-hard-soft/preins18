@@ -9,13 +9,16 @@
                 xmlns:of="http://omnifaces.org/functions">
 
     <ui:define name="sidebar-left">
-
         <ui:include src="adminMenu.xhtml" />
-
     </ui:define>
     <ui:define name="content">
         <h:form>
-            
+           <p:dataTable value="#{personController.maliste}" var="liste">
+                <p:columns value="#{personController.maliste[0]}" columnIndexVar="i" var="column" field="#{column.property}" >
+                     
+        <h:outputText value="#{liste[i]}" />
+    </p:columns>
+</p:dataTable>
         </h:form>
 
     </ui:define>

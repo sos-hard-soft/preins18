@@ -5,13 +5,13 @@
         <param-value>Development</param-value>
     </context-param>
     <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>south-street</param-value>
-</context-param>
-<mime-mapping>
-    <extension>xhtml</extension>
-    <mime-type>application/xml</mime-type>
-</mime-mapping>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>south-street</param-value>
+    </context-param>
+    <mime-mapping>
+        <extension>xhtml</extension>
+        <mime-type>application/xml</mime-type>
+    </mime-mapping>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -42,6 +42,18 @@
             <role-name>candidat</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>Managed Pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>Managed pages</web-resource-name>
+            <description/>
+            <url-pattern>/manage/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>manager</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>umpRealm</realm-name>
@@ -53,5 +65,9 @@
     <security-role>
         <description/>
         <role-name>candidat</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>manager</role-name>
     </security-role>
 </web-app>

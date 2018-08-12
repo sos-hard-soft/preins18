@@ -10,30 +10,34 @@
     <h3 class="text-center thin">Préinscription en masters de la faculté des sciences juridiques économiques et sociales - Oujda</h3>
 			<h:form>
                             <p:messages for="update"/>
+                            <div class="row ">
+                                <p:commandLink action="#{etudiantController.showCreate}">
+                                <div class="col-md-6 col-sm-6 fst highlight">
+                                    <h1>Cliquez ici pour la création de votre compte pour gestion de préinscription</h1>
+                                </div>
+                                <div class="col-md-6 col-sm-6 highlight">
+                                    <img src="resources/images/createAccount.jpg" />
+                                </div>
+                                    </p:commandLink>
+                            </div>
+                            <div class="row ">
+                                <p:commandLink action="#{etudiantController.showLogin}">
+                                <div class="col-md-6 col-sm-6 scnd highlight">
+                                    <h1>Cliquez ici pour acceder <br />a votre compte  déja crée auparavant</h1>
+                                </div>
+                                <div class="col-md-6 col-sm-6 highlight">
+                                    <img src="resources/images/reachAccount.jpg" />
+                                </div>
+                                    </p:commandLink>
+                            </div>
 			<div class="row">
-                            <div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><p:commandLink action="#{etudiantController.showLogin}"><h4><i class="fa fa-smile-o fa-5"></i>Ouvrir votre session</h4></p:commandLink></div>
-					<div class="h-body text-center">
-						<p>Vous avez déja crée votre compte, et déja validez par émail, cliquez ici pour ouvrir une session et accéder a votre espace personnel.</p>
-					</div>
-				</div>  
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><p:commandLink action="#{etudiantController.showCreate}"><h4><i class="fa fa-cogs fa-5"></i>Création du compte</h4></p:commandLink></div>
-					<div class="h-body text-center">
-						<p>Vous voulez effectuez votre préinscription en master, cliquez sur le bouton en haut pour entamer la procédure.</p>
-					</div>
+                            
+				<div class="col-md-8 col-sm-6 highlight">
+                                    <h1>Si vous trouvez des dificulté dans l'utilisation de notre plateforme, cette vidéo vous guidera pas a ps pour réaliser votre candidature! </h1>
 				</div>
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-youtube-play fa-5"></i>Vidéo de presentation</h4></div>
-					<div class="h-body text-center">
-						<p>Si vous trouvez des dificulté dans l'utilisation de notre plateforme, cette vidéo vous guidera pas a ps pour réaliser votre candidature! </p>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-heart fa-5"></i>Creative Commons</h4></div>
-					<div class="h-body text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem, vitae, perferendis, perspiciatis nobis voluptate quod illum soluta minima ipsam ratione quia numquam eveniet eum reprehenderit dolorem dicta nesciunt corporis?</p>
-					</div>
+				<div class="col-md-4 col-sm-6 highlight">
+					<div class="h-caption"><h4><i class="fa fa-youtube fa-9"></i>Video</h4></div>
+					
 				</div>
 				
 			</div>

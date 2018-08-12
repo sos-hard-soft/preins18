@@ -8,6 +8,7 @@ package com.sos.fso.cdoc.insc.services;
 import com.sos.fso.cdoc.insc.entities.Person;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -24,10 +25,20 @@ public class PersonFacade extends AbstractFacade<Person> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
 
     public PersonFacade() {
         super(Person.class);
     }
     
-    
+    public Person findByCin(String cin) {
+        Person personne;
+        try {
+            personne = em.createNamedQuery("Person.findByCin", Person.class).setParameter("cin", cin).getSingleResult();
+            return personne;
+        } catch (NoResultException ex) {
+            return null;
+        }
+        
+    }
 }

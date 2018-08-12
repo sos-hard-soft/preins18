@@ -5,10 +5,12 @@
  */
 package com.sos.fso.cdoc.insc.controllers;
 
+import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
 import com.sos.fso.cdoc.insc.entities.Students;
+import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
@@ -21,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
@@ -58,6 +61,12 @@ public class PersonController implements Serializable{
     @Inject
     private FiliereFacade filiereFacade;
     private Filiere filiereProf;
+    
+    @Inject
+    private CompteFacade compteService;
+    private Compte newCompte;
+    private Compte compte;
+    private boolean sessionOuverte;
     
     @Inject
     private EtudiantFacade etudiantService;
@@ -248,6 +257,13 @@ public class PersonController implements Serializable{
     }
 
     public Person getCurrent() {
+        if (current == null) {
+            current = personService.findByCin(compte.getCin());
+            
+        }
+        if (current.getPhoto() != null) {
+            fileExist = true;
+        }
         return current;
     }
 
@@ -258,6 +274,48 @@ public class PersonController implements Serializable{
     public Person getPerson(java.lang.Integer id) {
         return personService.find(id);
     }
+
+    public Compte getNewCompte() {
+        return newCompte;
+    }
+
+    public void setNewCompte(Compte newCompte) {
+        this.newCompte = newCompte;
+    }
+
+    public Compte getCompte() {
+        if (compte == null) {
+            Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+            if (principal != null) {
+                String cin = principal.getName();
+                compte = compteService.findByCin(cin);
+            }
+        }
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
+    }
+
+    public boolean isSessionOuverte() {
+        return sessionOuverte;
+    }
+
+    public void setSessionOuverte(boolean sessionOuverte) {
+        this.sessionOuverte = sessionOuverte;
+    }
+
+    public Etudiant getStudent() {
+        return student;
+    }
+
+    public void setStudent(Etudiant student) {
+        this.student = student;
+    }
+    
+    
+    
     
     @FacesConverter(forClass = Person.class)
     public static class PersonControllerConverter implements Converter {
