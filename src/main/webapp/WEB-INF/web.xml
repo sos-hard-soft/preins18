@@ -47,7 +47,9 @@
         <web-resource-collection>
             <web-resource-name>Managed pages</web-resource-name>
             <description/>
-            <url-pattern>/manage/*</url-pattern>
+            <url-pattern>/manage/logedPerson.xhtml</url-pattern>
+            <url-pattern>/manage/view.xhtml</url-pattern>
+            <url-pattern>/filiere/addFiliere.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>

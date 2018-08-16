@@ -11,16 +11,18 @@
 
         
 <ui:define name="content">
-            <h:form>
-            <p:commandButton rendered="#{etudiantController.compte.actif}"
+            
+    
+    <h:form>
+                <p:commandButton rendered="#{personController.compte.actif}"
                             value="Log Out" action="#{loginController.doLogout}"/><br/>
         
         <p:messages for="update"/>
         <div class="jumbotron top-space">
-			<h4>Bienvenu <p:outputLabel  rendered="#{etudiantController.compte.actif}" value="#{etudiantController.current.prenom}"/></h4>
+			<h4>Bienvenu <p:outputLabel  rendered="#{personController.compte.actif}" value="#{personController.current.prenom}"/></h4>
                         <h4>Vous allez etre rédiriger vers votre espace personel
-                            <p:commandLink rendered="#{etudiantController.compte.actif}"
-                value="cliquez ici" action="#{etudiantController.showLoggedDetails}" class="btn btn-primary btn-large"/></h4>
+                            <p:commandLink rendered="#{personController.compte.actif}"
+                value="cliquez ici" action="#{personController.showSpace}" class="btn btn-primary btn-large"/></h4>
      		<h4>
                     Sur votre espace personel vous pouvez passer votre candidature, 
                     modifier vos informations personelle, et éditer votre qualification et diplomes.

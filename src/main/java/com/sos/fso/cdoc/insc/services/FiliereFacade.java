@@ -32,11 +32,27 @@ public class FiliereFacade extends AbstractFacade<Filiere> {
     }
     public Filiere findByResponsable(Person responsable) {
         Filiere filiere;
+        System.out.println("recherche filiere du prof : " + responsable.getPrenom());
         Integer idFiliere = responsable.getFiliereList().get(0).getIdFiliere();
         System.out.println(" l'id : " + idFiliere );
         System.out.println(" l'intitule : " + responsable.getFiliereList().get(0).getIntitule());
         try {
             filiere = em.createNamedQuery("Filiere.findByIdFiliere", Filiere.class).setParameter("idFiliere", idFiliere).getSingleResult();
+            return filiere;
+        } catch (NoResultException ex) {
+            return null;
+        }
+        
+    }
+    
+    public Filiere findByFiliere(Filiere responsabilite) {
+        Filiere filiere;
+//        System.out.println("recherche filiere du prof : " + responsable.getPrenom());
+//        Integer idFiliere = responsable.getFiliereList().get(0).getIdFiliere();
+//        System.out.println(" l'id : " + idFiliere );
+//        System.out.println(" l'intitule : " + responsable.getFiliereList().get(0).getIntitule());
+        try {
+            filiere = em.createNamedQuery("Filiere.findByIdFiliere", Filiere.class).setParameter("idFiliere", responsabilite.getIdFiliere()).getSingleResult();
             return filiere;
         } catch (NoResultException ex) {
             return null;

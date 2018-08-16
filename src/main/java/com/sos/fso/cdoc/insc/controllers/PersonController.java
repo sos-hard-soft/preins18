@@ -26,6 +26,8 @@ import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.ejb.Init;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -71,7 +73,7 @@ public class PersonController implements Serializable{
     @Inject
     private EtudiantFacade etudiantService;
     private Etudiant student;
-    private List<Students> maliste;
+    private List<Object[]> maliste;
     
     private boolean visibled = false;
     private boolean visible = false;
@@ -84,6 +86,22 @@ public class PersonController implements Serializable{
      * Creates a new instance of MasterController
      * @return 
      */
+    
+    
+    @PostConstruct
+    public void init() {
+        if (current == null) {
+            sessionOuverte = false;
+        } else {
+            sessionOuverte = true;
+        }
+    }
+    
+    public String showList() {
+        return "/mstList?faces-redirect=true";
+    }
+
+    
     public String showEdit() {
         //this.current = item;
         return "/index?faces-redirect=true";
@@ -98,6 +116,15 @@ public class PersonController implements Serializable{
         newPerson = new Person();
         return "/filiere/newPerson?faces-redirect=true";
     }
+    
+    public String showSpace() {
+        return "/manage/view?faces-redirect=true";
+    }
+    
+    public String showLogin() {
+        return "/manage/logedPerson?faces-redirect=true";
+    }
+    
     
     public List<Person> getAllPersons() {
         return personService.findAll();
@@ -164,7 +191,9 @@ public class PersonController implements Serializable{
                
     }
 
-    public List<Students> getMaliste() {
+    public List<Object[]> getMaliste() {
+        System.out.println("Debut de la récuperation de la liste du prof");
+        System.out.println("Le prof est : " + current.getNom());
         String intitule = filiereFacade.findByResponsable(current).getIntitule();
         System.out.println("L'intitulé reporté est : " + intitule);
         System.out.println("recuperation de la liste des etudiants par la requete natif sql*************");
@@ -175,7 +204,7 @@ public class PersonController implements Serializable{
         return maliste;
     }
 
-    public void setMaliste(List<Students> maliste) {
+    public void setMaliste(List<Object[]> maliste) {
         this.maliste = maliste;
     }
     
@@ -255,11 +284,11 @@ public class PersonController implements Serializable{
     public void setNewPerson(Person newPerson) {
         this.newPerson = newPerson;
     }
-
+    
     public Person getCurrent() {
         if (current == null) {
-            current = personService.findByCin(compte.getCin());
-            
+            current = new Person();
+            current = personService.findByCin(compte.getCin());            
         }
         if (current.getPhoto() != null) {
             fileExist = true;
@@ -282,11 +311,13 @@ public class PersonController implements Serializable{
     public void setNewCompte(Compte newCompte) {
         this.newCompte = newCompte;
     }
-
+    
     public Compte getCompte() {
         if (compte == null) {
+            System.out.println("recuperatoion du compte a partir de la session!!!!");
             Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
             if (principal != null) {
+                System.out.println("le princ " + principal.getName());
                 String cin = principal.getName();
                 compte = compteService.findByCin(cin);
             }

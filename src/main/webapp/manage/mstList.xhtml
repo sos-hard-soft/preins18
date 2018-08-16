@@ -12,20 +12,16 @@
         <ui:include src="adminMenu.xhtml" />
     </ui:define>
     <ui:define name="content">
+     
         <h:form>
-            <p:dataTable value="#{personController.current.filiereList}" var="filiere">
-                <p:column headerText="id">
-                    #{filiere.idFiliere}
-                </p:column>
-                <p:column headerText="intit">
-                    #{filiere.intitule}
-                </p:column>
-                <p:column headerText="description">
-                    #{filiere.description}
-                </p:column>
-                <p:co
-            </p:dataTable>
+            
+            <p:dataTable value="#{personController.maliste}" var="liste">
+                <p:columns value="#{personController.maliste[0]}" columnIndexVar="i" var="column" field="#{column.property}" >
+                     
+        <h:outputText value="#{liste[i]}" />
+    </p:columns>
+</p:dataTable>
         </h:form>
-
+    
     </ui:define>
 </ui:composition>

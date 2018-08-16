@@ -41,7 +41,12 @@
                                 <li><a href="http://droit.ump.ma/fr/diplome-universitaire-detudes-universitaires-superieures-specialisees">DUEUSS</a></li>
                         
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a class="btn" href="security/login.xhtml">Ouvrir Votre session</a></li>
+                        <li><a class="btn" href="security/login.xhtml">Ouvrir Votre session</a>
+                            <p:commandButton rendered="#{etudiantController.compte.actif}"
+                             icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
+                        <p:commandButton rendered="#{etudiantController.compte.actif}"
+                             icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
+                        </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

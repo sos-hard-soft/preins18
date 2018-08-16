@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -108,7 +109,7 @@ public class Person implements Serializable {
     private String prenomAr;
     @Column(name = "sexe")
     private Boolean sexe;
-    @OneToMany(mappedBy = "responsable")
+    @OneToMany(mappedBy = "responsable", fetch = FetchType.LAZY)
     private List<Filiere> filiereList;
 
     public Person() {
