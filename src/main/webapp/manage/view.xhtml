@@ -12,7 +12,9 @@
         <ui:include src="adminMenu.xhtml" />
     </ui:define>
     <ui:define name="content">
+        <p:spacer />
         <h:form>
+            
             <p:dataTable value="#{personController.current.filiereList}" var="filiere">
                 <p:column headerText="id">
                     #{filiere.idFiliere}
@@ -23,7 +25,9 @@
                 <p:column headerText="description">
                     #{filiere.description}
                 </p:column>
-                <p:co
+                <p:column headerText="Afficher Liste">
+                    <p:commandButton value="Liste" action="#{personController.showList(filiere)}" />
+                </p:column>
             </p:dataTable>
         </h:form>
 

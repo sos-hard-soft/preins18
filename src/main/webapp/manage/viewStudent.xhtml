@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:of="http://omnifaces.org/functions">
+
+    <ui:define name="sidebar-left">
+
+        <ui:include src="adminMenu.xhtml" />
+
+    </ui:define>
+    <ui:define name="content">
+        <h:form>
+            <div class="row">
+                <div class="col-lg-8">
+                    <p:panel id="etudiantdetail">
+                        
+                        <p:messages for="update"/>
+                        <p:panel header="Informations personèlle">
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="CIN : "/>
+                                <p:outputLabel value="#{personController.student.cin}"/>
+
+                                <p:outputLabel value="CNE : "/>
+                                <p:outputLabel value="#{personController.student.cne}"/>
+
+                                <p:outputLabel value="Nom : "/>
+                                <p:outputLabel value="#{personController.student.nom}"/>
+
+                                <p:outputLabel value="#{personController.student.nomAr}" style="float: right;" dir="rtl"/>
+                                <p:outputLabel  value="الاسم العائلي : *" dir="rtl" style="float: right;"/>
+                                <p:outputLabel value="Prénom : " />
+                                <p:outputLabel value="#{personController.student.prenom}"/>
+
+                                <p:outputLabel value="#{personController.student.prenomAr}" style="float: right;" dir="rtl"/>
+                                <p:outputLabel  value="الاسم الشخصي : *" dir="rtl" style="float: right;"/>
+
+                                <p:outputLabel value="Date de naissance : "/>
+                                <p:outputLabel value="#{personController.student.dateNaissance}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:outputLabel>
+
+                                <p:outputLabel value="Lieu de naissance : "/>
+                                <p:outputLabel value="#{personController.student.lieuNaissance}"/>
+                                
+                                <p:outputLabel value="#{personController.student.lieuNaissanceAr}" style="float: right;"/>
+                                <p:outputLabel value=" مكان الازدياد : *" dir="rtl" style="float: right;"/>
+                                 
+                                <p:outputLabel value="Nationalité : "/>
+                                <p:outputLabel value="#{personController.student.nationalite}"/>
+
+                                <p:outputLabel value="Sexe : "/>
+                                <p:outputLabel value="Masculin" rendered="#{personController.student.sexe}"/>
+                                <p:outputLabel value="Féminin" rendered="#{!personController.student.sexe}"/>
+
+                                <p:outputLabel value="Activité : "/>
+                                <p:outputLabel value="Fonctionaire" rendered="#{personController.student.activite}"/>
+                                <p:outputLabel value="Sans Fonction" rendered="#{!personController.student.activite}"/>
+
+                                <p:outputLabel value="Etat matrimonial : "/>
+                                <p:outputLabel value="Célibataire" rendered="#{personController.student.etatMatrimonial}"/>
+                                <p:outputLabel value="Mariée" rendered="#{!personController.student.etatMatrimonial}"/>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:panel header="Cordonnées de contact">
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="email : "/>
+                                <p:outputLabel value="#{personController.student.email}"/>
+                                <p:outputLabel value="Adresse : "/>
+                                <p:outputLabel value="#{personController.student.adresse}"/>
+                                <p:outputLabel value="Numéro de téléphonne: "/>
+                                <p:outputLabel value="#{personController.student.numeroTelephonne}"/>
+                            </p:panelGrid>
+                        </p:panel>
+
+
+                    </p:panel>
+                </div>
+                <div class="col-lg-3">
+                    <p:panel header="Aide">
+                        <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
+                        <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
+                        
+                    </p:panel>
+                </div>
+            </div>
+            <p:tabView id="tabView">  
+
+                <p:tab id="tab1" title="Diplomes Obtenus">
+
+                    <p:dataTable value="#{personController.student.qualificationList}" var="diplome">
+                        <p:column  headerText="Diplome">  
+                            <h:outputText value="#{diplome.diplome}" />  
+                        </p:column> 
+                        <p:column  headerText="Date d'obtention">  
+                            <h:outputText value="#{diplome.dateObtention}" >
+                                <f:convertDateTime pattern="dd.MM.yyyy" />
+                            </h:outputText>  
+                        </p:column> 
+
+                        <p:column  headerText="Mention">  
+                            <h:outputText value="#{diplome.mention}" />  
+                        </p:column> 
+                        <p:column  headerText="Etablissement">  
+                            <h:outputText value="#{diplome.partieDelivrante}" />  
+                        </p:column>
+
+                    </p:dataTable>
+
+
+                </p:tab>  
+                <p:tab id="tab2" title="Filieres Choisis">
+                    <p:outputLabel value="Vous avez choisis les filieres ci après : "/>
+                    
+                    <p:dataTable value="#{personController.student.choixList}" var="choix">
+                        <p:column  headerText="Filiere Choisis">  
+                            <h:outputText value="#{choix.idFiliere.intitule}" />  
+                        </p:column> 
+                        <p:column  headerText="Intitulé de la filière">  
+                            <h:outputText value="#{choix.idFiliere.description}" />  
+                        </p:column> 
+
+                    </p:dataTable>
+                </p:tab>
+                
+                
+                <p:tab id="tab3" title="Pieces Justificatives">  
+
+                    <p:accordionPanel value="#{personController.student.piecesList}" var="piece">
+                        <p:tab title="La piece : #{piece.intitule}">
+                            
+                                
+                                    <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true"/>
+                                
+                            <h:panelGrid columns="2" cellpadding="5">
+                                                    
+                                <h:outputText value="Intitulé:" style="font-weight: bold" />
+                                <h:outputText value="#{piece.intitule}" />
+
+                                <h:outputText value="Partie delivrante:" style="font-weight: bold" />
+                                <h:outputText value="#{piece.partieDelivrante}" />
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
+
+
+                </p:tab> 
+
+
+
+            </p:tabView>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

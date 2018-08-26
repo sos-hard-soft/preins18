@@ -21,6 +21,16 @@
     <version>3.2</version>
 </dependency>
         <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.16</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.albfernandez</groupId>
+            <artifactId>itext2</artifactId>
+            <version>2.1.8</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
             <version>1.0.0-RC15</version>

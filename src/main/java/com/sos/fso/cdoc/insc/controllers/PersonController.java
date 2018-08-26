@@ -10,6 +10,7 @@ import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
 import com.sos.fso.cdoc.insc.entities.Students;
+import com.sos.fso.cdoc.insc.helpers.StdList;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
@@ -75,6 +76,8 @@ public class PersonController implements Serializable{
     private Etudiant student;
     private List<Object[]> maliste;
     
+    private List<StdList> stdliste;
+    
     private boolean visibled = false;
     private boolean visible = false;
     private boolean fileExist = false;
@@ -97,8 +100,9 @@ public class PersonController implements Serializable{
         }
     }
     
-    public String showList() {
-        return "/mstList?faces-redirect=true";
+    public String showList(Filiere filiere) {
+        stdliste = etudiantService.getStudents(filiere.getIntitule());
+        return "/manage/mstList?faces-redirect=true";
     }
 
     
@@ -125,6 +129,11 @@ public class PersonController implements Serializable{
         return "/manage/logedPerson?faces-redirect=true";
     }
     
+    public String showStudentDetail(String cin) {
+        this.student = etudiantService.findByCin(cin);;
+        
+        return "/manage/viewStudent?faces-redirect=true";
+    }
     
     public List<Person> getAllPersons() {
         return personService.findAll();
@@ -191,25 +200,27 @@ public class PersonController implements Serializable{
                
     }
 
-    public List<Object[]> getMaliste() {
-        System.out.println("Debut de la récuperation de la liste du prof");
-        System.out.println("Le prof est : " + current.getNom());
-        String intitule = filiereFacade.findByResponsable(current).getIntitule();
+    public void getMaliste(String intitule) {
+        //List<Object[]>
+        //System.out.println("Debut de la récuperation de la liste du prof");
+        //System.out.println("Le prof est : " + current.getNom());
+        //String intitule = filiereFacade.findByResponsable(current).getIntitule();
         System.out.println("L'intitulé reporté est : " + intitule);
         System.out.println("recuperation de la liste des etudiants par la requete natif sql*************");
         System.out.println("**************************************************************************");
         maliste = etudiantService.getPreinscrit(intitule);
         System.out.println("List recuperer avec suces !!!!!");
         //System.out.println("first element " + maliste.get(0));
-        return maliste;
+       //return maliste;
     }
 
     public void setMaliste(List<Object[]> maliste) {
         this.maliste = maliste;
     }
-    
-    
-    
+
+    public List<Object[]> getMaliste() {
+        return maliste;
+    }
     
     public boolean isVisibled() {
         return visibled;
@@ -275,6 +286,14 @@ public class PersonController implements Serializable{
     public void setUploaded(File uploaded) {
         this.uploaded = uploaded;
     }
+
+    public List<StdList> getStdliste() {
+        return stdliste;
+    }
+
+    public void setStdliste(List<StdList> stdliste) {
+        this.stdliste = stdliste;
+    }
     
     
     public Person getNewPerson() {
@@ -338,6 +357,7 @@ public class PersonController implements Serializable{
     }
 
     public Etudiant getStudent() {
+        
         return student;
     }
 
