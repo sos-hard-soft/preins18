@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class QualificationFacade extends AbstractFacade<Qualification> {
-    @PersistenceContext(unitName = "cdocPU")
+    @PersistenceContext(unitName = "insPU")
     private EntityManager em;
 
     @Override

@@ -23,7 +23,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class EtudiantFacade extends AbstractFacade<Etudiant> {
-    @PersistenceContext(unitName = "cdocPU")
+    @PersistenceContext(unitName = "insPU")
     private EntityManager em;
 
     @Override

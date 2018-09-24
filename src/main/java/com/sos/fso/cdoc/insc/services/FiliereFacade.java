@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class FiliereFacade extends AbstractFacade<Filiere> {
 
-    @PersistenceContext(unitName = "cdocPU")
+    @PersistenceContext(unitName = "insPU")
     private EntityManager em;
 
     @Override

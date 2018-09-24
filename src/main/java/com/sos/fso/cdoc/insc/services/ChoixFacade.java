@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ChoixFacade extends AbstractFacade<Choix> {
-    @PersistenceContext(unitName = "cdocPU")
+    @PersistenceContext(unitName = "insPU")
     private EntityManager em;
 
     @Override
