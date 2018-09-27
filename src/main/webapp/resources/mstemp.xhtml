@@ -8,7 +8,7 @@
 <h:head>
     <ui:insert name="meta"></ui:insert>
     
-    <title>Préinscription Master - Faculté des sciences Juridiques économiques et sociales - Université Mohammed Ier Oujda</title>
+    <title>Candidature Master - Faculté des sciences Juridiques économiques et sociales - Université Mohammed Ier Oujda</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="assets/css/bootstrap.min.css" />
@@ -33,20 +33,19 @@
                     <a class="navbar-brand" href="http://droit.ump.ma/fr">
                         <img src="/preinsmast/resources/assets/images/logoFSJES.png" alt="Faculté des sciences Juridiques économiques et sociales" /></a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <h:form><div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
+                        <li><a href="http://preinsmasterdroit.ump.ma/canmaster">Acceuil</a></li>
                          <li><a href="http://droit.ump.ma/fr">La Faculté</a></li>
                         <li class="active"><a href="http://droit.ump.ma/fr/master">Master</a></li>
                                 <li><a href="http://droit.ump.ma/fr/master-specialises">Master Spécialisé</a></li>
                                 <li><a href="http://droit.ump.ma/fr/diplome-universitaire-detudes-universitaires-superieures-specialisees">DUEUSS</a></li>
-                        
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><p:commandLink rendered="#{!etudiantController.compte.actif}"><a class="btn" href="security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
-                            <p:commandButton rendered="#{etudiantController.compte.actif}"
+                        <li><p:commandLink rendered="#{!etudiantController.compte.actif or !personController.compte.actif}"><a class="btn" href="http://localhost:8080/preinsmast/security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
+                            <p:commandButton rendered="#{etudiantController.compte.actif or personController.compte.actif}"
                              icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
                         </li>
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div></h:form><!--/.nav-collapse -->
             </div>
         </div> 
         <!-- /.navbar -->
@@ -106,26 +105,9 @@
                         </div>
 
                         <div class="col-md-6 widget">
-						<h3 class="widget-title">MASTER</h3>
+						<h3 class="widget-title"><p:commandLink value="MASTER" action="#{personController.showLogin}" /></h3>
 						<div class="widget-body">
-                                                    <p>
-                                                        
-
-
-1.Objectifs de la formation:
-
-<ul><li>Il s’agit d’un cursus nouveau et attractif, la formation ambitionne de répondre aux nouvelles exigences de la fiscalité et la gestion fiscale des entreprises.</li>
-    <li>L’objectif du Master est de former des fiscalistes de haut niveau disposant des connaissances techniques et pratiques nécessaires à l'entrée immédiate dans la vie professionnelle, capables de maîtriser la fiscalité nationale et internationale</li>
-    <li>Préparer les jeunes chercheurs aux carrières de fiscaliste au sein des administrations fiscales, des grandes entreprises et des cabinets d'avocats à vocation nationale et internationale.</li>
-    <li>Permettre aux étudiants, d'acquérir des capacités de raisonnement juridique et technique touchant directement ou indirectement à la fiscalité.</li>
-</ul>
-
-
-                                                        
-                                                    </p>
-							<p>2.Compétences à acquérir:<br />
-
-Maîtriser les concepts et les techniques de la fiscalité nationale et internationale</p>
+                                                    
 						</div>
 					</div>
 
@@ -140,6 +122,7 @@ Maîtriser les concepts et les techniques de la fiscalité nationale et internat
                         <div class="col-md-6 widget">
                             <div class="widget-body">
                                 <p class="simplenav">
+                                    <li><a href="http://preinsmasterdroit.ump.ma/canmaster">Acceuil</a></li>
                                     <a href="http://droit.ump.ma/fr">La Faculté</a> | 
                                     <a href="http://droit.ump.ma/fr/master">Master</a> |
                                     <a href="http://droit.ump.ma/fr/master-specialises">Master Spécialisé</a> |
@@ -152,7 +135,7 @@ Maîtriser les concepts et les techniques de la fiscalité nationale et internat
                         <div class="col-md-6 widget">
                             <div class="widget-body">
                                 <p class="text-right">
-                                    Copyright 2018, FSJES. Réalisé par <a href="http://www.soshardandsoft.com/" rel="designer">SOS Hard Soft</a> 
+                                    Copyright 2018, FSJES. Réalisé par <a href="http://www.soshardandsoft.com/" rel="designer"> SOS Hard Soft</a> 
                                 </p>
                             </div>
                         </div>

@@ -23,11 +23,11 @@
                         <hr />
                         <h:form>
                             <p:messages for="update"/>
-                        <p:panel header="Veuillez Saisir Vos informations personnels">
+                        <p:panel header="Veuillez Saisir Vos informations personnelles">
                             <p:panelGrid columns="4">
                                 <h:outputText value="CNE :" />
                                     <p:inputText id="cne" class="form-control" value="#{etudiantController.newEtudiant.cne}"
-                                                 required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant">
+                                                 required="true" requiredMessage="Veuillez saisir votre code national de l'étudiant">
                                         <f:validator binding="#{uniqueCneValidator}" />
                                         <f:ajax event="blur" render="verifyCNE"/>
                                     </p:inputText>
@@ -35,22 +35,39 @@
                                     <p:message id="verifyCNE" for="cne"/>
                                <h:outputText value="CNI :" />
                                     <p:inputText id="cin" class="form-control" value="#{etudiantController.newEtudiant.cin}"
-                                                 required="true" requiredMessage="Veuillez saisir votre code didentite nationale !">
+                                                 required="true" requiredMessage="Veuillez saisir votre code d'identité nationale !">
                                         <f:validator binding="#{uniqueCinValidator}" />
                                         <f:ajax event="blur" render="verifyCIN"/>
                                     </p:inputText>
                                <h:outputText dir="rtl" value="رقم البطاقة الوطنية للتعريف : " />
                                     <p:message id="verifyCIN" for="cin"/>
+                            </p:panelGrid>
+                            <p:panelGrid columns="3">
                                     <h:outputText value="Nom :" />
                                <p:inputText id="nom" class="form-control" value="#{etudiantController.newEtudiant.nom}"
                                                  required="true" requiredMessage="Veuillez saisir votre nom"/>
-                               <h:outputText dir="rtl" value="الاسم العائلي : " />     
+                                    
                                <p:message for="nom"/>
-                                    <h:outputText value="Prénom :" />
+                             
+                               <p:message for="nomAr"/>
+                               <p:inputText id="nomAr" class="form-control" value="#{etudiantController.newEtudiant.nomAr}"
+                                                 required="true" requiredMessage="Veuillez saisir votre nom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
+                               <h:outputText dir="rtl" value="الاسم العائلي : " />
+                                    
+                               <h:outputText value="Prénom :" />
                                 <p:inputText id="prenom" class="form-control" value="#{etudiantController.newEtudiant.prenom}"
-                                                 required="true" requiredMessage="Veuillez saisir votre prenom"/>
-                                <h:outputText dir="rtl" value="الاسم الشخصي : " />
+                                                 required="true" requiredMessage="Veuillez saisir votre prénom"/>
+                                
                                     <p:message for="prenom"/>
+                                    
+                                <p:message for="prenomAr"/>
+                                <p:inputText id="prenomAr" class="form-control" value="#{etudiantController.newEtudiant.prenomAr}"
+                                                 required="true" requiredMessage="Veuillez saisir votre prénom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
+                                
+                                    
+                                    <h:outputText dir="rtl" value="الاسم الشخصي : " />
+                                </p:panelGrid>
+                            <p:panelGrid columns="4">    
                                     <h:outputText value="Date de naissance :" />
                                     <p:calendar id="dateNaissance" value="#{etudiantController.newEtudiant.dateNaissance}" title="DateNaissance" 
                                         locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />

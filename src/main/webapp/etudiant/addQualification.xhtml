@@ -47,8 +47,8 @@
                                 event="select"/>-->
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
-                    <p:outputLabel value="Veuillez charger l'image de votre diplome :" />
-                    <p:fileUpload id="fichier" label="Cliquez pour Chargé votre copie de diplome" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                    <p:outputLabel value="Veuillez charger l'image de votre diplôme :" />
+                    <p:fileUpload id="fichier" label="Cliquez pour Chargé votre copie de diplôme" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
                                   sizeLimit="5000000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:message for="fichier"/>
 
@@ -59,7 +59,7 @@
                         <f:selectItem itemLabel="Passable" itemValue="Passable" />  
                         <f:selectItem itemLabel="Assez bien" itemValue="Assez bien" />  
                         <f:selectItem itemLabel="Bien" itemValue="Bien" />
-                        <f:selectItem itemLabel="Tres bien" itemValue="Tres bien" />
+                        <f:selectItem itemLabel="Très bien" itemValue="Très bien" />
                         <f:selectItem itemLabel="Excellent" itemValue="Excellent" />
                     </p:selectOneMenu>
                     <p:message for="mention"/>
@@ -79,7 +79,7 @@
                     <p:message for="partieDelivrante"/>
 
                 </p:panelGrid>
-                        <p:panel header="Les notes de semestres(1->6) pour les licence ou master(1->4) / les années pour les Ingénieurs(1->5) ou les étudiants de l'ancien systeme(1->4)">
+                        <p:panel header="Les notes des semestres(1->6) pour les licences ou masters(1->4) / les années pour les Ingénieurs(1->5) ou les étudiants de l'ancien système(1->4)">
                         <p:panelGrid columns="4">
                         <p:outputLabel value="Note 1 :"/>
                         <p:inputNumber id="note1" value="#{etudiantController.newQualification.note1}" minValue="0.00" maxValue="20.00" />

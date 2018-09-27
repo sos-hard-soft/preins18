@@ -7,13 +7,13 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:define name="content">
-    <h3 class="text-center thin">Préinscription en masters de la faculté des sciences juridiques économiques et sociales - Oujda</h3>
+    <h3 class="text-center thin">Candidature en masters de la faculté des sciences juridiques économiques et sociales - Oujda</h3>
 			<h:form>
                             <p:messages for="update"/>
                             <div class="row ">
                                 <p:commandLink action="#{etudiantController.showCreate}">
                                 <div class="col-md-6 col-sm-6 fst highlight">
-                                    <h1>Cliquez ici pour la création de votre compte pour gestion de préinscription</h1>
+                                    <h1 style="color: #FFF;">Cliquez ici pour la création de votre compte pour gestion de candidature</h1>
                                 </div>
                                 <div class="col-md-6 col-sm-6 highlight">
                                     <img src="resources/images/createAccount.jpg" />
@@ -23,37 +23,15 @@
                             <div class="row ">
                                 <p:commandLink action="#{etudiantController.showLogin}">
                                 <div class="col-md-6 col-sm-6 scnd highlight">
-                                    <h1>Cliquez ici pour acceder <br />a votre compte  déja crée auparavant</h1>
+                                    <h1 style="color: #FFF;">Cliquez ici pour accéder <br />a votre compte  déja crée auparavant</h1>
                                 </div>
                                 <div class="col-md-6 col-sm-6 highlight">
                                     <img src="resources/images/reachAccount.jpg" />
                                 </div>
                                     </p:commandLink>
                             </div>
-			<div class="row">
-                            
-				<div class="col-md-8 col-sm-6 highlight">
-                                    <h1>Si vous trouvez des dificulté dans l'utilisation de notre plateforme, cette vidéo vous guidera pas a ps pour réaliser votre candidature! </h1>
-				</div>
-				<div class="col-md-4 col-sm-6 highlight">
-					<div class="h-caption"><h4><i class="fa fa-youtube fa-9"></i>Video</h4></div>
-					
-				</div>
-				
-			</div>
+			
                             </h:form>
-            <div class="row">
-               
-                <ol>
-                  
-                    <li><p:commandLink value="New Filiere" action="#{filiereController.showCreateFiliere}" /></li>
-                    <li><p:commandLink value="New Person" action="#{personController.showLogin}" /></li>
-                </ol>
-              
-            </div>        
-             
-            
-            
             
        </ui:define>
 </ui:composition>

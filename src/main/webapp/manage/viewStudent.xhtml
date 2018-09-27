@@ -110,6 +110,50 @@
                         </p:column>
 
                     </p:dataTable>
+                    
+                     <p:accordionPanel value="#{personController.student.qualificationList}" var="diplome">
+                         <p:tab title="La piece : #{diplome.diplome}">
+                            
+                                
+                                    <o:graphicImage value="#{etudiantController.getImage(diplome.pathScan)}" dataURI="true"/>
+                                
+                            <h:panelGrid columns="2" cellpadding="5">
+                                                    
+                                <h:outputText value="Date Obtention:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.dateObtention}" />
+
+                                <h:outputText value="Date Premiere Inscription:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.datePremiereInscription}" />
+                                
+                                <h:outputText value="Etablissement délivrant le diplôme:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.partieDelivrante}" />
+                                
+                                <h:outputText value="Classement:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.classement}" />
+                                
+                                <h:outputText value="Note 1:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.note1}" />
+                                
+                                <h:outputText value="Note 2:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.note2}" />
+                                
+                                <h:outputText value="Note 3:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.note3}" />
+                                
+                                <h:outputText value="Note 4:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.note4}" />
+                                
+                                <h:outputText value="Note 5:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.note5}" />
+                                
+                                <h:outputText value="Note 6:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.note6}" />
+                                
+                                <h:outputText value="Mention:" style="font-weight: bold" />
+                                <h:outputText value="#{diplome.mention}" />
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:accordionPanel>
 
 
                 </p:tab>  
