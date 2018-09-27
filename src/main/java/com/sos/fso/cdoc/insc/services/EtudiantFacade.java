@@ -102,7 +102,7 @@ public class EtudiantFacade extends AbstractFacade<Etudiant> {
                     + "INNER JOIN t_filiere AS f ON c.id_filiere = f.id_filiere "
                     + "Where f.intitule = '" + intitule + "' and (q.diplome = 'Licence fondamentale' or q.diplome = 'Licence professionnelle');", StdList.class).getResultList();
             System.out.println("Works fine!!!!!");
-            System.out.println(preinscrit.get(0).toString());
+            //System.out.println(preinscrit.get(0).toString());
         } catch (NoResultException ex) {
             throw new NoResultException(ex.getMessage());            
         }

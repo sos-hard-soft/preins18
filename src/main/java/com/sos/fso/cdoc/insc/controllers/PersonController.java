@@ -101,6 +101,7 @@ public class PersonController implements Serializable{
     }
     
     public String showList(Filiere filiere) {
+        System.out.println("la filiere est " + filiere.getIntitule());
         stdliste = etudiantService.getStudents(filiere.getIntitule());
         return "/manage/mstList?faces-redirect=true";
     }
@@ -126,7 +127,7 @@ public class PersonController implements Serializable{
     }
     
     public String showLogin() {
-        return "/manage/logedPerson?faces-redirect=true";
+        return "/managed/logedPerson?faces-redirect=true";
     }
     
     public String showStudentDetail(String cin) {
@@ -307,6 +308,7 @@ public class PersonController implements Serializable{
     public Person getCurrent() {
         if (current == null) {
             current = new Person();
+            System.out.println("recuperation de la personne courante" + compte.getCin());
             current = personService.findByCin(compte.getCin());            
         }
         if (current.getPhoto() != null) {

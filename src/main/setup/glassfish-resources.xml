@@ -26,7 +26,7 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="jdbc/inscDB" object-type="user" pool-name="mysql_inscMast_rootPool"/>
     <mail-resource debug="false" enabled="true" 
-                   from="mabsalhi.sos@gmail.com" 
+                   from="masterfsjes@ump.ac.ma" 
                    host="smtp.gmail.com" 
                    jndi-name="mail/fsjesMailer" 
                    object-type="user" 
@@ -34,14 +34,14 @@
                    store-protocol-class="com.sun.mail.imap.IMAPStore" 
                    transport-protocol="smtp" 
                    transport-protocol-class="com.sun.mail.smtp.SMTPTransport" 
-                   user="mabsalhi.sos"
+                   user="masterfsjes"
     >
         <description/>
         <property name="mail.smtp.socketFactory.class" value="javax.net.ssl.SSLSocketFactory"/>
         <property name="mail.smtp.socketFactory.port " value="465"/>
         <property name="mail.smtp.port " value="465"/>
         <property name="mail.smtp.auth " value="true"/>
-        <property name="mail.smtp.password " value="mabsalhi.sos@gmail.com"/>
-        <property name="mail.smtp.user " value="salhi1983"/>
+        <property name="mail.smtp.password " value="masterfsjes@ump.ac.ma"/>
+        <property name="mail.smtp.user " value="MST|fsjes1819"/>
     </mail-resource>
 </resources>

@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sos.ump.fsjes.insc</groupId>
-    <artifactId>preinsmaster</artifactId>
+    <artifactId>candidmaster</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>preinsmaster</name>
+    <name>candidmaster</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

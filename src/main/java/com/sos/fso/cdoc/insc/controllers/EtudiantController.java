@@ -540,7 +540,7 @@ public class EtudiantController implements Serializable {
                 visibled = true;
                 break;
 
-            case "Licence professionelle":
+            case "Licence professionnelle":
                 visible = true;
                 visibled = true;
                 break;
