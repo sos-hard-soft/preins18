@@ -8,11 +8,24 @@
                 xmlns:o="http://omnifaces.org/ui"
                 xmlns:of="http://omnifaces.org/functions">
 
-   
+   <ui:define name="breadcrumb">
+		<h:form><ol class="breadcrumb">
+			<li><a href="http://preinsmasterdroit.ump.ma/candidmast">Acceuil</a></li>
+                        <li class="active"><p:commandLink value="Mon espace" action="#{personController.showSpace}" /></li>
+		</ol></h:form>
+                    </ui:define>
     <ui:define name="content">
-     
+        
+     <div>
+            <h1 class="page-title">Liste des candidats a votre master</h1>
+            <p>Vous pouvez visualisé le dossier d'un candidat en cliquant sur son Numéro CIN</p>            
+        </div>
         <h:form>
-
+            
+<h:commandLink>Cliquez ici pour Exporter la liste au Format excel
+        <p:graphicImage name="../resources/images/excel16.png" />
+        <p:dataExporter type="xls" target="tbl" fileName="liste candidats" pageOnly="true" />   
+    </h:commandLink>
                     <h1><h:outputText value="List"/></h1>
                     <p:dataTable id="tbl" value="#{personController.stdliste}"
                                  scrollable="true" scrollHeight="150" scrollWidth="500" frozenColumns="4" sortMode="multiple" var="item">
@@ -139,14 +152,8 @@
                     </p:dataTable>
                
             
-                    <p:dataTable>
-                        
-                    </p:dataTable>
+                                
             
-            <h:commandLink>Exporter
-        <p:graphicImage name="/demo/images/excel.png" />
-        <p:dataExporter type="xls" target="tbl" fileName="liste" pageOnly="true" />   
-    </h:commandLink>
         </h:form>
     
     </ui:define>

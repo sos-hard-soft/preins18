@@ -56,6 +56,14 @@
             <role-name>manager</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>Admin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Admin</web-resource-name>
+            <description>Administrated pages</description>
+            <url-pattern>/manage/manage.xhtml</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>umpRealm</realm-name>
@@ -71,5 +79,9 @@
     <security-role>
         <description/>
         <role-name>manager</role-name>
+    </security-role>
+    <security-role>
+        <description>Administrateur de l'application</description>
+        <role-name>admin</role-name>
     </security-role>
 </web-app>

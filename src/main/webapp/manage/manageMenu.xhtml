@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:form>
+            <p:menu>  
+        <p:submenu label="Gerer les Responsables">  
+            <p:menuitem value="Ajouter Personne" action="#{personController.showCreatePerson}" icon="ui-icon-plus"/>                          
+        </p:submenu>        
+        <p:submenu label="Gerer Filière">  
+            <p:menuitem value="Ajouter une Filière" action="#{filiereController.showCreateFiliere}" icon="ui-icon-plus"/>  
+        </p:submenu>
+        <p:submenu label="Gerer Filière">  
+            <p:menuitem value="Liste des Candidats" action="#{filiereController.showCreateFiliere}" icon="ui-icon-plus"/>  
+        </p:submenu>        
+    </p:menu>
+</h:form>
+        </ui:composition>
+    </h:body>
+</html>

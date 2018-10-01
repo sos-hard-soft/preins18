@@ -53,11 +53,9 @@
         <ui:insert name="header"></ui:insert>
     </header>
     <div class="container">
+		<ui:insert name="breadcrumb">
 		
-		<ol class="breadcrumb">
-			<li><a href="http://droit.ump.ma/preinsmast">Acceuil</a></li>
-			<li class="active">Espace personnel</li>
-		</ol>
+                    </ui:insert>
         <div class="row">
             <aside class="col-md-2 sidebar sidebar-left">
 
@@ -105,7 +103,8 @@
                         </div>
 
                         <div class="col-md-6 widget">
-						<h3 class="widget-title"><p:commandLink value="MASTER" action="#{personController.showLogin}" /></h3>
+                            <h:form>
+                            <h3 class="widget-title"><p:commandLink value="MASTER" action="#{personController.showLogin}" /></h3></h:form>			
 						<div class="widget-body">
                                                     
 						</div>
@@ -135,7 +134,7 @@
                         <div class="col-md-6 widget">
                             <div class="widget-body">
                                 <p class="text-right">
-                                    Copyright 2018, FSJES. Réalisé par <a href="http://www.soshardandsoft.com/" rel="designer"> SOS Hard Soft</a> 
+                                    Copyright 2018, FSJES. Réalisé par <a href="http://www.soshardandsoft.com/" rel="designer">SOS Hard Soft</a> 
                                 </p>
                             </div>
                         </div>

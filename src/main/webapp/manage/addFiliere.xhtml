@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/mstemp.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             <ui:define name="sidebar-left">
+                
+                    <ui:include src="manageMenu.xhtml" />
+             
+            </ui:define>
+<ui:define name="content">
+              
+                    <h:form>
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="intitule :" for="intitule" />
+                            <p:inputText id="intitule" value="#{filiereController.newFiliere.intitule}" title="intitule" />
+                            <p:outputLabel value="description :" for="description" />
+                            <p:inputText id="description" value="#{filiereController.newFiliere.description}" title="description" />
+                            <p:outputLabel value="person :" for="person" />
+                            <p:selectOneMenu id="person" value="#{filiereController.newFiliere.responsable}" title="Person">
+                                <f:selectItems value="#{personController.allPersons}" var="person"
+                                               itemValue="#{person}" itemLabel="#{person.nom}"/>
+                            </p:selectOneMenu>
+                            
+                            
+                    
+                        </p:panelGrid>
+                        <h:commandButton id="saveButton" value="Enregistrez les donnee" 
+                                         action="#{filiereController.doCreateFiliere}" />
+                
+                        
+                               
+                    </h:form>
+                
+
+           </ui:define>
+</ui:composition>
