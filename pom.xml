@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.sos.ump.fsjes.insc</groupId>
-    <artifactId>candidmaster</artifactId>
+    <artifactId>canduess</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>candidmaster</name>
+    <name>canduess</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -146,4 +146,5 @@
             <name>Repository for library EclipseLink (JPA 2.1)</name>
         </repository>
     </repositories>
+    <description>Candidature duess</description>
 </project>

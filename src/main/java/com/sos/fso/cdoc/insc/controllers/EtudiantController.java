@@ -295,7 +295,7 @@ public class EtudiantController implements Serializable {
         InputStream input = uploadedFile.getInputstream();
         System.out.println(uploadedFile.getFileName());
 
-        folder = Paths.get("C:\\inscmast\\candidats\\" + current.getCin() + "");
+        folder = Paths.get("/opt/duess/candidats/" + current.getCin() + "");
         String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
         Path file = Files.createTempFile(folder, filename + "-", "." + extension);
@@ -317,7 +317,7 @@ public class EtudiantController implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new FileInputStream(new File("C:\\inscmast\\no_document.jpeg"));
+        return new FileInputStream(new File("/opt/duess/no_document.jpeg"));
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
@@ -446,7 +446,7 @@ public class EtudiantController implements Serializable {
         activationService.create(activation);
         //Creation du répertoire spécifique a l'étudiant
         String candidatFolder = newEtudiant.getCin();
-        folder = Paths.get("C:\\inscmast\\candidats\\" + candidatFolder + "");
+        folder = Paths.get("/opt/duess/candidats" + candidatFolder + "");
         try {
             Files.createDirectories(folder);
         } catch (IOException ex) {

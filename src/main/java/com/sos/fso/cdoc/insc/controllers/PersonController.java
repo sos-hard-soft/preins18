@@ -144,7 +144,7 @@ public class PersonController implements Serializable{
     public String doCreatePerson(){
         //Creation du répertoire spécifique a l'étudiant
         String personFolder = newPerson.getCin();
-        folder = Paths.get("C:\\inscmast\\persons\\" + personFolder + "");
+        folder = Paths.get("/opt/duess/persons/" + personFolder + "");
         try {
             Files.createDirectories(folder);
         } catch (IOException ex) {
@@ -176,7 +176,7 @@ public class PersonController implements Serializable{
         InputStream input = uploadedFile.getInputstream();
         System.out.println(uploadedFile.getFileName());
 
-        folder = Paths.get("C:\\inscmast\\persons\\" + newPerson.getCin() + "");
+        folder = Paths.get("/opt/duess/persons/" + newPerson.getCin() + "");
         String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
         Path file = Files.createTempFile(folder, filename + "-", "." + extension);

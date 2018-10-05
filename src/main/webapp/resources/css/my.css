@@ -8,7 +8,7 @@
 */
 
 body{
-    background: url("/preinsmast/javax.faces.resource/images/bg.png.xhtml") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    background: url("/canduess/javax.faces.resource/images/bg.png.xhtml") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
 }
 
 #primaryMenu {
@@ -22,7 +22,7 @@ body{
     display: none;
 }
 #menuLeft {
-    background: url("/preinsmast/javax.faces.resource/images/block-bg.png.xhtml") no-repeat scroll left bottom rgba(0, 0, 0, 0);
+    background: url("/canduess/javax.faces.resource/images/block-bg.png.xhtml") no-repeat scroll left bottom rgba(0, 0, 0, 0);
     float: left;
     height: 59px;
     margin: 0 0 0 -24px;
@@ -30,7 +30,7 @@ body{
     width: 24px;
 }
 #menuRight {
-    background: url("/preinsmast/javax.faces.resource/images/right-block-bg.png.xhtml") no-repeat scroll right bottom rgba(0, 0, 0, 0);
+    background: url("/canduess/javax.faces.resource/images/right-block-bg.png.xhtml") no-repeat scroll right bottom rgba(0, 0, 0, 0);
     clear: right;
     float: right;
     height: 59px;
@@ -221,12 +221,12 @@ body{
 }
 
 #sidebar_first h2 {
-  background: url("/preinsmast/javax.faces.resource/images/block-bg-green.png") bottom left no-repeat;
+  background: url("/canduess/javax.faces.resource/images/block-bg-green.png") bottom left no-repeat;
   margin-left: -24px; 
   padding: 9px 0 24px 26px; 
 }
 #sidebar_last h2 {
-  background: url("/preinsmast/javax.faces.resource/images/right-block-bg-green.png") bottom right no-repeat;
+  background: url("/canduess/javax.faces.resource/images/right-block-bg-green.png") bottom right no-repeat;
   clear: both;
   margin-right: -24px;
   padding:9px 27px 24px 20px;
@@ -246,12 +246,12 @@ body{
 
 #sidebar_first .with-subject ul.menu li {
 	border-bottom: 1px dotted #000000;
-    list-style-image: url("/preinsmast/javax.faces.resource/images/dropdown-normal-arrow.png");
+    list-style-image: url("/canduess/javax.faces.resource/images/dropdown-normal-arrow.png");
     padding: 8px 0 8px 8px;
 	}
 	
 #sidebar_first .with-subject ul.menu li.expanded {
-	list-style-image: url("/preinsmast/javax.faces.resource/images/menu-expanded.png");
+	list-style-image: url("/canduess/javax.faces.resource/images/menu-expanded.png");
     padding: 8px 0 8px 8px;
 	}
 
