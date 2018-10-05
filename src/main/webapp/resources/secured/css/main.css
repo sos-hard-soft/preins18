@@ -7,22 +7,22 @@
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('/preinsmast/resources/secured/fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('/candidmaster/resources/secured/fonts/poppins/Poppins-Regular.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('/preinsmast/resources/secured/fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('/candidmaster/resources/secured/fonts/poppins/Poppins-Bold.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('/preinsmast/resources/secured/fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('/candidmaster/resources/secured/fonts/poppins/Poppins-Medium.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('/preinsmast/resources/secured/fonts/montserrat/Montserrat-Bold.ttf'); 
+  src: url('/candidmaster/resources/secured/fonts/montserrat/Montserrat-Bold.ttf'); 
 }
 
 /*//////////////////////////////////////////////////////////////////

@@ -21,12 +21,11 @@
             <p>Vous pouvez visualisé le dossier d'un candidat en cliquant sur son Numéro CIN</p>            
         </div>
         <h:form>
-            
-<h:commandLink>Cliquez ici pour Exporter la liste au Format excel
-        <p:graphicImage name="../resources/images/excel16.png" />
+            <div style="margin-bottom: 10px;">
+            <h:commandLink class="btn btn-download btn-action btn-lg">Cliquez ici pour Exporter la liste au Format excel
+        <p:graphicImage value="../resources/images/excel.png" />
         <p:dataExporter type="xls" target="tbl" fileName="liste candidats" pageOnly="true" />   
-    </h:commandLink>
-                    <h1><h:outputText value="List"/></h1>
+            </h:commandLink></div>
                     <p:dataTable id="tbl" value="#{personController.stdliste}"
                                  scrollable="true" scrollHeight="150" scrollWidth="500" frozenColumns="4" sortMode="multiple" var="item">
                         <p:column sortBy="#{item.cne}">

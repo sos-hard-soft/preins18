@@ -30,17 +30,17 @@
                     <!-- Button for smallest screens -->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                     <a class="navbar-brand" href="http://droit.ump.ma/fr">
-                        <img src="/preinsmast/resources/assets/images/logoFSJES.png" alt="Faculté des sciences Juridiques économiques et sociales" /></a>
+                        <img src="/candidmaster/resources/assets/images/logoFSJES.png" alt="Faculté des sciences Juridiques économiques et sociales" /></a>
                 </div>
                 <h:form><div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
-                        <li><a href="http://preinsmasterdroit.ump.ma/preinsmaster">Acceuil</a></li>
+                        <li><a href="http://preinsmasterdroit.ump.ma/candidmaster">Acceuil</a></li>
                         <li><a href="http://droit.ump.ma/fr">La Faculté</a></li>
                         <li class="active"><a href="http://droit.ump.ma/fr/master">Master</a></li>
                                 <li><a href="http://droit.ump.ma/fr/master-specialises">Master Spécialisé</a></li>
                                 <li><a href="http://droit.ump.ma/fr/diplome-universitaire-detudes-universitaires-superieures-specialisees">DUEUSS</a></li>
                         
-                         <li><p:commandLink rendered="#{!etudiantController.compte.actif or !personController.compte.actif}"><a class="btn" href="http://localhost:8080/preinsmast/security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
+                         <li><p:commandLink rendered="#{!etudiantController.compte.actif or !personController.compte.actif}"><a class="btn" href="http://preinsmasterdroit.ump.ma/candidmaster/security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
                             <p:commandButton rendered="#{etudiantController.compte.actif or personController.compte.actif}"
                              icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
                          </li>
