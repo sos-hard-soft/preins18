@@ -2,7 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/mstemp.xhtml"
+                template="../resources/msLand.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:o="http://omnifaces.org/ui"
@@ -14,20 +14,16 @@
                         <li class="active"><p:commandLink value="Mon espace" action="#{personController.showSpace}" /></li>
 		</ol></h:form>
                     </ui:define>
-    <ui:define name="sidebar-left">
-
-        <ui:include src="manageMenu.xhtml" />
-
-    </ui:define>
+   
     <ui:define name="content">
         <h:form>
             <div class="row">
-                <div class="col-lg-8">
+             
                     <p:panel id="etudiantdetail">
                         
                         <p:messages for="update"/>
                         <p:panel header="Informations personèlle">
-                            <p:panelGrid columns="2">
+                            <p:panelGrid columns="4">
                                 <p:outputLabel value="CIN : "/>
                                 <p:outputLabel value="#{personController.student.cin}"/>
 
@@ -85,43 +81,17 @@
 
 
                     </p:panel>
-                </div>
-                <div class="col-lg-3">
-                    <p:panel header="Aide">
-                        <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
-                        <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
-                        
-                    </p:panel>
-                </div>
+                
             </div>
             <p:tabView id="tabView">  
 
                 <p:tab id="tab1" title="Diplomes Obtenus">
 
-                    <p:dataTable value="#{personController.student.qualificationList}" var="diplome">
-                        <p:column  headerText="Diplome">  
-                            <h:outputText value="#{diplome.diplome}" />  
-                        </p:column> 
-                        <p:column  headerText="Date d'obtention">  
-                            <h:outputText value="#{diplome.dateObtention}" >
-                                <f:convertDateTime pattern="dd.MM.yyyy" />
-                            </h:outputText>  
-                        </p:column> 
-
-                        <p:column  headerText="Mention">  
-                            <h:outputText value="#{diplome.mention}" />  
-                        </p:column> 
-                        <p:column  headerText="Etablissement">  
-                            <h:outputText value="#{diplome.partieDelivrante}" />  
-                        </p:column>
-
-                    </p:dataTable>
-                    
                      <p:accordionPanel value="#{personController.student.qualificationList}" var="diplome">
-                         <p:tab title="La piece : #{diplome.diplome}">
+                         <p:tab title="Le Diplôme : #{diplome.diplome}">
                             
                                 
-                                    <o:graphicImage value="#{etudiantController.getImage(diplome.pathScan)}" dataURI="true"/>
+                            <o:graphicImage value="#{etudiantController.getImage(diplome.pathScan)}" dataURI="true"/>
                                 
                             <h:panelGrid columns="2" cellpadding="5">
                                                     

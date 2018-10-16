@@ -32,7 +32,7 @@
                         
                     <p:message for="piece"/>
                     <p:outputLabel value="Veuillez charger l'image de votre piece :" />
-                    <p:fileUpload id="file" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                    <p:fileUpload id="file" mode="advanced" label="Cliquez pour Chargé votre piece" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
                                   sizeLimit="5242880"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:message for="file"/>
 
