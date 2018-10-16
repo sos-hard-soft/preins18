@@ -19,31 +19,31 @@
                     <div class="panel-body">
                         <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
                         <h:form><p class="text-center text-muted">Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de
-                            <h:commandLink value="connexion" action="#{etudiantController.showLogin}" /></p></h:form>. 
+                            <h:commandLink class="btn btn-action" value="connexion" action="#{etudiantController.showLogin}" /></p></h:form>. 
                         <hr />
                         <h:form>
                             <p:messages for="update"/>
                         <p:panel header="Veuillez Saisir Vos informations personnelles">
                             <p:panelGrid columns="4">
-                                <h:outputText value="CNE :" />
+                                <h:outputText value="CNE *:" />
                                     <p:inputText id="cne" class="form-control" value="#{etudiantController.newEtudiant.cne}"
                                                  required="true" requiredMessage="Veuillez saisir votre code national de l'étudiant">
                                         <f:validator binding="#{uniqueCneValidator}" />
                                         <f:ajax event="blur" render="verifyCNE"/>
                                     </p:inputText>
-                                <h:outputText dir="rtl" value="الرقم الوطني للطالب : " />
+                                <h:outputText dir="rtl" value="الرقم الوطني للطالب *: " />
                                     <p:message id="verifyCNE" for="cne"/>
-                               <h:outputText value="CNI :" />
+                               <h:outputText value="CNI *:" />
                                     <p:inputText id="cin" class="form-control" value="#{etudiantController.newEtudiant.cin}"
                                                  required="true" requiredMessage="Veuillez saisir votre code d'identité nationale !">
                                         <f:validator binding="#{uniqueCinValidator}" />
                                         <f:ajax event="blur" render="verifyCIN"/>
                                     </p:inputText>
-                               <h:outputText dir="rtl" value="رقم البطاقة الوطنية للتعريف : " />
+                               <h:outputText dir="rtl" value="رقم البطاقة الوطنية للتعريف *: " />
                                     <p:message id="verifyCIN" for="cin"/>
                             </p:panelGrid>
                             <p:panelGrid columns="3">
-                                    <h:outputText value="Nom :" />
+                                    <h:outputText value="Nom *:" />
                                <p:inputText id="nom" class="form-control" value="#{etudiantController.newEtudiant.nom}"
                                                  required="true" requiredMessage="Veuillez saisir votre nom"/>
                                     
@@ -52,9 +52,9 @@
                                <p:message for="nomAr"/>
                                <p:inputText id="nomAr" class="form-control" value="#{etudiantController.newEtudiant.nomAr}"
                                                  required="true" requiredMessage="Veuillez saisir votre nom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
-                               <h:outputText dir="rtl" value="الاسم العائلي : " />
+                               <h:outputText dir="rtl" value="الاسم العائلي *: " />
                                     
-                               <h:outputText value="Prénom :" />
+                               <h:outputText value="Prénom *:" />
                                 <p:inputText id="prenom" class="form-control" value="#{etudiantController.newEtudiant.prenom}"
                                                  required="true" requiredMessage="Veuillez saisir votre prénom"/>
                                 
@@ -65,21 +65,21 @@
                                                  required="true" requiredMessage="Veuillez saisir votre prénom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
                                 
                                     
-                                    <h:outputText dir="rtl" value="الاسم الشخصي : " />
+                                    <h:outputText dir="rtl" value="الاسم الشخصي *: " />
                                 </p:panelGrid>
                             <p:panelGrid columns="4">    
-                                    <h:outputText value="Date de naissance :" />
-                                    <p:calendar id="dateNaissance" value="#{etudiantController.newEtudiant.dateNaissance}" title="DateNaissance" 
+                                    <h:outputText value="Date de naissance *:" />
+                                    <p:calendar id="dateNaissance" required="true" value="#{etudiantController.newEtudiant.dateNaissance}" title="DateNaissance" 
                                         locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />
-                                    <h:outputText dir="rtl" value="تاريخ الازدياد : " /> 
+                                    <h:outputText dir="rtl" value="تاريخ الازدياد  *: " /> 
                                     <p:message for="dateNaissance"/>
-                                     <h:outputText value="email :" />
+                                     <h:outputText value="email *:" />
                                      <p:inputText id="email" class="form-control" value="#{etudiantController.newEtudiant.email}"
                                                  required="true" requiredMessage="Veuillez saisir une adresse email valide">
                                         <f:validateRegex
                                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                     </p:inputText>
-                                     <h:outputText dir="rtl" value="البريد الالكتروني : " />
+                                     <h:outputText dir="rtl" value="البريد الالكتروني *: " />
                                     <p:message for="email"/>
                                     </p:panelGrid>
                                     </p:panel>
