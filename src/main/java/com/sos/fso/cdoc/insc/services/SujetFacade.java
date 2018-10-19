@@ -5,7 +5,7 @@
  */
 package com.sos.fso.cdoc.insc.services;
 
-import com.sos.fso.cdoc.insc.entities.Branche;
+import com.sos.fso.cdoc.insc.entities.Person;
 import com.sos.fso.cdoc.insc.entities.Sujet;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,8 +30,8 @@ public class SujetFacade extends AbstractFacade<Sujet> {
         super(Sujet.class);
     }
     
-    public List<Sujet> findByBranche(Branche branche){
-        return em.createNamedQuery("Sujet.findByBranche", Sujet.class).setParameter("branche", branche).getResultList();
+    public List<Sujet> findByBranche(Person responsable){
+        return em.createNamedQuery("Sujet.findByEncadrant", Sujet.class).setParameter("responsable", responsable).getResultList();
     }
     
 }

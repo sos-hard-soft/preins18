@@ -10,7 +10,7 @@ import com.sos.fso.cdoc.insc.entities.Branche;
 import com.sos.fso.cdoc.insc.entities.Choix;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
-import com.sos.fso.cdoc.insc.entities.Filiere;
+import com.sos.fso.cdoc.insc.entities.Sujet;
 import com.sos.fso.cdoc.insc.entities.Pieces;
 import com.sos.fso.cdoc.insc.entities.Qualification;
 import com.sos.fso.cdoc.insc.helpers.Hash;
@@ -19,7 +19,7 @@ import com.sos.fso.cdoc.insc.services.BrancheFacade;
 import com.sos.fso.cdoc.insc.services.ChoixFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
-import com.sos.fso.cdoc.insc.services.FiliereFacade;
+import com.sos.fso.cdoc.insc.services.SujetFacade;
 import com.sos.fso.cdoc.insc.services.MailerBean;
 import com.sos.fso.cdoc.insc.services.PiecesFacade;
 import com.sos.fso.cdoc.insc.services.QualificationFacade;
@@ -114,19 +114,15 @@ public class EtudiantController implements Serializable {
 
     @Inject
     private SujetFacade sujetService;
-    private List<Filiere> listChoix;
+    private List<Sujet> listChoix;
 
     @Inject
     private ChoixFacade choixService;
     private Choix choix = new Choix();
-    private Filiere choixFiliere;
-    private List<Filiere> choixFLTmp = new ArrayList<>();
+    private Sujet choixSujet;
+    private List<Sujet> choixFLTmp = new ArrayList<>();
 
-    @Inject
-    private FiliereFacade filiereService;
-    private List<Filiere> listFiliere;
-
-    private DualListModel<Filiere> pickFiliere;
+    private DualListModel<Sujet> pickSujet;
 
     private boolean visibled = false;
     private boolean visible = false;
@@ -174,9 +170,9 @@ public class EtudiantController implements Serializable {
         return "/etudiant/addPieces?faces-redirect=true";
     }
 
-    public String showChoixFiliere() {
-        choixFiliere = new Filiere();
-        return "/etudiant/selectFiliere?faces-redirect=true";
+    public String showChoixSujet() {
+        choixSujet = new Sujet();
+        return "/etudiant/selectSujet?faces-redirect=true";
     }
 
     public String showAddChoice() {
@@ -185,13 +181,13 @@ public class EtudiantController implements Serializable {
             branche = new Branche();
             return "/etudiant/addChoice?faces-redirect=true";
         }
-        listChoix = filiereService.findAll();
+        listChoix = sujetService.findAll();
         return "/etudiant/selectSujet?faces-redirect=true";
     }
 
     public String showSujets() {
         etudiantService.clearCache();
-        listChoix = filiereService.findAll();
+        listChoix = sujetService.findAll();
         return "/etudiant/selectSujet?faces-redirect=true";
     }
 
@@ -385,7 +381,7 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
-    public String doAddChoix(Filiere filiere) {
+    public String doAddChoix(Sujet sujet) {
         int nbChoix = current.getChoixList().size();
         System.out.println("le nombre de choix est " + nbChoix);
 
@@ -395,9 +391,9 @@ public class EtudiantController implements Serializable {
 
             while (iterator.hasNext()) {
                 Choix choixExistant = iterator.next();
-                Filiere filiereExistante = choixExistant.getIdFiliere();
-                System.out.println("le sujet de l'iteraor" + filiereExistante.getIntitule());
-                if (filiereExistante.getIntitule() == null ? filiere.getIntitule() == null : filiereExistante.getIntitule().equals(filiere.getIntitule())) {
+                Sujet sujetExistante = choixExistant.getIdSujet();
+                System.out.println("le sujet de l'iteraor" + sujetExistante.getIntitule());
+                if (sujetExistante.getIntitule() == null ? sujet.getIntitule() == null : sujetExistante.getIntitule().equals(sujet.getIntitule())) {
                     addMessage("update", FacesMessage.SEVERITY_ERROR, "Vous avez déja choisi cette Filière, ", "Veuillez effectuer un nouveau choix.");
                     return null;
                 } else {
@@ -406,10 +402,10 @@ public class EtudiantController implements Serializable {
             }
 
             choix.setIdEtudiant(current);
-            choix.setIdFiliere(filiere);
+            choix.setIdSujet(sujet);
             choixService.create(choix);
             current.getChoixList().add(choix);
-            System.out.println("Edition en cours ajout de " + choix.getIdFiliere().getIntitule());
+            System.out.println("Edition en cours ajout de " + choix.getIdSujet().getIntitule());
             etudiantService.edit(current);
             etudiantService.clearCache();
             return "/etudiant/view?faces-redirect=true";
@@ -512,7 +508,7 @@ public class EtudiantController implements Serializable {
 
             List<Choix> choixAnciens = choixService.findByIdEtudiant(current);
             choix = choixAnciens.get(1);
-            //branche = choix.getIdFiliere().getBranche();
+            //branche = choix.getIdSujet().getBranche();
             System.out.println("la nombre est : " + branche.getIntitule());
         } else {
             branche = null;
@@ -565,12 +561,12 @@ public class EtudiantController implements Serializable {
     }
 
     public void onRowSelect(SelectEvent event) {
-        FacesMessage msg = new FacesMessage("Filiere Selectionné", ((Filiere) event.getObject()).getIntitule());
+        FacesMessage msg = new FacesMessage("Sujet Selectionné", ((Sujet) event.getObject()).getIntitule());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
     public void onRowUnselect(UnselectEvent event) {
-        FacesMessage msg = new FacesMessage("Filiere déselectionné", ((Filiere) event.getObject()).getIntitule());
+        FacesMessage msg = new FacesMessage("Sujet déselectionné", ((Sujet) event.getObject()).getIntitule());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
@@ -620,12 +616,12 @@ public class EtudiantController implements Serializable {
     }
 
    
-    public Filiere getChoixFiliere() {
-        return choixFiliere;
+    public Sujet getChoixSujet() {
+        return choixSujet;
     }
 
-    public void setChoixFiliere(Filiere choixFiliere) {
-        this.choixFiliere = choixFiliere;
+    public void setChoixSujet(Sujet choixSujet) {
+        this.choixSujet = choixSujet;
     }
 
     public void setCompte(Compte compte) {
@@ -656,12 +652,12 @@ public class EtudiantController implements Serializable {
         this.branche = branche;
     }
 
-    public List<Filiere> getListChoix() {
-        listChoix = filiereService.findAll();
+    public List<Sujet> getListChoix() {
+        listChoix = sujetService.findAll();
         return listChoix;
     }
 
-    public void setListChoix(List<Filiere> listChoix) {
+    public void setListChoix(List<Sujet> listChoix) {
         this.listChoix = listChoix;
     }
 
@@ -753,21 +749,21 @@ public class EtudiantController implements Serializable {
         this.fileExist = fileExist;
     }
 
-    public List<Filiere> getChoixFLTmp() {
+    public List<Sujet> getChoixFLTmp() {
         return choixFLTmp;
     }
 
-    public void setChoixFLTmp(List<Filiere> choixFLTmp) {
+    public void setChoixFLTmp(List<Sujet> choixFLTmp) {
         this.choixFLTmp = choixFLTmp;
     }
 
-    public List<Filiere> getListFiliere() {
-        listFiliere = filiereService.findAll();
-        return listFiliere;
+    public List<Sujet> getListSujet() {
+        listChoix = sujetService.findAll();
+        return listChoix;
     }
 
-    public void setListFiliere(List<Filiere> listFiliere) {
-        this.listFiliere = listFiliere;
+    public void setListSujet(List<Sujet> listChoix) {
+        this.listChoix = listChoix;
     }
 
     public Pieces getNewPieces() {
@@ -786,22 +782,22 @@ public class EtudiantController implements Serializable {
         this.currentPieces = currentPieces;
     }
 
-    public DualListModel<Filiere> getPickFiliere() {
-        if (pickFiliere == null) {
-            pickFiliere = new DualListModel<Filiere>();
-            pickFiliere.setSource(getListFiliere());
+    public DualListModel<Sujet> getPickSujet() {
+        if (pickSujet == null) {
+            pickSujet = new DualListModel<Sujet>();
+            pickSujet.setSource(getListSujet());
         }
-        return pickFiliere;
+        return pickSujet;
     }
 
-    public void setPickFiliere(DualListModel<Filiere> pickFiliere) {
-        this.pickFiliere = pickFiliere;
+    public void setPickSujet(DualListModel<Sujet> pickSujet) {
+        this.pickSujet = pickSujet;
     }
 
     public void onTransfer(TransferEvent event) {
         StringBuilder builder = new StringBuilder();
         for (Object item : event.getItems()) {
-            builder.append(((Filiere) item).getIntitule()).append("<br />");
+            builder.append(((Sujet) item).getIntitule()).append("<br />");
         }
 
         FacesMessage msg = new FacesMessage();

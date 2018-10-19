@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Choix.findAll", query = "SELECT c FROM Choix c")
     , @NamedQuery(name = "Choix.findByIdChoix", query = "SELECT c FROM Choix c WHERE c.idChoix = :idChoix")
     , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")
-    , @NamedQuery(name = "Choix.findByIdFiliere", query = "SELECT c FROM Choix c WHERE c.idFiliere = :idFiliere")})
+    , @NamedQuery(name = "Choix.findByIdSujet", query = "SELECT c FROM Choix c WHERE c.idSujet = :idSujet")})
 public class Choix implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,9 +44,9 @@ public class Choix implements Serializable {
     @JoinColumn(name = "id_etudiant", referencedColumnName = "id_etudiant")
     @ManyToOne
     private Etudiant idEtudiant;
-    @JoinColumn(name = "id_filiere", referencedColumnName = "id_filiere")
+    @JoinColumn(name = "id_sujet", referencedColumnName = "id_sujet")
     @ManyToOne
-    private Filiere idFiliere;
+    private Sujet idSujet;
 
     public Choix() {
     }
@@ -79,37 +79,19 @@ public class Choix implements Serializable {
         this.idEtudiant = idEtudiant;
     }
 
-    public Filiere getIdFiliere() {
-        return idFiliere;
+    public Sujet getIdSujet() {
+        return idSujet;
     }
 
-    public void setIdFiliere(Filiere idFiliere) {
-        this.idFiliere = idFiliere;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idChoix != null ? idChoix.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Choix)) {
-            return false;
-        }
-        Choix other = (Choix) object;
-        if ((this.idChoix == null && other.idChoix != null) || (this.idChoix != null && !this.idChoix.equals(other.idChoix))) {
-            return false;
-        }
-        return true;
+    public void setIdSujet(Sujet idSujet) {
+        this.idSujet = idSujet;
     }
 
     @Override
     public String toString() {
-        return "com.sos.fso.cdoc.insc.entities.Choix[ idChoix=" + idChoix + " ]";
+        return "Choix{" + "idEtudiant=" + idEtudiant + ", idSujet=" + idSujet + '}';
     }
+
+    
     
 }

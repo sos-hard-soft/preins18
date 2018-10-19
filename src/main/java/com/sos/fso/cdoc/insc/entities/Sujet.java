@@ -34,10 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sujet.findAll", query = "SELECT s FROM Sujet s")
     , @NamedQuery(name = "Sujet.findByIdSujet", query = "SELECT s FROM Sujet s WHERE s.idSujet = :idSujet")
     , @NamedQuery(name = "Sujet.findByDescription", query = "SELECT s FROM Sujet s WHERE s.description = :description")
-    , @NamedQuery(name = "Sujet.findByEncadrant", query = "SELECT s FROM Sujet s WHERE s.encadrant = :encadrant")
-    , @NamedQuery(name = "Sujet.findByEtablissement", query = "SELECT s FROM Sujet s WHERE s.etablissement = :etablissement")
+    , @NamedQuery(name = "Sujet.findByEncadrant", query = "SELECT s FROM Sujet s WHERE s.responsable = :responsable")
     , @NamedQuery(name = "Sujet.findByIntitule", query = "SELECT s FROM Sujet s WHERE s.intitule = :intitule")
-    , @NamedQuery(name = "Sujet.findByLabo", query = "SELECT s FROM Sujet s WHERE s.labo = :labo")
+    , @NamedQuery(name = "Sujet.findByLabo", query = "SELECT s FROM Sujet s WHERE s.idLaboratoire = :idLaboratoire")
     , @NamedQuery(name = "Sujet.findByNbPlace", query = "SELECT s FROM Sujet s WHERE s.nbPlace = :nbPlace")
     , @NamedQuery(name = "Sujet.findByOptimisticLock", query = "SELECT s FROM Sujet s WHERE s.optimisticLock = :optimisticLock")})
 public class Sujet implements Serializable {
@@ -49,35 +48,26 @@ public class Sujet implements Serializable {
     @Column(name = "id_sujet")
     private Integer idSujet;
     @Size(max = 255)
-    @Column(name = "description")
-    private String description;
-    @Size(max = 255)
-    @Column(name = "encadrant")
-    private String encadrant;
-    @Size(max = 255)
-    @Column(name = "etablissement")
-    private String etablissement;
-    @Size(max = 255)
     @Column(name = "intitule")
     private String intitule;
     @Size(max = 255)
-    @Column(name = "labo")
-    private String labo;
+    @Column(name = "description")
+    private String description;    
+    @JoinColumn(name = "person", referencedColumnName = "id_person")
+    @ManyToOne
+    private Person responsable;
     @Column(name = "nb_place")
     private Integer nbPlace;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @JoinColumn(name = "branche", referencedColumnName = "id_branche")
+    @JoinColumn(name = "laboratoire", referencedColumnName = "choixList")
     @ManyToOne
-    private Branche branche;
-    //@OneToMany(mappedBy = "idSujet")
-    //private List<Choix> choixList;
+    private Laboratoire idLaboratoire;
+    @OneToMany(mappedBy = "idSujet")
+    private List<Choix> choixList;
 
+    
     public Sujet() {
-    }
-
-    public Sujet(Integer idSujet) {
-        this.idSujet = idSujet;
     }
 
     public Integer getIdSujet() {
@@ -88,30 +78,6 @@ public class Sujet implements Serializable {
         this.idSujet = idSujet;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getEncadrant() {
-        return encadrant;
-    }
-
-    public void setEncadrant(String encadrant) {
-        this.encadrant = encadrant;
-    }
-
-    public String getEtablissement() {
-        return etablissement;
-    }
-
-    public void setEtablissement(String etablissement) {
-        this.etablissement = etablissement;
-    }
-
     public String getIntitule() {
         return intitule;
     }
@@ -120,12 +86,20 @@ public class Sujet implements Serializable {
         this.intitule = intitule;
     }
 
-    public String getLabo() {
-        return labo;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLabo(String labo) {
-        this.labo = labo;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Person getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(Person responsable) {
+        this.responsable = responsable;
     }
 
     public Integer getNbPlace() {
@@ -144,42 +118,24 @@ public class Sujet implements Serializable {
         this.optimisticLock = optimisticLock;
     }
 
-    public Branche getBranche() {
-        return branche;
+    public Laboratoire getIdLaboratoire() {
+        return idLaboratoire;
     }
 
-    public void setBranche(Branche branche) {
-        this.branche = branche;
+    public void setIdLaboratoire(Laboratoire idLaboratoire) {
+        this.idLaboratoire = idLaboratoire;
     }
 
-//    @XmlTransient
-//    public List<Choix> getChoixList() {
-//        return choixList;
-//    }
-//
-//    public void setChoixList(List<Choix> choixList) {
-//        this.choixList = choixList;
-//    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idSujet != null ? idSujet.hashCode() : 0);
-        return hash;
+    public List<Choix> getChoixList() {
+        return choixList;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Sujet)) {
-            return false;
-        }
-        Sujet other = (Sujet) object;
-        if ((this.idSujet == null && other.idSujet != null) || (this.idSujet != null && !this.idSujet.equals(other.idSujet))) {
-            return false;
-        }
-        return true;
+    public void setChoixList(List<Choix> choixList) {
+        this.choixList = choixList;
     }
+
+    
+   
 
     @Override
     public String toString() {
