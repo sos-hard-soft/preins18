@@ -5,8 +5,8 @@
  */
 package com.sos.fso.cdoc.insc.controllers;
 
-import com.sos.fso.cdoc.insc.entities.Sujet;
-import com.sos.fso.cdoc.insc.services.SujetFacade;
+import com.sos.fso.cdoc.insc.entities.Laboratoire;
+import com.sos.fso.cdoc.insc.services.LaboratoireFacade;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,19 +23,19 @@ import javax.inject.Named;
  *
  * @author master05
  */
-@Named(value = "sujetController")
+@Named(value = "laboratoireController")
 @SessionScoped
-public class SujetController implements Serializable{
+public class LaboratoireController implements Serializable{
    // ======================================
     // = Attributes =
     // ======================================
     private static final Logger logger = Logger.getLogger(LaboratoireController.class.getName());
     
     @Inject
-    private SujetFacade sujetService;
-    private Sujet newSujet;
-    private Sujet current;
-    private List<Sujet> sujets;
+    private LaboratoireFacade laboratoireService;
+    private Laboratoire newLaboratoire;
+    private Laboratoire current;
+    private List<Laboratoire> laboratoires;
     
     /**
      * Creates a new instance of MasterController
@@ -47,63 +47,63 @@ public class SujetController implements Serializable{
     }
 
     public String showDetails() {
-        return "/manage/view?faces-redirect=true";
+        return "/manage/viewLabo?faces-redirect=true";
     }
 
-    public String showCreateSujet() {
-        newSujet = new Sujet();
-        return "/manage/addSujet?faces-redirect=true";
+    public String showCreateLaboratoire() {
+        newLaboratoire = new Laboratoire();
+        return "/manage/addLabo?faces-redirect=true";
     }
     
-    public List<Sujet> getAllSujets() {
-        return sujetService.findAll();
+    public List<Laboratoire> getAllLaboratoires() {
+        return laboratoireService.findAll();
     }
     
     
-    public String doCreateSujet(){
-        System.out.println("Procedure de creation " + newSujet.getIntitule());
-        sujetService.create(newSujet);
+    public String doCreateLaboratoire(){
+        System.out.println("Procedure de creation " + newLaboratoire.getIntitule());
+        laboratoireService.create(newLaboratoire);
         FacesMessage message = new FacesMessage( "Succès de l'inscription !" );
         FacesContext.getCurrentInstance().addMessage( null, message );
         return "/index?faces-redirect=true";
     }
     
-    public SujetController() {
+    public LaboratoireController() {
         
        
     }
 
-    public Sujet getNewSujet() {
-        return newSujet;
+    public Laboratoire getNewLaboratoire() {
+        return newLaboratoire;
     }
 
-    public void setNewSujet(Sujet newSujet) {
-        this.newSujet = newSujet;
+    public void setNewLaboratoire(Laboratoire newLaboratoire) {
+        this.newLaboratoire = newLaboratoire;
     }
 
-    public Sujet getCurrent() {
+    public Laboratoire getCurrent() {
         return current;
     }
 
-    public void setCurrent(Sujet current) {
+    public void setCurrent(Laboratoire current) {
         this.current = current;
     }
 
-    public Sujet getSujet(java.lang.Integer id) {
-        return sujetService.find(id);
+    public Laboratoire getLaboratoire(java.lang.Integer id) {
+        return laboratoireService.find(id);
     }
     
-    @FacesConverter(forClass = Sujet.class)
-    public static class SujetControllerConverter implements Converter {
+    @FacesConverter(forClass = Laboratoire.class)
+    public static class LaboratoireControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            SujetController controller = (SujetController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "sujetController");
-            return controller.getSujet(getKey(value));
+            LaboratoireController controller = (LaboratoireController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "laboratoireController");
+            return controller.getLaboratoire(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -123,11 +123,11 @@ public class SujetController implements Serializable{
             if (object == null) {
                 return null;
             }
-            if (object instanceof Sujet) {
-                Sujet o = (Sujet) object;
-                return getStringKey(o.getIdSujet());
+            if (object instanceof Laboratoire) {
+                Laboratoire o = (Laboratoire) object;
+                return getStringKey(o.getIdLaboratoire());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Sujet.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Laboratoire.class.getName());
             }
         }
     

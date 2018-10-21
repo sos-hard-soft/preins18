@@ -6,7 +6,6 @@
 package com.sos.fso.cdoc.insc.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,16 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -54,23 +49,13 @@ public class Filiere implements Serializable {
     private String intitule;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @OneToMany(mappedBy = "idFiliere")
-    private List<Choix> choixList;
     @JoinColumn(name = "person", referencedColumnName = "id_person")
     @ManyToOne
-    private Person responsable;
+    private Person person;
 
     public Filiere() {
     }
 
-    public Filiere(Integer idFiliere, String description, String intitule, Integer optimisticLock, Person responsable) {
-        this.idFiliere = idFiliere;
-        this.description = description;
-        this.intitule = intitule;
-        this.optimisticLock = optimisticLock;
-        this.responsable = responsable;
-    }
-    
     public Filiere(Integer idFiliere) {
         this.idFiliere = idFiliere;
     }
@@ -107,20 +92,12 @@ public class Filiere implements Serializable {
         this.optimisticLock = optimisticLock;
     }
 
-    public List<Choix> getChoixList() {
-        return choixList;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setChoixList(List<Choix> choixList) {
-        this.choixList = choixList;
-    }
-
-    public Person getResponsable() {
-        return responsable;
-    }
-
-    public void setResponsable(Person responsable) {
-        this.responsable = responsable;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     @Override
@@ -145,7 +122,7 @@ public class Filiere implements Serializable {
 
     @Override
     public String toString() {
-        return intitule;
+        return "com.sos.fso.cdoc.insc.entities.Filiere[ idFiliere=" + idFiliere + " ]";
     }
     
 }

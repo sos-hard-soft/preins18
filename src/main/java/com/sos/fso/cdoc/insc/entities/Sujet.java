@@ -34,9 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sujet.findAll", query = "SELECT s FROM Sujet s")
     , @NamedQuery(name = "Sujet.findByIdSujet", query = "SELECT s FROM Sujet s WHERE s.idSujet = :idSujet")
     , @NamedQuery(name = "Sujet.findByDescription", query = "SELECT s FROM Sujet s WHERE s.description = :description")
-    , @NamedQuery(name = "Sujet.findByEncadrant", query = "SELECT s FROM Sujet s WHERE s.responsable = :responsable")
     , @NamedQuery(name = "Sujet.findByIntitule", query = "SELECT s FROM Sujet s WHERE s.intitule = :intitule")
-    , @NamedQuery(name = "Sujet.findByLabo", query = "SELECT s FROM Sujet s WHERE s.idLaboratoire = :idLaboratoire")
     , @NamedQuery(name = "Sujet.findByNbPlace", query = "SELECT s FROM Sujet s WHERE s.nbPlace = :nbPlace")
     , @NamedQuery(name = "Sujet.findByOptimisticLock", query = "SELECT s FROM Sujet s WHERE s.optimisticLock = :optimisticLock")})
 public class Sujet implements Serializable {
@@ -48,26 +46,29 @@ public class Sujet implements Serializable {
     @Column(name = "id_sujet")
     private Integer idSujet;
     @Size(max = 255)
+    @Column(name = "description")
+    private String description;
+    @Size(max = 255)
     @Column(name = "intitule")
     private String intitule;
-    @Size(max = 255)
-    @Column(name = "description")
-    private String description;    
-    @JoinColumn(name = "person", referencedColumnName = "id_person")
-    @ManyToOne
-    private Person responsable;
     @Column(name = "nb_place")
     private Integer nbPlace;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @JoinColumn(name = "laboratoire", referencedColumnName = "choixList")
+    @JoinColumn(name = "laboratoire", referencedColumnName = "id_laboratoire")
     @ManyToOne
-    private Laboratoire idLaboratoire;
+    private Laboratoire laboratoire;
+    @JoinColumn(name = "person", referencedColumnName = "id_person")
+    @ManyToOne
+    private Person responsable;
     @OneToMany(mappedBy = "idSujet")
     private List<Choix> choixList;
 
-    
     public Sujet() {
+    }
+
+    public Sujet(Integer idSujet) {
+        this.idSujet = idSujet;
     }
 
     public Integer getIdSujet() {
@@ -78,14 +79,6 @@ public class Sujet implements Serializable {
         this.idSujet = idSujet;
     }
 
-    public String getIntitule() {
-        return intitule;
-    }
-
-    public void setIntitule(String intitule) {
-        this.intitule = intitule;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -94,12 +87,12 @@ public class Sujet implements Serializable {
         this.description = description;
     }
 
-    public Person getResponsable() {
-        return responsable;
+    public String getIntitule() {
+        return intitule;
     }
 
-    public void setResponsable(Person responsable) {
-        this.responsable = responsable;
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
     }
 
     public Integer getNbPlace() {
@@ -118,14 +111,24 @@ public class Sujet implements Serializable {
         this.optimisticLock = optimisticLock;
     }
 
-    public Laboratoire getIdLaboratoire() {
-        return idLaboratoire;
+    public Laboratoire getLaboratoire() {
+        return laboratoire;
     }
 
-    public void setIdLaboratoire(Laboratoire idLaboratoire) {
-        this.idLaboratoire = idLaboratoire;
+    public void setLaboratoire(Laboratoire laboratoire) {
+        this.laboratoire = laboratoire;
     }
 
+    public Person getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(Person responsable) {
+        this.responsable = responsable;
+    }
+
+    
+    @XmlTransient
     public List<Choix> getChoixList() {
         return choixList;
     }
@@ -134,8 +137,25 @@ public class Sujet implements Serializable {
         this.choixList = choixList;
     }
 
-    
-   
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idSujet != null ? idSujet.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Sujet)) {
+            return false;
+        }
+        Sujet other = (Sujet) object;
+        if ((this.idSujet == null && other.idSujet != null) || (this.idSujet != null && !this.idSujet.equals(other.idSujet))) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {

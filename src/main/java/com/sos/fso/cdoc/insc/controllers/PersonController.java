@@ -9,7 +9,6 @@ import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
-import com.sos.fso.cdoc.insc.entities.Students;
 import com.sos.fso.cdoc.insc.helpers.StdList;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
@@ -53,7 +52,7 @@ public class PersonController implements Serializable{
    // ======================================
     // = Attributes =
     // ======================================
-    private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
+    private static final Logger logger = Logger.getLogger(PersonController.class.getName());
     
     @Inject
     private PersonFacade personService;

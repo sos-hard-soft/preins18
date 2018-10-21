@@ -31,13 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "t_pieces")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pieces.findAll", query = "SELECT q FROM Pieces q")
+    @NamedQuery(name = "Pieces.findAll", query = "SELECT p FROM Pieces p")
     , @NamedQuery(name = "Pieces.findByIdPieces", query = "SELECT p FROM Pieces p WHERE p.idPieces = :idPieces")
-    , @NamedQuery(name = "Pieces.findByPathScan", query = "SELECT p FROM Pieces p WHERE p.pathScan = :pathScan")
     , @NamedQuery(name = "Pieces.findByDateObtention", query = "SELECT p FROM Pieces p WHERE p.dateObtention = :dateObtention")
-    , @NamedQuery(name = "Pieces.findByIntitule", query = "SELECT p FROM Pieces p WHERE p.intitule = :intitule")
+    , @NamedQuery(name = "Pieces.findByIntitiul\u00e9", query = "SELECT p FROM Pieces p WHERE p.intitiul\u00e9 = :intitiul\u00e9")
     , @NamedQuery(name = "Pieces.findByOptimisticLock", query = "SELECT p FROM Pieces p WHERE p.optimisticLock = :optimisticLock")
-    , @NamedQuery(name = "Pieces.findByPartieDelivrante", query = "SELECT p FROM Pieces p WHERE p.partieDelivrante = :partieDelivrante")})
+    , @NamedQuery(name = "Pieces.findByPartieDelivrante", query = "SELECT p FROM Pieces p WHERE p.partieDelivrante = :partieDelivrante")
+    , @NamedQuery(name = "Pieces.findByPathScan", query = "SELECT p FROM Pieces p WHERE p.pathScan = :pathScan")})
 public class Pieces implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,20 +46,20 @@ public class Pieces implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_pieces")
     private Integer idPieces;
-    @Size(max = 255)
-    @Column(name = "path_scan")
-    private String pathScan;
     @Column(name = "date_obtention")
     @Temporal(TemporalType.DATE)
     private Date dateObtention;
     @Size(max = 255)
-    @Column(name = "intitiulé")
-    private String intitule;
+    @Column(name = "intitiul\u00e9")
+    private String intitiulé;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
     @Size(max = 255)
     @Column(name = "partie_delivrante")
     private String partieDelivrante;
+    @Size(max = 255)
+    @Column(name = "path_scan")
+    private String pathScan;
     @JoinColumn(name = "etudiant", referencedColumnName = "id_etudiant")
     @ManyToOne
     private Etudiant etudiant;
@@ -79,28 +79,20 @@ public class Pieces implements Serializable {
         this.idPieces = idPieces;
     }
 
-    public String getPathScan() {
-        return pathScan;
-    }
-
-    public String getIntitule() {
-        return intitule;
-    }
-
-    public void setIntitule(String intitule) {
-        this.intitule = intitule;
-    }
-    
-    public void setPathScan(String pathScan) {
-        this.pathScan = pathScan;
-    }
-
     public Date getDateObtention() {
         return dateObtention;
     }
 
     public void setDateObtention(Date dateObtention) {
         this.dateObtention = dateObtention;
+    }
+
+    public String getIntitiulé() {
+        return intitiulé;
+    }
+
+    public void setIntitiulé(String intitiulé) {
+        this.intitiulé = intitiulé;
     }
 
     public Integer getOptimisticLock() {
@@ -117,6 +109,14 @@ public class Pieces implements Serializable {
 
     public void setPartieDelivrante(String partieDelivrante) {
         this.partieDelivrante = partieDelivrante;
+    }
+
+    public String getPathScan() {
+        return pathScan;
+    }
+
+    public void setPathScan(String pathScan) {
+        this.pathScan = pathScan;
     }
 
     public Etudiant getEtudiant() {
@@ -151,5 +151,5 @@ public class Pieces implements Serializable {
     public String toString() {
         return "com.sos.fso.cdoc.insc.entities.Pieces[ idPieces=" + idPieces + " ]";
     }
-
+    
 }

@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Choix.findAll", query = "SELECT c FROM Choix c")
     , @NamedQuery(name = "Choix.findByIdChoix", query = "SELECT c FROM Choix c WHERE c.idChoix = :idChoix")
-    , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")
-    , @NamedQuery(name = "Choix.findByIdSujet", query = "SELECT c FROM Choix c WHERE c.idSujet = :idSujet")})
+    , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")})
 public class Choix implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,10 +87,28 @@ public class Choix implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Choix{" + "idEtudiant=" + idEtudiant + ", idSujet=" + idSujet + '}';
+    public int hashCode() {
+        int hash = 0;
+        hash += (idChoix != null ? idChoix.hashCode() : 0);
+        return hash;
     }
 
-    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Choix)) {
+            return false;
+        }
+        Choix other = (Choix) object;
+        if ((this.idChoix == null && other.idChoix != null) || (this.idChoix != null && !this.idChoix.equals(other.idChoix))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.sos.fso.cdoc.insc.entities.Choix[ idChoix=" + idChoix + " ]";
+    }
     
 }

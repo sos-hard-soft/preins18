@@ -17,7 +17,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -73,7 +72,7 @@ public class Etudiant implements Serializable {
     @Column(name = "cin")
     private String cin;
     @Column(name = "cne")
-    private long cne;
+    private BigInteger cne;
     @Column(name = "date_naissance")
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
@@ -118,10 +117,10 @@ public class Etudiant implements Serializable {
     private Branche branche;
     @OneToMany(mappedBy = "etudiant")
     private List<Qualification> qualificationList;
-    @OneToMany(mappedBy = "etudiant")
-    private List<Pieces> piecesList;
     @OneToMany(mappedBy = "idEtudiant")
     private List<Choix> choixList;
+    @OneToMany(mappedBy = "etudiant")
+    private List<Pieces> piecesList;
 
     public Etudiant() {
     }
@@ -162,11 +161,11 @@ public class Etudiant implements Serializable {
         this.cin = cin;
     }
 
-    public long getCne() {
+    public BigInteger getCne() {
         return cne;
     }
 
-    public void setCne(long cne) {
+    public void setCne(BigInteger cne) {
         this.cne = cne;
     }
 
@@ -289,17 +288,7 @@ public class Etudiant implements Serializable {
     public void setBranche(Branche branche) {
         this.branche = branche;
     }
-    
-    @XmlTransient
-    public List<Pieces> getPiecesList() {
-        return piecesList;
-    }
 
-    public void setPiecesList(List<Pieces> piecesList) {
-        this.piecesList = piecesList;
-    }
-    
-    
     @XmlTransient
     public List<Qualification> getQualificationList() {
         return qualificationList;
@@ -316,6 +305,15 @@ public class Etudiant implements Serializable {
 
     public void setChoixList(List<Choix> choixList) {
         this.choixList = choixList;
+    }
+
+    @XmlTransient
+    public List<Pieces> getPiecesList() {
+        return piecesList;
+    }
+
+    public void setPiecesList(List<Pieces> piecesList) {
+        this.piecesList = piecesList;
     }
 
     @Override

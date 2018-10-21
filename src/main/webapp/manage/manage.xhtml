@@ -16,19 +16,30 @@
     
     <ui:define name="content">
         
-        <h:form>
-            <p:dataTable value="#{filiereController.allFilieres}" var="item">
-                <p:column headerText="Filière">
-                    <h:outputText value="#{item.intitule}" />
-    </p:column>
-                <p:column headerText="Intitulé">
-                    <h:outputText value="#{item.description}" />
-    </p:column>
-                <p:column headerText="Responsable">
-                    <h:outputText value="#{item.responsable.nom} #{item.responsable.prenom}" />
-    </p:column>
-            </p:dataTable>  
-            
-        </h:form>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{laboratoireController.allLaboratoires}" var="item">
+                    <p:column headerText="Intitule">
+                        <h:outputText value="#{item.intitule}"/>
+                    </p:column>
+                    <p:column headerText="Description">
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>                    
+                    <p:column headerText="Directeur">
+                        <h:outputText value="#{item.directeur.nom} #{item.directeur.prenom}"/>
+                    </p:column>
+                    <p:column headerText="Actions">
+                        <p:growl id="messages"/>  
+                        <p:menuButton value="Edition">  
+                            <p:menuitem value="Editer le laboratoire" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
+                        </p:menuButton>  
+                    </p:column>                     
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
     </ui:define>
 </ui:composition>

@@ -12,11 +12,12 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -37,21 +38,21 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
     , @NamedQuery(name = "Person.findByIdPerson", query = "SELECT p FROM Person p WHERE p.idPerson = :idPerson")
-    , @NamedQuery(name = "Person.findByAdresse", query = "SELECT p FROM Person p WHERE p.adresse = :adresse")
     , @NamedQuery(name = "Person.findByCin", query = "SELECT p FROM Person p WHERE p.cin = :cin")
+    , @NamedQuery(name = "Person.findByNom", query = "SELECT p FROM Person p WHERE p.nom = :nom")
+    , @NamedQuery(name = "Person.findByNomAr", query = "SELECT p FROM Person p WHERE p.nomAr = :nomAr")
+    , @NamedQuery(name = "Person.findByPrenom", query = "SELECT p FROM Person p WHERE p.prenom = :prenom")
+    , @NamedQuery(name = "Person.findByPrenomAr", query = "SELECT p FROM Person p WHERE p.prenomAr = :prenomAr")
     , @NamedQuery(name = "Person.findByDateNaissance", query = "SELECT p FROM Person p WHERE p.dateNaissance = :dateNaissance")
     , @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email")
+    , @NamedQuery(name = "Person.findByAdresse", query = "SELECT p FROM Person p WHERE p.adresse = :adresse")
     , @NamedQuery(name = "Person.findByEtatMatrimonial", query = "SELECT p FROM Person p WHERE p.etatMatrimonial = :etatMatrimonial")
     , @NamedQuery(name = "Person.findByFonction", query = "SELECT p FROM Person p WHERE p.fonction = :fonction")
     , @NamedQuery(name = "Person.findByLieuNaissance", query = "SELECT p FROM Person p WHERE p.lieuNaissance = :lieuNaissance")
     , @NamedQuery(name = "Person.findByLieuNaissanceAr", query = "SELECT p FROM Person p WHERE p.lieuNaissanceAr = :lieuNaissanceAr")
     , @NamedQuery(name = "Person.findByNationalite", query = "SELECT p FROM Person p WHERE p.nationalite = :nationalite")
-    , @NamedQuery(name = "Person.findByNom", query = "SELECT p FROM Person p WHERE p.nom = :nom")
-    , @NamedQuery(name = "Person.findByNomAr", query = "SELECT p FROM Person p WHERE p.nomAr = :nomAr")
     , @NamedQuery(name = "Person.findByNumeroTelephonne", query = "SELECT p FROM Person p WHERE p.numeroTelephonne = :numeroTelephonne")
     , @NamedQuery(name = "Person.findByOptimisticLock", query = "SELECT p FROM Person p WHERE p.optimisticLock = :optimisticLock")
-    , @NamedQuery(name = "Person.findByPrenom", query = "SELECT p FROM Person p WHERE p.prenom = :prenom")
-    , @NamedQuery(name = "Person.findByPrenomAr", query = "SELECT p FROM Person p WHERE p.prenomAr = :prenomAr")
     , @NamedQuery(name = "Person.findBySexe", query = "SELECT p FROM Person p WHERE p.sexe = :sexe")})
 public class Person implements Serializable {
 
@@ -62,11 +63,20 @@ public class Person implements Serializable {
     @Column(name = "id_person")
     private Integer idPerson;
     @Size(max = 255)
-    @Column(name = "adresse")
-    private String adresse;
-    @Size(max = 255)
     @Column(name = "cin")
     private String cin;
+    @Size(max = 255)
+    @Column(name = "nom")
+    private String nom;
+    @Size(max = 255)
+    @Column(name = "nom_ar")
+    private String nomAr;
+    @Size(max = 255)
+    @Column(name = "prenom")
+    private String prenom;
+    @Size(max = 255)
+    @Column(name = "prenom_ar")
+    private String prenomAr;
     @Column(name = "date_naissance")
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
@@ -74,6 +84,9 @@ public class Person implements Serializable {
     @Size(max = 255)
     @Column(name = "email")
     private String email;
+    @Size(max = 255)
+    @Column(name = "adresse")
+    private String adresse;
     @Column(name = "etat_matrimonial")
     private Boolean etatMatrimonial;
     @Size(max = 255)
@@ -88,12 +101,6 @@ public class Person implements Serializable {
     @Size(max = 255)
     @Column(name = "nationalite")
     private String nationalite;
-    @Size(max = 255)
-    @Column(name = "nom")
-    private String nom;
-    @Size(max = 255)
-    @Column(name = "nom_ar")
-    private String nomAr;
     @Column(name = "numero_telephonne")
     private BigInteger numeroTelephonne;
     @Column(name = "optimistic_lock")
@@ -101,41 +108,21 @@ public class Person implements Serializable {
     @Lob
     @Column(name = "photo")
     private byte[] photo;
-    @Size(max = 255)
-    @Column(name = "prenom")
-    private String prenom;
-    @Size(max = 255)
-    @Column(name = "prenom_ar")
-    private String prenomAr;
     @Column(name = "sexe")
     private Boolean sexe;
-    @OneToMany(mappedBy = "responsable", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person")
     private List<Filiere> filiereList;
+    @OneToMany(mappedBy = "responsable")
+    private List<Sujet> sujetList;
+    @OneToMany(mappedBy = "directeur")
+    private List<Laboratoire> laboratoireList;
+    @JoinColumn(name = "laboratoire", referencedColumnName = "id_laboratoire")
+    @ManyToOne
+    private Laboratoire laboratoire;
 
     public Person() {
     }
 
-    public Person(Integer idPerson, String adresse, String cin, Date dateNaissance, String email, Boolean etatMatrimonial, String fonction, String lieuNaissance, String lieuNaissanceAr, String nationalite, String nom, String nomAr, BigInteger numeroTelephonne, Integer optimisticLock, byte[] photo, String prenom, String prenomAr, Boolean sexe) {
-        this.idPerson = idPerson;
-        this.adresse = adresse;
-        this.cin = cin;
-        this.dateNaissance = dateNaissance;
-        this.email = email;
-        this.etatMatrimonial = etatMatrimonial;
-        this.fonction = fonction;
-        this.lieuNaissance = lieuNaissance;
-        this.lieuNaissanceAr = lieuNaissanceAr;
-        this.nationalite = nationalite;
-        this.nom = nom;
-        this.nomAr = nomAr;
-        this.numeroTelephonne = numeroTelephonne;
-        this.optimisticLock = optimisticLock;
-        this.photo = photo;
-        this.prenom = prenom;
-        this.prenomAr = prenomAr;
-        this.sexe = sexe;
-    }
-    
     public Person(Integer idPerson) {
         this.idPerson = idPerson;
     }
@@ -148,20 +135,44 @@ public class Person implements Serializable {
         this.idPerson = idPerson;
     }
 
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
     public String getCin() {
         return cin;
     }
 
     public void setCin(String cin) {
         this.cin = cin;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getNomAr() {
+        return nomAr;
+    }
+
+    public void setNomAr(String nomAr) {
+        this.nomAr = nomAr;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getPrenomAr() {
+        return prenomAr;
+    }
+
+    public void setPrenomAr(String prenomAr) {
+        this.prenomAr = prenomAr;
     }
 
     public Date getDateNaissance() {
@@ -178,6 +189,14 @@ public class Person implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public Boolean getEtatMatrimonial() {
@@ -220,22 +239,6 @@ public class Person implements Serializable {
         this.nationalite = nationalite;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getNomAr() {
-        return nomAr;
-    }
-
-    public void setNomAr(String nomAr) {
-        this.nomAr = nomAr;
-    }
-
     public BigInteger getNumeroTelephonne() {
         return numeroTelephonne;
     }
@@ -260,22 +263,6 @@ public class Person implements Serializable {
         this.photo = photo;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getPrenomAr() {
-        return prenomAr;
-    }
-
-    public void setPrenomAr(String prenomAr) {
-        this.prenomAr = prenomAr;
-    }
-
     public Boolean getSexe() {
         return sexe;
     }
@@ -284,6 +271,15 @@ public class Person implements Serializable {
         this.sexe = sexe;
     }
 
+    public Laboratoire getLaboratoire() {
+        return laboratoire;
+    }
+
+    public void setLaboratoire(Laboratoire laboratoire) {
+        this.laboratoire = laboratoire;
+    }
+    
+
     @XmlTransient
     public List<Filiere> getFiliereList() {
         return filiereList;
@@ -291,6 +287,24 @@ public class Person implements Serializable {
 
     public void setFiliereList(List<Filiere> filiereList) {
         this.filiereList = filiereList;
+    }
+
+    @XmlTransient
+    public List<Sujet> getSujetList() {
+        return sujetList;
+    }
+
+    public void setSujetList(List<Sujet> sujetList) {
+        this.sujetList = sujetList;
+    }
+
+    @XmlTransient
+    public List<Laboratoire> getLaboratoireList() {
+        return laboratoireList;
+    }
+
+    public void setLaboratoireList(List<Laboratoire> laboratoireList) {
+        this.laboratoireList = laboratoireList;
     }
 
     @Override
@@ -315,7 +329,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return prenom + " " + nom;
+        return "com.sos.fso.cdoc.insc.entities.Person[ idPerson=" + idPerson + " ]";
     }
     
 }

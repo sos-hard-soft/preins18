@@ -6,7 +6,6 @@
 package com.sos.fso.cdoc.insc.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -48,6 +47,7 @@ public class Compte implements Serializable {
     private Integer idCompte;
     @Column(name = "actif")
     private Boolean actif;
+    @Size(max = 255)
     @Column(name = "cin")
     private String cin;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
@@ -96,7 +96,6 @@ public class Compte implements Serializable {
         this.cin = cin;
     }
 
-    
     public String getEmail() {
         return email;
     }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             
+<ui:define name="content">
+                                  <f:view>
+
+
+                            <h:form>
+                                <h1><h:outputText value="Create/Edit"/></h1>
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel value="Intitule:" for="intitule" />
+                                    <p:inputText id="intitule" value="#{sujetController.newSujet.intitule}" title="Intitule" />
+                                    <h:outputLabel value="Description:" for="description" />
+                                    <p:inputText id="description" value="#{sujetController.newSujet.description}" title="Description" />
+                                    <h:outputLabel value="Responsable:" for="responsable" />
+                                    <p:selectOneMenu id="responsable" value="#{sujetController.newSujet.responsable}" title="Responsable" >
+                                        <!-- TODO: update below reference to list of available items-->
+                                        <f:selectItems value="#{personController.allPersons}" var="person"
+                                                       itemValue="#{person}" itemLabel="#{person.nom} #{person.prenom}"/>
+                                    </p:selectOneMenu>
+                                    <h:outputLabel value="NbPlace:" for="nbPlace" />
+                                    <p:inputText id="nbPlace" value="#{sujetController.newSujet.nbPlace}" title="NbPlace" />
+                                    <h:outputLabel value="IdLaboratoire:" for="idLaboratoire" />
+                                    <p:selectOneMenu id="idLaboratoire" value="#{sujetController.newSujet.laboratoire}" title="IdLaboratoire" >
+                                        <!-- TODO: update below reference to list of available items-->
+                                        <f:selectItems value="#{laboratoireController.allLaboratoires}" var="labo" 
+                                                       itemValue="#{labo}" itemLabel="#{labo.intitule}"/>
+                                    </p:selectOneMenu>
+                                </h:panelGrid>
+                            </h:form>
+                        </f:view>
+
+     
+                
+
+           </ui:define>
+</ui:composition>

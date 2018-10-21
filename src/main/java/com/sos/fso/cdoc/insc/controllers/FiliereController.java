@@ -29,7 +29,7 @@ public class FiliereController implements Serializable{
    // ======================================
     // = Attributes =
     // ======================================
-    private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
+    private static final Logger logger = Logger.getLogger(FiliereController.class.getName());
     
     @Inject
     private FiliereFacade filiereService;

@@ -51,8 +51,6 @@ public class Branche implements Serializable {
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
     @OneToMany(mappedBy = "branche")
-    private List<Sujet> sujetList;
-    @OneToMany(mappedBy = "branche")
     private List<Etudiant> etudiantList;
 
     public Branche() {
@@ -92,15 +90,6 @@ public class Branche implements Serializable {
 
     public void setOptimisticLock(Integer optimisticLock) {
         this.optimisticLock = optimisticLock;
-    }
-
-    @XmlTransient
-    public List<Sujet> getSujetList() {
-        return sujetList;
-    }
-
-    public void setSujetList(List<Sujet> sujetList) {
-        this.sujetList = sujetList;
     }
 
     @XmlTransient

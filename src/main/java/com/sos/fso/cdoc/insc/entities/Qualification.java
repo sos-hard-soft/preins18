@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Qualification.findAll", query = "SELECT q FROM Qualification q")
     , @NamedQuery(name = "Qualification.findByIdQualification", query = "SELECT q FROM Qualification q WHERE q.idQualification = :idQualification")
-    , @NamedQuery(name = "Qualification.findByPathScan", query = "SELECT q FROM Qualification q WHERE q.pathScan = :pathScan")
     , @NamedQuery(name = "Qualification.findByClassement", query = "SELECT q FROM Qualification q WHERE q.classement = :classement")
     , @NamedQuery(name = "Qualification.findByDateObtention", query = "SELECT q FROM Qualification q WHERE q.dateObtention = :dateObtention")
     , @NamedQuery(name = "Qualification.findByDatePremiereInscription", query = "SELECT q FROM Qualification q WHERE q.datePremiereInscription = :datePremiereInscription")
@@ -47,6 +46,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Qualification.findByNote6", query = "SELECT q FROM Qualification q WHERE q.note6 = :note6")
     , @NamedQuery(name = "Qualification.findByOptimisticLock", query = "SELECT q FROM Qualification q WHERE q.optimisticLock = :optimisticLock")
     , @NamedQuery(name = "Qualification.findByPartieDelivrante", query = "SELECT q FROM Qualification q WHERE q.partieDelivrante = :partieDelivrante")
+    , @NamedQuery(name = "Qualification.findByPathScan", query = "SELECT q FROM Qualification q WHERE q.pathScan = :pathScan")
     , @NamedQuery(name = "Qualification.findByScanReleve1", query = "SELECT q FROM Qualification q WHERE q.scanReleve1 = :scanReleve1")
     , @NamedQuery(name = "Qualification.findByScanReleve2", query = "SELECT q FROM Qualification q WHERE q.scanReleve2 = :scanReleve2")
     , @NamedQuery(name = "Qualification.findByScanReleve3", query = "SELECT q FROM Qualification q WHERE q.scanReleve3 = :scanReleve3")
@@ -61,9 +61,6 @@ public class Qualification implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_qualification")
     private Integer idQualification;
-    @Size(max = 255)
-    @Column(name = "path_scan")
-    private String pathScan;
     @Column(name = "classement")
     private Integer classement;
     @Column(name = "date_obtention")
@@ -96,6 +93,9 @@ public class Qualification implements Serializable {
     @Size(max = 255)
     @Column(name = "partie_delivrante")
     private String partieDelivrante;
+    @Size(max = 255)
+    @Column(name = "path_scan")
+    private String pathScan;
     @Size(max = 255)
     @Column(name = "scan_releve1")
     private String scanReleve1;
@@ -131,14 +131,6 @@ public class Qualification implements Serializable {
 
     public void setIdQualification(Integer idQualification) {
         this.idQualification = idQualification;
-    }
-
-    public String getPathScan() {
-        return pathScan;
-    }
-
-    public void setPathScan(String pathScan) {
-        this.pathScan = pathScan;
     }
 
     public Integer getClassement() {
@@ -243,6 +235,14 @@ public class Qualification implements Serializable {
 
     public void setPartieDelivrante(String partieDelivrante) {
         this.partieDelivrante = partieDelivrante;
+    }
+
+    public String getPathScan() {
+        return pathScan;
+    }
+
+    public void setPathScan(String pathScan) {
+        this.pathScan = pathScan;
     }
 
     public String getScanReleve1() {

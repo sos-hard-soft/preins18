@@ -31,9 +31,9 @@ public class FiliereFacade extends AbstractFacade<Filiere> {
         super(Filiere.class);
     }
     public Filiere findByResponsable(Person responsable) {
-        Filiere filiere;
+      /*  Filiere filiere;
         System.out.println("recherche filiere du prof : " + responsable.getPrenom());
-        Integer idFiliere = responsable.getFiliereList().get(0).getIdFiliere();
+        //Integer idFiliere = responsable.getFiliereList().get(0).getIdFiliere();
         System.out.println(" l'id : " + idFiliere );
         System.out.println(" l'intitule : " + responsable.getFiliereList().get(0).getIntitule());
         try {
@@ -42,7 +42,8 @@ public class FiliereFacade extends AbstractFacade<Filiere> {
         } catch (NoResultException ex) {
             return null;
         }
-        
+        */
+      return null;
     }
     
     public Filiere findByFiliere(Filiere responsabilite) {

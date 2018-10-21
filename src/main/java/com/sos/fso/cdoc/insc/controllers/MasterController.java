@@ -31,7 +31,7 @@ public class MasterController implements Serializable {
     // ======================================
     // = Attributes =
     // ======================================
-    private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
+    private static final Logger logger = Logger.getLogger(MasterController.class.getName());
     
     @Inject
     private PersonFacade personService;
