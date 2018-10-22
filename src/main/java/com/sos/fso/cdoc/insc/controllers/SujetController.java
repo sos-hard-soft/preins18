@@ -29,7 +29,7 @@ public class SujetController implements Serializable{
    // ======================================
     // = Attributes =
     // ======================================
-    private static final Logger logger = Logger.getLogger(LaboratoireController.class.getName());
+    private static final Logger logger = Logger.getLogger(SujetController.class.getName());
     
     @Inject
     private SujetFacade sujetService;

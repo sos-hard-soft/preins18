@@ -136,6 +136,9 @@ public class EtudiantController implements Serializable {
     // ======================================
     // = Navigation Methods =
     // ======================================
+    public String showManage() {
+        return "/manage/manage?faces-redirect=true";
+    }
     public String showIndex() {
         return "/index?faces-redirect=true";
     }
@@ -394,7 +397,7 @@ public class EtudiantController implements Serializable {
                 Sujet sujetExistante = choixExistant.getIdSujet();
                 System.out.println("le sujet de l'iteraor" + sujetExistante.getIntitule());
                 if (sujetExistante.getIntitule() == null ? sujet.getIntitule() == null : sujetExistante.getIntitule().equals(sujet.getIntitule())) {
-                    addMessage("update", FacesMessage.SEVERITY_ERROR, "Vous avez déja choisi cette Filière, ", "Veuillez effectuer un nouveau choix.");
+                    addMessage("update", FacesMessage.SEVERITY_ERROR, "Vous avez déja choisi ce Sujet, ", "Veuillez effectuer un nouveau choix.");
                     return null;
                 } else {
                     System.out.println("le sujet n'est pas  dans la liste des sujet de l'etudiant");

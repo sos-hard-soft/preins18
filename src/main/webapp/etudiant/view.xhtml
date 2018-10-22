@@ -132,9 +132,9 @@
 
 
                 </p:tab>  
-                <p:tab id="tab2" title="Filieres Choisis">
-                    <p:outputLabel value="Vous avez choisis les filieres ci après : "/>
-                    <p:commandButton action="#{etudiantController.showChoixFiliere}" rendered="#{etudiantController.current.choixList.size() != 2}" value="Ajouter un autre choix" />
+                <p:tab id="tab2" title="Sujet Choisis">
+                    <p:outputLabel value="Vous avez choisis les Sujets ci après : "/>
+                    <p:commandButton action="#{etudiantController.showChoixSujet}" rendered="#{etudiantController.current.choixList.size() != 2}" value="Ajouter un autre choix" />
                     <p:dataTable value="#{etudiantController.current.choixList}" var="choix">
                         <p:column headerText="Actions">  
 
@@ -146,13 +146,15 @@
 
 
                         </p:column>
-                        <p:column  headerText="Filiere Choisis">  
-                            <h:outputText value="#{choix.idFiliere.intitule}" />  
+                        <p:column  headerText="Sujet Choisis">  
+                            <h:outputText value="#{choix.idSujet.intitule}" />  
                         </p:column> 
-                        <p:column  headerText="Intitulé de la filière">  
-                            <h:outputText value="#{choix.idFiliere.description}" />  
+                        <p:column  headerText="Description">  
+                            <h:outputText value="#{choix.idSujet.description}" />  
                         </p:column> 
-
+                        <p:column  headerText="Laboratoire d'attache">  
+                            <h:outputText value="#{choix.idSujet.laboratoire.intitule}" />  
+                        </p:column> 
                     </p:dataTable>
                 </p:tab>
                 

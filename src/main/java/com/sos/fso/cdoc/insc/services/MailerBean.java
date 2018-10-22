@@ -62,11 +62,14 @@ public class MailerBean {
             MimeBodyPart htmlPart = new MimeBodyPart();
             String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
                     + "<p>Bonjour</p>"
-                    + "<p>Vous avez entamez la procédure de candidature au master a la <strong>Faculté des sciences juridiques économiques et sociales</strong> d'Oujda<br />"
-                    + "Pour confirmer les données saisi et créer votre compte veuillez cliquez sur le lien suivant ou le copiez collez dans votre navigateur : </p>"
-                    + "http://preinsmasterdroit.ump.ma/candidmaster/compte/validation.xhtml?key="+key+"<br />"
+                    + "<p>Vous avez entamez la procédure de candidature au cycle doctorale a la <strong>Faculté des sciences juridiques économiques et sociales</strong> d'Oujda<br />"
+                    + "Pour confirmer les données saisi et créer votre compte veuillez vous presenté auprès du service d'étude doctorale a la faculté des sciences d'oujda, "
+                    + "munis de votre Carte National d'Identité et cela avant le "
+                    + "14 novembre 2018 afin de recuperer votre login et mot de passe d'accès a l'application de candidature.</p>"
+                    /*+ "http://preinsmasterdroit.ump.ma/candidoc/compte/validation.xhtml?key="+key+"<br />"
                     + "<p>Le login est votre CIN : "+ cin + "<br />"
-                    + "Votre mot de passe est : " + password + "</p></body></html>";
+                    + "Votre mot de passe est : " + password*/
+                    + "</body></html>";
             htmlPart.setContent(htmlContent, "text/html");
             
             //String messageBody = "Pour confirmer votre demande d'inscription veuillez , cliquez sur le lien suivant : "

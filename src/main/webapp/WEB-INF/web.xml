@@ -42,7 +42,7 @@
             <role-name>candidat</role-name>
         </auth-constraint>
     </security-constraint>
-    <security-constraint>
+<!--    <security-constraint>
         <display-name>Managed Pages</display-name>
         <web-resource-collection>
             <web-resource-name>Managed pages</web-resource-name>
@@ -67,7 +67,7 @@
             <description/>
             <role-name>admin</role-name>
         </auth-constraint>
-    </security-constraint>
+    </security-constraint>-->
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>umpRealm</realm-name>

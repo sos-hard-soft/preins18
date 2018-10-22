@@ -44,14 +44,17 @@ public class Laboratoire implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_laboratoire")
     private Integer idLaboratoire;
-    @Size(max = 255)
-    @Column(name = "description")
-    private String description;
+    @Column(name = "optimistic_lock")
+    private Integer optimisticLock;
     @Size(max = 255)
     @Column(name = "intitule")
     private String intitule;
-    @Column(name = "optimistic_lock")
-    private Integer optimisticLock;
+    @Size(max = 255)
+    @Column(name = "intitule_ar")
+    private String intituleAR;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
     @OneToMany(mappedBy = "laboratoire")
     private List<Sujet> sujetList;
     @OneToMany(mappedBy = "laboratoire")
@@ -114,6 +117,14 @@ public class Laboratoire implements Serializable {
 
     public void setDirecteur(Person directeur) {
         this.directeur = directeur;
+    }
+
+    public String getIntituleAR() {
+        return intituleAR;
+    }
+
+    public void setIntituleAR(String intituleAR) {
+        this.intituleAR = intituleAR;
     }
 
    

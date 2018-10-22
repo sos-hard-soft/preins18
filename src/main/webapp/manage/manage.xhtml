@@ -17,9 +17,36 @@
     <ui:define name="content">
         
         <f:view>
-
+            
 
             <h:form>
+                <p:menubar>
+        <p:submenu label="Laboratoire" icon="ui-icon-document">
+            <p:menuitem value="Crée" action="#{laboratoireController.showCreateLaboratoire}"/>
+            <p:separator />
+            <p:menuitem value="List"/>
+        </p:submenu>
+ 
+        <p:submenu label="Personne" icon="ui-icon-document">
+            <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
+            <p:separator />
+            <p:menuitem value="List"/>
+        </p:submenu>
+        <p:submenu label="Sujet" icon="ui-icon-document">
+            <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
+            <p:separator />
+            <p:menuitem value="List"/>
+        </p:submenu>
+ 
+        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+ 
+        <f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+        </f:facet>
+    </p:menubar>
+                
+                
                 <h1><h:outputText value="List"/></h1>
                 <p:dataTable value="#{laboratoireController.allLaboratoires}" var="item">
                     <p:column headerText="Intitule">

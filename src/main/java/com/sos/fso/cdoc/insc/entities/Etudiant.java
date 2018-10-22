@@ -72,7 +72,7 @@ public class Etudiant implements Serializable {
     @Column(name = "cin")
     private String cin;
     @Column(name = "cne")
-    private BigInteger cne;
+    private Long cne;
     @Column(name = "date_naissance")
     @Temporal(TemporalType.DATE)
     private Date dateNaissance;
@@ -161,11 +161,11 @@ public class Etudiant implements Serializable {
         this.cin = cin;
     }
 
-    public BigInteger getCne() {
+    public Long getCne() {
         return cne;
     }
 
-    public void setCne(BigInteger cne) {
+    public void setCne(Long cne) {
         this.cne = cne;
     }
 

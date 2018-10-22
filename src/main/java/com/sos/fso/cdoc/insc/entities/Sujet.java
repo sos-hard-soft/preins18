@@ -45,16 +45,19 @@ public class Sujet implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_sujet")
     private Integer idSujet;
-    @Size(max = 255)
-    @Column(name = "description")
-    private String description;
+    @Column(name = "optimistic_lock")
+    private Integer optimisticLock;
     @Size(max = 255)
     @Column(name = "intitule")
     private String intitule;
+    @Size(max = 255)
+    @Column(name = "intitule_ar")
+    private String intituleAR;
+    @Size(max = 255)
+    @Column(name = "description")
+    private String description;
     @Column(name = "nb_place")
     private Integer nbPlace;
-    @Column(name = "optimistic_lock")
-    private Integer optimisticLock;
     @JoinColumn(name = "laboratoire", referencedColumnName = "id_laboratoire")
     @ManyToOne
     private Laboratoire laboratoire;
@@ -127,6 +130,15 @@ public class Sujet implements Serializable {
         this.responsable = responsable;
     }
 
+    public String getIntituleAR() {
+        return intituleAR;
+    }
+
+    public void setIntituleAR(String intituleAR) {
+        this.intituleAR = intituleAR;
+    }
+
+    
     
     @XmlTransient
     public List<Choix> getChoixList() {

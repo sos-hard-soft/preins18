@@ -33,6 +33,8 @@
                                                        itemValue="#{labo}" itemLabel="#{labo.intitule}"/>
                                     </p:selectOneMenu>
                                 </h:panelGrid>
+                                <p:commandButton id="saveButton" value="Enregistrez les donnee" 
+                                                 action="#{sujetController.doCreateSujet}" />
                             </h:form>
                         </f:view>
 

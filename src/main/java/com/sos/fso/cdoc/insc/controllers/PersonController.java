@@ -118,7 +118,7 @@ public class PersonController implements Serializable{
 
     public String showCreatePerson() {
         newPerson = new Person();
-        return "/filiere/newPerson?faces-redirect=true";
+        return "/manage/newPerson?faces-redirect=true";
     }
     
     public String showSpace() {

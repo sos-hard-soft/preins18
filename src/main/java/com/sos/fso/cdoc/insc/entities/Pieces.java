@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pieces.findAll", query = "SELECT p FROM Pieces p")
     , @NamedQuery(name = "Pieces.findByIdPieces", query = "SELECT p FROM Pieces p WHERE p.idPieces = :idPieces")
     , @NamedQuery(name = "Pieces.findByDateObtention", query = "SELECT p FROM Pieces p WHERE p.dateObtention = :dateObtention")
-    , @NamedQuery(name = "Pieces.findByIntitiul\u00e9", query = "SELECT p FROM Pieces p WHERE p.intitiul\u00e9 = :intitiul\u00e9")
+    , @NamedQuery(name = "Pieces.findByIntitule", query = "SELECT p FROM Pieces p WHERE p.intitule = :intitule")
     , @NamedQuery(name = "Pieces.findByOptimisticLock", query = "SELECT p FROM Pieces p WHERE p.optimisticLock = :optimisticLock")
     , @NamedQuery(name = "Pieces.findByPartieDelivrante", query = "SELECT p FROM Pieces p WHERE p.partieDelivrante = :partieDelivrante")
     , @NamedQuery(name = "Pieces.findByPathScan", query = "SELECT p FROM Pieces p WHERE p.pathScan = :pathScan")})
@@ -50,8 +50,8 @@ public class Pieces implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateObtention;
     @Size(max = 255)
-    @Column(name = "intitiul\u00e9")
-    private String intitiulé;
+    @Column(name = "intitiule")
+    private String intitule;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
     @Size(max = 255)
@@ -87,12 +87,12 @@ public class Pieces implements Serializable {
         this.dateObtention = dateObtention;
     }
 
-    public String getIntitiulé() {
-        return intitiulé;
+    public String getIntitule() {
+        return intitule;
     }
 
-    public void setIntitiulé(String intitiulé) {
-        this.intitiulé = intitiulé;
+    public void setIntitule(String intitule) {
+        this.intitule = intitule;
     }
 
     public Integer getOptimisticLock() {

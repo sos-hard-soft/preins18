@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             
+<ui:define name="content">
+    <f:view>
+
+
+        <h:form>
+            <h1><h:outputText value="Create/Edit"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Intitule:" for="intitule" />
+                <p:inputText id="intitule" value="#{laboratoireController.newLaboratoire.intitule}" title="Intitule" />
+                <p:outputLabel value="Description:" for="description" />
+                <p:inputText id="description" value="#{laboratoireController.newLaboratoire.description}" title="Description" />
+                <p:outputLabel value="Directeur:" for="directeur" />
+                <p:selectOneMenu id="directeur" value="#{laboratoireController.newLaboratoire.directeur}" >
+                    <!-- TODO: update below reference to list of available items-->
+                    <f:selectItems value="#{personController.allPersons}" var="person"
+                                                       itemValue="#{person}" itemLabel="#{person.nom} #{person.prenom}"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
+            <p:commandButton id="saveButton" value="Enregistrez les donnee" 
+                             action="#{laboratoireController.doCreateLaboratoire}" />
+        </h:form>
+    </f:view>
+
+                
+
+           </ui:define>
+</ui:composition>
