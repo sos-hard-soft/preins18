@@ -31,9 +31,11 @@ public class ChoixFacade extends AbstractFacade<Choix> {
     }
     
     public List<Choix> findByIdEtudiant(Etudiant current){
-        return em.createNamedQuery("Choix.findByIdEtudiant").setParameter("idEtudiant", current).getResultList();
-        
+        return em.createNamedQuery("Choix.findByIdEtudiant").setParameter("idEtudiant", current).getResultList();        
     }
     
+    public List<Choix> findByIdSujet(Sujet selected){
+        return em.createNamedQuery("Choix.findByIdEtudiant").setParameter("idEtudiant", current).getResultList();        
+    }
     
 }

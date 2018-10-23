@@ -7,22 +7,22 @@
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('/candidmaster/resources/secured/fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('/candidoc/resources/secured/fonts/poppins/Poppins-Regular.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('/candidmaster/resources/secured/fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('/candidoc/resources/secured/fonts/poppins/Poppins-Bold.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('/candidmaster/resources/secured/fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('/candidoc/resources/secured/fonts/poppins/Poppins-Medium.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('/candidmaster/resources/secured/fonts/montserrat/Montserrat-Bold.ttf'); 
+  src: url('/candidoc/resources/secured/fonts/montserrat/Montserrat-Bold.ttf'); 
 }
 
 /*//////////////////////////////////////////////////////////////////

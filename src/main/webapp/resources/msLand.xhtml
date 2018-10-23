@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <ui:insert name="meta"></ui:insert>
-        <title>Candidature Master - Faculté des sciences Juridiques économiques et sociales - Université Mohammed Ier Oujda</title>
+        <title>Candidature  - CEDoc-DEG - Université Mohammed Ier Oujda</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="assets/css/bootstrap.min.css" />
@@ -30,17 +30,15 @@
                     <!-- Button for smallest screens -->
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                     <a class="navbar-brand" href="http://droit.ump.ma/fr">
-                        <img src="/candidmaster/resources/assets/images/logoFSJES.png" alt="Faculté des sciences Juridiques économiques et sociales" /></a>
+                        <img src="/candidoc/resources/assets/images/logoFSJES.png" alt="Faculté des sciences Juridiques économiques et sociales" /></a>
                 </div>
                 <h:form><div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
-                        <li><a href="http://preinsmasterdroit.ump.ma/candidmaster">Acceuil</a></li>
+                        <li><a href="http://preinsmasterdroit.ump.ma/candidoc">Acceuil</a></li>
                         <li><a href="http://droit.ump.ma/fr">La Faculté</a></li>
-                        <li class="active"><a href="http://droit.ump.ma/fr/master">Master</a></li>
-                                <li><a href="http://droit.ump.ma/fr/master-specialises">Master Spécialisé</a></li>
-                                <li><a href="http://droit.ump.ma/fr/diplome-universitaire-detudes-universitaires-superieures-specialisees">DUEUSS</a></li>
-                        
-                         <li><p:commandLink rendered="#{!etudiantController.compte.actif or !personController.compte.actif}"><a class="btn" href="http://preinsmasterdroit.ump.ma/candidmaster/security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
+                        <li class="active"><a href="http://www.ump.ma/fr/centres-detudes-doctorales/centre-detudes-doctorales-droit-economie-et-gestion">CEDoc-DEG</a></li>
+                                <li><a href="https://laboratoire.ump.ma/api/filter?etab=1&lab=&axe=&discipline=&enseignant=">Laboratoires</a></li>
+                         <li><p:commandLink rendered="#{!etudiantController.compte.actif or !personController.compte.actif}"><a class="btn" href="http://preinsmasterdroit.ump.ma/candidoc/security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
                             <p:commandButton rendered="#{etudiantController.compte.actif or personController.compte.actif}"
                              icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
                          </li>
@@ -91,7 +89,7 @@
                         </div>
 
                         <div class="col-md-6 widget">
-                            <h:form><h3 class="widget-title"><p:commandLink value="MASTER" action="#{personController.showLogin}" /></h3></h:form>
+                            <h:form><h3 class="widget-title"><p:commandLink value="CEDoc-DEG" action="#{personController.showLogin}" /></h3></h:form>
 						<div class="widget-body">
                                                     
 						</div>

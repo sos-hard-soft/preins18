@@ -30,8 +30,7 @@ public class SujetFacade extends AbstractFacade<Sujet> {
         super(Sujet.class);
     }
     
-    public List<Sujet> findByBranche(Person responsable){
-        return em.createNamedQuery("Sujet.findByEncadrant", Sujet.class).setParameter("responsable", responsable).getResultList();
+    public List<Sujet> findByResponsable(Person responsable){
+        return em.createNamedQuery("Sujet.findByResponsable", Sujet.class).setParameter("responsable", responsable).getResultList();
     }
-    
 }

@@ -9,11 +9,13 @@ import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
+import com.sos.fso.cdoc.insc.entities.Sujet;
 import com.sos.fso.cdoc.insc.helpers.StdList;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
+import com.sos.fso.cdoc.insc.services.SujetFacade;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +29,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.Init;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -59,6 +60,11 @@ public class PersonController implements Serializable{
     private Person newPerson;
     private Person current;
     private List<Person> personnes;
+    
+    @Inject
+    private SujetFacade sujetService;
+    private Sujet sujet;
+    private List<Sujet> listSujet;
     
     @Inject
     private FiliereFacade filiereFacade;
@@ -111,6 +117,11 @@ public class PersonController implements Serializable{
         return "/index?faces-redirect=true";
     }
 
+    public String showSujet() {
+        listSujet = sujetService.findByResponsable(current);
+        return "/LaboMember/mySujet?faces-redirect=true";
+    }
+    
     public String showDetails(Person selected) {
         this.current = selected;
         return "/filiere/list?faces-redirect=true";
@@ -364,6 +375,22 @@ public class PersonController implements Serializable{
 
     public void setStudent(Etudiant student) {
         this.student = student;
+    }
+
+    public Sujet getSujet() {
+        return sujet;
+    }
+
+    public void setSujet(Sujet sujet) {
+        this.sujet = sujet;
+    }
+
+    public List<Sujet> getListSujet() {
+        return listSujet;
+    }
+
+    public void setListSujet(List<Sujet> listSujet) {
+        this.listSujet = listSujet;
     }
     
     
