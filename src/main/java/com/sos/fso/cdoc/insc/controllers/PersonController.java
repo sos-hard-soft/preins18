@@ -132,6 +132,11 @@ public class PersonController implements Serializable{
         return "/manage/newPerson?faces-redirect=true";
     }
     
+    public String showAllPersons() {
+        personnes = personService.findAll();
+        return "/manage/view?faces-redirect=true";
+    }
+    
     public String showSpace() {
         return "/manage/view?faces-redirect=true";
     }
@@ -141,8 +146,7 @@ public class PersonController implements Serializable{
     }
     
     public String showStudentDetail(String cin) {
-        this.student = etudiantService.findByCin(cin);;
-        
+        this.student = etudiantService.findByCin(cin);
         return "/manage/viewStudent?faces-redirect=true";
     }
     
@@ -154,7 +158,7 @@ public class PersonController implements Serializable{
     public String doCreatePerson(){
         //Creation du répertoire spécifique a l'étudiant
         String personFolder = newPerson.getCin();
-        folder = Paths.get("/opt/inscmast/persons/" + personFolder + "");
+        folder = Paths.get("/opt/cdoc/persons/" + personFolder + "");
         try {
             Files.createDirectories(folder);
         } catch (IOException ex) {
@@ -186,7 +190,7 @@ public class PersonController implements Serializable{
         InputStream input = uploadedFile.getInputstream();
         System.out.println(uploadedFile.getFileName());
 
-        folder = Paths.get("/opt/inscmast/persons/" + newPerson.getCin() + "");
+        folder = Paths.get("/opt/cdoc/persons/" + newPerson.getCin() + "");
         String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
         Path file = Files.createTempFile(folder, filename + "-", "." + extension);

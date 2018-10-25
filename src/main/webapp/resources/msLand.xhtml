@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
     <h:head>
         <ui:insert name="meta"></ui:insert>
         <title>Candidature  - CEDoc-DEG - Université Mohammed Ier Oujda</title>
@@ -37,7 +38,7 @@
                         <li><a href="http://preinsmasterdroit.ump.ma/candidoc">Acceuil</a></li>
                         <li><a href="http://droit.ump.ma/fr">La Faculté</a></li>
                         <li class="active"><a href="http://www.ump.ma/fr/centres-detudes-doctorales/centre-detudes-doctorales-droit-economie-et-gestion">CEDoc-DEG</a></li>
-                                <li><a href="https://laboratoire.ump.ma/api/filter?etab=1&lab=&axe=&discipline=&enseignant=">Laboratoires</a></li>
+                                <li><a href="https://laboratoire.ump.ma/">Laboratoires</a></li>
                          <li><p:commandLink rendered="#{!etudiantController.compte.actif or !personController.compte.actif}"><a class="btn" href="http://preinsmasterdroit.ump.ma/candidoc/security/login.xhtml">Ouvrir Votre session</a></p:commandLink>
                             <p:commandButton rendered="#{etudiantController.compte.actif or personController.compte.actif}"
                              icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>

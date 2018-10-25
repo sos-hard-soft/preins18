@@ -6,7 +6,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:o="http://omnifaces.org/ui"
-                xmlns:of="http://omnifaces.org/functions">
+                xmlns:of="http://omnifaces.org/functions"
+                xmlns:pe="http://primefaces.org/ui/extensions">
 
     <ui:define name="sidebar-left">
 
@@ -52,10 +53,10 @@
 
                                 <p:outputLabel value="Lieu de naissance : "/>
                                 <p:outputLabel value="#{etudiantController.current.lieuNaissance}"/>
-                                
+
                                 <p:outputLabel value="#{etudiantController.current.lieuNaissanceAr}" style="float: right;"/>
                                 <p:outputLabel value=" مكان الازدياد : *" dir="rtl" style="float: right;"/>
-                                 
+
                                 <p:outputLabel value="Nationalité : "/>
                                 <p:outputLabel value="#{etudiantController.current.nationalite}"/>
 
@@ -90,7 +91,7 @@
                     <p:panel header="Aide">
                         <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
                         <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
-                        
+
                     </p:panel>
                 </div>
             </div>
@@ -157,18 +158,22 @@
                         </p:column> 
                     </p:dataTable>
                 </p:tab>
-                
-                
+
+
                 <p:tab id="tab3" title="Pieces Justificatives">  
 
                     <p:accordionPanel value="#{etudiantController.current.piecesList}" var="piece">
                         <p:tab title="La piece : #{piece.intitule}">
                             <p:commandButton id="delete" value="Supprimer la piece" action="#{etudiantController.doDeletePieces(piece)}" icon="ui-icon-delete" />
-                                
-                                    <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true"/>
-                                
+
+                            <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true"/>
+                            <p:commandButton rendered="#{piece.pathScan.contains('.pdf')}" value="Télécharger le document pour visualisé" ajax="false" 
+                                            onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{etudiantController.getPdfFile(piece.pathScan)}" />  
+                                    </p:commandButton>
+
                             <h:panelGrid columns="2" cellpadding="5">
-                                                    
+
                                 <h:outputText value="Intitulé:" style="font-weight: bold" />
                                 <h:outputText value="#{piece.intitule}" />
 

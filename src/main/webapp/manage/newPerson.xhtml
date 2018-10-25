@@ -14,7 +14,32 @@
 <ui:define name="content">
               
                     <h:form>
-                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:menubar>
+        <p:submenu label="Laboratoire" icon="ui-icon-document">
+            <p:menuitem value="Crée" action="#{laboratoireController.showCreateLaboratoire}"/>
+            <p:separator />
+            <p:menuitem value="List"/>
+        </p:submenu>
+ 
+        <p:submenu label="Personne" icon="ui-icon-document">
+            <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
+            <p:separator />
+            <p:menuitem value="List"/>
+        </p:submenu>
+        <p:submenu label="Sujet" icon="ui-icon-document">
+            <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
+            <p:separator />
+            <p:menuitem value="List"/>
+        </p:submenu>
+ 
+        <p:menuitem value="Quit" url="" icon="ui-icon-close" />
+ 
+        <f:facet name="options">
+            <p:inputText style="margin-right:10px" placeholder="Search"/>
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+        </f:facet>
+    </p:menubar>
+                        <h1><h:outputText value="Créee une personne"/></h1>
                         <p:growl id="messages" showDetail="true"/>
                         <p:panelGrid columns="2">
                             <p:outputLabel value="Veuillez charger votre Photo d'identité :" />

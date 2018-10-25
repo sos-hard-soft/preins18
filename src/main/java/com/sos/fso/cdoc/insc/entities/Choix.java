@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Choix.findAll", query = "SELECT c FROM Choix c")
     , @NamedQuery(name = "Choix.findByIdChoix", query = "SELECT c FROM Choix c WHERE c.idChoix = :idChoix")
       ,  @NamedQuery(name = "Choix.findByIdEtudiant", query = "SELECT c FROM Choix c WHERE c.idEtudiant = :idEtudiant")
+        ,  @NamedQuery(name = "Choix.findBySujet", query = "SELECT c FROM Choix c WHERE c.idSujet = :idSujet")
     , @NamedQuery(name = "Choix.findByOptimisticLock", query = "SELECT c FROM Choix c WHERE c.optimisticLock = :optimisticLock")})
 public class Choix implements Serializable {
 

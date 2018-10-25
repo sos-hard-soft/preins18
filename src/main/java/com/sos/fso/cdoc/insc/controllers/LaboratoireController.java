@@ -46,10 +46,14 @@ public class LaboratoireController implements Serializable{
         return "/index?faces-redirect=true";
     }
 
-    public String showDetails() {
+    public String showDetails(Laboratoire labo) {
+        current = labo;
         return "/manage/viewLabo?faces-redirect=true";
     }
-
+    public String showListLaboratoire() {
+        laboratoires = laboratoireService.findAll();
+        return "/manage/listLabo?faces-redirect=true";
+    }
     public String showCreateLaboratoire() {
         newLaboratoire = new Laboratoire();
         return "/manage/addLabo?faces-redirect=true";

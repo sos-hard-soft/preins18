@@ -46,10 +46,16 @@ public class SujetController implements Serializable{
         return "/index?faces-redirect=true";
     }
 
-    public String showDetails() {
-        return "/manage/view?faces-redirect=true";
+    public String showDetails(Sujet sujet) {
+        current = sujet;
+        return "/manage/viewSujet?faces-redirect=true";
     }
-
+    
+    public String showListSujet() {
+        sujets = sujetService.findAll();
+        return "/manage/listSujet?faces-redirect=true";
+    }
+    
     public String showCreateSujet() {
         newSujet = new Sujet();
         return "/manage/addSujet?faces-redirect=true";

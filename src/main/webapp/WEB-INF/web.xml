@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>south-street</param-value>
+        <param-value>omega</param-value>
     </context-param>
     <mime-mapping>
         <extension>xhtml</extension>
@@ -70,7 +70,7 @@
     </security-constraint>-->
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>umpRealm</realm-name>
+        <realm-name>cedocRealm</realm-name>
         <form-login-config>
             <form-login-page>/security/login.xhtml</form-login-page>
             <form-error-page>/security/error.xhtml</form-error-page>

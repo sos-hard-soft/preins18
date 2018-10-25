@@ -19,7 +19,6 @@ import com.sos.fso.cdoc.insc.services.BrancheFacade;
 import com.sos.fso.cdoc.insc.services.ChoixFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
-import com.sos.fso.cdoc.insc.services.SujetFacade;
 import com.sos.fso.cdoc.insc.services.MailerBean;
 import com.sos.fso.cdoc.insc.services.PiecesFacade;
 import com.sos.fso.cdoc.insc.services.QualificationFacade;
@@ -61,6 +60,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -130,8 +130,6 @@ public class EtudiantController implements Serializable {
     private String fileName;
     private Path folder;
     private File uploaded;
-    
-   
 
     // ======================================
     // = Navigation Methods =
@@ -139,6 +137,7 @@ public class EtudiantController implements Serializable {
     public String showManage() {
         return "/manage/manage?faces-redirect=true";
     }
+
     public String showIndex() {
         return "/index?faces-redirect=true";
     }
@@ -237,20 +236,20 @@ public class EtudiantController implements Serializable {
 
         //return response;
     }
-    
-    public String doDeletePieces(Pieces pieces){
+
+    public String doDeletePieces(Pieces pieces) {
         try {
             this.performDelete(pieces.getPathScan());
             System.out.println("Suppression du fichier depuis disque !!");
             current.getPiecesList().remove(pieces);
             piecesService.remove(pieces);
-            
+
         } catch (Exception e) {
             System.out.println("errur : " + e.getStackTrace());
         }
         return this.showDetails();
     }
-    
+
     public void sendConfirmationCandidatureMail(String email, String choix) {
         try {
             mailStatus = mailerBean.sendConfirmationCandidatureMail(email, choix);
@@ -259,21 +258,22 @@ public class EtudiantController implements Serializable {
             logger.severe(ex.getMessage());
         }
     }
-    
-    public void performDelete(String path){
+
+    public void performDelete(String path) {
         File laPiece = new File(path);
         laPiece.delete();
         System.out.println("Le fichier a été supprimé");
         addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
     }
 
-    public void deleteQualificationScan(String path){
+    public void deleteQualificationScan(String path) {
         File laPiece = new File(path);
         laPiece.delete();
         System.out.println("Le fichier a été supprimé");
         addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
         this.currentQualification.setPathScan(null);
     }
+
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         System.out.println("Start file upload procedure");
         UploadedFile file = event.getFile();
@@ -294,7 +294,7 @@ public class EtudiantController implements Serializable {
         InputStream input = uploadedFile.getInputstream();
         System.out.println(uploadedFile.getFileName());
 
-        folder = Paths.get("/opt/inscmast/candidats/" + current.getCin() + "");
+        folder = Paths.get("/opt/cdoc/candidats/" + current.getCin() + "");
         String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
         Path file = Files.createTempFile(folder, filename + "-", "." + extension);
@@ -316,7 +316,17 @@ public class EtudiantController implements Serializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return new FileInputStream(new File("/opt/inscmast/no_document.jpeg"));
+        return new FileInputStream(new File("/opt/cdoc/no_document.jpeg"));
+    }
+    public StreamedContent getPdfFile(String filename) throws IOException {
+        File PdfFile = Paths.get(filename).toFile();
+     return new DefaultStreamedContent(new FileInputStream(PdfFile), "application/pdf" , filename);
+}
+    public StreamedContent servePDF(String filename) throws IOException {
+        StreamedContent content;
+        File PdfFile = Paths.get(filename).toFile();
+        content = new DefaultStreamedContent(new FileInputStream(PdfFile), "application/pdf", filename);
+        return content;
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
@@ -445,7 +455,7 @@ public class EtudiantController implements Serializable {
         activationService.create(activation);
         //Creation du répertoire spécifique a l'étudiant
         String candidatFolder = newEtudiant.getCin();
-        folder = Paths.get("/opt/inscmast/candidats/" + candidatFolder + "");
+        folder = Paths.get("/opt/cdoc/candidats/" + candidatFolder + "");
         try {
             Files.createDirectories(folder);
         } catch (IOException ex) {
@@ -472,14 +482,13 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
-    
     public void doRemoveQualification(Qualification diplome) {
         String asupprimer = diplome.getPathScan();
         System.out.println("Debut procedure delete");
-        try {            
+        try {
             this.current.getQualificationList().remove(diplome);
             System.out.println("Debut procedure delete du diplome");
-            
+
             qualificationService.remove(diplome);
             System.out.println("diplome supprimé");
             etudiantService.edit(current);
@@ -587,7 +596,7 @@ public class EtudiantController implements Serializable {
     public Etudiant getCurrent() {
         if (current == null) {
             current = etudiantService.findByCin(compte.getCin());
-            
+
         }
         if (current.getPhoto() != null) {
             fileExist = true;
@@ -618,7 +627,6 @@ public class EtudiantController implements Serializable {
         return compte;
     }
 
-   
     public Sujet getChoixSujet() {
         return choixSujet;
     }
