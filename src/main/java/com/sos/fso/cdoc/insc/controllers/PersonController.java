@@ -134,7 +134,7 @@ public class PersonController implements Serializable{
     
     public String showAllPersons() {
         personnes = personService.findAll();
-        return "/manage/view?faces-redirect=true";
+        return "/manage/personList?faces-redirect=true";
     }
     
     public String showSpace() {

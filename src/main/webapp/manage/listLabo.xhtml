@@ -22,12 +22,12 @@
                     <p:submenu label="Personne" icon="ui-icon-document">
                         <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
                         <p:separator />
-                        <p:menuitem value="List"/>
+                        <p:menuitem value="List" action="#{personController.showAllPersons}"/>
                     </p:submenu>
                     <p:submenu label="Sujet" icon="ui-icon-document">
                         <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
                         <p:separator />
-                        <p:menuitem value="List"/>
+                        <p:menuitem value="List" action="#{sujetController.showListSujet}"/>
                     </p:submenu>
 
                     <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
@@ -73,7 +73,6 @@
                         </p:menuButton>  
                     </p:column>
                 </p:dataTable>
-
 
             </h:form>
         </f:view>

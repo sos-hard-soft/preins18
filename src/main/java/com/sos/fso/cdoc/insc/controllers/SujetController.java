@@ -71,7 +71,7 @@ public class SujetController implements Serializable{
         sujetService.create(newSujet);
         FacesMessage message = new FacesMessage( "Succès de l'inscription !" );
         FacesContext.getCurrentInstance().addMessage( null, message );
-        return "/index?faces-redirect=true";
+        return "/manage/listSujet?faces-redirect=true";
     }
     
     public SujetController() {

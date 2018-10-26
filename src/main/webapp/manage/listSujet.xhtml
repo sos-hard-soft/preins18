@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+             
+<ui:define name="content">
+   <f:view>
+
+
+                            <h:form>
+                                <p:menubar>
+                    <p:submenu label="Laboratoire" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{laboratoireController.showCreateLaboratoire}"/>
+                        <p:separator />
+                        <p:menuitem value="List" action="#{laboratoireController.showListLaboratoire}"/>
+                    </p:submenu>
+
+                    <p:submenu label="Personne" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
+                        <p:separator />
+                        <p:menuitem value="List" action="#{personController.showAllPersons}"/>
+                    </p:submenu>
+                    <p:submenu label="Sujet" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
+                        <p:separator />
+                        <p:menuitem value="List" action="#{sujetController.showListSujet}"/>
+                    </p:submenu>
+
+                    <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+
+                    <f:facet name="options">
+                        <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                    </f:facet>
+                </p:menubar>
+                                
+
+                                    <h1><h:outputText value="List"/></h1>
+                                    <p:dataTable value="#{sujetController.allSujets}" var="item">
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Description"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.description}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Intitule"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.intitule}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="NbPlace"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.nbPlace}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Laboratoire"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.laboratoire.intitule}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Responsable"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.responsable.nom} #{item.responsable.prenom}"/>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="IntituleAR"/>
+                                            </f:facet>
+                                            <h:outputText value="#{item.intituleAR}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                              
+                                
+                                
+                            </h:form>
+                        </f:view>
+                
+
+           </ui:define>
+</ui:composition>

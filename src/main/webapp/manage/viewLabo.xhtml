@@ -21,30 +21,30 @@
 
             <h:form>
                 <p:menubar>
-        <p:submenu label="Laboratoire" icon="ui-icon-document">
-            <p:menuitem value="Crée" action="#{laboratoireController.showCreateLaboratoire}"/>
-            <p:separator />
-            <p:menuitem value="List"/>
-        </p:submenu>
- 
-        <p:submenu label="Personne" icon="ui-icon-document">
-            <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
-            <p:separator />
-            <p:menuitem value="List"/>
-        </p:submenu>
-        <p:submenu label="Sujet" icon="ui-icon-document">
-            <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
-            <p:separator />
-            <p:menuitem value="List"/>
-        </p:submenu>
- 
-        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
- 
-        <f:facet name="options">
-            <p:inputText style="margin-right:10px" placeholder="Search"/>
-            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-        </f:facet>
-    </p:menubar>
+                    <p:submenu label="Laboratoire" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{laboratoireController.showCreateLaboratoire}"/>
+                        <p:separator />
+                        <p:menuitem value="List" action="#{laboratoireController.showListLaboratoire}"/>
+                    </p:submenu>
+
+                    <p:submenu label="Personne" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
+                        <p:separator />
+                        <p:menuitem value="List" action="#{personController.showAllPersons}"/>
+                    </p:submenu>
+                    <p:submenu label="Sujet" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
+                        <p:separator />
+                        <p:menuitem value="List" action="#{sujetController.showListSujet}"/>
+                    </p:submenu>
+
+                    <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+
+                    <f:facet name="options">
+                        <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                    </f:facet>
+                </p:menubar>
                 
                 <h1><h:outputText value="Détails Laboratoire"/></h1>
                 <p:panelGrid columns="2">
@@ -69,9 +69,11 @@
                         <p:column  headerText="Place au sujet">  
                             <h:outputText value="#{sujet.nbPlace}" />  
                         </p:column>
+                    <p:column  headerText="Détails">
                         <p:menuButton value="Actions">  
                             <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{sujetController.showDetails(sujet)}" />    
                         </p:menuButton> 
+                        </p:column>
                 </p:dataTable>
                 
                 <p:dataTable value="#{laboratoireController.current.membersList}" var="member">
