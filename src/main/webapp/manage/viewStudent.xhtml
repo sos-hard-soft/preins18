@@ -48,6 +48,9 @@
                         
                         <p:messages for="update"/>
                         <p:panel header="Informations personelle">
+                            <p:panelGrid>
+                            <p:graphicImage height="120" width="120" value="#{etudiantController.byteToImage(personController.student.photo)}" />
+                        </p:panelGrid>
                             <p:panelGrid columns="4">
                                 <p:outputLabel value="CIN : "/>
                                 <p:outputLabel value="#{personController.student.cin}"/>
@@ -160,15 +163,18 @@
 
 
                 </p:tab>  
-                <p:tab id="tab2" title="Filieres Choisis">
-                    <p:outputLabel value="Le Candidats a choisis les filieres ci après : "/>
+                <p:tab id="tab2" title="Sujets Choisis">
+                    <p:outputLabel value="Le Candidats a choisis les Sujet ci après : "/>
                     
                     <p:dataTable value="#{personController.student.choixList}" var="choix">
-                        <p:column  headerText="Filiere Choisis">  
-                            <h:outputText value="#{choix.idFiliere.intitule}" />  
-                        </p:column> 
-                        <p:column  headerText="Intitulé de la filière">  
-                            <h:outputText value="#{choix.idFiliere.description}" />  
+                        <p:column  headerText="Sujet Choisis">  
+                            <h:outputText value="#{choix.idSujet.intitule}" />  
+                        </p:column>
+                        <p:column  headerText="description">  
+                            <h:outputText value="#{choix.idSujet.description}" />  
+                        </p:column>
+                        <p:column  headerText="Laboratoire">  
+                            <h:outputText value="#{choix.idSujet.laboratoire.intitule}" />  
                         </p:column> 
 
                     </p:dataTable>
@@ -182,6 +188,10 @@
                             
                                 
                                     <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true"/>
+                            <p:commandButton rendered="#{piece.pathScan.contains('.pdf')}" value="Télécharger le document pour visualisé" ajax="false" 
+                                            onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                    <p:fileDownload value="#{etudiantController.getPdfFile(piece.pathScan)}" />  
+                                    </p:commandButton>
                                 
                             <h:panelGrid columns="2" cellpadding="5">
                                                     

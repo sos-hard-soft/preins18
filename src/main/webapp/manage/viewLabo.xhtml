@@ -69,11 +69,11 @@
                         <p:column  headerText="Place au sujet">  
                             <h:outputText value="#{sujet.nbPlace}" />  
                         </p:column>
-                    <p:column  headerText="Détails">
+                    <p:column  headerText="Details">
                         <p:menuButton value="Actions">  
-                            <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{sujetController.showDetails(sujet)}" />    
+                            <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" action="#{sujetController.showDetails(sujet)}" />    
                         </p:menuButton> 
-                        </p:column>
+                    </p:column>
                 </p:dataTable>
                 
                 <p:dataTable value="#{laboratoireController.current.membersList}" var="member">

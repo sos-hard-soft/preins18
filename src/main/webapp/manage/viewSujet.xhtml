@@ -38,9 +38,6 @@
                     </f:facet>
                 </p:menubar>
             
-
-
-            <h:form>
                 <h1><h:outputText value="View"/></h1>
                 <p:panelGrid columns="2">
                     <h:outputText value="Intitule:"/>
@@ -88,7 +85,7 @@
                         </f:facet>
                         <h:outputText value="#{elem.idEtudiant.nationalite}"/>
                     </p:column>
-                    <p:column headerText="Actions">  
+                   <p:column headerText="Actions">  
                         <p:growl id="messages"/>  
                         <p:menuButton value="Actions">  
                             <p:menuitem value="Visualisé les détails" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{personController.showStudentDetail(elem.idEtudiant.cin)}" />    
@@ -96,7 +93,7 @@
                     </p:column>
                 </p:dataTable>
                 
-            </h:form>
+       
 
             
             
