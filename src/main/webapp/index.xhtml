@@ -7,10 +7,11 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:define name="content">
+    <div class="row doc">
     <h2 class="text-center thin">Candidature au cycle doctorale du Centre d’Etudes Doctorales : Droit, Economie et Gestion</h2>
 			<h:form>
                             <p:messages for="update"/>
-                            <div class="row ">
+                            
                                 <p:commandLink action="#{etudiantController.showCreate}">
                                 <div class="col-md-6 col-sm-6 fst highlight">
                                     <h1 style="color: #FFF;">Cliquez ici pour la création de votre compte pour gestion de candidature</h1>
@@ -19,8 +20,7 @@
                                     <img src="resources/images/createAccount.jpg" />
                                 </div>
                                     </p:commandLink>
-                            </div>
-                            <div class="row ">
+                            
                                 <p:commandLink action="#{etudiantController.showLogin}">
                                 <div class="col-md-6 col-sm-6 scnd highlight">
                                     <h1 style="color: #FFF;">Cliquez ici pour accéder <br />a votre compte  déja crée auparavant</h1>

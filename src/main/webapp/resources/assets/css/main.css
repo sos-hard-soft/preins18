@@ -99,3 +99,7 @@ img.pull-left { margin-right: 10px; }
 .scnd{
     background-color: #2196f3;
 }
+
+.doc {
+   background: #fff url( /candidoc/resources/images/docimg.jpg) no-repeat; background-size: cover; 
+}

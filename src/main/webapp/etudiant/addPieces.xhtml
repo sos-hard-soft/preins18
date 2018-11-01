@@ -32,18 +32,18 @@
                         
                     <p:message for="piece"/>
                     <p:outputLabel value="Veuillez charger l'image de votre piece :" />
-                    <p:fileUpload id="file" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                    <p:fileUpload id="file" label="Cliquez pour Chargé votre fichier" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
                                   sizeLimit="5242880"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:message for="file"/>
 
-                    <p:outputLabel value="Partie delivrante : *"/>
+                    <p:outputLabel value="Partie délivrante : *"/>
                     <p:inputText id="partieDelivrante" value="#{etudiantController.newPieces.partieDelivrante}"
                                  required="true" requiredMessage="Veuillez saisir l'etablissement ayant delivré la piece"/>
                     <p:message for="partieDelivrante"/>
 
                 </p:panelGrid>
                         
-                <h:commandButton value="Enregistrer la pièce" action="#{etudiantController.doAddPieces}"/>
+                <p:commandButton value="Enregistrer la pièce" action="#{etudiantController.doAddPieces}"/>
 
 </p:panel>
                         </div>
@@ -51,15 +51,10 @@
                         <p:panel header="Aide a propos de l'ajout des diplômes !!">
                         
                         <p>
-                            Quand vous ajoutez un diplôme, 
+                            Quand vous ajoutez un fichier, 
                             <ul>
                                 <li style="color: #1A96D4; font-family: georgia;">Les champs marqués avec un asterisk (*) sont obligatoires</li>
-                                <li style="color: #46b8da; font-family: georgia;">Vous n'êtes pas obligés de saisir des notes pour le bacalaureat</li>
-                                <li style="color: #99CC00; font-family: georgia;">Dans le cas des liscences veuillez saisir vos notes de semestres</li>
-                                <li style="color: blueviolet; font-family: georgia;">Dans le cas des étudiants issus de l'ancien système, ils peuvent saisir leur moyennes générales pour les 4 années, dans les champs Note S</li>
-                                <li style="color: #FE6B25; font-family: georgia;">Dans le cas des master juste 4 semestres</li>
-                                <li style="color: #c09853; font-family: georgia;">Dans le cas des diplômes d'ingenieurs de S1 a S5 reprèsentent les 5 années de formation</li>
-                                <li style="color: #449d44; font-family: georgia;">Pour les notes, utiliser un point '.' pour séparer la décimale, exemple : "13.43"</li>
+                                <li style="color: #c09853; font-family: georgia;">Les formats supporté sont les images JPEG, GIF ou PNG, et les fichiers aux formats PDF</li>                                
                             </ul>
                         </p>
                         </p:panel>

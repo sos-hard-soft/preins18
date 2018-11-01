@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{encadrantController.listSujet}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numéro du sujet"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nbPlace}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Intitule"/>
+                        </f:facet>
+                        <h:outputText value="#{item.intitule}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IntituleAR"/>
+                        </f:facet>
+                        <h:outputText value="#{item.intituleAR}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </p:column>
+                    
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+
+    </ui:define>
+</ui:composition>

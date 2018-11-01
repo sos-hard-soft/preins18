@@ -75,7 +75,7 @@
                         </p:panel>
                         <p:panel header="Cordonnées de contact">
                             <p:panelGrid columns="2">
-                                <p:outputLabel value="email : "/>
+                                <p:outputLabel value="émail : "/>
                                 <p:outputLabel value="#{etudiantController.current.email}"/>
                                 <p:outputLabel value="Adresse : "/>
                                 <p:outputLabel value="#{etudiantController.current.adresse}"/>
@@ -89,63 +89,47 @@
                 </div>
                 <div class="col-lg-3">
                     <p:panel header="Aide">
-                        <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
-                        <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
+                        <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guauche de l'écran.</p>
+                        <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, de charger vos attestation de travail ou de non-emploie et toute autre pièce justificative.</p>
 
                     </p:panel>
                 </div>
             </div>
             <p:tabView id="tabView">  
-
-                <p:tab id="tab1" title="Diplomes Obtenus">
-
+                <p:tab id="tab1" title="Diplômes Obtenus">
                     <p:dataTable value="#{etudiantController.current.qualificationList}" var="diplome">
                         <p:column headerText="Actions">  
-
                             <p:growl id="messages"/>  
-
                             <p:menuButton value="Actions">  
                                 <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
                                 <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveQualification(diplome)}" ajax="false"/>  
-
                             </p:menuButton>  
-
-
                         </p:column>
-                        <p:column  headerText="Diplome">  
+                        <p:column  headerText="Diplôme">  
                             <h:outputText value="#{diplome.diplome}" />  
                         </p:column> 
                         <p:column  headerText="Date d'obtention">  
                             <h:outputText value="#{diplome.dateObtention}" >
                                 <f:convertDateTime pattern="dd.MM.yyyy" />
                             </h:outputText>  
-                        </p:column> 
-
+                        </p:column>
                         <p:column  headerText="Mention">  
                             <h:outputText value="#{diplome.mention}" />  
                         </p:column> 
                         <p:column  headerText="Etablissement">  
                             <h:outputText value="#{diplome.partieDelivrante}" />  
                         </p:column>
-
-
                     </p:dataTable>
-
-
                 </p:tab>  
                 <p:tab id="tab2" title="Sujet Choisis">
                     <p:outputLabel value="Vous avez choisis les Sujets ci après : "/>
-                    <p:commandButton action="#{etudiantController.showChoixSujet}" rendered="#{etudiantController.current.choixList.size() != 2}" value="Ajouter un autre choix" />
+                    <p:commandButton action="#{etudiantController.showChoixSujet}" rendered="#{etudiantController.current.choixList.size() != 1}" value="Ajouter un choix" />
                     <p:dataTable value="#{etudiantController.current.choixList}" var="choix">
                         <p:column headerText="Actions">  
-
                             <p:growl id="messages"/>  
-
                             <p:menuButton value="Actions">  
                                 <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveChoix(choix)}" ajax="false"/>  
                             </p:menuButton>  
-
-
                         </p:column>
                         <p:column  headerText="Sujet Choisis">  
                             <h:outputText value="#{choix.idSujet.intitule}" />  
@@ -158,36 +142,24 @@
                         </p:column> 
                     </p:dataTable>
                 </p:tab>
-
-
-                <p:tab id="tab3" title="Pieces Justificatives">  
-
+                <p:tab id="tab3" title="Pièces Justificatives">  
                     <p:accordionPanel value="#{etudiantController.current.piecesList}" var="piece">
-                        <p:tab title="La piece : #{piece.intitule}">
-                            <p:commandButton id="delete" value="Supprimer la piece" action="#{etudiantController.doDeletePieces(piece)}" icon="ui-icon-delete" />
-
+                        <p:tab title="La pièce : #{piece.intitule}">
+                            <p:commandButton id="delete" value="Supprimer la pièce" action="#{etudiantController.doDeletePieces(piece)}" icon="ui-icon-delete" />
                             <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true"/>
-                            <p:commandButton rendered="#{piece.pathScan.contains('.pdf')}" value="Télécharger le document pour visualisé" ajax="false" 
+                            <p:commandButton rendered="#{piece.pathScan.contains('.pdf')}" value="Télécharger le document pour visualiser" ajax="false" 
                                             onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
                                     <p:fileDownload value="#{etudiantController.getPdfFile(piece.pathScan)}" />  
                                     </p:commandButton>
-
                             <h:panelGrid columns="2" cellpadding="5">
-
                                 <h:outputText value="Intitulé:" style="font-weight: bold" />
                                 <h:outputText value="#{piece.intitule}" />
-
                                 <h:outputText value="Partie delivrante:" style="font-weight: bold" />
                                 <h:outputText value="#{piece.partieDelivrante}" />
                             </h:panelGrid>
                         </p:tab>
                     </p:accordionPanel>
-
-
                 </p:tab> 
-
-
-
             </p:tabView>
         </h:form>
 

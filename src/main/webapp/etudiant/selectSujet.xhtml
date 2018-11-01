@@ -16,14 +16,14 @@
         <p:messages for="update"/>
         <p:panel header="Liste des sujet disponible">
             <p:dataTable value="#{sujetController.allSujets}" var="sujet">
-            <p:column  headerText="Intitule du sujet">  
+            <p:column  headerText="Intitulé du sujet">  
                 <h:outputText value="#{sujet.intitule}" />  
         </p:column> 
             <p:column headerText="Description du sujet">  
                 <h:outputText value="#{sujet.description}" />  
         </p:column> 
-            <p:column headerText="Responsable">  
-                <h:outputText value="#{sujet.responsable.nom} #{sujet.responsable.prenom}" />  
+            <p:column headerText="Résponsable">  
+                <h:outputText value="#{sujet.laboratoire.intitule}" />  
         </p:column> 
             <p:column style="width:4%">  
                             
