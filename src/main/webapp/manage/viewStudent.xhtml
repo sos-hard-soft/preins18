@@ -20,7 +20,9 @@
             <div class="row">
                
                     <p:panel id="etudiantdetail">
-                        
+                        <p:panelGrid>
+                            <p:graphicImage height="120" width="120" rendered="#{personController.fileExist}" value="#{etudiantController.byteToImage(personController.student.photo)}" />
+                        </p:panelGrid>
                         <p:messages for="update"/>
                         <p:panel header="Informations personelle">
                             <p:panelGrid columns="4">

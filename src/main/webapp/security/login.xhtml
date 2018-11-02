@@ -8,99 +8,99 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-	<title>Login V1</title>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="secured/images/icons/favicon.ico"/>
-<!--===============================================================================================-->
+    <h:head>
+        <title>Login V1</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!--===============================================================================================-->	
+        <link rel="icon" type="image/png" href="secured/images/icons/favicon.ico"/>
+        <!--===============================================================================================-->
         <h:outputStylesheet name="secured/vendor/bootstrap/css/bootstrap.min.css" />
-	<h:outputStylesheet name="secured/fonts/font-awesome-4.7.0/css/font-awesome.css" />
-	
+        <h:outputStylesheet name="secured/fonts/font-awesome-4.7.0/css/font-awesome.css" />
+
         <h:outputStylesheet name="secured/vendor/animate/animate.css" />
-	
+
         <h:outputStylesheet name="secured/vendor/css-hamburgers/hamburgers.min.css" />
-	
+
         <h:outputStylesheet name="secured/vendor/select2/select2.min.css" />
-	
+
         <h:outputStylesheet name="secured/css/util.css" />
-	<h:outputStylesheet name="secured/css/main.css" />
+        <h:outputStylesheet name="secured/css/main.css" />
 
-</h:head>
+    </h:head>
     <h:body>
-	
-	<div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt">
-                                    <p:graphicImage value="../resources/secured/images/img-01.png" />					
-				</div>
-                           
-				<form class="login100-form validate-form" action="j_security_check" method="post">
-					<span class="login100-form-title">
-						Authentification des personnes enregistrés
-					</span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                                            <p:inputText placeholder="Login" class="input100" id="j_username" />
-                                            	<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							
-						</span>
-					</div>
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="login100-pic js-tilt">
+                        <p:graphicImage value="../resources/secured/images/img-01.png" />					
+                    </div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Mot de passe obligatoire">
-                                            <p:password placeholder="Mot de passe" class="input100" id="j_password" />
-                                            	<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							
-						</span>
-					</div>
-					
-					<div class="container-login100-form-btn">
-                                            <h:commandButton class="login100-form-btn" value="Se Connecter" />
-						
-					</div>
+                    <form class="login100-form validate-form" action="j_security_check" method="post">
+                        <span class="login100-form-title">
+                            Authentification des personnes enregistrés
+                        </span>
+                        <span class="login100-form-title">
+                            Le Login est votre CIN, le mot de passe vous l'avez saisi durant la première phase d'inscription
+                        </span>
+                        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                            <p:inputText placeholder="Login" class="input100" id="j_username" />
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
 
-					<!--<div class="text-center p-t-12">
-						<span class="txt1">
-							Vous avez oublié vos identifiants
-						</span><br />
-						<a class="txt2" href="#">
-							Identifiant / Mot de passe
-						</a>
-					</div>-->
+                            </span>
+                        </div>
 
-					<div class="text-center p-t-136">
-                                   
-                                            <a href="/candidmaster/index.xhtml">
-							<h4>Créer votre espace
-							
-                                               </h4> </a>
-                                    
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	
+                        <div class="wrap-input100 validate-input" data-validate = "Mot de passe obligatoire">
+                            <p:password placeholder="Mot de passe" class="input100" id="j_password" />
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
 
-	
-<!--===============================================================================================-->	
-    <h:outputScript name="secured/vendor/jquery/jquery-3.2.1.min.js" target="head"/>
-	<h:outputScript name="secured/vendor/bootstrap/js/popper.js" target="head"/>
+                            </span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <h:commandButton class="login100-form-btn" value="Se Connecter" />
+
+                        </div>
+
+                        <!--<div class="text-center p-t-12">
+                                <span class="txt1">
+                                        Vous avez oublié vos identifiants
+                                </span><br />
+                                <a class="txt2" href="#">
+                                        Identifiant / Mot de passe
+                                </a>
+                        </div>-->
+
+                        <div class="text-center p-t-136">
+
+                            <a href="/candidmaster/index.xhtml">
+                                <h4>Créer votre espace</h4> </a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!--===============================================================================================-->	
+        <h:outputScript name="secured/vendor/jquery/jquery-3.2.1.min.js" target="head"/>
+        <h:outputScript name="secured/vendor/bootstrap/js/popper.js" target="head"/>
         <h:outputScript name="secured/vendor/bootstrap/js/bootstrap.min.js" target="head"/>
         <h:outputScript name="secured/vendor/select2/select2.min.js" target="head"/>
         <h:outputScript name="secured/vendor/tilt/tilt.jquery.min.js" target="head"/>
         <h:outputScript name="secured/js/main.js" target="head"/>
-	<script >
-		$('.js-tilt').tilt({
-			scale: 1.1
-		})
-	</script>
-<!--===============================================================================================-->
+        <script >
+            $('.js-tilt').tilt({
+                scale: 1.1
+            })
+        </script>
+        <!--===============================================================================================-->
 
 
     </h:body>

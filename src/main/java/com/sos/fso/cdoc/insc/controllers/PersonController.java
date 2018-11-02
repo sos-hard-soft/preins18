@@ -131,8 +131,11 @@ public class PersonController implements Serializable{
     }
     
     public String showStudentDetail(String cin) {
-        this.student = etudiantService.findByCin(cin);;
-        
+        this.student = etudiantService.findByCin(cin);
+        if (student.getPhoto() != null) {
+            fileExist = true;
+        }
+                
         return "/manage/viewStudent?faces-redirect=true";
     }
     

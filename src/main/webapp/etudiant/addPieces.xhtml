@@ -18,7 +18,7 @@
                 </p:panel>
                 <div class="row">
                     <div class="col-lg-8">
-                    <p:panel header="Ajouter un nouveau diplôme">
+                    <p:panel header="Ajouter une piece Justificative, une demande, un CV ou tout autre fichier demandé dans cet espace. Pour la partie délivrante sa pourrait etre vous meme dans le cas des demande et lettre de motivation. La date c'est celle de rédaction.">
                     
                 <p:panelGrid columns="3">
                     <p:outputLabel value="Date de délivrance de la pièce : "/>
@@ -33,17 +33,16 @@
                     <p:message for="piece"/>
                     <p:outputLabel value="Veuillez charger l'image de votre piece :" />
                     <p:fileUpload id="file" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
-                                  sizeLimit="5242880"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
+                                  sizeLimit="5242880" label="Cliquez pour Chargé votre Pièce" invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
                     <p:message for="file"/>
 
-                    <p:outputLabel value="Partie delivrante : *"/>
+                    <p:outputLabel value="Partie delivrante: *"/>
                     <p:inputText id="partieDelivrante" value="#{etudiantController.newPieces.partieDelivrante}"
                                  required="true" requiredMessage="Veuillez saisir l'etablissement ayant delivré la piece"/>
-                    <p:message for="partieDelivrante"/>
-
+                    <p:message for="partieDelivrante"/>                    
                 </p:panelGrid>
                         
-                <h:commandButton value="Enregistrer la pièce" action="#{etudiantController.doAddPieces}"/>
+                <p:commandButton value="Enregistrer la pièce" action="#{etudiantController.doAddPieces}"/>
 
 </p:panel>
                         </div>

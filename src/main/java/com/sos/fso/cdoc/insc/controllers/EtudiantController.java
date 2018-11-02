@@ -239,16 +239,24 @@ public class EtudiantController implements Serializable {
         //return response;
     }
     
-    public String doDeletePieces(Pieces pieces){
+    public String doDeletePieces(Pieces piece){
+        String path = piece.getPathScan();
+        if (path == null) {
+            current.getPiecesList().remove(piece);
+            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
+            return this.showDetails();
+            
+        }else{
         try {
-            this.performDelete(pieces.getPathScan());
+            this.performDelete(piece.getPathScan());
             System.out.println("Suppression du fichier depuis disque !!");
-            current.getPiecesList().remove(pieces);
-            piecesService.remove(pieces);
+            current.getPiecesList().remove(piece);
+            piecesService.remove(piece);
             
         } catch (Exception e) {
-            System.out.println("errur : " + e.getStackTrace());
-        }
+            System.out.println("error when delete piece : " + e.getStackTrace());
+        }}
+        addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
         return this.showDetails();
     }
     
@@ -495,7 +503,7 @@ public class EtudiantController implements Serializable {
             this.current.getChoixList().remove(choix);
             choixService.remove(choix);
             etudiantService.edit(current);
-            addMessage("update", FacesMessage.SEVERITY_INFO, "le Sujet a ete supprimer avec success !!", "Error !!");
+            addMessage("update", FacesMessage.SEVERITY_INFO, "le Choix a ete supprimer avec success !!", "Error !!");
 
         } catch (Exception e) {
         }

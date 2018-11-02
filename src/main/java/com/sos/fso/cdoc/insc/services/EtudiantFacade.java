@@ -94,7 +94,7 @@ public class EtudiantFacade extends AbstractFacade<Etudiant> {
     //            System.out.println("Works fine!!!!!");  
             
             
-            preinscrit = em.createNativeQuery("SELECT e.cne, e.cin, e.nom, e.prenom, e.date_naissance, e.lieu_naissance, e.sexe, e.nationalite, q.diplome, q.date_obtention, q.date_premiere_inscription, q.mention, q.note1, q.note2, q.note3, q.note4, q.note5, q.note6, "
+            preinscrit = em.createNativeQuery("SELECT e.cne, e.cin, e.nom, e.prenom, e.date_naissance, e.lieu_naissance, e.sexe, e.nationalite, q.diplome, q.partie_delivrante, q.date_obtention, q.date_premiere_inscription, q.mention, q.note1, q.note2, q.note3, q.note4, q.note5, q.note6, "
                     + "(q.note1+q.note2+q.note3+q.note4+q.note5+q.note6)/6 as moyenne "
                     + "FROM  t_etudiant AS e INNER JOIN t_choix AS c "
                     + "ON e.id_etudiant = c.id_etudiant "

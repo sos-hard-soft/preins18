@@ -53,7 +53,7 @@ public class Pieces implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dateObtention;
     @Size(max = 255)
-    @Column(name = "intitiulé")
+    @Column(name = "intitiule")
     private String intitule;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;

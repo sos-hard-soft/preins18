@@ -20,6 +20,11 @@
             <h1 class="page-title">Liste des candidats a votre master</h1>
             <p>Vous pouvez visualisé le dossier d'un candidat en cliquant sur son Numéro CIN</p>            
         </div>
+        <style>
+            .container {
+    width: 1800px;
+}
+        </style>
         <h:form>
             <div style="margin-bottom: 10px;">
             <h:commandLink class="btn btn-download btn-action btn-lg">Cliquez ici pour Exporter la liste au Format excel
@@ -27,7 +32,7 @@
         <p:dataExporter type="xls" target="tbl" fileName="liste candidats" pageOnly="true" />   
             </h:commandLink></div>
                     <p:dataTable id="tbl" value="#{personController.stdliste}"
-                                 scrollable="true" scrollHeight="150" scrollWidth="500" frozenColumns="4" sortMode="multiple" var="item">
+                                  sortMode="multiple" var="item">
                         <p:column sortBy="#{item.cne}">
                             <f:facet name="header">
                                 <h:outputText value="Cne"/>
@@ -40,7 +45,7 @@
                             </f:facet>
                             <p:commandLink value="#{item.cin}" action="#{personController.showStudentDetail(item.cin)}"/>
                         </p:column>
-                        <p:column filterBy="#{item.nom}">
+                        <p:column filterBy="#{item.nom}" sortBy="#{item.nom}">
                             <f:facet name="header">
                                 <h:outputText value="Nom"/>
                             </f:facet>
@@ -148,12 +153,7 @@
                             </f:facet>
                             <h:outputText value="#{item.moyenne}"/>
                         </p:column>
-                    </p:dataTable>
-               
-            
-                                
-            
-        </h:form>
-    
+                    </p:dataTable>                   
+        </h:form>    
     </ui:define>
 </ui:composition>

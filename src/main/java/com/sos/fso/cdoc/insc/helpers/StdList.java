@@ -55,9 +55,13 @@ public class StdList implements Serializable{
     @Size(max = 255)
     @Column(name = "diplome")
     private String diplome;
+    @Size(max = 255)
+    @Column(name = "partie_delivrante")
+    private String partieDelivrante;
     @Column(name = "date_obtention")
     @Temporal(TemporalType.DATE)
     private Date dateObtention;
+    
     @Column(name = "date_premiere_inscription")
     @Temporal(TemporalType.DATE)
     private Date datePremiereInscription;
@@ -83,7 +87,7 @@ public class StdList implements Serializable{
     public StdList() {
     }
 
-    public StdList(long cne, String cin, String nom, String prenom, Date dateNaissance, String lieuNaissance, Boolean sexe, String nationalite, String diplome, Date dateObtention, Date datePremiereInscription, String mention, Double note1, Double note2, Double note3, Double note4, Double note5, Double note6, Double moyenne) {
+    public StdList(long cne, String cin, String nom, String prenom, Date dateNaissance, String lieuNaissance, Boolean sexe, String nationalite, String diplome, String partieDelivrante, Date dateObtention, Date datePremiereInscription, String mention, Double note1, Double note2, Double note3, Double note4, Double note5, Double note6, Double moyenne) {
         this.cne = cne;
         this.cin = cin;
         this.nom = nom;
@@ -93,6 +97,7 @@ public class StdList implements Serializable{
         this.sexe = sexe;
         this.nationalite = nationalite;
         this.diplome = diplome;
+        this.partieDelivrante = partieDelivrante;
         this.dateObtention = dateObtention;
         this.datePremiereInscription = datePremiereInscription;
         this.mention = mention;
@@ -175,6 +180,14 @@ public class StdList implements Serializable{
 
     public void setDiplome(String diplome) {
         this.diplome = diplome;
+    }
+
+    public String getPartieDelivrante() {
+        return partieDelivrante;
+    }
+
+    public void setPartieDelivrante(String partieDelivrante) {
+        this.partieDelivrante = partieDelivrante;
     }
 
     public Date getDateObtention() {
