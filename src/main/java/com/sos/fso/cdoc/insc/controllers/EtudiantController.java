@@ -134,10 +134,6 @@ public class EtudiantController implements Serializable {
     // ======================================
     // = Navigation Methods =
     // ======================================
-    public String showManage() {
-        return "/manage/manage?faces-redirect=true";
-    }
-
     public String showIndex() {
         return "/index?faces-redirect=true";
     }
@@ -426,6 +422,7 @@ public class EtudiantController implements Serializable {
 
         } else {
             addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix permis est atteint !!", "Error !!");
+            etudiantService.clearCache();
             return "/etudiant/view?faces-redirect=true";
         }
 

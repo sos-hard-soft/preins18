@@ -5,15 +5,12 @@
  */
 package com.sos.fso.cdoc.insc.controllers;
 
-import com.sos.fso.cdoc.insc.entities.Choix;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
 import com.sos.fso.cdoc.insc.entities.Sujet;
 import com.sos.fso.cdoc.insc.helpers.StdList;
-import com.sos.fso.cdoc.insc.helpers.StudentChoicesValidator;
-import com.sos.fso.cdoc.insc.services.ChoixFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
@@ -50,13 +47,13 @@ import org.primefaces.model.UploadedFile;
  *
  * @author master05
  */
-@Named(value = "encadrantController")
+@Named(value = "adminController")
 @SessionScoped
-public class EncadrantController implements Serializable{
+public class AdminController implements Serializable{
    // ======================================
     // = Attributes =
     // ======================================
-    private static final Logger logger = Logger.getLogger(EncadrantController.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminController.class.getName());
     
     @Inject
     private PersonFacade personService;
@@ -68,11 +65,6 @@ public class EncadrantController implements Serializable{
     private SujetFacade sujetService;
     private Sujet sujet;
     private List<Sujet> listSujet;
-    
-    @Inject
-    private ChoixFacade choixService;
-    private Choix choix;
-    private List<Choix> listChoix;
     
     @Inject
     private FiliereFacade filiereFacade;
@@ -125,20 +117,15 @@ public class EncadrantController implements Serializable{
         //this.current = item;
         return "/index?faces-redirect=true";
     }
-    
-    public String showThesards(Sujet sujet){
-       listChoix = choixService.findByIdSujet(sujet);
-       return "/encadrants/listThesards?faces-redirect=true";
-    }
 
     public String showSujet() {
         listSujet = sujetService.findByResponsable(current);
         return "/LaboMember/mySujet?faces-redirect=true";
     }
     
-    public String showDetails(Etudiant selected) {
-        this.student = selected;
-        return "/encadrants/viewStudent?faces-redirect=true";
+    public String showDetails(Person selected) {
+        this.current = selected;
+        return "/filiere/list?faces-redirect=true";
     }
 
     public String showCreatePerson() {
@@ -152,11 +139,11 @@ public class EncadrantController implements Serializable{
     }
     
     public String showSpace() {
-        return "encadrant?faces-redirect=true";
+        return "/manage/view?faces-redirect=true";
     }
     
     public String showLogin() {
-        return "/encadrants/logedPerson?faces-redirect=true";
+        return "/managed/logedPerson?faces-redirect=true";
     }
     
     public String showStudentDetail(String cin) {
@@ -224,7 +211,7 @@ public class EncadrantController implements Serializable{
     
     
     
-    public EncadrantController() {
+    public AdminController() {
                
     }
 
@@ -321,22 +308,6 @@ public class EncadrantController implements Serializable{
 
     public void setStdliste(List<StdList> stdliste) {
         this.stdliste = stdliste;
-    }
-
-    public Choix getChoix() {
-        return choix;
-    }
-
-    public void setChoix(Choix choix) {
-        this.choix = choix;
-    }
-
-    public List<Choix> getListChoix() {
-        return listChoix;
-    }
-
-    public void setListChoix(List<Choix> listChoix) {
-        this.listChoix = listChoix;
     }
     
     
@@ -438,7 +409,7 @@ public class EncadrantController implements Serializable{
             if (value == null || value.length() == 0) {
                 return null;
             }
-            EncadrantController controller = (EncadrantController) facesContext.getApplication().getELResolver().
+            AdminController controller = (AdminController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "personController");
             return controller.getPerson(getKey(value));
         }

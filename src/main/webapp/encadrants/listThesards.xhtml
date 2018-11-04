@@ -11,35 +11,52 @@
 
         <f:view>
             <h:form>
-                <h1><h:outputText value="List"/></h1>
-                <p:dataTable value="#{encadrantController.listSujet}" var="item">
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Numéro du sujet"/>
-                        </f:facet>
-                        <h:outputText value="#{item.nbPlace}"/>
-                    </p:column>
+                <h:form>
+                    <h1><h:outputText value="List"/></h1>
+                    <p:dataTable value="#{encadrantController.listChoix}" var="item">
+                        <p:column filterBy="#{item.idEtudiant.cin}" sortBy="#{item.idEtudiant.cin}">
+                            <f:facet name="header">
+                                <h:outputText value="Cin"/>
+                            </f:facet>
+                            <p:commandLink value="#{item.idEtudiant.cin}" action="#{encadrantController.showDetails(item.idEtudiant)}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="CNE"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEtudiant.cne}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idEtudiant.nom}" sortBy="#{item.idEtudiant.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEtudiant.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prenom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEtudiant.prenom}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEtudiant.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sexe"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEtudiant.activite ? 'Male' : 'Female'}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Intitule"/>
-                        </f:facet>
-                        <h:outputText value="#{item.intitule}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="IntituleAR"/>
-                        </f:facet>
-                        <h:outputText value="#{item.intituleAR}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Description"/>
-                        </f:facet>
-                        <h:outputText value="#{item.description}"/>
-                    </p:column>
-                    
-                </p:dataTable>
+                
+                
+                
             </h:form>
         </f:view>
 

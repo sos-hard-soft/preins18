@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="meta">
+            <head><meta http-equiv="refresh" content="10; URL=/preinsmast/manage/view.xhtml" /></head>
+        </ui:define>
+
+        
+<ui:define name="content">
+            
+    
+    <h:form>
+                <p:commandButton rendered="#{encadrantController.compte.actif}"
+                            value="Log Out" action="#{loginController.doLogout}"/><br/>
+        
+        <p:messages for="update"/>
+        <div class="jumbotron top-space">
+			<h4>Bienvenu <p:outputLabel  rendered="#{encadrantController.compte.actif}" value="#{encadrantController.current.prenom}"/></h4>
+                        <h4>Vous allez etre rédiriger vers votre espace personel
+                            <p:commandLink rendered="#{encadrantController.compte.actif}"
+                value="cliquez ici" action="#{encadrantController.showSpace}" class="btn btn-primary btn-large"/></h4>
+     		<h4>
+                    Sur votre espace personel vous pouvez gerer les candidats a vos sujets.
+                </h4>
+  		</div>
+        
+        </h:form>
+        </ui:define>
+</ui:composition>

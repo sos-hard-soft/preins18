@@ -42,18 +42,19 @@
             <role-name>candidat</role-name>
         </auth-constraint>
     </security-constraint>
-<!--    <security-constraint>
-        <display-name>Managed Pages</display-name>
+    <security-constraint>
+        <display-name>Encadrant Pages</display-name>
         <web-resource-collection>
-            <web-resource-name>Managed pages</web-resource-name>
+            <web-resource-name>Encadrant pages</web-resource-name>
             <description/>
-            <url-pattern>/managed/logedPerson.xhtml</url-pattern>
-            <url-pattern>/manage/view.xhtml</url-pattern>
-            <url-pattern>/filiere/addFiliere.xhtml</url-pattern>
+            <url-pattern>/encadrants/logedPerson.xhtml</url-pattern>
+            <url-pattern>/encadrants/encadrants.xhtml</url-pattern>
+            <url-pattern>/encadrants/listThesards.xhtml</url-pattern>
+            <url-pattern>/encadrants/viewPerson.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>manager</role-name>
+            <role-name>ens</role-name>
         </auth-constraint>
     </security-constraint>
     <security-constraint>
@@ -67,7 +68,7 @@
             <description/>
             <role-name>admin</role-name>
         </auth-constraint>
-    </security-constraint>-->
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>cedocRealm</realm-name>
@@ -83,6 +84,10 @@
     <security-role>
         <description/>
         <role-name>manager</role-name>
+    </security-role>
+    <security-role>
+        <description>Groupe des enseignants</description>
+        <role-name>ens</role-name>
     </security-role>
     <security-role>
         <description>Administrateur de l'application</description>

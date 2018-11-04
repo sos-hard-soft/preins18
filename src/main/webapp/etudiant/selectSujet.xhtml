@@ -6,38 +6,41 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-             <ui:define name="sidebar-left">
-                
-                    <ui:include src="menuEtudiant.xhtml" />
-             
-            </ui:define>
-<ui:define name="content">
+    <ui:define name="sidebar-left">
+
+        <ui:include src="menuEtudiant.xhtml" />
+
+    </ui:define>
+    <ui:define name="content">
         <h:form>
-        <p:messages for="update"/>
-        <p:panel header="Liste des sujet disponible">
-            <p:dataTable value="#{sujetController.allSujets}" var="sujet">
-            <p:column  headerText="Intitulé du sujet">  
-                <h:outputText value="#{sujet.intitule}" />  
-        </p:column> 
-            <p:column headerText="Description du sujet">  
-                <h:outputText value="#{sujet.description}" />  
-        </p:column> 
-            <p:column headerText="Résponsable">  
-                <h:outputText value="#{sujet.laboratoire.intitule}" />  
-        </p:column> 
-            <p:column style="width:4%">  
-                            
-                                <p:growl id="messages"/>  
+            <p:messages for="update"/>
+            <p:panel header="Liste des sujet disponible">
+                <p:dataTable value="#{sujetController.allSujets}" sortBy="#{sujet.laboratoire.intitule}"
+                             expandableRowGroups="true" var="sujet">
+                    <p:headerRow>
+                        <p:column headerText="Laboratoire d'attache" colspan="5">  
+                            <h:outputText value="#{sujet.laboratoire.intitule}" />  
+                        </p:column>
+                    </p:headerRow>
+                    <p:column  headerText="Numéro du sujet">  
+                        <h:outputText value="#{sujet.nbPlace}" />  
+                    </p:column>
+                    <p:column  headerText="Intitulé du sujet">  
+                        <h:outputText value="#{sujet.intitule}" />  
+                    </p:column>
+                    <p:column  headerText="Intitulé du sujet en Arabe">  
+                        <h:outputText value="#{sujet.intituleAR}" />  
+                    </p:column>
+                    <p:column headerText="Description du sujet">  
+                        <h:outputText value="#{sujet.description}" />  
+                    </p:column> 
 
-                                <p:menuButton value="Options">  
-                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(sujet)}" icon="ui-icon-arrowrefresh-1-w"/>    
-                                                                        
-                                </p:menuButton>  
-                            
-
-                        </p:column> 
-        </p:dataTable>
-        </p:panel>
+                    <p:column>  
+                        <p:growl id="messages"/>  
+                        <p:commandButton value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(sujet)}" icon="ui-icon-arrowrefresh-1-w" />  
+                    </p:column> 
+                </p:dataTable>
+            </p:panel>
         </h:form>
-       </ui:define>
+    </ui:define>
 </ui:composition>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="content">
+        <f:view>
+            <h:form><div class="ui-g">
+                    <div class="ui-g-12">
+                        <h1>Choisissez Votre Espace</h1>
+                    </div>
+                   
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <p:commandLink action="#{encadrantController.showLogin}">
+                        <span><img src="../resources/images/encadrant.jpg" /></span>
+                        <h3>Encadrant</h3>
+                        </p:commandLink>
+                    </div>
+                    <div class="ui-g-4">
+<p:commandLink action="#{directeurController.showLogin}">
+                        <span><img src="../resources/images/Directeur.jpg" /></span>
+                        <h3>Directeur de Laboratoire</h3>
+                        </p:commandLink>
+                    </div>
+                    <div class="ui-g-4">
+<p:commandLink action="#{adminController.showLogin}">
+                        <span><img src="../resources/images/admin.jpg" /></span>
+                        <h3>Administrateur</h3>
+                        </p:commandLink>
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>
+</ui:composition>
