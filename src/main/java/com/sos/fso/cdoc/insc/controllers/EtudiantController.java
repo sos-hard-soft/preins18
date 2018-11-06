@@ -38,6 +38,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -101,7 +102,7 @@ public class EtudiantController implements Serializable {
 
     @Inject
     private PiecesFacade piecesService;
-    private Pieces newPieces;
+    private Pieces newPieces = new Pieces();
     private Pieces currentPieces = new Pieces();
 
     @Inject
@@ -342,6 +343,7 @@ public class EtudiantController implements Serializable {
 
     public String doAddPieces() {
         logger.log(Level.INFO, "Debut de la procedure d'ajout d'une piece justificative!!");
+        System.out.println("l'ajout de  la piece en cours");
         if (current != null) {
             newPieces.setEtudiant(current);
             System.out.println("le fichier de la justif : ");

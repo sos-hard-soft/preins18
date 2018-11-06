@@ -12,7 +12,7 @@
              
             </ui:define>
 <ui:define name="content">
-                <h:form>
+    <h:form>
                     <div></div>
                     <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
                         Votre session a éxpirer ou vous n'avez pas activer votre compte.
@@ -97,7 +97,7 @@
                                 <f:selectItem itemLabel="Masculin" itemValue="true"/>
                                 <f:selectItem itemLabel="Féminin" itemValue="false"/>
                             </p:selectOneRadio>
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="sexe"/>
 
 
                             <p:outputLabel value="Etat matrimonial :"/>
@@ -105,23 +105,28 @@
                                 <f:selectItem itemLabel="Célibataire" itemValue="true"/>
                                 <f:selectItem itemLabel="Marié(e)" itemValue="false"/>
                             </p:selectOneRadio>
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="etatMatrimonial"/>
 
-                            <p:outputLabel value="Fonctionaire :"/>
-                            <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}">
-                                <f:selectItem itemLabel="Oui" itemValue="true"/>
-                                <f:selectItem itemLabel="Non" itemValue="false"/>
+                            <p:outputLabel value="Situation Professionelle *:"/>
+                            <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}" required="true">
+                                <f:selectItem itemLabel="Employé" itemValue="true"/>
+                                <f:selectItem itemLabel="Sans Emploi" itemValue="false"/>
                             </p:selectOneRadio>
-                            <p:message for="lieuNaissance"/>
-
+                            <p:message for="activite"/>
+                            </p:panelGrid>
+                        <p:panelGrid>
+                            <p:outputLabel value="Après l'édition n'oublié pas d'ajouter votre attesttion d'emploi ou de non emploie sur la partie pièces justificative."/>
+                                                      
+</p:panelGrid>
+                        <p:panelGrid columns="3">
                             <p:outputLabel value="Adresse de corespondance :"/>
                             <p:inputTextarea rows="6" cols="50" id="adresse" value="#{etudiantController.current.adresse}"
                                              />
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="adresse"/>
                             <p:outputLabel value="Numéro de téléphonne :"/>
                             <p:inputText id="telephonne" value="#{etudiantController.current.numeroTelephonne}"
                                          />
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="telephonne"/>
                         </p:panelGrid>
                         <p:commandButton class="btn btn-action" value="Enregistrer les Modifications" action="#{etudiantController.doEdit}"/>
 

@@ -45,12 +45,9 @@
     <security-constraint>
         <display-name>Encadrant Pages</display-name>
         <web-resource-collection>
-            <web-resource-name>Encadrant pages</web-resource-name>
-            <description/>
-            <url-pattern>/encadrants/logedPerson.xhtml</url-pattern>
-            <url-pattern>/encadrants/encadrants.xhtml</url-pattern>
-            <url-pattern>/encadrants/listThesards.xhtml</url-pattern>
-            <url-pattern>/encadrants/viewPerson.xhtml</url-pattern>
+            <web-resource-name>Encadrant resources</web-resource-name>
+            <description>Les ressources des encadrants</description>
+            <url-pattern>/encadrants/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>

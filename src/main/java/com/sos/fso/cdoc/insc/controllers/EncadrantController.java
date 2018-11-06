@@ -126,7 +126,12 @@ public class EncadrantController implements Serializable{
         return "/index?faces-redirect=true";
     }
     
-    public String showThesards(Sujet sujet){
+    public String showTest() {
+        //this.current = item;
+        return "/encadrants/test?faces-redirect=true";
+    }
+    
+    public String showThesard(Sujet sujet){
        listChoix = choixService.findByIdSujet(sujet);
        return "/encadrants/listThesards?faces-redirect=true";
     }
