@@ -241,17 +241,18 @@ public class EtudiantController implements Serializable {
     
     public String doDeletePieces(Pieces piece){
         String path = piece.getPathScan();
-        if (path == null) {
+        File laPiece = new File(path);
+        if (laPiece.exists()) {
             current.getPiecesList().remove(piece);
-            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
+            this.piecesService.remove(piece);
+            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece et le fichier ont ete supprimer avec success !!", "Error !!");
             return this.showDetails();
-            
         }else{
         try {
-            this.performDelete(piece.getPathScan());
-            System.out.println("Suppression du fichier depuis disque !!");
-            current.getPiecesList().remove(piece);
-            piecesService.remove(piece);
+             current.getPiecesList().remove(piece);
+             this.piecesService.remove(piece);
+            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
+            return this.showDetails();
             
         } catch (Exception e) {
             System.out.println("error when delete piece : " + e.getStackTrace());
@@ -271,9 +272,12 @@ public class EtudiantController implements Serializable {
     
     public void performDelete(String path){
         File laPiece = new File(path);
+        if(laPiece.exists()){
         laPiece.delete();
         System.out.println("Le fichier a été supprimé");
-        addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
+        addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");}else{
+            System.out.println("Erreur lors de la suppression de fichier");
+        }
     }
 
     public void deleteQualificationScan(String path){
