@@ -66,6 +66,18 @@
             <role-name>admin</role-name>
         </auth-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>directed</display-name>
+        <web-resource-collection>
+            <web-resource-name>directed</web-resource-name>
+            <description/>
+            <url-pattern>/DirLabo/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>directeur</role-name>
+        </auth-constraint>
+    </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>cedocRealm</realm-name>
@@ -89,5 +101,9 @@
     <security-role>
         <description>Administrateur de l'application</description>
         <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description>Page des directeur de labo</description>
+        <role-name>directeur</role-name>
     </security-role>
 </web-app>

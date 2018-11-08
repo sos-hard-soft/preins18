@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Laboratoire.findByIdLaboratoire", query = "SELECT l FROM Laboratoire l WHERE l.idLaboratoire = :idLaboratoire")
     , @NamedQuery(name = "Laboratoire.findByDescription", query = "SELECT l FROM Laboratoire l WHERE l.description = :description")
     , @NamedQuery(name = "Laboratoire.findByIntitule", query = "SELECT l FROM Laboratoire l WHERE l.intitule = :intitule")
-    , @NamedQuery(name = "Laboratoire.findByOptimisticLock", query = "SELECT l FROM Laboratoire l WHERE l.optimisticLock = :optimisticLock")})
+    , @NamedQuery(name = "Laboratoire.findByDirecteur", query = "SELECT l FROM Laboratoire l WHERE l.directeur = :directeur")})
 public class Laboratoire implements Serializable {
 
     private static final long serialVersionUID = 1L;

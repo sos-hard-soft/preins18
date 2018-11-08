@@ -6,6 +6,8 @@
 package com.sos.fso.cdoc.insc.services;
 
 import com.sos.fso.cdoc.insc.entities.Laboratoire;
+import com.sos.fso.cdoc.insc.entities.Person;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,11 @@ public class LaboratoireFacade extends AbstractFacade<Laboratoire> {
     public LaboratoireFacade() {
         super(Laboratoire.class);
     }
+
+    public List<Laboratoire> findLaboByDirecteur(Person directeur) {
+        return em.createNamedQuery("Laboratoire.findByDirecteur", Laboratoire.class).setParameter("directeur", directeur).getResultList();
+
+    }
+    
     
 }

@@ -44,7 +44,7 @@ public class MailerBean {
      * @return
      */
     @Asynchronous
-    public Future<String> sendVerificationMail(String email, String key,String cin, String password) {
+    public Future<String> sendVerificationMail(String email) {
         String status;
         try {
             Message message = new MimeMessage(session);
@@ -66,9 +66,55 @@ public class MailerBean {
                     + "Pour confirmer les données saisi et créer votre compte veuillez vous presenté auprès du service d'étude doctorale a la faculté des sciences d'oujda, "
                     + "munis de votre Carte National d'Identité et cela avant le "
                     + "14 novembre 2018 afin de recuperer votre login et mot de passe d'accès a l'application de candidature.</p>"
-                    /*+ "http://preinsmasterdroit.ump.ma/candidoc/compte/validation.xhtml?key="+key+"<br />"
-                    + "<p>Le login est votre CIN : "+ cin + "<br />"
-                    + "Votre mot de passe est : " + password*/
+                    + "</body></html>";
+            htmlPart.setContent(htmlContent, "text/html");
+            
+            multipart.addBodyPart(htmlPart);
+            message.setContent(multipart);
+            
+            message.setSentDate(timeStamp);
+            Transport.send(message);
+            status = "Sent";
+            logger.log(Level.INFO, "Mail sent to {0}", email);
+        } catch (MessagingException ex) {
+            logger.severe("Error in sending message.");
+            status = "Encountered an error: " + ex.getMessage();
+            logger.severe(ex.getMessage());
+        }
+        return new AsyncResult<>(status);
+    }
+ 
+ 
+    /**
+     *
+     * @param email
+     * @param key
+     * @param cin
+     * @param password
+     * @return
+     */
+    @Asynchronous
+    public Future<String> sendAdminMail(String email, String key,String cin, String password) {
+        String status;
+        try {
+            Message message = new MimeMessage(session);
+            Multipart multipart = new MimeMultipart("alternative");
+            message.setFrom();
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(email, false));
+            message.setSubject("Activation compte : " + cin);
+            message.setHeader("X-Mailer", "JavaMail");
+            DateFormat dateFormatter = DateFormat
+                    .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
+            Date timeStamp = new Date();
+            
+            //Corps de l'email
+            MimeBodyPart htmlPart = new MimeBodyPart();
+            String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
+                    + "<p>Activation du compte du candidat :</p>"
+                    + "http://preinsmasterdroit.ump.ma/candidoc/compte/validation.xhtml?key="+key+"<br />"
+                    + "<h4>Login est le CIN : " + cin + "</h4>"
+                    + "<h4>Mot de passe : " + password + "<h4>"
                     + "</body></html>";
             htmlPart.setContent(htmlContent, "text/html");
             
@@ -86,10 +132,10 @@ public class MailerBean {
             status = "Encountered an error: " + ex.getMessage();
             logger.severe(ex.getMessage());
         }
-        return new AsyncResult<String>(status);
+        return new AsyncResult<>(status);
     }
- 
- 
+    
+    
  @Asynchronous
     public Future<String> sendConfirmationCandidatureMail(String email, String branche) {
         String status;

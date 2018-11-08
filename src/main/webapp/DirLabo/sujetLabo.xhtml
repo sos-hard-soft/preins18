@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="meta">
+        <head><meta http-equiv="refresh" content="10; URL=/candidoc/etudiant/view.xhtml" /></head>
+    </ui:define>
+
+
+    <ui:define name="content">
+        <f:view>
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <h:dataTable value="#{directeurController.labo.sujetList}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numéro du Sujet"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nbPlace}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Intitule"/>
+                        </f:facet>
+                        <h:outputText value="#{item.intitule}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Description"/>
+                        </f:facet>
+                        <h:outputText value="#{item.description}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Intitule"/>
+                        </f:facet>
+                        <h:outputText value="#{item.intituleAR}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Responsable"/>
+                        </f:facet>
+                        <h:outputText value="#{item.responsable.nom} #{item.responsable.prenom}"/>
+                    </h:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Liste des Candidats"/>
+                        </f:facet>
+                        <p:commandButton value="Afficher" action="#{directeurController.showThesard(item)}"/>
+                    </p:column>
+                </h:dataTable>
+            </h:form>
+            
+            
+            
+            
+        </f:view>
+
+    </ui:define>
+</ui:composition>
+

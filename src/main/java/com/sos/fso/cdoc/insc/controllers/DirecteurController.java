@@ -5,15 +5,19 @@
  */
 package com.sos.fso.cdoc.insc.controllers;
 
+import com.sos.fso.cdoc.insc.entities.Choix;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
+import com.sos.fso.cdoc.insc.entities.Laboratoire;
 import com.sos.fso.cdoc.insc.entities.Person;
 import com.sos.fso.cdoc.insc.entities.Sujet;
 import com.sos.fso.cdoc.insc.helpers.StdList;
+import com.sos.fso.cdoc.insc.services.ChoixFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
+import com.sos.fso.cdoc.insc.services.LaboratoireFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
 import com.sos.fso.cdoc.insc.services.SujetFacade;
 import java.io.ByteArrayInputStream;
@@ -67,6 +71,15 @@ public class DirecteurController implements Serializable{
     private List<Sujet> listSujet;
     
     @Inject
+    private ChoixFacade choixService;
+    private List<Choix> listChoix;
+    
+    @Inject
+    private LaboratoireFacade laboService;
+    private Laboratoire labo;
+    private List<Laboratoire> listLabo;
+    
+    @Inject
     private FiliereFacade filiereFacade;
     private Filiere filiereProf;
     
@@ -117,38 +130,50 @@ public class DirecteurController implements Serializable{
         //this.current = item;
         return "/index?faces-redirect=true";
     }
+    
+    public String ShowSujetLabo(Laboratoire choix){
+        this.labo = choix;
+    return "/DirLabo/sujetLabo?faces-redirect=true";
+    }
+    
+    public String showThesard(Sujet sujet){
+       listChoix = choixService.findByIdSujet(sujet);
+       return "/DirLabo/listThesards?faces-redirect=true";
+    }
 
     public String showSujet() {
         listSujet = sujetService.findByResponsable(current);
-        return "/LaboMember/mySujet?faces-redirect=true";
+        return "/DirLabo/mySujet?faces-redirect=true";
     }
     
     public String showDetails(Person selected) {
         this.current = selected;
-        return "/filiere/list?faces-redirect=true";
+        return "/DirLabo/viewStudent?faces-redirect=true";
     }
 
     public String showCreatePerson() {
         newPerson = new Person();
-        return "/manage/newPerson?faces-redirect=true";
+        return "/DirLabo/newPerson?faces-redirect=true";
     }
     
     public String showAllPersons() {
         personnes = personService.findAll();
-        return "/manage/personList?faces-redirect=true";
+        return "/DirLabo/personList?faces-redirect=true";
     }
     
     public String showSpace() {
-        return "/manage/view?faces-redirect=true";
+        this.listLabo = laboService.findLaboByDirecteur(current);
+        System.out.println("le labo : " + listLabo.get(0).getIntitule());
+        return "/DirLabo/directeur?faces-redirect=true";
     }
     
     public String showLogin() {
-        return "/managed/logedPerson?faces-redirect=true";
+        return "/DirLabo/logedPerson?faces-redirect=true";
     }
     
     public String showStudentDetail(String cin) {
         this.student = etudiantService.findByCin(cin);
-        return "/manage/viewStudent?faces-redirect=true";
+        return "/DirLabo/viewStudent?faces-redirect=true";
     }
     
     public List<Person> getAllPersons() {
@@ -308,6 +333,30 @@ public class DirecteurController implements Serializable{
 
     public void setStdliste(List<StdList> stdliste) {
         this.stdliste = stdliste;
+    }
+
+    public List<Choix> getListChoix() {
+        return listChoix;
+    }
+
+    public void setListChoix(List<Choix> listChoix) {
+        this.listChoix = listChoix;
+    }
+
+    public Laboratoire getLabo() {
+        return labo;
+    }
+
+    public void setLabo(Laboratoire labo) {
+        this.labo = labo;
+    }
+
+    public List<Laboratoire> getListLabo() {
+        return listLabo;
+    }
+
+    public void setListLabo(List<Laboratoire> listLabo) {
+        this.listLabo = listLabo;
     }
     
     

@@ -6,27 +6,35 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="meta">
-            <head><meta http-equiv="refresh" content="10; URL=/candidoc/etudiant/view.xhtml" /></head>
+            <head><meta http-equiv="refresh" /></head>
         </ui:define>
 
         
 <ui:define name="content">
             <h:form>
-            <p:commandButton rendered="#{etudiantController.compte.actif}"
+                <p:panel rendered="#{etudiantController.compte.actif}">
+            <p:commandButton 
                             value="Log Out" action="#{loginController.doLogout}"/><br/>
         
         <p:messages for="update"/>
         <div class="jumbotron top-space">
 			<h4>Bienvenu <p:outputLabel  rendered="#{etudiantController.compte.actif}" value="#{etudiantController.current.prenom}"/></h4>
-                        <h4>Vous allez etre rédiriger vers votre espace personel
-                            <p:commandLink rendered="#{etudiantController.compte.actif}"
-                value="cliquez ici" action="#{etudiantController.showLoggedDetails}" class="btn btn-primary btn-large"/></h4>
+                        <h4><p:commandLink rendered="#{etudiantController.compte.actif}"
+                value="Cliquez sur ce Bouton" action="#{etudiantController.showLoggedDetails}" class="btn btn-primary btn-large"/>
+                        pour  accéder a votre espace personel et compléter votre dossier de candidature.
+                        </h4>
      		<h4>
                     Sur votre espace personel vous pouvez passer votre candidature, 
-                    modifier vos informations personelle, et éditer votre qualification et diplomes.
+                    modifier vos informations personelle, et éditer vos qualifications et diplômes.
                 </h4>
   		</div>
-        
+        </p:panel>
+                <p:panel rendered="#{!etudiantController.compte.actif}">
+            
+        <div class="jumbotron top-space">
+            <h4>Veuillez d'abord vous dirigé vers le service Doctorat à l’administration de la Faculté des Sciences Juridiques Economiques et Sociales d'Oujda, muni de votre carte d’identité nationale afin d’activez votre compte et recevoir vos identifiants de connexion pour poursuivre la candidature et sélectionnez votre sujet de recherche.</h4>
+          		</div>
+        </p:panel>
         </h:form>
         </ui:define>
 </ui:composition>
