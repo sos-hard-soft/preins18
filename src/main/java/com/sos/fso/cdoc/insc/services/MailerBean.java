@@ -52,7 +52,7 @@ public class MailerBean {
             message.setFrom();
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email, false));
-            message.setSubject("Message de confirmation de demande de préinscription en Cycle Master");
+            message.setSubject("Message de confirmation de demande de candidature en Cycle Doctoral");
             message.setHeader("X-Mailer", "JavaMail");
             DateFormat dateFormatter = DateFormat
                     .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
@@ -63,7 +63,7 @@ public class MailerBean {
             String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
                     + "<p>Bonjour</p>"
                     + "<p>Vous avez entamez la procédure de candidature au cycle doctorale a la <strong>Faculté des sciences juridiques économiques et sociales</strong> d'Oujda<br />"
-                    + "Pour confirmer les données saisi et créer votre compte veuillez vous presenté auprès du service d'étude doctorale a la faculté des sciences d'oujda, "
+                    + "Pour confirmer les données saisi et créer votre compte veuillez vous presenté auprès du service d'étude doctorale a la faculté des Sciences Juridiques Economiques et sociales d'Oujda, "
                     + "munis de votre Carte National d'Identité et cela avant le "
                     + "14 novembre 2018 afin de recuperer votre login et mot de passe d'accès a l'application de candidature.</p>"
                     + "</body></html>";
@@ -144,7 +144,7 @@ public class MailerBean {
             Multipart multipart = new MimeMultipart("alternative");
             message.setFrom();
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email, false));
+                    InternetAddress.parse("masterfsjes@ump.ac.ma", false));
             message.setSubject("Message de confirmation de candidature");
             message.setHeader("X-Mailer", "JavaMail");
             DateFormat dateFormatter = DateFormat
