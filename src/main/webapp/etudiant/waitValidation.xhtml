@@ -6,14 +6,14 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:define name="meta">
-            <head><meta http-equiv="refresh" content="100; URL=http://droit.ump.ma" /></head>
+            <head></head>
         </ui:define>
     <ui:define name="content">		
         <div></div>
         <h:form>
         <p:messages for="update"/>
         <div class="jumbotron top-space">
-			<h4>Vous avez effectué la création d'un compte de candidature au cycle doctorale a la faculté des Sciences Juridiques Economiques et sociales d'Oujda avec succès.
+            <h4>Vous avez effectué la création d'un compte de candidature au cycle doctorale a la faculté des Sciences Juridiques Economiques et sociales d'Oujda avec succès.<br />
 Rendez vous au service Doctorat à l’administration de la faculté des Sciences Juridiques Economiques et sociales d'Oujda, muni de votre carte d’identité nationale afin d’activez votre compte et recevoir vos identifiants de connexion pour poursuivre la candidature et sélectionnez votre sujet de recherche.
 </h4>
      		<p class="text-right"><a href="http://droit.ump.ma" class="btn btn-primary btn-large">Page d'acceuil de la FSJES »</a></p>
@@ -23,14 +23,6 @@ Rendez vous au service Doctorat à l’administration de la faculté des Science
         
                 
         </h:form>
-    
-<script type="text/JavaScript">
-function redirect(){
-   window.location = $('a').attr('href');
-}
-
-setTimeout(redirect, 2000);
-
-</script>
+   
     </ui:define>
 </ui:composition>

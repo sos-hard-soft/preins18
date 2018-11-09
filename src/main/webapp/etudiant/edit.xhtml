@@ -108,7 +108,8 @@
                             <p:message for="etatMatrimonial"/>
 
                             <p:outputLabel value="Situation Professionelle *:"/>
-                            <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}" required="true">
+                            <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}" required="true"
+                                              requiredMessage="Veuillez Selectionnez votre situation professionnelle">
                                 <f:selectItem itemLabel="Employé" itemValue="true"/>
                                 <f:selectItem itemLabel="Sans Emploi" itemValue="false"/>
                             </p:selectOneRadio>
