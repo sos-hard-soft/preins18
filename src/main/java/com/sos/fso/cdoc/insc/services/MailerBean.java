@@ -32,7 +32,8 @@ import javax.mail.internet.MimeMultipart;
 @Named
 @Stateless
 public class MailerBean {
-    @Resource(name="mail/fsjesMailer")
+
+    @Resource(name = "mail/fsjesMailer")
     private Session session;
 
     private static final Logger logger = Logger.getLogger(MailerBean.class.getName());
@@ -57,21 +58,20 @@ public class MailerBean {
             DateFormat dateFormatter = DateFormat
                     .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
             Date timeStamp = new Date();
-            
+
             //Corps de l'email
             MimeBodyPart htmlPart = new MimeBodyPart();
             String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
                     + "<p>Bonjour</p>"
-                    + "<p>Vous avez entamez la procédure de candidature au cycle doctorale a la <strong>Faculté des sciences juridiques économiques et sociales</strong> d'Oujda<br />"
-                    + "Pour confirmer les données saisi et créer votre compte veuillez vous presenté auprès du service d'étude doctorale a la faculté des Sciences Juridiques Economiques et sociales d'Oujda, "
-                    + "munis de votre Carte National d'Identité et cela avant le "
-                    + "14 novembre 2018 afin de recuperer votre login et mot de passe d'accès a l'application de candidature.</p>"
+                    + "<p>Vous avez entamé la procédure de candidature au cycle doctorale Centre d’Etudes Doctorales : Droit, Economie et Gestion de l’Université Mohammed Premier d’Oujda.</p>"
+                    + "<p>Pour confirmer les données saisies et créer votre compte veuillez-vous présenté auprès du service d'étude doctorale a la Faculté des Sciences Juridiques Economiques et sociales d'Oujda,"
+                    + " munis de votre Carte National d'Identité et cela avant le 16 novembre 2018 afin de récupérer votre login et mot de passe d'accès à l'application de candidature."
                     + "</body></html>";
             htmlPart.setContent(htmlContent, "text/html");
-            
+
             multipart.addBodyPart(htmlPart);
             message.setContent(multipart);
-            
+
             message.setSentDate(timeStamp);
             Transport.send(message);
             status = "Sent";
@@ -83,50 +83,48 @@ public class MailerBean {
         }
         return new AsyncResult<>(status);
     }
- 
- 
+
     /**
      *
-     * @param email
      * @param key
      * @param cin
      * @param password
      * @return
      */
     @Asynchronous
-    public Future<String> sendAdminMail(String email, String key,String cin, String password) {
+    public Future<String> sendAdminMail(String key, String cin, String password) {
         String status;
         try {
             Message message = new MimeMessage(session);
             Multipart multipart = new MimeMultipart("alternative");
             message.setFrom();
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email, false));
+                    InternetAddress.parse("masterfsjes@ump.ac.ma", false));
             message.setSubject("Activation compte : " + cin);
             message.setHeader("X-Mailer", "JavaMail");
             DateFormat dateFormatter = DateFormat
                     .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
             Date timeStamp = new Date();
-            
+
             //Corps de l'email
             MimeBodyPart htmlPart = new MimeBodyPart();
             String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
                     + "<p>Activation du compte du candidat :</p>"
-                    + "http://preinsmasterdroit.ump.ma/candidoc/compte/validation.xhtml?key="+key+"<br />"
+                    + "http://preinsmasterdroit.ump.ma/candidoc/compte/validation.xhtml?key=" + key + "<br />"
                     + "<h4>Login est le CIN : " + cin + "</h4>"
                     + "<h4>Mot de passe : " + password + "<h4>"
                     + "</body></html>";
             htmlPart.setContent(htmlContent, "text/html");
-            
+
             //String messageBody = "Pour confirmer votre demande d'inscription veuillez , cliquez sur le lien suivant : "
-             //       + "http://localhost:8080/cdocFSOinsc/compte/validation.xhtml?key="+key;
+            //       + "http://localhost:8080/cdocFSOinsc/compte/validation.xhtml?key="+key;
             multipart.addBodyPart(htmlPart);
             message.setContent(multipart);
-            
+
             message.setSentDate(timeStamp);
             Transport.send(message);
             status = "Sent";
-            logger.log(Level.INFO, "Mail sent to {0}", email);
+            logger.log(Level.INFO, "Mail sent to {0}", "masterfsjes@ump.ac.ma");
         } catch (MessagingException ex) {
             logger.severe("Error in sending message.");
             status = "Encountered an error: " + ex.getMessage();
@@ -134,9 +132,8 @@ public class MailerBean {
         }
         return new AsyncResult<>(status);
     }
-    
-    
- @Asynchronous
+
+    @Asynchronous
     public Future<String> sendConfirmationCandidatureMail(String email, String branche) {
         String status;
         try {
@@ -150,7 +147,7 @@ public class MailerBean {
             DateFormat dateFormatter = DateFormat
                     .getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT);
             Date timeStamp = new Date();
-            
+
             //Corps de l'email
             MimeBodyPart htmlPart = new MimeBodyPart();
             String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
@@ -159,12 +156,12 @@ public class MailerBean {
                     + "<p>Pour finaliser votre candidature, veuillez deposer votre dossier complet(consulter la page suivante : http://preinsmasterdroit.ump.ma/master) aupres du service de master a la Faculté des sciences juridiques économiques et sociales d'oujda entre le 01 et le 27 octobre 2018.</p>"
                     + "Merci.</body></html>";
             htmlPart.setContent(htmlContent, "text/html");
-            
+
             //String messageBody = "Pour confirmer votre demande d'inscription veuillez , cliquez sur le lien suivant : "
-             //       + "http://localhost:8080/cdocFSOinsc/compte/validation.xhtml?key="+key;
+            //       + "http://localhost:8080/cdocFSOinsc/compte/validation.xhtml?key="+key;
             multipart.addBodyPart(htmlPart);
             message.setContent(multipart);
-            
+
             message.setSentDate(timeStamp);
             Transport.send(message);
             status = "Sent";
@@ -176,5 +173,5 @@ public class MailerBean {
         }
         return new AsyncResult<String>(status);
     }
-    
+
 }

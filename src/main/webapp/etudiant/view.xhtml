@@ -121,8 +121,8 @@
                         </p:column>
                     </p:dataTable>
                 </p:tab>  
-                <p:tab id="tab2" title="Sujet Choisis">
-                    <p:outputLabel value="Vous avez choisis les Sujets ci après : "/>
+                <p:tab id="tab2" title="Sujet Choisi">
+                    <p:outputLabel value="Vous avez choisis le Sujet ci après : "/>
                     <p:commandButton action="#{etudiantController.showChoixSujet}" rendered="#{etudiantController.current.choixList.size() != 1}" value="Ajouter un choix" />
                     <p:dataTable value="#{etudiantController.current.choixList}" var="choix">
                         <p:column headerText="Actions">  
@@ -133,9 +133,6 @@
                         </p:column>
                         <p:column  headerText="Sujet Choisis">  
                             <h:outputText value="#{choix.idSujet.intitule}" />  
-                        </p:column> 
-                        <p:column  headerText="Description">  
-                            <h:outputText value="#{choix.idSujet.description}" />  
                         </p:column> 
                         <p:column  headerText="Laboratoire d'attache">  
                             <h:outputText value="#{choix.idSujet.laboratoire.intitule}" />  
@@ -154,7 +151,7 @@
                             <h:panelGrid columns="2" cellpadding="5">
                                 <h:outputText value="Intitulé:" style="font-weight: bold" />
                                 <h:outputText value="#{piece.intitule}" />
-                                <h:outputText value="Partie delivrante:" style="font-weight: bold" />
+                                <h:outputText value="Partie délivrante:" style="font-weight: bold" />
                                 <h:outputText value="#{piece.partieDelivrante}" />
                             </h:panelGrid>
                         </p:tab>

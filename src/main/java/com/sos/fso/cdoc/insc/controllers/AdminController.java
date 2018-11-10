@@ -143,7 +143,7 @@ public class AdminController implements Serializable{
     }
     
     public String showLogin() {
-        return "/managed/logedPerson?faces-redirect=true";
+        return "/manage/logedPerson?faces-redirect=true";
     }
     
     public String showStudentDetail(String cin) {

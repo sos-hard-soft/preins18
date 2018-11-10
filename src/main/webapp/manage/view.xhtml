@@ -10,28 +10,140 @@
 <ui:define name="breadcrumb">
 		<h:form><ol class="breadcrumb">
 			<li><a href="http://preinsmasterdroit.ump.ma/candidmast">Acceuil</a></li>
-                        <li class="active"><p:commandLink value="Mon espace" action="#{personController.showSpace}" /></li>
+                        <li class="active"><p:commandLink value="Mon espace" action="#{adminController.showSpace}" /></li>
 		</ol></h:form>
                     </ui:define>
     <ui:define name="content">
+         <h:form>
+            
+          <p:menubar>
+                    <p:submenu label="Laboratoire" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{laboratoireController.showCreateLaboratoire}"/>
+                        <p:separator />
+                        <p:menuitem value="List" action="#{laboratoireController.showListLaboratoire}"/>
+                    </p:submenu>
+
+                    <p:submenu label="Personne" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{personController.showCreatePerson}" />
+                        <p:separator />
+                        <p:menuitem value="List" action="#{personController.showAllPersons}"/>
+                    </p:submenu>
+                    <p:submenu label="Sujet" icon="ui-icon-document">
+                        <p:menuitem value="Crée" action="#{sujetController.showCreateSujet}" />
+                        <p:separator />
+                        <p:menuitem value="List" action="#{sujetController.showListSujet}"/>
+                    </p:submenu>
+
+                    <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+
+                    <f:facet name="options">
+                        <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                    </f:facet>
+                </p:menubar>
         <p:spacer />
         <div>
-            <h1 class="page-title">Liste des candidats a votre master</h1>
+            <h1 class="page-title">Liste des candidats au CEDO-DEG</h1>
             <p>Cliquez sur le bouton Liste en face de votre Filière pour visualisé les candidats</p>            
         </div>
-        <h:form>
+       
+
+
             
-            <p:dataTable value="#{personController.current.filiereList}" var="filiere">
-                <p:column headerText="intit">
-                    #{filiere.intitule}
-                </p:column>
-                <p:column headerText="description">
-                    #{filiere.description}
-                </p:column>
-                <p:column headerText="Afficher Liste">
-                    <p:commandButton value="Liste" action="#{personController.showList(filiere)}" />
-                </p:column>
-            </p:dataTable>
+                    <h1><h:outputText value="List"/></h1>
+                    <p:dataTable value="#{etudiantController.all}" var="std">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cin"/>
+                            </f:facet>
+                            <h:outputText value="#{std.cin}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cne"/>
+                            </f:facet>
+                            <h:outputText value="#{std.cne}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{std.nom}"/>
+                        </p:column>
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prenom"/>
+                            </f:facet>
+                            <h:outputText value="#{std.prenom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sexe"/>
+                            </f:facet>
+                            <h:outputText value="#{std.sexe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DateNaissance"/>
+                            </f:facet>
+                            <h:outputText value="#{std.dateNaissance}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="LieuNaissance"/>
+                            </f:facet>
+                            <h:outputText value="#{std.lieuNaissance}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nationalite"/>
+                            </f:facet>
+                            <h:outputText value="#{std.nationalite}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            <h:outputText value="#{std.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Adresse"/>
+                            </f:facet>
+                            <h:outputText value="#{std.adresse}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="NumeroTelephonne"/>
+                            </f:facet>
+                            <h:outputText value="#{std.numeroTelephonne}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Activite"/>
+                            </f:facet>
+                            <h:outputText value="#{std.activite}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="EtatMatrimonial"/>
+                            </f:facet>
+                            <h:outputText value="#{std.etatMatrimonial}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Photo"/>
+                            </f:facet>
+                            <h:outputText value="#{std.photo}"/>
+                        </p:column>                        
+                    </p:dataTable>
+               
+     
+
             
             
         </h:form>

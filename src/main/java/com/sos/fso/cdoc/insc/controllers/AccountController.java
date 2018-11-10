@@ -53,7 +53,7 @@ public class AccountController implements Serializable {
     // = Business Methods =
     // ======================================
     public String showManage() {
-        return "/manage/select?faces-redirect=true";
+        return "/compte/select?faces-redirect=true";
     }
     
     

@@ -49,7 +49,7 @@
                         <p:messages for="update"/>
                         <p:panel header="Informations personelle">
                             <p:panelGrid>
-                            <p:graphicImage height="120" width="120" value="#{etudiantController.byteToImage(directeurController.student.photo)}" />
+                            <p:graphicImage rendered="#{directeurController.fileExist}" height="120" width="120" value="#{etudiantController.byteToImage(directeurController.student.photo)}" />
                         </p:panelGrid>
                             <p:panelGrid columns="4">
                                 <p:outputLabel value="CIN : "/>

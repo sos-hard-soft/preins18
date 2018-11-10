@@ -173,6 +173,9 @@ public class DirecteurController implements Serializable{
     
     public String showStudentDetail(String cin) {
         this.student = etudiantService.findByCin(cin);
+        if (student.getPhoto() != null) {
+            fileExist = true;
+        }
         return "/DirLabo/viewStudent?faces-redirect=true";
     }
     

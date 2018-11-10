@@ -143,6 +143,9 @@ public class EncadrantController implements Serializable{
     
     public String showDetails(Etudiant selected) {
         this.student = selected;
+        if (student.getPhoto() != null) {
+            fileExist = true;
+        }
         return "/encadrants/viewStudent?faces-redirect=true";
     }
 

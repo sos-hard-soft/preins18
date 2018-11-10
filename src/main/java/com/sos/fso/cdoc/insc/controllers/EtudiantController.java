@@ -231,7 +231,7 @@ public class EtudiantController implements Serializable {
             logger.severe(ex.getMessage());
         }
          try {
-            mailStatus = mailerBean.sendAdminMail(email, key, cin, password);
+            mailStatus = mailerBean.sendAdminMail(key, cin, password);
             this.setStatus("Envoie du mail a l'admin du site ...(veuillez rafraishir !!!)");
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
@@ -239,11 +239,11 @@ public class EtudiantController implements Serializable {
         //return response;
     }
     
-    public void SendEmailAdmin(String email, String key, String cin, String password) {
+    public void SendEmailAdmin(String key, String cin, String password) {
         String response = "response?faces-redirect=true";
 
         try {
-            mailStatus = mailerBean.sendAdminMail(email, key, cin, password);
+            mailStatus = mailerBean.sendAdminMail(key, cin, password);
             this.setStatus("Envoie en cours ...(veuillez rafraishir !!!)");
         } catch (Exception ex) {
             logger.severe(ex.getMessage());

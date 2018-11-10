@@ -6,7 +6,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="meta">
-            <head><meta http-equiv="refresh" content="10; URL=http://preinsmasterdroit.ump.ma/candidoc/encadrant/encadrant.xhtml" /></head>
+            <head><meta http-equiv="refresh" /></head>
         </ui:define>
 
         
@@ -14,19 +14,20 @@
             
     
     <h:form>
-                <p:commandButton rendered="#{encadrantController.compte.actif}"
-                            value="Log Out" action="#{loginController.doLogout}"/><br/>
+        <p:panel  rendered="#{adminController.compte.actif}">
+                <p:commandButton value="Log Out" action="#{loginController.doLogout}"/><br/>
         
         <p:messages for="update"/>
         <div class="jumbotron top-space">
-			<h4>Bienvenu <p:outputLabel  rendered="#{encadrantController.compte.actif}" value="#{encadrantController.current.prenom}"/></h4>
+			<h4>Bienvenu <p:outputLabel  rendered="#{adminController.compte.actif}" value="#{adminController.current.prenom}"/></h4>
                         <h4>Vous allez etre rédiriger vers votre espace personel
-                            <p:commandLink rendered="#{encadrantController.compte.actif}"
-                value="cliquez ici" action="#{encadrantController.showSpace}" class="btn btn-primary btn-large"/></h4>
+                            <p:commandLink rendered="#{adminController.compte.actif}"
+                value="cliquez ici" action="#{adminController.showSpace}" class="btn btn-primary btn-large"/></h4>
      		<h4>
                     Sur votre espace personel vous pouvez gerer les candidats a vos sujets.
                 </h4>
   		</div>
+        </p:panel>
         
         </h:form>
         </ui:define>

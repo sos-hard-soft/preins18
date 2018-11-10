@@ -59,7 +59,7 @@
         <web-resource-collection>
             <web-resource-name>Admin</web-resource-name>
             <description>Administrated pages</description>
-            <url-pattern>/manage/manage.xhtml</url-pattern>
+            <url-pattern>/manage/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
