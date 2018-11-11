@@ -241,24 +241,26 @@ public class EtudiantController implements Serializable {
     
     public String doDeletePieces(Pieces piece){
         String path = piece.getPathScan();
+        if(path != null){
         File laPiece = new File(path);
-        if (laPiece.exists()) {
-            current.getPiecesList().remove(piece);
-            this.piecesService.remove(piece);
-            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece et le fichier ont ete supprimer avec success !!", "Error !!");
-            return this.showDetails();
+             //current.getPiecesList().remove(piece);
+             this.performDelete(piece.getPathScan());
+           this.piecesService.remove(piece);
+            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
+            return this.showLoggedDetails();
         }else{
         try {
-             current.getPiecesList().remove(piece);
              this.piecesService.remove(piece);
-            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
+            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece et le fichier ont ete supprimer avec success !!", "Error !!");
             return this.showDetails();
+             //current.getPiecesList().remove(piece);
+             
             
         } catch (Exception e) {
             System.out.println("error when delete piece : " + e.getStackTrace());
         }}
         addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
-        return this.showDetails();
+        return this.showLoggedDetails();
     }
     
     public void sendConfirmationCandidatureMail(String email, String choix) {
@@ -424,7 +426,7 @@ public class EtudiantController implements Serializable {
             System.out.println("Edition en cours ajout de " + choix.getIdFiliere().getIntitule());
             etudiantService.edit(current);
             etudiantService.clearCache();
-            return "/etudiant/view?faces-redirect=true";
+            return showLoggedDetails();
 
         } else {
             addMessage("update", FacesMessage.SEVERITY_ERROR, "le maximum de choix (2) permis est atteint !!", "Error !!");
