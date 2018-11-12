@@ -160,7 +160,7 @@ public class EncadrantController implements Serializable{
     }
     
     public String showSpace() {
-        return "directeur?faces-redirect=true";
+        return "/encadrants/encadrant?faces-redirect=true";
     }
     
     public String showLogin() {

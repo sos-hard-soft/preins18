@@ -402,7 +402,7 @@ public class AdminController implements Serializable{
     
     
     @FacesConverter(forClass = Person.class)
-    public static class PersonControllerConverter implements Converter {
+    public static class AdminControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
@@ -410,7 +410,7 @@ public class AdminController implements Serializable{
                 return null;
             }
             AdminController controller = (AdminController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "personController");
+                    getValue(facesContext.getELContext(), null, "adminController");
             return controller.getPerson(getKey(value));
         }
 

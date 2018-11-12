@@ -6,12 +6,11 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
     <ui:define name="content">
 
         <f:view>
             <h:form>
-                <h1><h:outputText value="List"/></h1>
+                <h1><h:outputText value="Liste de vos sujet proposés"/></h1>
                 <p:dataTable value="#{encadrantController.listSujet}" var="item">
                     <p:column>
                         <f:facet name="header">
@@ -22,7 +21,7 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Intitule"/>
+                            <h:outputText value="Intitulé"/>
                         </f:facet>
                         <h:outputText value="#{item.intitule}"/>
                     </p:column>

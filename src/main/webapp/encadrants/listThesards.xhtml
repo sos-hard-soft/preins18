@@ -12,7 +12,7 @@
         <f:view>
             <h:form>    
       
-                    <h1><h:outputText value="List"/></h1>
+                    <h1><h:outputText value="Liste des candidats a ce sujet :"/></h1>
                     <p:dataTable value="#{encadrantController.listChoix}" var="item">
                         <p:column filterBy="#{item.idEtudiant.cin}" sortBy="#{item.idEtudiant.cin}">
                             <f:facet name="header">
@@ -51,11 +51,7 @@
                             </f:facet>
                             <h:outputText value="#{item.idEtudiant.activite ? 'Male' : 'Female'}"/>
                         </p:column>
-                    </p:dataTable>
-         
-
-                
-                
+                    </p:dataTable>       
                 
             </h:form>
         </f:view>
