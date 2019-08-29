@@ -26,17 +26,7 @@
             <p:column headerText="Responsable">  
                 <h:outputText value="#{filiere.responsable.nom} #{filiere.responsable.prenom}" />  
         </p:column> 
-            <p:column headerText="Actions">  
-                            
-                                <p:growl id="messages"/>  
-
-                                <p:menuButton value="Ajouter">  
-                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
-                                                                        
-                                </p:menuButton>  
-                            
-
-                        </p:column> 
+           
         </p:dataTable>
  
         </h:form>

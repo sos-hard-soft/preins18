@@ -1,89 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/admin.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="../resources/msLand.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="head">
-        <title>Admin Starter</title>
-    </ui:define>
+    <ui:define name="content">	
+        
 
-    <ui:define name="logo-lg">
-        Admin Starter
-    </ui:define>
-
-    <ui:define name="logo-mini">
-        Admin
-    </ui:define>
-
-    <ui:define name="menu">
-        <ul class="sidebar-menu" data-widget="tree">
-            <li>
+            <header class="page-header">
+                <h1 class="page-title">Création d'un compte pour la gestion de la préinscription</h1>
                 
-                    <i class="fa fa-home"></i>
-                    <span>Home</span>
-             
-            </li>
-            <h:form>
-                <li class="header">
-                    
-		<h:commandLink action="#{languageBean.changeLanguage('fr')}"
-			value="Continuez en Français" />
-		
-	
-                </li>
-                <li>
-                    <h:commandLink action="#{languageBean.changeLanguage('ar')}"
-			value="إستمر بالعربية" />
-                </li>
-                </h:form>
-        </ul>
-     </ui:define>
+            </header>
 
-    <ui:define name="top-menu">
-
-    </ui:define>
-
-      <ui:define name="title">
-        #{adm['ns.title']}
-    </ui:define>
-
-    <ui:define name="description">
-        A page description
-    </ui:define>
-
-    <ui:define name="body">
             <div class="col-md-10 col-md-offset-2 col-sm-8 col-sm-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h3 class="thin text-center">#{adm['ns.title']}</h3>
+                        <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
                         <h:form><p class="text-center text-muted">Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de
                             <h:commandLink class="btn btn-action" value="connexion" action="#{etudiantController.showLogin}" /></p></h:form>. 
                         <hr />
                         <h:form>
                             <p:messages for="update"/>
-                        <p:panel header="#{adm['personalInfo']}">
-                            <p:panelGrid columns="3">
-                                <h:outputText value="#{adm['ns.cne']}" />
+                        <p:panel header="Veuillez Saisir Vos informations personnelles">
+                            <p:panelGrid columns="4">
+                                <h:outputText value="CNE *:" />
                                     <p:inputText id="cne" class="form-control" value="#{etudiantController.newEtudiant.cne}"
                                                  required="true" requiredMessage="Veuillez saisir votre code national de l'étudiant">
                                         <f:validator binding="#{uniqueCneValidator}" />
                                         <f:ajax event="blur" render="verifyCNE"/>
                                     </p:inputText>
-                                
+                                <h:outputText dir="rtl" value="الرقم الوطني للطالب *: " />
                                     <p:message id="verifyCNE" for="cne"/>
-                               <h:outputText value="#{adm['ns.cin']}" />
+                               <h:outputText value="CNI *:" />
                                     <p:inputText id="cin" class="form-control" value="#{etudiantController.newEtudiant.cin}"
                                                  required="true" requiredMessage="Veuillez saisir votre code d'identité nationale !">
                                         <f:validator binding="#{uniqueCinValidator}" />
                                         <f:ajax event="blur" render="verifyCIN"/>
                                     </p:inputText>
-                               
+                               <h:outputText dir="rtl" value="رقم البطاقة الوطنية للتعريف *: " />
                                     <p:message id="verifyCIN" for="cin"/>
                             </p:panelGrid>
                             <p:panelGrid columns="3">
-                                    <h:outputText value="#{adm['ns.fname']}" />
+                                    <h:outputText value="Nom *:" />
                                <p:inputText id="nom" class="form-control" value="#{etudiantController.newEtudiant.nom}"
                                                  required="true" requiredMessage="Veuillez saisir votre nom"/>
                                     
@@ -92,9 +52,9 @@
                                <p:message for="nomAr"/>
                                <p:inputText id="nomAr" class="form-control" value="#{etudiantController.newEtudiant.nomAr}"
                                                  required="true" requiredMessage="Veuillez saisir votre nom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
-                               <h:outputText dir="rtl" value="#{adm['ns.fnameAr']}" />
+                               <h:outputText dir="rtl" value="الاسم العائلي *: " />
                                     
-                               <h:outputText value="#{adm['ns.lastName']}" />
+                               <h:outputText value="Prénom *:" />
                                 <p:inputText id="prenom" class="form-control" value="#{etudiantController.newEtudiant.prenom}"
                                                  required="true" requiredMessage="Veuillez saisir votre prénom"/>
                                 
@@ -105,38 +65,40 @@
                                                  required="true" requiredMessage="Veuillez saisir votre prénom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
                                 
                                     
-                                    <h:outputText dir="rtl" value="#{adm['ns.lastNameAr']}" />
+                                    <h:outputText dir="rtl" value="الاسم الشخصي *: " />
                                 </p:panelGrid>
-                            <p:panelGrid columns="3">    
-                                    <h:outputText value="#{adm['ns.dateOfBirth']}" />
+                            <p:panelGrid columns="4">    
+                                    <h:outputText value="Date de naissance *:" />
                                     <p:calendar id="dateNaissance" required="true" value="#{etudiantController.newEtudiant.dateNaissance}" title="DateNaissance" 
                                         locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />
+                                    <h:outputText dir="rtl" value="تاريخ الازدياد  *: " /> 
                                     <p:message for="dateNaissance"/>
-                                     <h:outputText value="#{adm['ns.email']}" />
+                                     <h:outputText value="email *:" />
                                      <p:inputText id="email" class="form-control" value="#{etudiantController.newEtudiant.email}"
                                                  required="true" requiredMessage="Veuillez saisir une adresse email valide">
                                         <f:validateRegex
                                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                     </p:inputText>
+                                     <h:outputText dir="rtl" value="البريد الالكتروني *: " />
                                     <p:message for="email"/>
                                     </p:panelGrid>
                                     </p:panel>
                                     
-                                    <p:panel header="#{adm['ns.password']}">  
+                                    <p:panel header="Mot de passe pour le compte">  
                                         <p:messages id="pass" showDetail="true" autoUpdate="true"/>
 
-                                        <h:panelGrid columns="2" id="matchGrid">                     
-                                            <h:outputLabel for="pwd1" value="#{adm['ns.password']}" />  
+                                        <h:panelGrid columns="3" id="matchGrid">                     
+                                            <h:outputLabel for="pwd1" value="Mot de passe : *" />  
                                             <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" label="Password 1" required="true">
                                                 <f:validateLength minimum="6" for="pwd1" />                    
                                             </p:password>
-                                           
-                                            <h:outputLabel for="pwd2" value="#{adm['ns.repeatPassword']}" />  
+                                            <h:outputText dir="rtl" value="كلمة السر : " />
+                                            <h:outputLabel for="pwd2" value="Resaisissez le mot de passe : *" />  
                                             <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
-                                            
+                                            <h:outputText dir="rtl" value="تأكيد الكلمة: " />
                                         </h:panelGrid>  
                                     </p:panel> 
-                            <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="#{adm['ns.saveData']}" action="" /></div>
+                            <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les données" action="" /></div>
                             </h:form>
                                 </div>
                                 
@@ -144,19 +106,9 @@
                                             
                                     </div>
                        </div>
+      
+ 
+        
+
     </ui:define>
-
-
-    <ui:define name="footer">
-          <a target="_blank"
-           href="https://droit.ump.ma/">
-            #{adm['ns.Copyright']}
-        </a>
-
-        <div class="pull-right hidden-xs" style="color: gray">
-            <i>1.0.0</i>
-        </div>
-    </ui:define>
-
-
 </ui:composition>

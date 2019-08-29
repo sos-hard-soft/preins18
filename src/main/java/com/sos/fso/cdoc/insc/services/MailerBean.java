@@ -64,7 +64,7 @@ public class MailerBean {
                     + "<p>Bonjour</p>"
                     + "<p>Vous avez entamez la procédure de candidature au master a la <strong>Faculté des sciences juridiques économiques et sociales</strong> d'Oujda<br />"
                     + "Pour confirmer les données saisi et créer votre compte veuillez cliquez sur le lien suivant ou le copiez collez dans votre navigateur : </p>"
-                    + "http://preinsmasterdroit.ump.ma/candidmaster/compte/validation.xhtml?key="+key+"<br />"
+                    + "http://localhost:8080/candidmaster/compte/validation.xhtml?key="+key+"<br />"
                     + "<p>Le login est votre CIN : "+ cin + "<br />"
                     + "Votre mot de passe est : " + password + "</p></body></html>";
             htmlPart.setContent(htmlContent, "text/html");
@@ -107,7 +107,7 @@ public class MailerBean {
             String htmlContent = "<html><body><h1>Message de confirmation de candidature</h1>"
                     + "<p>Bonjour</p>"
                     + "<p>Vous avez effectué votre choix de candidature au master <strong>Faculté des sciences juridiques économiques et sociales</strong> dans les filières suivantes : " + branche + "<br /></p>"
-                    + "<p>Pour finaliser votre candidature, veuillez deposer votre dossier complet(consulter la page suivante : http://preinsmasterdroit.ump.ma/master) aupres du service de master a la Faculté des sciences juridiques économiques et sociales d'oujda entre le 01 et le 27 octobre 2018.</p>"
+                    + "<p>Pour finaliser votre candidature, veuillez deposer votre dossier complet(consulter la page suivante : http://localhost:8080/master) aupres du service de master a la Faculté des sciences juridiques économiques et sociales d'oujda entre le 01 et le 27 octobre 2018.</p>"
                     + "Merci.</body></html>";
             htmlPart.setContent(htmlContent, "text/html");
             

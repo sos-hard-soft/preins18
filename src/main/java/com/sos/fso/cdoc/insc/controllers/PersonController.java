@@ -131,6 +131,7 @@ public class PersonController implements Serializable{
     }
     
     public String showStudentDetail(String cin) {
+        fileExist = false;
         this.student = etudiantService.findByCin(cin);
         if (student.getPhoto() != null) {
             fileExist = true;
@@ -312,9 +313,6 @@ public class PersonController implements Serializable{
             current = new Person();
             System.out.println("recuperation de la personne courante" + compte.getCin());
             current = personService.findByCin(compte.getCin());            
-        }
-        if (current.getPhoto() != null) {
-            fileExist = true;
         }
         return current;
     }

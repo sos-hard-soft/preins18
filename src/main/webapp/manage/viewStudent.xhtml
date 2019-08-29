@@ -10,7 +10,7 @@
 
     <ui:define name="breadcrumb">
 		<h:form><ol class="breadcrumb">
-			<li><a href="http://preinsmasterdroit.ump.ma/candidmaster">Acceuil</a></li>
+			<li><a href="http://localhost:8080/candidmaster">Acceuil</a></li>
                         <li class="active"><p:commandLink value="Mon espace" action="#{personController.showSpace}" /></li>
 		</ol></h:form>
                     </ui:define>
@@ -21,7 +21,7 @@
                
                     <p:panel id="etudiantdetail">
                         <p:panelGrid>
-                            <p:graphicImage height="120" width="120" rendered="#{personController.fileExist}" value="#{etudiantController.byteToImage(personController.student.photo)}" />
+                            <p:graphicImage rendered="#{personController.fileExist}" height="120" width="120" value="#{etudiantController.byteToImage(personController.student.photo)}" />
                         </p:panelGrid>
                         <p:messages for="update"/>
                         <p:panel header="Informations personelle">

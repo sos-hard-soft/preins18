@@ -51,6 +51,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -134,6 +135,7 @@ public class EtudiantController implements Serializable {
     private String fileName;
     private Path folder;
     private File uploaded;
+    private File noImage;
     
    
 
@@ -335,6 +337,7 @@ public class EtudiantController implements Serializable {
     }
 
     public DefaultStreamedContent byteToImage(byte[] imgBytes) throws IOException {
+        
         ByteArrayInputStream img = new ByteArrayInputStream(imgBytes);
         return new DefaultStreamedContent(img, "image/jpg");
     }
@@ -632,6 +635,15 @@ public class EtudiantController implements Serializable {
         }
         return compte;
     }
+
+    public File getNoImage() {
+        return noImage;
+    }
+
+    public void setNoImage(File noImage) {
+        this.noImage = noImage;
+    }
+    
 
    
     public Filiere getChoixFiliere() {

@@ -135,18 +135,9 @@
                 </p:tab>  
                 <p:tab id="tab2" title="Filieres Choisis">
                     <p:outputLabel value="Vous avez choisis les filieres ci après : "/>
-                    <p:commandButton action="#{etudiantController.showChoixFiliere}" rendered="#{etudiantController.current.choixList.size() != 2}" value="Ajouter un autre choix" />
+                    
                     <p:dataTable value="#{etudiantController.current.choixList}" var="choix">
-                        <p:column headerText="Actions">  
-
-                            <p:growl id="messages"/>  
-
-                            <p:menuButton value="Actions">  
-                                <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveChoix(choix)}" ajax="false"/>  
-                            </p:menuButton>  
-
-
-                        </p:column>
+                        
                         <p:column  headerText="Filiere Choisis">  
                             <h:outputText value="#{choix.idFiliere.intitule}" />  
                         </p:column> 

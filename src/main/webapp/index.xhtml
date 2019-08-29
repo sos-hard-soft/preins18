@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -12,17 +12,98 @@
                             <p:messages for="update"/>
 
                             <div class="row ">
-                                <p:commandLink action="#{etudiantController.showLogin}">
+                                
                                 <div class="col-md-6 col-sm-6 scnd highlight">
-                                    <h1 style="color: #FFF;">Cliquez ici pour accéder <br />a votre compte  déja crée auparavant</h1>
+                                    <h1 style="color: #FFF;">En attente des Résultats</h1>
                                 </div>
-                                <div class="col-md-6 col-sm-6 highlight">
-                                    <img src="resources/images/reachAccount.jpg" />
-                                </div>
-                                    </p:commandLink>
+                                
                             </div>
 			
                             </h:form>
             
        </ui:define>
+</ui:composition>-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/admin.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <ui:define name="head">
+        <title>Admin Starter</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        Admin Starter
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        Admin
+    </ui:define>
+
+    <ui:define name="menu">
+        <ul class="sidebar-menu" data-widget="tree">
+            <li>
+                
+                    <i class="fa fa-home"></i>
+                    <span>Home</span>
+             
+            </li>
+            <h:form>
+                <li class="header">
+                    
+		<h:commandLink action="#{languageBean.changeLanguage('fr')}"
+			value="Continuez en Français" />
+		
+	
+                </li>
+                <li>
+                    <h:commandLink action="#{languageBean.changeLanguage('ar')}"
+			value="إستمر بالعربية" />
+                </li>
+                </h:form>
+        </ul>
+     </ui:define>
+
+    <ui:define name="top-menu">
+<ui:include src="/includes/top-bar.xhtml"/>
+    </ui:define>
+
+      <ui:define name="title">
+        <h2 class="align-center">
+            Welcome to the <span class="text-aqua"> <i><a href="https://github.com/adminfaces/admin-starter" target="_blank"
+                                                          style="text-transform: none;text-decoration: none"> AdminFaces Starter</a></i></span> Project!
+            <br/>
+            <small>Integrating #{adm['label.expired.message']} <p:link value="Primefaces" href="http://primefaces.org"/>, <p:link value="Bootstrap"
+                                                                                                  href="http://getbootstrap.com/"/> and
+                <p:link value="Admin LTE" href="https://almsaeedstudio.com/themes/AdminLTE/index2.html/"/> into your
+                <p:link value="JSF" href="https://javaserverfaces.java.net/"/> application.
+            </small>
+        </h2>
+          <h3>#{adm['controlsidebar.txt.sidebar-slide']}</h3>
+    </ui:define>
+
+    <ui:define name="description">
+        A page description
+    </ui:define>
+
+    <ui:define name="body">
+            <h2>Page body</h2>
+            <p:commandLink value="create account" action="#{etudiantController.showCreate}" />
+    </ui:define>
+
+
+    <ui:define name="footer">
+          <a target="_blank"
+           href="https://github.com/adminfaces/">
+            Copyright (C) 2017 - AdminFaces
+        </a>
+
+        <div class="pull-right hidden-xs" style="color: gray">
+            <i>1.0.0</i>
+        </div>
+    </ui:define>
+
+
 </ui:composition>

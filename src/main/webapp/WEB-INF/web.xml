@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>south-street</param-value>
+        <param-value>admin</param-value>
     </context-param>
     <mime-mapping>
         <extension>xhtml</extension>
