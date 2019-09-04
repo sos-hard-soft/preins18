@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <h1>Liste des cadres</h1>
-    </h:head>
-    <h:body>
-        <ui:composition>
-            <h:form>
-            <p:commandButton rendered="#{etudiantController.compte.actif}"
-                             icon="ui-icon-locked" style="background-image: -moz-linear-gradient(center top , #FE6B25, #FE6B25);" value="Fermer votre session" action="#{loginController.doLogout}"/>
-               <p:menu>  
-        <p:submenu label="Detail Etudiant">  
-            <p:menuitem value="Afficher détail" action="#{etudiantController.showLoggedDetails}" icon="ui-icon-search" />  
-            <p:menuitem value="Editer Infos" action="#{etudiantController.showEdit}" icon="ui-icon-arrowrefresh-1-w"/>
-                            
-        </p:submenu>  
-        <p:submenu label="Ajouter des qualification">  
-            <p:menuitem value="Ajouter un diplome" action="#{etudiantController.showAddQualification}" icon="ui-icon-plus"/>  
-        </p:submenu>
-        <p:submenu label="Gerer la candidature">  
-            <p:menuitem value="Choisir la filiere" action="#{etudiantController.showChoixFiliere}" icon="ui-icon-plus"/>
-            </p:submenu>
-        <p:submenu label="Pieces Justificatives">  
-            <p:menuitem value="Ajouter une pièce" disabled="false" action="#{etudiantController.showAddPieces}" target="_blank" icon="ui-icon-print"/>  
-        </p:submenu>
-    </p:menu>
-</h:form>
-        </ui:composition>
-    </h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ul class="sidebar-menu tree" data-widget="tree">
+        <li>
+            <p:commandLink rendered="#{etudiantController.compte.actif}"
+                              action="#{loginController.doLogout}">
+            <i class="fa fa-lock"></i>
+                <span>Fermer votre session</span>
+                </p:commandLink>
+        </li>
+        <li class="header">
+            Détails Etudiant
+        </li>
+        <li>
+            <p:commandLink action="#{etudiantController.showLoggedDetails}">
+                <i class="fa fa-eye"></i>
+                <span>Afficher détails</span>
+            </p:commandLink>
+        </li>
+        <li>
+            <p:commandLink action="#{etudiantController.showEdit}">
+                <i class="fa fa-edit"></i>
+                <span>Editer Infos</span>
+            </p:commandLink>
+        </li>
+        <li class="header">
+            Ajouter des qualification
+        </li>
+        <li>
+            <p:commandLink action="#{etudiantController.showAddQualification}">
+                <i class="fa fa-book"></i>
+                <span>Ajouter un diplome</span>
+            </p:commandLink>
+        </li>
+        <li class="header">
+            Gerer la candidature
+        </li>
+        <li>
+            <p:commandLink action="#{etudiantController.showChoixFiliere}">
+                <i class="fa fa-hand-o-up"></i>
+                <span>Choisir la filiere</span>
+            </p:commandLink>
+        </li>
+        <li class="header">
+            Pieces Justificatives
+        </li>
+        <li>
+            <p:commandLink action="#{etudiantController.showAddPieces}">
+                <i class="fa fa-file-image-o"></i>
+                <span>Ajouter une pièce</span>
+            </p:commandLink>
+        </li>
+    </ul>
+
+</ui:composition>

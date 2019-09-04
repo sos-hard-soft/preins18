@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ul class="sidebar-menu tree" data-widget="tree">
+        <li>
+            <p:commandLink rendered="#{etudiantController.compte.actif}"
+                              action="#{loginController.doLogout}">
+            <i class="fa fa-lock"></i>
+                <span>Fermer votre session</span>
+                </p:commandLink>
+        </li>
+        <li class="header">
+            Détails Etudiant
+        </li>
+        <li>
+            <p:commandLink action="#{etudiantController.showLoggedDetails}">
+                <i class="fa fa-eye"></i>
+                <span>Afficher détails</span>
+            </p:commandLink>
+        </li>
+    </ul>
+
+</ui:composition>

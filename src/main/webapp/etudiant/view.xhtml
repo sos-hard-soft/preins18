@@ -2,18 +2,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/mstemp.xhtml"
+                template="/admin.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:o="http://omnifaces.org/ui"
                 xmlns:of="http://omnifaces.org/functions">
-
-    <ui:define name="sidebar-left">
-
-        <ui:include src="menuEtudiant.xhtml" />
-
+             
+        <ui:define name="head">
+        <title>Création d'un compte pour la gestion de la préinscription</title>
     </ui:define>
-    <ui:define name="content">
+
+    <ui:define name="logo-lg">
+        <img src="../resources/images/logoFSJES.png" />
+    </ui:define>
+    <ui:define name="logo-mini">
+        <img src="../resources/images/logoFSJES.png" />
+    </ui:define>
+<ui:define name="menu"><ui:include src="menuEtudiant.xhtml" /></ui:define>
+    
+     <ui:define name="title">
+        <h:form><ul><li><p:commandLink action="#{language.changeLanguage('ar')}" >Arabe</p:commandLink></li><li><p:commandLink action="#{language.changeLanguage('')}" >Français</p:commandLink></li></ul></h:form>
+        <h2 class="align-center">Création d'un compte pour la gestion de la préinscription</h2>
+    </ui:define>
+    <ui:define name="body">
         <h:form>
             <div></div>
             <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
@@ -26,7 +37,7 @@
                             <p:graphicImage rendered="#{etudiantController.fileExist}" height="120" width="120" value="#{etudiantController.byteToImage(etudiantController.current.photo)}" />
                         </p:panelGrid>
                         <p:messages for="update"/>
-                        <p:panel header="Informations personèlle">
+                        <p:panel header="#{msg['detailsStd']}">
                             <p:panelGrid columns="2">
                                 <p:outputLabel value="CIN : "/>
                                 <p:outputLabel value="#{etudiantController.current.cin}"/>
@@ -164,7 +175,7 @@
                         <p:tab title="La piece : #{piece.intitule}">
                             <p:commandButton id="delete" value="Supprimer la piece" action="#{etudiantController.doDeletePieces(piece)}" icon="ui-icon-delete" />
                                 
-                                    <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true"/>
+<!--                                    <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true" />-->
                                 
                             <h:panelGrid columns="2" cellpadding="5">
                                                     
