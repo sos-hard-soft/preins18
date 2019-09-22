@@ -7,41 +7,41 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
              
         <ui:define name="head">
-        <title>Création d'un compte pour la gestion de la préinscription</title>
+        <title>#{msg.SelectFil}</title>
     </ui:define>
 
     <ui:define name="logo-lg">
-        Admin Starter
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
     <ui:define name="logo-mini">
-        Admin
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
 <ui:define name="menu"><ui:include src="menuEtudiant.xhtml" /></ui:define>
     
     <ui:define name="title">
-        Création d'un compte pour la gestion de la préinscription
+        <h4>#{msg.SelectFil}</h4>
     </ui:define>
     <ui:define name="body">
                 
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
         <p:messages id="select" showDetail="true" autoUpdate="true"/>
         
         <p:dataTable value="#{etudiantController.listChoix}" var="filiere" >
-            <p:column  headerText="Filière">  
+            <p:column  headerText="#{msg.filiere}">  
                 <h:outputText value="#{filiere.intitule}" />  
         </p:column> 
-        <p:column headerText="Intitule de la filière">  
+        <p:column headerText="#{msg.intFil}">  
                 <h:outputText value="#{filiere.description}" />  
         </p:column> 
-            <p:column headerText="Responsable">  
+            <p:column headerText="#{msg.respon}">  
                 <h:outputText value="#{filiere.responsable.nom} #{filiere.responsable.prenom}" />  
         </p:column> 
-            <p:column headerText="Actions">  
+            <p:column headerText="#{msg.actions}">  
                             
                                 <p:growl id="messages"/>  
 
-                                <p:menuButton value="Ajouter">  
-                                    <p:menuitem value="Ajouter a ma liste de choix" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
+                                <p:menuButton value="#{msg.add}">  
+                                    <p:menuitem value="#{msg.addChoix}" update="messages" action="#{etudiantController.doAddChoix(filiere)}" icon="ui-icon-arrowrefresh-1-w"/>    
                                                                         
                                 </p:menuButton>  
                             

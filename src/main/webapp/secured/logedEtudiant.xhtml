@@ -6,7 +6,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="meta">
-            <head><meta http-equiv="refresh" content="10; URL=/candidmaster/etudiant/view.xhtml" /></head>
+            <head></head>
         </ui:define>
 
         
@@ -17,13 +17,17 @@
         
         <p:messages for="update"/>
         <div class="jumbotron top-space">
-			<h4>Bienvenu <p:outputLabel  rendered="#{etudiantController.compte.actif}" value="#{etudiantController.current.prenom}"/></h4>
-                        <h4>Vous allez etre rédiriger vers votre espace personel
+			<h4>Bienvenu <p:outputLabel  rendered="#{etudiantController.compte.actif}" value="#{etudiantController.current.prenom} Vous allez etre rédiriger vers votre espace personel"/></h4>
+                        <h4>
                             <p:commandLink rendered="#{etudiantController.compte.actif}"
                 value="cliquez ici" action="#{etudiantController.showLoggedDetails}" class="btn btn-primary btn-large"/></h4>
      		<h4>
                     Sur votre espace personel vous pouvez passer votre candidature, 
                     modifier vos informations personelle, et éditer votre qualification et diplomes.
+                </h4>
+                        <h4>
+                            <p:outputLabel  rendered="#{!etudiantController.compte.actif}" style="color: red"
+                                            value="Si vous n'avez pas activé votre compte par le lien envoyé sur votre email votre compte restera invalid." />
                 </h4>
   		</div>
         

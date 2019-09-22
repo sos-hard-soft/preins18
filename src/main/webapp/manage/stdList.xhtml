@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/admin.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:of="http://omnifaces.org/functions">
+   
+    <ui:define name="head">
+        <title>#{msg.msgTitleCreate}</title>
+    </ui:define>
+    <ui:define name="logo-lg">
+        <img src="../resources/images/miniLogo.png" />
+    </ui:define>
+    <ui:define name="logo-mini">
+        <img src="../resources/images/miniLogo.png" />
+    </ui:define>
+    <ui:define name="menu">
+        <ul class="sidebar-menu tree" data-widget="tree">
+            <li>
+                <h:form>
+                        <p:commandLink value="Mon espace" action="#{personController.showSpace}" />
+		</h:form>
+            </li>
+        <li class="header">
+            Choisir la langue
+        </li>
+        <li>
+            <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+            <p:selectOneMenu style="background-color: yellow;" value="#{language.language}" onchange="submit()">
+                    <f:selectItem itemValue="fr" itemLabel="#{msg.fr}" />
+                    <f:selectItem itemValue="ar" itemLabel="#{msg.ar}" />        
+                </p:selectOneMenu>
+            </h:form>
+        </li>
+        </ul>
+        </ui:define>
+    <ui:define name="title">
+        <h2 class="align-center" dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">#{msg['msgTitleCreate']}</h2>
+    </ui:define>
+    <ui:define name="body">
+        
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+            <div style="margin-bottom: 10px;">
+            <h:commandLink class="btn btn-download btn-action btn-lg">Cliquez ici pour Exporter la liste au Format excel
+        <p:graphicImage value="../resources/images/excel.png" />
+        <p:dataExporter type="xls" target="tbl" fileName="liste candidats" pageOnly="true" />   
+            </h:commandLink></div>
+            
+                            <p:dataTable id="tbl" value="#{personController.stdliste}"
+                                  sortMode="multiple" var="item">
+                                <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Decision Prise"/>
+                            </f:facet>
+                             <h:outputText rendered="#{personController.getLaDecision(item.cin) == 'Accepter'}" value="Accepter" style="color: Green" />
+                            <h:outputText rendered="#{personController.getLaDecision(item.cin) == 'Rejetter'}" value="Rejeter" style="color: Red" />
+                            <h:outputText rendered="#{personController.getLaDecision(item.cin) == 'Non Traité'}" value="Non Encore Traité" style="color: blue" />                                                       
+                        </p:column>
+                        <p:column sortBy="#{item.cne}">
+                            <f:facet name="header">
+                                <h:outputText value="Cne"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cne}"  />                            
+                        </p:column>
+                        <p:column filterBy="#{item.cin}" sortBy="#{item.cin}">
+                            <f:facet name="header" >
+                                <h:outputText value="Cin"/>
+                            </f:facet>
+                            <p:commandLink value="#{item.cin}" action="#{personController.showStudentDetail(item.cin)}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nom}" sortBy="#{item.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="Nom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prenom"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DateNaissance"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateNaissance}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="LieuNaissance"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lieuNaissance}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Sexe"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sexe}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nationalite"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nationalite}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Diplome"/>
+                            </f:facet>
+                            <h:outputText value="#{item.diplome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DateObtention"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateObtention}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="DatePremiereInscription"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datePremiereInscription}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Mention"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mention}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.note1}">
+                            <f:facet name="header">
+                                <h:outputText value="S1"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note1}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="S2"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note2}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="S3"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note3}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="S4"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note4}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="S5"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note5}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="S6"/>
+                            </f:facet>
+                            <h:outputText value="#{item.note6}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.moyenne}">
+                            <f:facet name="header">
+                                <h:outputText value="Moyenne"/>
+                            </f:facet>
+                            <h:outputText value="#{item.moyenne}"/>
+                        </p:column>
+                    </p:dataTable> 
+                       
+            
+            
+                                      
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
+ 

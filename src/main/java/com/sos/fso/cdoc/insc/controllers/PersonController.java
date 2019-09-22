@@ -6,12 +6,14 @@
 package com.sos.fso.cdoc.insc.controllers;
 
 import com.sos.fso.cdoc.insc.entities.Compte;
+import com.sos.fso.cdoc.insc.entities.Decision;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.entities.Filiere;
 import com.sos.fso.cdoc.insc.entities.Person;
-import com.sos.fso.cdoc.insc.entities.Students;
+import com.sos.fso.cdoc.insc.helpers.LazyListDataModel;
 import com.sos.fso.cdoc.insc.helpers.StdList;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
+import com.sos.fso.cdoc.insc.services.DecisionFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
 import com.sos.fso.cdoc.insc.services.FiliereFacade;
 import com.sos.fso.cdoc.insc.services.PersonFacade;
@@ -28,7 +30,6 @@ import java.security.Principal;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.ejb.Init;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -37,10 +38,13 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -66,10 +70,15 @@ public class PersonController implements Serializable{
     private Filiere filiereProf;
     
     @Inject
+    private DecisionFacade decisionFacade;
+    private Decision decision;
+    
+    @Inject
     private CompteFacade compteService;
     private Compte newCompte;
     private Compte compte;
     private boolean sessionOuverte;
+    
     
     @Inject
     private EtudiantFacade etudiantService;
@@ -77,6 +86,8 @@ public class PersonController implements Serializable{
     private List<Object[]> maliste;
     
     private List<StdList> stdliste;
+    
+    private LazyDataModel<StdList> lazyModel;
     
     private boolean visibled = false;
     private boolean visible = false;
@@ -101,9 +112,19 @@ public class PersonController implements Serializable{
     }
     
     public String showList(Filiere filiere) {
-        System.out.println("la filiere est " + filiere.getIntitule());
-        stdliste = etudiantService.getStudents(filiere.getIntitule());
+        filiereProf = filiere;
+        stdliste = etudiantService.getStudents(filiere.getIntitule());    
+        
+        lazyModel = new LazyListDataModel(stdliste);
+        
         return "/manage/mstList?faces-redirect=true";
+    }
+
+     public String showListExport() {
+        
+        stdliste = etudiantService.getStudents(filiereProf.getIntitule());    
+        
+        return "/manage/stdList?faces-redirect=true";
     }
 
     
@@ -111,9 +132,64 @@ public class PersonController implements Serializable{
         //this.current = item;
         return "/index?faces-redirect=true";
     }
-
+    
+    public Decision getDecision(String cin){
+        Etudiant studentCurrent = etudiantService.findByCin(cin);
+        decision = decisionFacade.findByEtudiant(studentCurrent, current);             
+        if(decision == null){     
+        Decision accepter = new Decision();
+        accepter.setIdDecision(1999999);
+        accepter.setDeci(false);
+        accepter.setDecideur(this.current);
+        accepter.setSelectionne(studentCurrent);
+        }else{
+            
+        }        
+        return decision;        
+    }
+    
+    public String getLaDecision(String cin){
+        String laDecision;
+        Etudiant studentCurrent = etudiantService.findByCin(cin);
+        System.out.println("decision pour etudiant : " + studentCurrent.getIdEtudiant());
+        decision = decisionFacade.findByEtudiant(studentCurrent, current);             
+        if(decision == null){     
+        laDecision = "Non Traité";
+        }else if(decision.getDeci()){
+            laDecision = "Accepter";
+        }  else{
+            laDecision = "Rejetter";
+        }      
+        return laDecision;        
+    }
+    
+    
+    public String acceptDecision(Etudiant traite){
+        decisionFacade.deleteDecision(traite, current);
+        Decision accepter = new Decision();
+        accepter.setDeci(true);
+        accepter.setDecideur(this.current);
+        accepter.setSelectionne(traite);
+        decisionFacade.create(accepter);
+        personService.clearCache();
+        stdliste = etudiantService.getStudents(filiereProf.getIntitule());
+        return "/manage/mstList?faces-redirect=true";
+    }
+    
+    public String rejetDecision(Etudiant traite){
+        decisionFacade.deleteDecision(traite, current);
+        Decision accepter = new Decision();
+        accepter.setDeci(false);
+        accepter.setDecideur(this.current);
+        accepter.setSelectionne(traite);
+        decisionFacade.create(accepter);
+        personService.clearCache();
+        stdliste = etudiantService.getStudents(filiereProf.getIntitule());
+        return "/manage/mstList?faces-redirect=true";
+    }
     public String showDetails(Person selected) {
         this.current = selected;
+        personService.clearCache();
         return "/filiere/list?faces-redirect=true";
     }
 
@@ -131,10 +207,16 @@ public class PersonController implements Serializable{
     }
     
     public String showStudentDetail(String cin) {
+        this.student = new Etudiant();
         this.student = etudiantService.findByCin(cin);
-        if (student.getPhoto() != null) {
-            fileExist = true;
-        }                
+        System.out.println("l etudiant recuperer " + student.getCin());
+        if (student.getPhoto() == null) {
+            fileExist = false;
+        }   else{
+        fileExist = true;
+        }            
+        System.out.println("Photo null" + fileExist);
+        personService.clearCache();
         return "/manage/viewStudent?faces-redirect=true";
     }
     
@@ -158,8 +240,7 @@ public class PersonController implements Serializable{
         FacesContext.getCurrentInstance().addMessage( null, message );
         return "/index?faces-redirect=true";
     }
-    
-    
+        
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         System.out.println("Start file upload procedure");
         UploadedFile file = event.getFile();
@@ -334,6 +415,14 @@ public class PersonController implements Serializable{
     public void setNewCompte(Compte newCompte) {
         this.newCompte = newCompte;
     }
+
+    public Decision getDecision() {
+        return decision;
+    }
+
+    public void setDecision(Decision decision) {
+        this.decision = decision;
+    }
     
     public Compte getCompte() {
         if (compte == null) {
@@ -343,7 +432,21 @@ public class PersonController implements Serializable{
                 System.out.println("le princ " + principal.getName());
                 String cin = principal.getName();
                 compte = compteService.findByCin(cin);
+                boolean actif = false;
+            actif = compte.getActif();
+            if (!actif) {
+                System.out.println("Invalidation de la session");
+                FacesContext context = FacesContext.getCurrentInstance();
+                // remove data from beans:
+                for (String bean : context.getExternalContext().getSessionMap().keySet()) {
+                    context.getExternalContext().getSessionMap().remove(bean);
+                }
+                // destroy session:
+                HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+                session.invalidate();
             }
+            }
+            
         }
         return compte;
     }
@@ -368,8 +471,15 @@ public class PersonController implements Serializable{
     public void setStudent(Etudiant student) {
         this.student = student;
     }
-    
-    
+
+    public LazyDataModel<StdList> getLazyModel() {
+        return lazyModel;
+    }
+
+    public void setLazyModel(LazyDataModel<StdList> lazyModel) {
+        this.lazyModel = lazyModel;
+    }
+        
     
     
     @FacesConverter(forClass = Person.class)

@@ -13,10 +13,10 @@
     </ui:define>
 
     <ui:define name="logo-lg">
-        Admin Starter
+        <img src="../resources/images/logoFSJES.png" />
     </ui:define>
     <ui:define name="logo-mini">
-        Admin
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
 <ui:define name="menu"><ui:include src="menuEtudiant.xhtml" /></ui:define>
     
@@ -29,7 +29,7 @@ function myFunction() {
     location.reload();
 }
 </script>
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
             <p:messages for="update"/>
             <p:panel header="Modifier les détails du diplôme">
                 <p:panelGrid rendered="#{etudiantController.currentQualification.pathScan != null}">
@@ -44,14 +44,14 @@ function myFunction() {
                     
                 </p:panelGrid>
                 <p:panelGrid rendered="#{etudiantController.currentQualification.pathScan == null}">
-                    <p:outputLabel value="Veuillez charger l'image de votre diplôme :" />
-                    <p:fileUpload id="fichier" label="Cliquez pour Chargé votre copie de diplôme" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
-                                  sizeLimit="5000000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
+                    <p:outputLabel value="#{msg.uploadFile} :" />
+                    <p:fileUpload id="fichier" label="#{msg.uploadFile}" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                                  sizeLimit="5000000"  invalidSizeMessage="#{msg.tailleMax}" invalidFileMessage="#{msg.fileType}"/>
                     <p:message for="fichier"/>
                 </p:panelGrid>
                 <p:spacer width="100%" height="50" />
                 <p:panelGrid columns="3">
-                    <p:outputLabel value="Date d'obtention du diplôme"/>
+                    <p:outputLabel value="#{msg.dateObtention}"/>
                     <p:calendar id="dateObtention" value="#{etudiantController.currentQualification.dateObtention}"
                                 mode="popup" pattern="dd/MM/yyyy"
                                 yearRange="c-100" locale="fr"
@@ -59,7 +59,7 @@ function myFunction() {
                                 required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
                     <p:message for="dateObtention"/> 
 
-                    <p:outputLabel value="Date de première inscription"/>
+                    <p:outputLabel value="#{msg.datePremInsc}"/>
                     <p:calendar id="datePremiereInscription" value="#{etudiantController.currentQualification.datePremiereInscription}"
                                 mode="popup" pattern="dd/MM/yyyy"
                                 yearRange="c-100" locale="fr"
@@ -67,17 +67,17 @@ function myFunction() {
                                 required="true" requiredMessage="Veuillez selectionnez une Date d'inscription" />
                     <p:message for="datePremiereInscription"/> 
 
-                    <p:outputLabel value="Diplôme :"/>
+                    <p:outputLabel value="#{msg.diplome}"/>
                     <p:selectOneMenu id="diplome" value="#{etudiantController.currentQualification.diplome}"
                                      required="true" requiredMessage="Veuillez saisir la mention du diplôme">  
-                        <f:selectItem itemLabel="Diplome" itemValue="" />  
-                        <f:selectItem itemLabel="Baccalaureat" itemValue="Baccalaureat" />  
-                        <f:selectItem itemLabel="Licence fondamentale" itemValue="Licence fondamentale" />  
-                        <f:selectItem itemLabel="Licence professionnelle" itemValue="Licence professionnelle" />
-                        <f:selectItem itemLabel="Master recherche" itemValue="Master recherche" />
-                        <f:selectItem itemLabel="Master specialise" itemValue="Master specialise" />
-                        <f:selectItem itemLabel="Diplome d'ingenieur" itemValue="Diplome d'ingenieur" />
-                        <f:selectItem itemLabel="Autre diplome equivalent" itemValue="Autre diplome equivalent" />
+                        <f:selectItem itemLabel="#{msg.diplome}" itemValue="null" />  
+                        <f:selectItem itemLabel="#{msg.bac}" itemValue="Baccalaureat" />  
+                        <f:selectItem itemLabel="#{msg.LFond}" itemValue="Licence fondamentale" />  
+                        <f:selectItem itemLabel="#{msg.LPro}" itemValue="Licence professionnelle" />
+                        <f:selectItem itemLabel="#{msg.MstRe}" itemValue="Master recherche" />
+                        <f:selectItem itemLabel="#{msg.MstSp}" itemValue="Master specialise" />
+                        <f:selectItem itemLabel="#{msg.dipIng}" itemValue="Diplome d ingenieur" />
+                        <f:selectItem itemLabel="#{msg.autreDip}" itemValue="Autre diplome equivalent" />
                         <!--<p:ajax listener="#{etudiantController.getRightSemestre}" 
                                 event="select"/>-->
                     </p:selectOneMenu>  
@@ -86,12 +86,12 @@ function myFunction() {
                     <p:outputLabel value="Mention :"/>
                     <p:selectOneMenu id="mention" value="#{etudiantController.currentQualification.mention}"
                                      required="false" requiredMessage="Veuillez saisir la mention du diplôme">
-                        <f:selectItem itemLabel="Mention" itemValue="" />  
-                        <f:selectItem itemLabel="Passable" itemValue="Passable" />  
-                        <f:selectItem itemLabel="Assez bien" itemValue="Assez bien" />  
-                        <f:selectItem itemLabel="Bien" itemValue="Bien" />
-                        <f:selectItem itemLabel="Très bien" itemValue="Très bien" />
-                        <f:selectItem itemLabel="Excellent" itemValue="Excellent" />
+                        <f:selectItem itemLabel="#{msg.mention}" itemValue="null" />  
+                        <f:selectItem itemLabel="#{msg.passable}" itemValue="Passable" />  
+                        <f:selectItem itemLabel="#{msg.AB}" itemValue="Assez bien" />  
+                        <f:selectItem itemLabel="#{msg.B}" itemValue="Bien" />
+                        <f:selectItem itemLabel="#{msg.TB}" itemValue="Très bien" />
+                        <f:selectItem itemLabel="#{msg.Exc}" itemValue="Excellent" />
                     </p:selectOneMenu>
                     <p:message for="mention"/>
 

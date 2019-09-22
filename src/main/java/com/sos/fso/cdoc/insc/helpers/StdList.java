@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author mabsalhi.sos
  */
 @Entity
+@Table(name = "stdlist")
 @XmlRootElement
 public class StdList implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -83,11 +85,14 @@ public class StdList implements Serializable{
     private Double note6;
     @Column(name = "moyenne")
     private Double moyenne;
-
+    @Column(name = "deci")
+    private String deci;
+    
+    
     public StdList() {
     }
 
-    public StdList(long cne, String cin, String nom, String prenom, Date dateNaissance, String lieuNaissance, Boolean sexe, String nationalite, String diplome, String partieDelivrante, Date dateObtention, Date datePremiereInscription, String mention, Double note1, Double note2, Double note3, Double note4, Double note5, Double note6, Double moyenne) {
+    public StdList(long cne, String cin, String nom, String prenom, Date dateNaissance, String lieuNaissance, Boolean sexe, String nationalite, String diplome, String partieDelivrante, Date dateObtention, Date datePremiereInscription, String mention, Double note1, Double note2, Double note3, Double note4, Double note5, Double note6, Double moyenne, String deci) {
         this.cne = cne;
         this.cin = cin;
         this.nom = nom;
@@ -108,6 +113,8 @@ public class StdList implements Serializable{
         this.note5 = note5;
         this.note6 = note6;
         this.moyenne = moyenne;
+        this.deci = deci;
+        
     }
 
     public long getCne() {
@@ -270,6 +277,15 @@ public class StdList implements Serializable{
         this.moyenne = moyenne;
     }
 
+    public String getDeci() {
+        return deci;
+    }
+
+    public void setDeci(String deci) {
+        this.deci = deci;
+    }
+
+    
     @Override
     public String toString() {
         return "StdList{" + "nom=" + nom + ", prenom=" + prenom + '}';

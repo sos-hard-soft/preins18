@@ -7,133 +7,131 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
              
         <ui:define name="head">
-        <title>Création d'un compte pour la gestion de la préinscription</title>
+            <title>#{msg.editInfo}</title>
     </ui:define>
 
-    <ui:define name="logo-lg">
-        Admin Starter
+   <ui:define name="logo-lg">
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
     <ui:define name="logo-mini">
-        Admin
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
 <ui:define name="menu"><ui:include src="menuEtudiant.xhtml" /></ui:define>
     
     <ui:define name="title">
-        Création d'un compte pour la gestion de la préinscription
+        #{msg.editInfo}
     </ui:define>
     <ui:define name="body">
-                <h:form>
+                <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
                     <div></div>
                     <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
-                        Votre session a éxpirer ou vous n'avez pas activer votre compte.
+                        #{msg.sessionOut}
                     </p:panel>
 
-                    <p:panel id="etudiantdetail" header="Modification des Informations personelle" rendered="#{!etudiantController.sessionOuverte}">
-                         <p:outputLabel value="Veuillez charger votre Photo d'identité :" />
-                    <p:fileUpload mode="advanced" label="Cliquez pour Chargé votre foto d'identité" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleFileUpload}" 
-                                  sizeLimit="500000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
+                    <p:panel id="etudiantdetail" header="#{msg.editInfo}" rendered="#{!etudiantController.sessionOuverte}">
+                         <p:outputLabel value="#{msg.uploadPhoto} :" />
+                    <p:fileUpload mode="advanced" label="#{msg.uploadPhoto}" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleFileUpload}" 
+                                  sizeLimit="500000"  invalidSizeMessage="#{msg.tailleMax}" invalidFileMessage="#{msg.fileType}"/>
                     <p:growl id="messages" showDetail="true"/>
         
                         <p:messages for="update"/>
                         <p:panelGrid columns="3">
 
                         </p:panelGrid>
-                        <p:panelGrid columns="3">
-                            <p:outputLabel value="CNE : "/>
+                        <p:panelGrid columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid" styleClass="ui-fluid card">
+                            <p:outputLabel value="#{msg['cne']} *:"/>
                             <p:outputLabel id="cne" value="#{etudiantController.current.cne}"
                                            />
                             <p:message for="cne"/>
 
-                            <p:outputLabel value="CIN : "/>
+                            <p:outputLabel value="#{msg['cin']} *:"/>
                             <p:outputLabel id="cin" value="#{etudiantController.current.cin}" />
 
                             <p:message for="cin"/>
 
 
 
-                            <p:outputLabel  value="Nom : *"/>
+                            <p:outputLabel  value="#{msg['nom']} *:"/>
                             <p:inputText id="nom" value="#{etudiantController.current.nom}"
-                                         required="true" requiredMessage="Veuillez saisir votre nom"/>
+                                         required="true" requiredMessage="#{msg.nomRequired}"/>
                             <p:message for="nom"/>
+                            <p:outputLabel value="#{msg['prenom']} *:"/>
+                            <p:inputText id="prenom" value="#{etudiantController.current.prenom}"
+                                         required="true" requiredMessage="#{msg.prenomRequired}"/>
+                            <p:message for="prenom"/>
+                            <p:outputLabel  value="#{msg['nomAr']} *:" style="float: right;"/>
+                            <p:inputText id="nomAr" value="#{etudiantController.current.nomAr}"
+                                         dir="rtl" style="float: right;" required="false" requiredMessage="#{msg.prenomArRequired}"/>
                             
                             <p:message for="nomAr"/>
-                            <p:inputText id="nomAr" value="#{etudiantController.current.nomAr}"
-                                         dir="rtl" style="float: right;" required="false" requiredMessage="Veuillez saisir votre nom en arabe"/>
-                            <p:outputLabel  value="الاسم العائلي : *" dir="rtl" style="float: right;"/>
-                            
-
-                            <p:outputLabel value="Prénom : *"/>
-                            <p:inputText id="prenom" value="#{etudiantController.current.prenom}"
-                                         required="true" requiredMessage="Veuillez saisir votre prenom"/>
-                            <p:message for="prenom"/>
+                            <p:outputLabel  value="#{msg['prenomAr']} *:" style="float: right;"/>
+                            <p:inputText id="prenomAr" value="#{etudiantController.current.prenomAr}"
+                                         dir="rtl" style="float: right;" required="false" requiredMessage="#{msg.nomArRequired}"/>
                             
                             <p:message for="prenomAr"/>
-                            <p:inputText id="prenomAr" value="#{etudiantController.current.prenomAr}"
-                                         dir="rtl" style="float: right;" required="false" requiredMessage="Veuillez saisir votre nom en arabe"/>
-                            <p:outputLabel  value="الاسم الشخصي : *" dir="rtl" style="float: right;"/>
                             
-                            
-                            <p:outputLabel value="Date de naissance : *"/>
+                            <p:outputLabel value="#{msg['dateNaissance']} *:"/>
                             <p:calendar id="dateNaissance" value="#{etudiantController.current.dateNaissance}" title="DateNaissance" 
                                         locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />
                             <p:message for="dateNaissance"/>
 
-                            <p:outputLabel value="email : *"/>
+                            <p:outputLabel value="#{msg['email']} : *"/>
                             <p:inputText id="email" value="#{etudiantController.current.email}"
-                                         required="true" requiredMessage="Veuillez saisir une adresse email valide">
+                                         required="true" requiredMessage="#{msg.emailRequiredMessage}">
                                 <f:validateRegex
                                     pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                             </p:inputText>
                             <p:message for="email"/>
 
-                            <p:outputLabel value="Lieu de naissance :"/>
+                            <p:outputLabel value="#{msg['lieuNaissance']} :"/>
                             <p:inputText id="lieuNaissance" value="#{etudiantController.current.lieuNaissance}"
                                          />
                             <p:message for="lieuNaissance"/>
-                            
-                            <p:message for="lieuNaissanceAr"/>
+                             <p:outputLabel value="#{msg['lieuNaissanceAr']}" style="float: right;"/>
+                           
                             <p:inputText id="lieuNaissanceAr" value="#{etudiantController.current.lieuNaissanceAr}"
                                          dir="rtl" style="float: right;"/>
-                            <p:outputLabel value=" مكان الازدياد : *" dir="rtl" style="float: right;"/>
-                            
+                           
+                             <p:message for="lieuNaissanceAr"/>
 
-                            <p:outputLabel value="Nationalité :"/>
+                            <p:outputLabel value="#{msg['nationalite']}"/>
                             <p:inputText id="nationalite" value="#{etudiantController.current.nationalite}"
                                          />
                             <p:message for="nationalite"/>
 
-                            <p:outputLabel value="sexe :"/>
+                            <p:outputLabel value="#{msg['sexe']} :"/>
                             <p:selectOneRadio id="sexe" value="#{etudiantController.current.sexe}">
-                                <f:selectItem itemLabel="Masculin" itemValue="true"/>
-                                <f:selectItem itemLabel="Féminin" itemValue="false"/>
+                                <f:selectItem itemLabel="#{msg['masculin']}" itemValue="true"/>
+                                <f:selectItem itemLabel="#{msg['feminin']}" itemValue="false"/>
                             </p:selectOneRadio>
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="sexe"/>
 
 
-                            <p:outputLabel value="Etat matrimonial :"/>
+                            <p:outputLabel value="#{msg['etatMatrimonial']} :"/>
                             <p:selectOneRadio id="etatMatrimonial" value="#{etudiantController.current.etatMatrimonial}">
-                                <f:selectItem itemLabel="Célibataire" itemValue="true"/>
-                                <f:selectItem itemLabel="Marié(e)" itemValue="false"/>
+                                <f:selectItem itemLabel="#{msg['celib']}" itemValue="true"/>
+                                <f:selectItem itemLabel="#{msg['mariee']}" itemValue="false"/>
                             </p:selectOneRadio>
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="etatMatrimonial"/>
 
-                            <p:outputLabel value="Fonctionaire :"/>
+                            <p:outputLabel value="#{msg['activite']} :"/>
                             <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}">
-                                <f:selectItem itemLabel="Oui" itemValue="true"/>
-                                <f:selectItem itemLabel="Non" itemValue="false"/>
+                                <f:selectItem itemLabel="#{msg['fonctionnaire']}" itemValue="true"/>
+                                <f:selectItem itemLabel="#{msg['rechercheEmploi']}" itemValue="false"/>
                             </p:selectOneRadio>
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="activite"/>
 
-                            <p:outputLabel value="Adresse de corespondance :"/>
+                            <p:outputLabel value="#{msg['adresse']} :"/>
                             <p:inputTextarea rows="6" cols="50" id="adresse" value="#{etudiantController.current.adresse}"
                                              />
-                            <p:message for="lieuNaissance"/>
-                            <p:outputLabel value="Numéro de téléphonne :"/>
+                            <p:message for="adresse"/>
+                            <p:outputLabel value="#{msg['phone']} :"/>
                             <p:inputText id="telephonne" value="#{etudiantController.current.numeroTelephonne}"
                                          />
-                            <p:message for="lieuNaissance"/>
+                            <p:message for="telephonne"/>
                         </p:panelGrid>
-                        <p:commandButton class="btn btn-action" value="Enregistrer les Modification" action="#{etudiantController.doEdit}"/>
+                        <p:commandButton icon="fa fa-floppy-o" styleClass="btn-primary btn-block" value="#{msg['save']}" action="#{etudiantController.doEdit}"/>
 
 
                     </p:panel>

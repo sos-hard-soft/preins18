@@ -26,10 +26,7 @@
     <application>
         <!-- locale configuration -->
         <locale-config>
-            <supported-locale>en</supported-locale>
-            <supported-locale>en_US</supported-locale>		
-            <supported-locale>ar</supported-locale>
-            <supported-locale>de_DE</supported-locale>
+            <default-locale>fr</default-locale>            
         </locale-config>   
         <!-- resource bundle configuration -->
         <resource-bundle>

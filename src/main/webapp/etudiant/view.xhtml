@@ -13,129 +13,246 @@
     </ui:define>
 
     <ui:define name="logo-lg">
-        <img src="../resources/images/logoFSJES.png" />
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
     <ui:define name="logo-mini">
-        <img src="../resources/images/logoFSJES.png" />
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
 <ui:define name="menu"><ui:include src="menuEtudiant.xhtml" /></ui:define>
     
      <ui:define name="title">
-        <h:form><ul><li><p:commandLink action="#{language.changeLanguage('ar')}" >Arabe</p:commandLink></li><li><p:commandLink action="#{language.changeLanguage('')}" >Français</p:commandLink></li></ul></h:form>
         <h2 class="align-center">Création d'un compte pour la gestion de la préinscription</h2>
     </ui:define>
     <ui:define name="body">
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
             <div></div>
             <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
                 Votre session a expirer ou vous n'avez pas activer votre compte.
             </p:panel>
-            <div class="row">
-                <div class="col-lg-8">
-                    <p:panel id="etudiantdetail" rendered="#{!etudiantController.sessionOuverte}">
-                        <p:panelGrid>
-                            <p:graphicImage rendered="#{etudiantController.fileExist}" height="120" width="120" value="#{etudiantController.byteToImage(etudiantController.current.photo)}" />
-                        </p:panelGrid>
-                        <p:messages for="update"/>
-                        <p:panel header="#{msg['detailsStd']}">
-                            <p:panelGrid columns="2">
-                                <p:outputLabel value="CIN : "/>
+                     <div class="ui-g ui-fluid">              
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+
+        <div class="info-box-content">
+            <span class="info-box-text">
+                <p:graphicImage rendered="#{etudiantController.fileExist}" height="120" width="120" value="#{etudiantController.byteToImage(etudiantController.current.photo)}" />
+                        </span>
+            <span class="info-box-number"><p:messages for="update"/></span>
+        </div>
+
+    </div></div>
+   
+
+                        
+            
+                    <div class="callout-card callout-success">
+                        <h4>#{msg['detailsStd']}</h4>
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="#{msg['cin']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.cin}"/>
-
-                                <p:outputLabel value="CNE : "/>
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="#{msg['cne']}"/>
+                                
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.cne}"/>
-
-                                <p:outputLabel value="Nom : "/>
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="#{msg['nom']}"/>
+                                
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.nom}"/>
-
-                                <p:outputLabel value="#{etudiantController.current.nomAr}" style="float: right;" dir="rtl"/>
-                                <p:outputLabel  value="الاسم العائلي : *" dir="rtl" style="float: right;"/>
-                                <p:outputLabel value="Prénom : " />
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="#{msg['prenom']}" />
+                                
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.prenom}"/>
-
-                                <p:outputLabel value="#{etudiantController.current.prenomAr}" style="float: right;" dir="rtl"/>
-                                <p:outputLabel  value="الاسم الشخصي : *" dir="rtl" style="float: right;"/>
-
-                                <p:outputLabel value="Date de naissance : "/>
-                                <p:outputLabel value="#{etudiantController.current.dateNaissance}">
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel  value="#{msg['nomAr']}" />
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                                <p:outputLabel value="#{etudiantController.current.nomAr}"/>
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel  value="#{msg['prenomAr']}"/>                                
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                                <p:outputLabel value="#{etudiantController.current.prenomAr}"/>
+                            </span> 
+                        </div>
+                    </div> <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                           <p:outputLabel value="#{msg['dateNaissance']}"/>
+                                
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                               <p:outputLabel value="#{etudiantController.current.dateNaissance}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </p:outputLabel>
-
-                                <p:outputLabel value="Lieu de naissance : "/>
+                            </span> 
+                        </div>
+                    </div> <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['lieuNaissance']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.lieuNaissance}"/>
-                                
-                                <p:outputLabel value="#{etudiantController.current.lieuNaissanceAr}" style="float: right;"/>
-                                <p:outputLabel value=" مكان الازدياد : *" dir="rtl" style="float: right;"/>
-                                 
-                                <p:outputLabel value="Nationalité : "/>
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                              <p:outputLabel value="#{msg['lieuNaissanceAr']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                                <p:outputLabel value="#{etudiantController.current.lieuNaissanceAr}"/>
+                            </span> 
+                        </div>
+                    </div> <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['nationalite']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.nationalite}"/>
-
-                                <p:outputLabel value="Sexe : "/>
-                                <p:outputLabel value="Masculin" rendered="#{etudiantController.current.sexe}"/>
-                                <p:outputLabel value="Féminin" rendered="#{!etudiantController.current.sexe}"/>
-
-                                <p:outputLabel value="Activité : "/>
-                                <p:outputLabel value="Fonctionaire" rendered="#{etudiantController.current.activite}"/>
-                                <p:outputLabel value="Sans Fonction" rendered="#{!etudiantController.current.activite}"/>
-
-                                <p:outputLabel value="Etat matrimonial : "/>
-                                <p:outputLabel value="Célibataire" rendered="#{etudiantController.current.etatMatrimonial}"/>
-                                <p:outputLabel value="Mariée" rendered="#{!etudiantController.current.etatMatrimonial}"/>
-                            </p:panelGrid>
-                        </p:panel>
-                        <p:panel header="Cordonnées de contact">
-                            <p:panelGrid columns="2">
-                                <p:outputLabel value="email : "/>
+                            </span> 
+                        </div>
+                    </div> <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['sexe']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                                 <p:outputLabel value="#{msg['masculin']}" rendered="#{etudiantController.current.sexe}"/>
+                                <p:outputLabel value="#{msg['feminin']}" rendered="#{!etudiantController.current.sexe}"/>
+                            </span> 
+                        </div>
+                    </div> <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['activite']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                                <p:outputLabel value="#{msg['fonctionnaire']}" rendered="#{etudiantController.current.activite}"/>
+                                <p:outputLabel value="#{msg['rechercheEmploi']}" rendered="#{!etudiantController.current.activite}"/>
+                            </span> 
+                        </div>
+                    </div> 
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['etatMatrimonial']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
+                                <p:outputLabel value="#{msg['celib']}" rendered="#{etudiantController.current.etatMatrimonial}"/>
+                                <p:outputLabel value="#{msg['mariee']}" rendered="#{!etudiantController.current.etatMatrimonial}"/>
+                            </span> 
+                        </div>
+                    </div></div>
+                        <div class="callout-card callout-success">
+                            <h4>#{msg['infosContact']}</h4>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['email']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.email}"/>
-                                <p:outputLabel value="Adresse : "/>
+                            </span> 
+                        </div>
+                    </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                             <p:outputLabel value="#{msg['adresse']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.adresse}"/>
-                                <p:outputLabel value="Numéro de téléphonne: "/>
+                            </span> 
+                        </div>
+                    </div>
+                        <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel value="#{msg['phone']}"/>
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <span class="help-block"> 
                                 <p:outputLabel value="#{etudiantController.current.numeroTelephonne}"/>
-                            </p:panelGrid>
-                        </p:panel>
-
-
-                    </p:panel>
-                </div>
-                <div class="col-lg-3">
-                    <p:panel header="Aide">
+                            </span> 
+                        </div>
+                    </div></div>
+                        
+                      
+                    <p:panel header="#{msg['help']}">
                         <p style="color: #46b8da; font-family: georgia;">Vous pouvez à tout moment changer vos informations personnelles, pour cela il vous suffit de cliquer sur le bouton "Editer infos" dans le menu qui apparait à guache de l'écran.</p>
                         <p style="color: #D20005; font-family: georgia;">N'oubliez pas de saisir vos diplômes obtenus, ces derniers seront présents sur votre formulaire de candidature.</p>
                         <p style="color: #c7254e; font-family: georgia;">Vos demande et lettre de motivation en tant que pieces justificative, la partie delivrante pourrait etre vous meme. Donnez un nom significatif a chaque piece.</p>
                         
                     </p:panel>
-                </div>
-            </div>
+             
             <p:tabView id="tabView">  
 
-                <p:tab id="tab1" title="Diplomes Obtenus">
+                <p:tab id="tab1" title="#{msg['diplomesPersonne']}">
 
                     <p:dataTable value="#{etudiantController.current.qualificationList}" var="diplome">
-                        <p:column headerText="Actions">  
+                        <p:column headerText="#{msg['actions']}">  
 
                             <p:growl id="messages"/>  
 
-                            <p:menuButton value="Actions">  
-                                <p:menuitem value="Editer" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
-                                <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveQualification(diplome)}" ajax="false"/>  
+                            <p:menuButton value="#{msg['actions']}">  
+                                <p:menuitem value="#{msg['edit']}" icon="ui-icon-arrowrefresh-1-w" update="messages" action="#{etudiantController.showEditQualification(diplome)}" />    
+                                <p:menuitem value="#{msg['delete']}" icon="ui-icon-close" action="#{etudiantController.doRemoveQualification(diplome)}" ajax="false"/>  
 
                             </p:menuButton>  
 
 
                         </p:column>
-                        <p:column  headerText="Diplome">  
+                        <p:column  headerText="#{msg['diplome']}">  
                             <h:outputText value="#{diplome.diplome}" />  
                         </p:column> 
-                        <p:column  headerText="Date d'obtention">  
+                        <p:column  headerText="#{msg['dateObtention']}">  
                             <h:outputText value="#{diplome.dateObtention}" >
                                 <f:convertDateTime pattern="dd.MM.yyyy" />
                             </h:outputText>  
                         </p:column> 
 
-                        <p:column  headerText="Mention">  
+                        <p:column  headerText="#{msg['mention']}">  
                             <h:outputText value="#{diplome.mention}" />  
                         </p:column> 
-                        <p:column  headerText="Etablissement">  
+                        <p:column  headerText="#{msg['etablissement']}">  
                             <h:outputText value="#{diplome.partieDelivrante}" />  
                         </p:column>
 
@@ -144,24 +261,15 @@
 
 
                 </p:tab>  
-                <p:tab id="tab2" title="Filieres Choisis">
-                    <p:outputLabel value="Vous avez choisis les filieres ci après : "/>
-                    <p:commandButton action="#{etudiantController.showChoixFiliere}" rendered="#{etudiantController.current.choixList.size() != 2}" value="Ajouter un autre choix" />
+                <p:tab id="tab2" title="#{msg['filiereChoisis']}">
+                    <p:outputLabel value="#{msg['choixActuel']} : "/>
+                    <p:commandButton action="#{etudiantController.showChoixFiliere}" rendered="#{etudiantController.current.choixList.size() != 2}" value="#{msg['addChoix']}Ajouter un autre choix" />
                     <p:dataTable value="#{etudiantController.current.choixList}" var="choix">
-                        <p:column headerText="Actions">  
 
-                            <p:growl id="messages"/>  
-
-                            <p:menuButton value="Actions">  
-                                <p:menuitem value="Supprimer" icon="ui-icon-close" action="#{etudiantController.doRemoveChoix(choix)}" ajax="false"/>  
-                            </p:menuButton>  
-
-
-                        </p:column>
-                        <p:column  headerText="Filiere Choisis">  
+                        <p:column  headerText="#{msg['filiereChoisis']}">  
                             <h:outputText value="#{choix.idFiliere.intitule}" />  
                         </p:column> 
-                        <p:column  headerText="Intitulé de la filière">  
+                        <p:column  headerText="#{msg['intFil']}">  
                             <h:outputText value="#{choix.idFiliere.description}" />  
                         </p:column> 
 
@@ -169,20 +277,20 @@
                 </p:tab>
                 
                 
-                <p:tab id="tab3" title="Pieces Justificatives">  
+                <p:tab id="tab3" title="#{msg['piecesJustif']}">  
 
                     <p:accordionPanel value="#{etudiantController.current.piecesList}" var="piece">
-                        <p:tab title="La piece : #{piece.intitule}">
-                            <p:commandButton id="delete" value="Supprimer la piece" action="#{etudiantController.doDeletePieces(piece)}" icon="ui-icon-delete" />
+                        <p:tab title="#{msg['pieceJus']} : #{piece.intitule}">
+                            <p:commandButton id="delete" value="#{msg['delete']}" action="#{etudiantController.doDeletePieces(piece)}" icon="ui-icon-delete" />
                                 
-<!--                                    <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true" />-->
+                                    <o:graphicImage value="#{etudiantController.getImage(piece.pathScan)}" dataURI="true" />
                                 
                             <h:panelGrid columns="2" cellpadding="5">
                                                     
-                                <h:outputText value="Intitulé:" style="font-weight: bold" />
+                                <h:outputText value="#{msg['intPiece']} :" style="font-weight: bold" />
                                 <h:outputText value="#{piece.intitule}" />
 
-                                <h:outputText value="Partie delivrante:" style="font-weight: bold" />
+                                <h:outputText value="#{msg['partieDelivrante']} :" style="font-weight: bold" />
                                 <h:outputText value="#{piece.partieDelivrante}" />
                             </h:panelGrid>
                         </p:tab>
@@ -194,6 +302,7 @@
 
 
             </p:tabView>
+                </div>
         </h:form>
 
     </ui:define>

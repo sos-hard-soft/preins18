@@ -21,7 +21,7 @@ and open the template in the editor.
             </ui:define>
         <ui:define name="content">	
         <div></div>
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
         <p:messages for="update"/>
         
         <p:panel header="Selectionnez Une Formation doctorales">

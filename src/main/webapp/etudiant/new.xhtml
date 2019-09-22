@@ -5,39 +5,53 @@
                 template="/admin.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
     <ui:define name="head">
-        <title>Création d'un compte pour la gestion de la préinscription</title>
+        <title>#{msg.msgTitleCreate}</title>
     </ui:define>
-
     <ui:define name="logo-lg">
-        Admin Starter
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
-
     <ui:define name="logo-mini">
-        Admin
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
+    <ui:define name="menu">
+        <ul class="sidebar-menu tree" data-widget="tree">
+        <li class="header">
+            Choisir la langue
+        </li>
+        <li>
+            <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+            <p:selectOneMenu style="background-color: yellow;" value="#{language.language}" onchange="submit()">
+                    <f:selectItem itemValue="fr" itemLabel="#{msg.fr}" />
+                    <f:selectItem itemValue="ar" itemLabel="#{msg.ar}" />        
+                </p:selectOneMenu>
+            </h:form>
+        </li>
+        </ul>
+        </ui:define>
     <ui:define name="title">
-        <h:form><ul><li><p:commandLink action="#{language.changeLanguage('ar')}" >Arabe</p:commandLink></li><li><p:commandLink action="#{language.changeLanguage('')}" >Français</p:commandLink></li></ul></h:form>
-        <h2 class="align-center">Création d'un compte pour la gestion de la préinscription</h2>
+        <h2 class="align-center" dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">#{msg['msgTitleCreate']}</h2>
     </ui:define>
-    <ui:define name="body">	
+    <ui:define name="body">
+<!--        
         <p:panel styleClass="box-primary card">
-            <h:form>Si vous disposez déja d'un compte, Veuillez vous rendre sur la page de
-                <h:commandLink class="btn btn-action" value="connexion" action="#{etudiantController.showLogin}" /></h:form>
+            <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">#{msg['connMessage']}
+                <p:commandButton value="#{msg['conn']}" action="#{etudiantController.showLogin}" />
+            </h:form>
             <hr />
         </p:panel>
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
             <p:focus context="@form"/>
-            <p:panel styleClass="box-primary card">
                 <div class="ui-g ui-fluid">
+                    <div class="callout-card callout-info">
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                            <h:outputText value="CNE *:" />
-
+                            <h:outputText value="#{msg['cne']} *:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="cne" class="form-control" value="#{etudiantController.newEtudiant.cne}"
-                                         required="true" requiredMessage="Veuillez saisir votre code national de l'étudiant" validatorMessage="Saisir la lettre et le numéro sans espace">
+                                         required="true" requiredMessage="#{msg['cneRequired']}" validatorMessage="#{msg['cneNoSpace']}">
                                 <f:validator binding="#{uniqueCneValidator}" />
                                 <f:ajax event="blur" render="verifyCNE"/>
                             </p:inputText>
@@ -48,12 +62,11 @@
                     </div> 
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                            <h:outputText value="CNI *:" />
-
+                            <h:outputText value="#{msg['cin']}" />
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="cin" class="form-control" value="#{etudiantController.newEtudiant.cin}"
-                                         required="true" requiredMessage="Veuillez saisir votre code d'identité nationale !" validatorMessage="Saisir la lettre et le numéro sans espace">
+                                         required="true" requiredMessage="#{msg['cinRequired']}" validatorMessage="#{msg['cneNoSpace']}">
                                 <f:validateRegex pattern="^[a-zA-Z0-9]+$" />
                                 <f:validator binding="#{uniqueCinValidator}" />
                                 <f:ajax event="blur" render="verifyCIN"/>
@@ -65,11 +78,11 @@
                     </div>     
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
                         <div class="ui-sm-12 ui-g-11">
-                            <h:outputText value="Nom *:" />
+                            <h:outputText value="#{msg['nom']} *:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="nom" class="form-control" value="#{etudiantController.newEtudiant.nom}"
-                                         required="true" requiredMessage="Veuillez saisir votre nom"/>
+                                         required="true" requiredMessage="#{msg['nomRequired']}"/>
                             <span class="help-block"> 
                                 <p:message for="nom"/>
                             </span>
@@ -77,11 +90,11 @@
                     </div>     
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
                         <div class="ui-sm-12 ui-g-11">
-                            <h:outputText value="Prénom *:" />
+                            <h:outputText value="#{msg['prenom']} *:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="prenom" class="form-control" value="#{etudiantController.newEtudiant.prenom}"
-                                         required="true" requiredMessage="Veuillez saisir votre prénom"/>
+                                         required="true" requiredMessage="#{msg['prenomRequired']}"/>
                             <span class="help-block"> 
                                  <p:message for="prenom"/>
                             </span>
@@ -89,11 +102,11 @@
                     </div> 
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
                         <div class="ui-sm-12 ui-g-11">
-                            <h:outputText value="Nom *:" />
+                            <h:outputText value="#{msg['nomAr']} *:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="nomAr" class="form-control" value="#{etudiantController.newEtudiant.nomAr}"
-                                         required="true" requiredMessage="Veuillez saisir votre nom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
+                                         required="true" requiredMessage="#{msg['nomArRequired']}"/>
                             <span class="help-block"> 
                                 <p:message for="nomAr"/>
                             </span>
@@ -101,100 +114,82 @@
                     </div>     
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
                         <div class="ui-sm-12 ui-g-11">
-                            <h:outputText value="Prénom *:" />
+                            <h:outputText value="#{msg['prenomAr']} *:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="prenomAr" class="form-control" value="#{etudiantController.newEtudiant.prenomAr}"
-                                         required="true" requiredMessage="Veuillez saisir votre prénom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
+                                         required="true" requiredMessage="#{msg['prenomArRequired']}"/>
                             <span class="help-block"> 
                                  <p:message for="prenomAr"/>
                             </span>
                         </div>
                     </div>
-                </div>
-
-            </p:panel>
-
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid">
-                <p:commandButton value="Yes" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
-                                 icon="fa fa-check"/>
-                <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
-                                 icon="fa fa-close"/>
-            </p:confirmDialog>
-        </h:form>
-
-
-
-        <div class="col-md-10 col-md-offset-2 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h3 class="thin text-center">Créer un nouveau compte pour gestion de préinscription en Master</h3>
-
-                    <p:messages for="update"/>
-                    <p:panel header="Veuillez Saisir Vos informations personnelles">
-                        <p:panelGrid columns="4">
-
-
-                        </p:panelGrid>
-                        <p:panelGrid columns="3">
-
-
-                            <p:message for="nomAr"/>
-                            <p:inputText id="nomAr" class="form-control" value="#{etudiantController.newEtudiant.nomAr}"
-                                         required="true" requiredMessage="Veuillez saisir votre nom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
-                            <h:outputText dir="rtl" value="الاسم العائلي *: " />
-
-
-
-                            <p:message for="prenomAr"/>
-                            <p:inputText id="prenomAr" class="form-control" value="#{etudiantController.newEtudiant.prenomAr}"
-                                         required="true" requiredMessage="Veuillez saisir votre prénom en caractère Arabe, dans le cas des étrangers saisissez XXX"/>
-
-
-                            <h:outputText dir="rtl" value="الاسم الشخصي *: " />
-                        </p:panelGrid>
-                        <p:panelGrid columns="4">    
-                            <h:outputText value="Date de naissance *:" />
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                            <h:outputText dir="rtl" value="#{msg['dateNaissance']} *:" /> 
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
                             <p:calendar id="dateNaissance" required="true" value="#{etudiantController.newEtudiant.dateNaissance}" title="DateNaissance" 
                                         locale="fr" navigator="true" yearRange="1920:2010" pattern="dd/MM/yyyy" />
-                            <h:outputText dir="rtl" value="تاريخ الازدياد  *: " /> 
-                            <p:message for="dateNaissance"/>
-                            <h:outputText value="email *:" />
+                            <span class="help-block"> 
+                                 <p:message for="dateNaissance"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                             <h:outputText value="#{msg['email']} *:" />
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
                             <p:inputText id="email" class="form-control" value="#{etudiantController.newEtudiant.email}"
-                                         required="true" requiredMessage="Veuillez saisir une adresse email valide">
+                                         required="true" requiredMessage="#{msg['emailRequiredMessage']}" validatorMessage="#{msg['emailRequiredMessage']}">
                                 <f:validateRegex
                                     pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                             </p:inputText>
-                            <h:outputText dir="rtl" value="البريد الالكتروني *: " />
-                            <p:message for="email"/>
-                        </p:panelGrid>
-                    </p:panel>
-
-                    <p:panel header="Mot de passe pour le compte">  
-                        <p:messages id="pass" showDetail="true" autoUpdate="true"/>
-
-                        <h:panelGrid columns="3" id="matchGrid">                     
-                            <h:outputLabel for="pwd1" value="Mot de passe : *" />  
-                            <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" label="Password 1" required="true">
+                            <span class="help-block"> 
+                                  <p:message for="email"/>
+                            </span>
+                        </div>
+                    </div>
+                    </div></div>
+            <div class="ui-g ui-fluid">
+                    <div class="callout-card callout-warning">
+                        <h4>#{msg['msgPass']}</h4>
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                            <h:outputLabel for="pwd1" value="#{msg['password']}" />
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                              
+                            <p:password id="pwd1" value="#{etudiantController.newCompte.password}" match="pwd2" required="true">
                                 <f:validateLength minimum="6" for="pwd1" />                    
                             </p:password>
-                            <h:outputText dir="rtl" value="كلمة السر : " />
-                            <h:outputLabel for="pwd2" value="Resaisissez le mot de passe : *" />  
-                            <p:password id="pwd2" value="#{etudiantController.newCompte.password}" label="Password 2" required="true"/>  
-                            <h:outputText dir="rtl" value="تأكيد الكلمة: " />
-                        </h:panelGrid>  
-                    </p:panel> 
-                    <div class="top-margin"><p:commandButton update="pass" class="btn btn-action" id="saveButton" value="Enregistrez les données" action="#{etudiantController.doCreate}" /></div>
-
-                </div>
-
-
-
+                            <span class="help-block"> 
+                                 <p:message for="prenomAr"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">     
+                        <div class="ui-sm-12 ui-g-11">
+                             <h:outputLabel for="pwd2" value="#{msg['passwordBis']}" /> 
+                        </div>
+                        <div class="ui-sm-12 ui-g-11" >
+                            <p:password id="pwd2" value="#{etudiantController.newCompte.password}" required="true"/>
+                            <span class="help-block"> 
+                                <p:messages id="pass"/>
+                            </span>
+                        </div>
+                    </div>
+                        </div>
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:commandButton icon="fa fa-floppy-o" styleClass="btn-danger btn-block"
+                                         ignoreAutoUpdate="true" update="pass" 
+                                         class="btn btn-action" id="saveButton" value="#{msg['save']}" action="#{etudiantController.doCreate}" />
+                            </div>
+                    </div>
             </div>
-        </div>
-
-
-
-
+        </h:form>-->
     </ui:define>
 </ui:composition>
+ 

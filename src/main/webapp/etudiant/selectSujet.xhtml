@@ -11,10 +11,10 @@
     </ui:define>
 
     <ui:define name="logo-lg">
-        Admin Starter
+        <img src="../resources/images/logoFSJES.png" />
     </ui:define>
     <ui:define name="logo-mini">
-        Admin
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
 <ui:define name="menu">
     <ui:include src="menuEtudiant.xhtml" />
@@ -24,7 +24,7 @@
         Création d'un compte pour la gestion de la préinscription
     </ui:define>
     <ui:define name="body">
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
         <p:messages for="update"/>
         <p:panel header="Liste des sujet disponible">
             <p:dataTable value="#{filiereController.allFilieres}" var="filiere">

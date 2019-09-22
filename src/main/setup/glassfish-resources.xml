@@ -42,6 +42,6 @@
         <property name="mail.smtp.port " value="465"/>
         <property name="mail.smtp.auth " value="true"/>
         <property name="mail.smtp.password " value="masterfsjes@ump.ac.ma"/>
-        <property name="mail.smtp.user " value="MST|fsjes1819"/>
+        <property name="mail.smtp.user " value="#M@sterFSJES1920"/>
     </mail-resource>
 </resources>

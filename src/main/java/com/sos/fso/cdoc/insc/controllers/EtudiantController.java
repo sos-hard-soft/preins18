@@ -51,6 +51,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -134,8 +135,6 @@ public class EtudiantController implements Serializable {
     private String fileName;
     private Path folder;
     private File uploaded;
-    
-   
 
     // ======================================
     // = Navigation Methods =
@@ -198,10 +197,26 @@ public class EtudiantController implements Serializable {
     public String showLoggedDetails() {
         String cin = compte.getCin();
         System.out.println("le cne est : " + cin);
-        current = etudiantService.findByCin(cin);
-        System.out.println("La personne est : " + current.getNom() + "--> " + current.getCin());
-        etudiantService.clearCache();
-        return "/etudiant/view?faces-redirect=true";
+        boolean actif = false;
+        actif = compte.getActif();
+        if (!actif) {
+            System.out.println("Invalidation de la session");
+            FacesContext context = FacesContext.getCurrentInstance();
+            // remove data from beans:
+            for (String bean : context.getExternalContext().getSessionMap().keySet()) {
+                context.getExternalContext().getSessionMap().remove(bean);
+            }
+            // destroy session:
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+            session.invalidate();
+            return "/index?faces-redirect=true";
+        } else {
+            System.out.println("3lash ja hna");
+            current = etudiantService.findByCin(cin);
+            System.out.println("La personne est : " + current.getNom() + "--> " + current.getCin());
+            etudiantService.clearCache();
+            return "/etudiant/view?faces-redirect=true";
+        }
     }
 
     public String showLogin() {
@@ -238,31 +253,31 @@ public class EtudiantController implements Serializable {
 
         //return response;
     }
-    
-    public String doDeletePieces(Pieces piece){
+
+    public String doDeletePieces(Pieces piece) {
         String path = piece.getPathScan();
-        if(path != null){
-        File laPiece = new File(path);
-             //current.getPiecesList().remove(piece);
-             this.performDelete(piece.getPathScan());
-           this.piecesService.remove(piece);
+        if (path != null) {
+            File laPiece = new File(path);
+            //current.getPiecesList().remove(piece);
+            this.performDelete(piece.getPathScan());
+            this.piecesService.remove(piece);
             addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
             return this.showLoggedDetails();
-        }else{
-        try {
-             this.piecesService.remove(piece);
-            addMessage("update", FacesMessage.SEVERITY_INFO, "la piece et le fichier ont ete supprimer avec success !!", "Error !!");
-            return this.showDetails();
-             //current.getPiecesList().remove(piece);
-             
-            
-        } catch (Exception e) {
-            System.out.println("error when delete piece : " + e.getStackTrace());
-        }}
+        } else {
+            try {
+                this.piecesService.remove(piece);
+                addMessage("update", FacesMessage.SEVERITY_INFO, "la piece et le fichier ont ete supprimer avec success !!", "Error !!");
+                return this.showDetails();
+                //current.getPiecesList().remove(piece);
+
+            } catch (Exception e) {
+                System.out.println("error when delete piece : " + e.getStackTrace());
+            }
+        }
         addMessage("update", FacesMessage.SEVERITY_INFO, "la piece a ete supprimer avec success !!", "Error !!");
         return this.showLoggedDetails();
     }
-    
+
     public void sendConfirmationCandidatureMail(String email, String choix) {
         try {
             mailStatus = mailerBean.sendConfirmationCandidatureMail(email, choix);
@@ -271,24 +286,26 @@ public class EtudiantController implements Serializable {
             logger.severe(ex.getMessage());
         }
     }
-    
-    public void performDelete(String path){
+
+    public void performDelete(String path) {
         File laPiece = new File(path);
-        if(laPiece.exists()){
-        laPiece.delete();
-        System.out.println("Le fichier a été supprimé");
-        addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");}else{
+        if (laPiece.exists()) {
+            laPiece.delete();
+            System.out.println("Le fichier a été supprimé");
+            addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
+        } else {
             System.out.println("Erreur lors de la suppression de fichier");
         }
     }
 
-    public void deleteQualificationScan(String path){
+    public void deleteQualificationScan(String path) {
         File laPiece = new File(path);
         laPiece.delete();
         System.out.println("Le fichier a été supprimé");
         addMessage("update", FacesMessage.SEVERITY_INFO, "Le fichier a été supprimé !!", "Error !!");
         this.currentQualification.setPathScan(null);
     }
+
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         System.out.println("Start file upload procedure");
         UploadedFile file = event.getFile();
@@ -487,14 +504,13 @@ public class EtudiantController implements Serializable {
         return "/etudiant/view?faces-redirect=true";
     }
 
-    
     public void doRemoveQualification(Qualification diplome) {
         String asupprimer = diplome.getPathScan();
         System.out.println("Debut procedure delete");
-        try {            
+        try {
             this.current.getQualificationList().remove(diplome);
             System.out.println("Debut procedure delete du diplome");
-            
+
             qualificationService.remove(diplome);
             System.out.println("diplome supprimé");
             etudiantService.edit(current);
@@ -602,7 +618,6 @@ public class EtudiantController implements Serializable {
     public Etudiant getCurrent() {
         if (current == null) {
             current = etudiantService.findByCin(compte.getCin());
-            
         }
         if (current.getPhoto() != null) {
             fileExist = true;
@@ -628,12 +643,24 @@ public class EtudiantController implements Serializable {
             if (principal != null) {
                 String cin = principal.getName();
                 compte = compteService.findByCin(cin);
+                boolean actif = false;
+            actif = compte.getActif();
+            if (!actif) {
+                System.out.println("Invalidation de la session");
+                FacesContext context = FacesContext.getCurrentInstance();
+                // remove data from beans:
+                for (String bean : context.getExternalContext().getSessionMap().keySet()) {
+                    context.getExternalContext().getSessionMap().remove(bean);
+                }
+                // destroy session:
+                HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+                session.invalidate();
+            }
             }
         }
         return compte;
     }
 
-   
     public Filiere getChoixFiliere() {
         return choixFiliere;
     }

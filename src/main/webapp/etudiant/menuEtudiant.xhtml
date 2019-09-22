@@ -4,57 +4,66 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <ul class="sidebar-menu tree" data-widget="tree">
-        <li>
-            <p:commandLink rendered="#{etudiantController.compte.actif}"
-                              action="#{loginController.doLogout}">
-            <i class="fa fa-lock"></i>
-                <span>Fermer votre session</span>
+    <h:form  dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+        <ul class="sidebar-menu tree" data-widget="tree">
+            <li>
+                <p:commandLink rendered="#{etudiantController.compte.actif}"
+                               action="#{loginController.doLogout}">
+                    <i class="fa fa-lock"></i>
+                    <span>#{msg.fermSession}</span>
                 </p:commandLink>
-        </li>
-        <li class="header">
-            Détails Etudiant
-        </li>
-        <li>
-            <p:commandLink action="#{etudiantController.showLoggedDetails}">
-                <i class="fa fa-eye"></i>
-                <span>Afficher détails</span>
-            </p:commandLink>
-        </li>
-        <li>
-            <p:commandLink action="#{etudiantController.showEdit}">
-                <i class="fa fa-edit"></i>
-                <span>Editer Infos</span>
-            </p:commandLink>
-        </li>
-        <li class="header">
-            Ajouter des qualification
-        </li>
-        <li>
-            <p:commandLink action="#{etudiantController.showAddQualification}">
-                <i class="fa fa-book"></i>
-                <span>Ajouter un diplome</span>
-            </p:commandLink>
-        </li>
-        <li class="header">
-            Gerer la candidature
-        </li>
-        <li>
-            <p:commandLink action="#{etudiantController.showChoixFiliere}">
-                <i class="fa fa-hand-o-up"></i>
-                <span>Choisir la filiere</span>
-            </p:commandLink>
-        </li>
-        <li class="header">
-            Pieces Justificatives
-        </li>
-        <li>
-            <p:commandLink action="#{etudiantController.showAddPieces}">
-                <i class="fa fa-file-image-o"></i>
-                <span>Ajouter une pièce</span>
-            </p:commandLink>
-        </li>
-    </ul>
-
+            </li>
+            <li style="background-color: yellow;" class="header">
+                #{msg.lang}
+            </li>
+            <li>
+                <p:selectOneMenu style="background-color: yellow;" value="#{language.language}" onchange="submit()">
+                   <f:selectItem itemValue="fr" itemLabel="#{msg.fr}" />
+                    <f:selectItem itemValue="ar" itemLabel="#{msg.ar}" />          
+                </p:selectOneMenu>
+            </li>
+            <li class="header">
+                #{msg.detailsStd}
+            </li>
+            <li>
+                <p:commandLink action="#{etudiantController.showLoggedDetails}">
+                    <i class="fa fa-eye"></i>
+                    <span>#{msg.ShowDetails}</span>
+                </p:commandLink>
+            </li>
+            <li>
+                <p:commandLink action="#{etudiantController.showEdit}">
+                    <i class="fa fa-edit"></i>
+                    <span>#{msg.editInfo}</span>
+                </p:commandLink>
+            </li>
+            <li class="header">
+                #{msg.addDip}
+            </li>
+            <li>
+                <p:commandLink action="#{etudiantController.showAddQualification}">
+                    <i class="fa fa-book"></i>
+                    <span>#{msg.diplome}</span>
+                </p:commandLink>
+            </li>
+            <li class="header">
+                #{msg.manageCand}
+            </li>
+            <li>
+                <p:commandLink action="#{etudiantController.showChoixFiliere}">
+                    <i class="fa fa-hand-o-up"></i>
+                    <span>#{msg.ChoisirFiliere}</span>
+                </p:commandLink>
+            </li>
+            <li class="header">
+                #{msg.justif}
+            </li>
+            <li>
+                <p:commandLink action="#{etudiantController.showAddPieces}">
+                    <i class="fa fa-file-image-o"></i>
+                    <span>#{msg.addPiece}</span>
+                </p:commandLink>
+            </li>
+        </ul>
+    </h:form>
 </ui:composition>

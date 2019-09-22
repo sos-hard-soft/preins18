@@ -23,44 +23,51 @@ import javax.servlet.http.HttpSession;
 @RequestScoped
 public class LoginController {
 
-    
     @Inject
     private CompteFacade compteService;
     private Compte newCompte;
     private Compte compte;
+
     /**
      * Creates a new instance of LoginController
      */
     public LoginController() {
     }
-    
-    
-    /*@PostConstruct*/
-    public void init(){
+
+    @PostConstruct
+    public void init() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String,String> params;
+        Map<String, String> params;
         params = fc.getExternalContext().getRequestParameterMap();
         String cin = params.get("j_username");
         System.out.println("la personne logue est : " + cin);
         if (cin != null) {
-        compte = compteService.findByCin(cin);
-           }    
+            compte = compteService.findByCin(cin);
+            boolean actif = false;
+            actif = compte.getActif();
+            if (!actif) {
+                System.out.println("Invalidation de la session");
+                FacesContext context = FacesContext.getCurrentInstance();
+                // remove data from beans:
+                for (String bean : context.getExternalContext().getSessionMap().keySet()) {
+                    context.getExternalContext().getSessionMap().remove(bean);
+                }
+                // destroy session:
+                HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+                session.invalidate();
+            }
+        }
     }
-    
+
     public String doLogout() {
         FacesContext context = FacesContext.getCurrentInstance();
-
         // remove data from beans:
         for (String bean : context.getExternalContext().getSessionMap().keySet()) {
             context.getExternalContext().getSessionMap().remove(bean);
         }
-
         // destroy session:
         HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
         session.invalidate();
-        
-        
-
         // using faces-redirect to initiate a new request:
         return "/index.xhtml?faces-redirect=true";
 
@@ -81,5 +88,5 @@ public class LoginController {
     public void setCompte(Compte compte) {
         this.compte = compte;
     }
-    
+
 }

@@ -2,37 +2,63 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="../resources/msLand.xhtml"
+                template="/admin.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:o="http://omnifaces.org/ui"
                 xmlns:of="http://omnifaces.org/functions">
-
-   <ui:define name="breadcrumb">
-		<h:form><ol class="breadcrumb">
-			<li><a href="http://preinsmasterdroit.ump.ma/candidmaster">Acceuil</a></li>
-                        <li class="active"><p:commandLink value="Mon espace" action="#{personController.showSpace}" /></li>
-		</ol></h:form>
-                    </ui:define>
-    <ui:define name="content">
+   
+    <ui:define name="head">
+        <title>#{msg.msgTitleCreate}</title>
+    </ui:define>
+    <ui:define name="logo-lg">
+        <img src="../resources/images/miniLogo.png" />
+    </ui:define>
+    <ui:define name="logo-mini">
+        <img src="../resources/images/miniLogo.png" />
+    </ui:define>
+    <ui:define name="menu">
+        <ul class="sidebar-menu tree" data-widget="tree">
+            <li>
+                <h:form>
+                        <p:commandLink value="Mon espace" action="#{personController.showSpace}" />
+		</h:form>
+            </li>
+        <li class="header">
+            Choisir la langue
+        </li>
+        <li>
+            <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
+            <p:selectOneMenu style="background-color: yellow;" value="#{language.language}" onchange="submit()">
+                    <f:selectItem itemValue="fr" itemLabel="#{msg.fr}" />
+                    <f:selectItem itemValue="ar" itemLabel="#{msg.ar}" />        
+                </p:selectOneMenu>
+            </h:form>
+        </li>
+        </ul>
+        </ui:define>
+    <ui:define name="title">
+        <h2 class="align-center" dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">#{msg['msgTitleCreate']}</h2>
+    </ui:define>
+    <ui:define name="body">
         
-     <div>
-            <h1 class="page-title">Liste des candidats a votre master</h1>
-            <p>Vous pouvez visualisé le dossier d'un candidat en cliquant sur son Numéro CIN</p>            
-        </div>
-        <style>
-            .container {
-    width: 1800px;
-}
-        </style>
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
             <div style="margin-bottom: 10px;">
-            <h:commandLink class="btn btn-download btn-action btn-lg">Cliquez ici pour Exporter la liste au Format excel
-        <p:graphicImage value="../resources/images/excel.png" />
-        <p:dataExporter type="xls" target="tbl" fileName="liste candidats" pageOnly="true" />   
+                <h:commandLink class="btn btn-download btn-action btn-lg" action="#{personController.showListExport}">Cliquez ici pour Aller vers la page d'export de la liste complete Sous Format excel
+          
             </h:commandLink></div>
-                    <p:dataTable id="tbl" value="#{personController.stdliste}"
-                                  sortMode="multiple" var="item">
+            
+            <p:dataTable var="item" value="#{personController.lazyModel}" paginator="true" rows="10"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" id="listStu" lazy="true">
+        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Decision Prise"/>
+                            </f:facet>
+            <h:outputText rendered="#{personController.getLaDecision(item.cin) == 'Accepter'}" value="Accepter" style="color: Green" />
+                            <h:outputText rendered="#{personController.getLaDecision(item.cin) == 'Rejetter'}" value="Rejeter" style="color: Red" />
+                            <h:outputText rendered="#{personController.getLaDecision(item.cin) == 'Non Traité'}" value="Non Encore Traité" style="color: blue" />                                                        
+                        </p:column>
                         <p:column sortBy="#{item.cne}">
                             <f:facet name="header">
                                 <h:outputText value="Cne"/>
@@ -153,7 +179,13 @@
                             </f:facet>
                             <h:outputText value="#{item.moyenne}"/>
                         </p:column>
-                    </p:dataTable>                   
-        </h:form>    
+    </p:dataTable>
+                       
+            
+            
+                                      
+            
+        </h:form>
     </ui:define>
 </ui:composition>
+ 

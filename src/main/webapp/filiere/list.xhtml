@@ -15,7 +15,7 @@
     <f:view>
 
 
-        <h:form>
+        <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
             <h1><h:outputText value="List"/></h1>
            <!-- <p:dataTable value="#{personController.maliste}" var="liste">
                 <p:columns value="#{personController.maliste[0]}" columnIndexVar="i" var="column" field="#{column.property}" >

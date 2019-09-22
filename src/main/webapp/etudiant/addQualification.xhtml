@@ -7,112 +7,113 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
              
         <ui:define name="head">
-        <title>Création d'un compte pour la gestion de la préinscription</title>
+        <title>#{msg['addDiplome']}</title>
     </ui:define>
 
     <ui:define name="logo-lg">
-        Admin Starter
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
     <ui:define name="logo-mini">
-        Admin
+        <img src="../resources/images/miniLogo.png" />
     </ui:define>
 <ui:define name="menu"><ui:include src="menuEtudiant.xhtml" /></ui:define>
     
     <ui:define name="title">
-        Création d'un compte pour la gestion de la préinscription
+        #{msg['addDiplome']}
     </ui:define>
     <ui:define name="body">
-                <h:form>
+                <h:form dir="#{view.locale.language eq 'ar' ? 'rtl' : 'ltr'}">
                 <div></div>
                 <p:panel id="error" rendered="#{etudiantController.sessionOuverte}">
-                    Votre session a expirer ou vous n'avez pas activer votre compte.
+                    #{msg['sessionOut']}
                 </p:panel>
                 <div class="row">
                     <div class="col-lg-8">
-                    <p:panel header="Ajouter un nouveau diplôme">
+                    <p:panel header="#{msg['addQual']}">
                     
                 <p:panelGrid columns="3">
-                    <p:outputLabel value="Date d'obtention du diplôme : *"/>
+                    <p:outputLabel value="#{msg.dateObtention} : *"/>
                     <p:calendar id="dateObtention" value="#{etudiantController.newQualification.dateObtention}"
                                 locale="fr" navigator="true" yearRange="1980:2020" pattern="dd/MM/yyyy" requiredMessage="Veuillez selectionnez une Date d'obtention" />
                     <p:message for="dateObtention"/> 
 
-                    <p:outputLabel value="Date de première inscription : *"/>
+                    <p:outputLabel value="#{msg.datePremInsc} : *"/>
                     <p:calendar id="datePremiereInscription" value="#{etudiantController.newQualification.datePremiereInscription}"
                                 locale="fr" navigator="true" yearRange="1980:2020" pattern="dd/MM/yyyy" requiredMessage="Veuillez selectionnez une Date d obtention" />
                     <p:message for="datePremiereInscription"/> 
 
-                    <p:outputLabel value="Diplôme : *"/>
+                    <p:outputLabel value="#{msg.diplome} : *"/>
                     <p:selectOneMenu id="diplome" value="#{etudiantController.newQualification.diplome}"
                                      required="true" requiredMessage="Veuillez selectionnez votre diplôme" >  
-                        <f:selectItem itemLabel="Diplome" itemValue="null" />  
-                        <f:selectItem itemLabel="Baccalaureat" itemValue="Baccalaureat" />  
-                        <f:selectItem itemLabel="Licence fondamentale" itemValue="Licence fondamentale" />  
-                        <f:selectItem itemLabel="Licence professionnelle" itemValue="Licence professionnelle" />
-                        <f:selectItem itemLabel="Master recherche" itemValue="Master recherche" />
-                        <f:selectItem itemLabel="Master specialise" itemValue="Master specialise" />
-                        <f:selectItem itemLabel="Diplome d'ingenieur" itemValue="Diplome d ingenieur" />
-                        <f:selectItem itemLabel="Autre diplome equivalent" itemValue="Autre diplome equivalent" />
+                        <f:selectItem itemLabel="#{msg.diplome}" itemValue="null" />  
+                        <f:selectItem itemLabel="#{msg.bac}" itemValue="Baccalaureat" />  
+                        <f:selectItem itemLabel="#{msg.LFond}" itemValue="Licence fondamentale" />  
+                        <f:selectItem itemLabel="#{msg.LPro}" itemValue="Licence professionnelle" />
+                        <f:selectItem itemLabel="#{msg.MstRe}" itemValue="Master recherche" />
+                        <f:selectItem itemLabel="#{msg.MstSp}" itemValue="Master specialise" />
+                        <f:selectItem itemLabel="#{msg.dipIng}" itemValue="Diplome d ingenieur" />
+                        <f:selectItem itemLabel="#{msg.autreDip}" itemValue="Autre diplome equivalent" />
                         <!--<p:ajax listener="#{etudiantController.getRightSemestre}" 
                                 event="select"/>-->
                     </p:selectOneMenu>  
                     <p:message for="diplome"/>
-                    <p:outputLabel value="Veuillez charger l'image de votre diplôme :" />
-                    <p:fileUpload id="fichier" label="Cliquez pour Chargé votre copie de diplôme" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
-                                  sizeLimit="5000000"  invalidSizeMessage="La taille maximale de chargement est de 5Mb" invalidFileMessage="Vous avez le droit de charger que des images aux format : JPEG, GIF ou PNG"/>
+                    <p:outputLabel value="#{msg.imgDip} :" />
+                    <p:fileUpload id="fichier" label="#{msg.clickCharge}" mode="advanced" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" fileUploadListener="#{etudiantController.handleUploadToDisk}" 
+                                  sizeLimit="5000000"  invalidSizeMessage="#{msg.tailleMax}" 
+                                  invalidFileMessage="#{msg.fileType}"/>
                     <p:message for="fichier"/>
 
-                    <p:outputLabel value="Mention : *"/>
+                    <p:outputLabel value="#{msg.mention} : *"/>
                     <p:selectOneMenu id="mention" value="#{etudiantController.newQualification.mention}"
                                      required="true" requiredMessage="Veuillez saisir la mention du diplome">
-                        <f:selectItem itemLabel="Mention" itemValue="null" />  
-                        <f:selectItem itemLabel="Passable" itemValue="Passable" />  
-                        <f:selectItem itemLabel="Assez bien" itemValue="Assez bien" />  
-                        <f:selectItem itemLabel="Bien" itemValue="Bien" />
-                        <f:selectItem itemLabel="Très bien" itemValue="Très bien" />
-                        <f:selectItem itemLabel="Excellent" itemValue="Excellent" />
+                        <f:selectItem itemLabel="#{msg.mention}" itemValue="null" />  
+                        <f:selectItem itemLabel="#{msg.passable}" itemValue="Passable" />  
+                        <f:selectItem itemLabel="#{msg.AB}" itemValue="Assez bien" />  
+                        <f:selectItem itemLabel="#{msg.B}" itemValue="Bien" />
+                        <f:selectItem itemLabel="#{msg.TB}" itemValue="Très bien" />
+                        <f:selectItem itemLabel="#{msg.Exc}" itemValue="Excellent" />
                     </p:selectOneMenu>
                     <p:message for="mention"/>
 
-                    <p:outputLabel value="Classement :"/>
+                    <p:outputLabel value="#{msg.rank} :"/>
                     <p:inputText id="classement" value="#{etudiantController.newQualification.classement}"
-                                 converterMessage="Veuillez saisir un nombre entier."
-                                 validatorMessage="Veuillez saisir un nombre entier."
+                                 converterMessage="#{msg.intMessage}"
+                                 validatorMessage="#{msg.intMessage}"
                                  >
                         <f:validateLength minimum="0" maximum="6" />
                     </p:inputText>
                     <p:message for="classement"/>
 
-                    <p:outputLabel value="Etablissement delivrant le diplôme : *"/>
+                    <p:outputLabel value="#{msg.etablissement} : *"/>
                     <p:inputText id="partieDelivrante" value="#{etudiantController.newQualification.partieDelivrante}"
-                                 required="true" requiredMessage="Veuillez saisir l'etablissement d'etude"/>
+                                 required="true" requiredMessage="#{msg.studyLocale}"/>
                     <p:message for="partieDelivrante"/>
 
                 </p:panelGrid>
-                        <p:panel header="Les notes des semestres(1->6) pour les licences ou masters(1->4) / les années pour les Ingénieurs(1->5) ou les étudiants de l'ancien système(1->4)">
+                        <p:panel header="#{msg.noteSem}">
                         <p:panelGrid columns="4">
-                        <p:outputLabel value="Note 1 :"/>
+                        <p:outputLabel value="#{msg.note} 1 :"/>
                         <p:inputNumber id="note1" value="#{etudiantController.newQualification.note1}" minValue="0.00" maxValue="20.00" />
 
-                        <p:outputLabel value="Note 2 :"/>
+                        <p:outputLabel value="#{msg.note} 2 :"/>
                         <p:inputNumber id="note2" value="#{etudiantController.newQualification.note2}" minValue="0.00" maxValue="20.00" />
 
-                        <p:outputLabel value="Note 3 :"/>
+                        <p:outputLabel value="#{msg.note} 3 :"/>
                         <p:inputNumber id="note3" value="#{etudiantController.newQualification.note3}" minValue="0.00" maxValue="20.00" />
 
-                        <p:outputLabel value="Note 4 :"/>
+                        <p:outputLabel value="#{msg.note} 4 :"/>
                         <p:inputNumber id="note4" value="#{etudiantController.newQualification.note4}" minValue="0.00" maxValue="20.00" />
 
-                        <p:outputLabel value="Note 5 :"/>
+                        <p:outputLabel value="#{msg.note} 5 :"/>
                         <p:inputNumber id="note5" value="#{etudiantController.newQualification.note5}" minValue="0.00" maxValue="20.00" />
 
-                        <p:outputLabel value="Note 6 :"/>
+                        <p:outputLabel value="#{msg.note} 6 :"/>
                         <p:inputNumber id="note6" value="#{etudiantController.newQualification.note6}" minValue="0.00" maxValue="20.00" />
 
 
                     </p:panelGrid>
                     </p:panel>
-                <h:commandButton class="btn btn-action" value="Enregistrer ce parcours" action="#{etudiantController.doAddQualification}"/>
+                <p:commandButton icon="fa fa-floppy-o" styleClass="btn-primary btn-block" value="#{msg['save']}" action="#{etudiantController.doAddQualification}"/>
 
 </p:panel>
                         </div>

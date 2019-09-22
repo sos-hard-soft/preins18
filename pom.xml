@@ -4,7 +4,7 @@
 
     <groupId>com.sos.ump.fsjes.insc</groupId>
     <artifactId>candidmaster</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <packaging>war</packaging>
 
     <name>candidmaster</name>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.github.adminfaces</groupId>
             <artifactId>admin-theme</artifactId>
-            <version>1.0.0-RC18</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
